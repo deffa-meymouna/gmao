@@ -1,11 +1,17 @@
 {
-   "name" : "zendframework/gmao",
-   "description" : "Road equipment oriented GMAO Application",
-   "require" : { 
-     "php" : ">=5.4", 
-     "zendframework/zendframework" : "=2.2.5"
-   },
-   "keywords" : [ "road equipment", "gmao","équipements dynamiques" ], 
-   "license" : "BSD-3-Clause",
-   "homepage" : "http://www.at-it.fr/" 
+    "name": "gmao",
+    "description": "Road equipments GMAO Application",
+    "license": "Apache License v2",
+    "keywords": [
+        "gmao",
+        "equipement",
+        "dynamique",
+        "route",
+        "DIR-EST"
+    ],
+    "homepage": "http://www.at-it-fr/",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.2.5"
+    }
 }
