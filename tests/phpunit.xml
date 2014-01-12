@@ -7,8 +7,11 @@
 		<ini name="date.timezone" value="Europe/Paris" />
 	</php>
 	<testsuites>
+		<testsuite name="Application Tests">
+			<directory>../module/Application/tests/Application</directory>
+		</testsuite>
 		<testsuite name="Album Tests">
-			<directory>./Album</directory>
+			<directory>../module/Album/tests/Album</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>
