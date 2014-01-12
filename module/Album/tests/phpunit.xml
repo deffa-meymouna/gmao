@@ -1,7 +1,9 @@
-<phpunit bootstrap="./bootstrap.php" colors="true">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="Bootstrap.php" colors="true">
     <testsuites>
-        <testsuite name="Album Test Suite">
-            <directory>./</directory>
+        <testsuite name="Album Tests">
+            <directory>./Album</directory>
         </testsuite>
     </testsuites>
 </phpunit>

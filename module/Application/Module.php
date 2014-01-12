@@ -20,9 +20,14 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
         $translator = $e->getApplication()->getServiceManager()->get('translator');
-        $translator
-        ->setLocale(\Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-        ->setFallbackLocale('en_US');
+        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
+        	$translator
+        	->setLocale(locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+        	->setFallbackLocale('en_US');
+        }else{
+        	$translator
+        	->setLocale('en_US');
+        }
     }
 
     public function getConfig()
