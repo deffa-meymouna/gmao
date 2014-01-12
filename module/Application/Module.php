@@ -23,10 +23,10 @@ class Module
         if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
         	$translator
         	->setLocale(locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-        	->setFallbackLocale('en_US');
+        	->setFallbackLocale('fr_FR');
         }else{
         	$translator
-        	->setLocale('en_US');
+        	->setLocale('fr_FR');
         }
     }
 
