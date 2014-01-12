@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit bootstrap="Bootstrap.php" colors="true">
+    <php>
+        <ini name="date.timezone" value="Europe/Paris" />
+    </php>
     <testsuites>
         <testsuite name="Album Tests">
             <directory>./Album</directory>
