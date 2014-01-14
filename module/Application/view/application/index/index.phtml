@@ -2,12 +2,12 @@
     <h1><?php echo sprintf($this->translate('%sLa%s %sGMAO%s %sdédiée aux équipements de la route%s'), '<small>','</small>', '<i class="fa fa-road"></i>&nbsp;<span class="text-success">', '</span>','<small>','</small>') ?></h1>
     <p><?php 
     	echo sprintf($this->translate('Ce service de %sGMAO infogérée par %sAT-IT.FR%s est spécialisé pour les équipements dynamiques autoroutiers.'),
-    		'<i class="fa fa-road"></i>&nbsp;', '<a href="http://www.at-it.fr" title="GMAO">', '</a>') ?></p>
+    		'<i class="fa fa-road"></i>&nbsp;', '<a href="http://www.at-it.fr" title="AT-IT" target="_blank">', '</a>') ?></p>
     <p>
     	<span class="btn-group">
-    		<a class="btn btn-default btn-lg" href="" target="_blank">
+    		<a class="btn btn-default btn-lg" href="<?php echo $this->basePath('/gmao/service');?>">
     			<?php echo $this->translate('Découvrir le service') ?>&nbsp;<i class="fa fa-angle-double-right"></i></a>
-    		<a class="btn btn-default btn-lg" href="" target="_blank">
+    		<a class="btn btn-default btn-lg" href="<?php echo $this->basePath('/user/login');?>">
     			<i class="fa fa-sign-in"></i>&nbsp;<?php echo $this->translate('Connexion') ?>
     		</a>
     	</span>
@@ -22,9 +22,9 @@
                 <h2 class="panel-title"><i class="fa fa-code"></i>&nbsp;<?php echo $this->translate('Suivre le développement') ?></h2>
             </div>
             <div class="panel-body">
-                <p class="text-justify"><?php echo sprintf($this->translate('%sGMAO%s est un service en constant développement. Vous travaillez dans l\'univers des routes, vous ne trouvez pas de solution informatique infogérée capable de répondre aux besoins spécifiques des autoroutiers et des équipements dynamiques, alors n\'hésitez pas à découvrir les fonctions de notre %sGMAO%s. Ce produit étant en constante évolution, n\'hésitez pas à nous faire part de vos demandes spécifiques que nous intégrerons rapidement à nos demandes d\'évolutions'), 
+                <p class="text-justify"><?php echo sprintf($this->translate('%sGMAO%s est un service en constant développement. Vous travaillez dans l\'univers des routes&nbsp;? Vous ne trouvez pas de solution informatique infogérée capable de répondre aux besoins spécifiques des autoroutiers et des équipements dynamiques&nbsp;? Alors n\'hésitez pas à découvrir les fonctions de notre %sGMAO%s&nbsp;! Ce produit étant en constante évolution, n\'hésitez pas à nous faire part de vos demandes spécifiques que nous intégrerons rapidement à nos demandes d\'évolutions.'), 
 					'<i class="fa fa-road"></i><strong>&nbsp', '</strong>', '<i class="fa fa-road"></i><strong>&nbsp', '</strong>') ?></p>
-                <p><a class="btn btn-default pull-right" href="http://framework.zend.com/zf2" target="_blank"><?php echo $this->translate('ZF2 Development Portal') ?> &raquo;</a></p>
+                <p><a class="btn btn-default pull-right" href="<?php echo $this->basePath('/gmao/suivre');?>"><?php echo $this->translate('Portail de développement') ?> &raquo;</a></p>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="panel-body">
                 <p class="text-justify"><?php echo sprintf($this->translate("L'équipe de www.at-it.fr, forte de son expérience dans les équipements autoroutiers propose une solution évolutive répondant aux particularités des services d'exploitations publics et privés."), '<a href="https://github.com/zendframework/modules.zendframework.com">', '</a>') ?></p>
-                <p><a class="btn btn-default pull-right" href="http://modules.zendframework.com/" target="_blank"><?php echo sprintf($this->translate('Découvrir les fonctions de %sGMAO%s'),'<i class="fa fa-road"></i>&nbsp;<strong>','</strong>'); ?> <i class="fa fa-angle-double-right"></i></a></p>
+                <p><a class="btn btn-default pull-right" href="<?php echo $this->basePath('/gmao/fonction');?>"><?php echo sprintf($this->translate('Découvrir les fonctions de %sGMAO%s'),'<i class="fa fa-road"></i>&nbsp;<strong>','</strong>'); ?> <i class="fa fa-angle-double-right"></i></a></p>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
                 	<li><?php echo sprintf($this->translate("L'intégration des nouveaux équipements,")); ?></li>
                 	<li><?php echo sprintf($this->translate("La personnalisation de tableaux de bord ou de rapports,")); ?></li>
                 </ul>
-                <p><a class="btn btn-default pull-right" href=""><i class="fa fa-phone"></i>&nbsp;<?php echo $this->translate('Contactez-nous') ?></a></p>
+                <p><a class="btn btn-default pull-right" href="<?php echo $this->basePath('/gmao/contact');?>"><i class="fa fa-phone"></i>&nbsp;<?php echo $this->translate('Contactez-nous') ?></a></p>
             </div>
         </div>
     </div>

@@ -1,0 +1,104 @@
+<ul class="breadcrumb">
+	<li>GMAO</li>
+	<li>Présentation</li>
+	<li>Suivi de développement</li>
+</ul>
+<h2>Suivi de développement</h2>
+<div class="row">
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2 class="panel-title">Versions</h2></div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="text-center">Version</th>
+						<th class="text-center">Publiée</th>
+						<th class="text-center">Obsolète</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($this->versions as $version):?>
+					<tr class="text-center">
+						<td><?php echo $version->name;?></td>
+						<td>
+							<?php if ($version->released):?>
+							<span class="text-success"><i class="fa fa-check-square-o"></i></span>
+							<?php else:?>
+							<span class="text-muted"><i class="fa fa-square-o"></i></span>
+							<?php endif;?>
+						</td>
+						<td>
+							<?php if ($version->obsolete):?>
+							<span class="text-danger"><i class="fa fa-check-square-o"></i></span>
+							<?php else:?>
+							<span class="text-muted"><i class="fa fa-square-o"></i></span>
+							<?php endif;?>
+						</td>
+											</tr>
+					<?php endforeach;?>
+				</tbody>
+			</table>
+			<div class="panel-footer"></div>
+		</div>
+	</div>
+	<div class="col-sm-8">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2 class="panel-title">Demandes d'évolutions</h2></div>
+			<?php if (0 == count($this->demandes)):?>
+			<div class="panel-body">
+				<p class="alert alert-success">Aucune demande d'évolution en cours.</p>
+			</div>
+			<?php else:?>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Priorité</th>
+						<th>Statut</th>
+						<th>Titre</th>
+						<th>Résolution</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($this->demandes as $demande):?>
+					<tr>
+						<td><?php echo ucfirst($demande->priority->name);?></td>
+						<td><?php echo ucfirst($demande->status->name);?></td>
+						<td><?php echo ucfirst($demande->summary);?></td>
+						<td><?php echo ucfirst($demande->resolution->name);?></td>
+					</tr>
+				<?php endforeach;?>
+				</tbody>
+			</table>
+			<?php endif;?>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2 class="panel-title">Bugs bloquants</h2></div>
+			<?php if (0 == count($this->bugs)):?>
+			<div class="panel-body">
+				<p class="alert alert-success">Aucun bug bloquant en cours.</p>
+			</div>
+			<?php else:?>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Priorité</th>
+						<th>Statut</th>
+						<th>Titre</th>
+						<th>Résolution</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($this->bugs as $bug):?>
+					<tr>
+						<td><?php echo ucfirst($bug->priority->name);?></td>
+						<td><?php echo ucfirst($bug->status->name);?></td>
+						<td><?php echo ucfirst($bug->summary);?></td>
+						<td><?php echo ucfirst($bug->resolution->name);?></td>
+					</tr>
+				<?php endforeach;?>
+				</tbody>
+			</table>
+			<?php endif;?>
+		</div>
+	</div>
+</div>

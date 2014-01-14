@@ -24,4 +24,11 @@ return array(
                      => 'Zend\Db\Adapter\AdapterServiceFactory',
          ),
      ),
+	 'mantis' => array (
+	 	'soap' 	=> 'http://127.0.0.1/mantis/api/soap/mantisconnect.php?wsdl',
+	 	'projectId' 	=> 1,
+	 	'evolutionFilterId' => 2,
+	 	'bugFilterId'	=> 3
+	 		
+	)
  );

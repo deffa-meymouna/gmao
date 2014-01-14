@@ -18,4 +18,38 @@ class IndexController extends AbstractActionController
     {
         return new ViewModel();
     }
+    public function contactAction()
+    {
+        return new ViewModel();
+    }
+    public function serviceAction()
+    {
+        return new ViewModel();
+    }
+    public function fonctionAction()
+    {
+        return new ViewModel();
+    }
+    public function suivreAction()
+    {
+    	//FIXME : Find the good practice to Invoke config;
+    	$config = $this->getEvent()->getApplication()->getConfig();
+    	$c = new \SoapClient($config['mantis']['soap']);
+    	$username = $config['mantis']['username'];
+    	$password = $config['mantis']['password'];
+    	$projectId = $config['mantis']['projectId'];
+    	$filtreDemandeEvolution = $config['mantis']['evolutionFilterId'];
+    	$filtreBugBloquant = $config['mantis']['bugFilterId'];
+   		$versions = $c->mc_project_get_versions($username,$password,$projectId);
+   		$demandes = $c->mc_filter_get_issues($username,$password,$projectId,$filtreDemandeEvolution);
+   		$bugs = $c->mc_filter_get_issues($username,$password,$projectId,$filtreBugBloquant);
+    	
+        return new ViewModel(
+    		array(
+    			'versions' => $versions,
+    			'bugs' => $bugs,
+    			'demandes' => $demandes
+       		)
+        );
+    }
 }

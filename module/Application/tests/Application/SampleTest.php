@@ -14,7 +14,6 @@ class SampleTest extends Framework\TestCase
 
     public function testSample()
     {
-    	$this->assertTrue(true,"Example de test");
-        return true;//$this->assertInstanceOf('Zend\Di\LocatorInterface', $this->getLocator());
+    	$this->assertTrue(true,"Exemple de test");
     }
 }
