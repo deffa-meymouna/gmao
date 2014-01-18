@@ -34,16 +34,20 @@ class IndexController extends AbstractActionController
     {
     	//FIXME : Find the good practice to Invoke config;
     	$config = $this->getEvent()->getApplication()->getConfig();
-    	$c = new \SoapClient($config['mantis']['soap']);
     	$username = $config['mantis']['username'];
     	$password = $config['mantis']['password'];
     	$projectId = $config['mantis']['projectId'];
     	$filtreDemandeEvolution = $config['mantis']['evolutionFilterId'];
     	$filtreBugBloquant = $config['mantis']['bugFilterId'];
-   		$versions = $c->mc_project_get_versions($username,$password,$projectId);
+    	
+    	//Appel du Service SOAP
+   		$c = new \SoapClient($config['mantis']['soap']);
+    	$versions = $c->mc_project_get_versions($username,$password,$projectId);
    		$demandes = $c->mc_filter_get_issues($username,$password,$projectId,$filtreDemandeEvolution);
    		$bugs = $c->mc_filter_get_issues($username,$password,$projectId,$filtreBugBloquant);
+    	unset($c);
     	
+   		//Création de la vue
         return new ViewModel(
     		array(
     			'versions' => $versions,
