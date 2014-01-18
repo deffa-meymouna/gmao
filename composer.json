@@ -12,6 +12,7 @@
     "homepage": "http://www.at-it-fr/",
     "require": {
         "php": ">=5.3.3",
+	"coolcsn/csn-user" : "dev-master",
         "zendframework/zendframework": "2.2.5"
     }
 }
