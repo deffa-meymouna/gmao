@@ -28,29 +28,6 @@ return array (
 				'projectId' => 1,
 				'evolutionFilterId' => 2,
 				'bugFilterId' => 3 
-		),
-		'navigation' => array(
-				'default' => array(
-						array(
-								'label' => 'Home',
-								'route' => 'home',
-						),
-						/*array(
-								'label' => 'Page #1',
-								'route' => 'page-1',
-								'pages' => array(
-										array(
-												'label' => 'Child #1',
-												'route' => 'page-1-child',
-										),
-								),
-						),
-						array(
-								'label' => 'Page #2',
-								'route' => 'page-2',
-						),*/
-				),
-		),
-		 
+		),		 
 )
 ;

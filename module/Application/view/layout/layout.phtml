@@ -1,5 +1,10 @@
-<?php echo $this->doctype(); ?>
-
+<?php
+	//Préparation du menu 
+	$partial = array('navigation/topnav.phtml', 'default');
+	$this->navigation('navigation')->menu()->setPartial($partial);
+	//Doctype
+	echo $this->doctype();
+?>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
@@ -37,8 +42,9 @@
                     </button>
                     <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><span class=""><i class="fa fa-road"></i></span>&nbsp;<?php echo $this->translate('GMAO') ?></a>
                 </div>
+                
                 <div class="collapse navbar-collapse">
-					<?php echo $this->navigation('navigation')->menu()->setUlClass('nav navbar-nav'); ?>
+					<?php echo $this->navigation('navigation')->menu()->render(); ?>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>

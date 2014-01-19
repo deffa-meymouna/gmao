@@ -34,7 +34,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertControllerName ( 'Application\Controller\Index' );
 		$this->assertControllerClass ( 'IndexController' );
 		$this->assertActionName('index');
-		$this->assertMatchedRouteName ( 'application/default' );
+		$this->assertMatchedRouteName ( 'application' );
 	}
 	public function testServiceActionCanBeAccessed() {
 		
@@ -45,7 +45,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertControllerName ( 'Application\Controller\Index' );
 		$this->assertControllerClass ( 'IndexController' );
 		$this->assertActionName('service');
-		$this->assertMatchedRouteName ( 'application/default' );
+		$this->assertMatchedRouteName ( 'application' );
 	}
 	public function testContactActionCanBeAccessed() {
 	
@@ -56,7 +56,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertControllerName ( 'Application\Controller\Index' );
 		$this->assertControllerClass ( 'IndexController' );
 		$this->assertActionName('contact');
-		$this->assertMatchedRouteName ( 'application/default' );
+		$this->assertMatchedRouteName ( 'application' );
 	}
 	public function testSuivreActionCanBeAccessed() {
 	
@@ -67,7 +67,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertControllerName ( 'Application\Controller\Index' );
 		$this->assertControllerClass ( 'IndexController' );
 		$this->assertActionName('suivre');
-		$this->assertMatchedRouteName ( 'application/default' );
+		$this->assertMatchedRouteName ( 'application' );
 	}
 	public function testFonctionActionCanBeAccessed() {
 	
@@ -78,6 +78,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertControllerName ( 'Application\Controller\Index' );
 		$this->assertControllerClass ( 'IndexController' );
 		$this->assertActionName('fonction');
-		$this->assertMatchedRouteName ( 'application/default' );
+		$this->assertMatchedRouteName ( 'application' );
 	}
 }
