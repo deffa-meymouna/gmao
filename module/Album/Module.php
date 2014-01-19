@@ -59,16 +59,4 @@ class Module implements AutoloaderProviderInterface
     			),
     	);
     }
-/*
- * @FIXME : Evaluer la nécessité de ce code
- * 
-    public function onBootstrap(MvcEvent $e)
-    {
-        // You may not need to do this if you're doing it elsewhere in your
-        // application
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-    }
-*/
 }

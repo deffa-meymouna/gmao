@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace AlbumTest;
+namespace ApplicationTest;
 
 class SampleTest extends Framework\TestCase
 {
