@@ -1,7 +1,9 @@
 <?php
 	//Préparation du menu 
-	$partial = array('navigation/topnav.phtml', 'default');
-	$this->navigation('navigation')->menu()->setPartial($partial);
+	$partialMenu = array('navigation/topnav.phtml', 'default');
+	$this->navigation('navigation')->menu()->setPartial($partialMenu);
+	$partialBreadcrumbs = array('navigation/breadcrumbs.phtml', 'default');
+	$this->navigation('navigation')->breadcrumbs()->setPartial($partialBreadcrumbs);
 	//Doctype
 	echo $this->doctype();
 ?>
@@ -42,13 +44,13 @@
                     </button>
                     <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><span class=""><i class="fa fa-road"></i></span>&nbsp;<?php echo $this->translate('GMAO') ?></a>
                 </div>
-                
                 <div class="collapse navbar-collapse">
 					<?php echo $this->navigation('navigation')->menu()->render(); ?>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
         <div class="container">
+       		<?php echo $this->navigation()->breadcrumbs(); ?>
             <?php echo $this->content; ?>
             <hr>
             <footer>
