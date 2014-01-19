@@ -8,21 +8,12 @@
  */
 
 namespace Utilisateur\Controller;
-
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-
-class IndexController extends AbstractActionController
+/**
+ * Surcharge du controlleur initial de CsnUser
+ * 
+ * @author alexandre
+ *
+ */
+class IndexController extends \CsnUser\Controller\IndexController
 {
-    public function indexAction()
-    {
-        return new ViewModel();
-    }
-
-    public function fooAction()
-    {
-        // This shows the :controller and :action parameters in default route
-        // are working when you browse to /index/index/foo
-        return array();
-    }
 }

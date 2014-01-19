@@ -1,0 +1,35 @@
+<?php 
+	echo $this->partial('csn-user/layout/nav-menu', array('navMenu' => $this->navMenu));
+	$form = $this->form;
+	$form->setAttribute('action', $this->url('login'));
+	$form->setAttribute('class', 'form-signin');
+	$form->prepare();
+	echo $this->form()->openTag($form);	
+?>
+<div class="panel panel-default">
+	<div class="panel-heading"><h2 class="panel-title">Connexion</h2></div>
+	<div class="panel-body">
+		<?php if ($this->messages): ?>
+			<div class="alert alert-danger">
+				<a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+				<p><?php echo $this->messages;?></p>
+			</div>
+		<?php endif;?>
+		<?php 
+		echo $this->formRow($form->get('usernameOrEmail'));
+		echo $this->formRow($form->get('password'));
+		echo '<br />';
+		echo $this->formRow($form->get('rememberme'));
+		echo '<br />';
+		echo $this->form()->closeTag();
+		?>
+	</div>
+	<div class="panel-footer">
+		<?php echo $this->formSubmit($form->get('submit'));?>
+		<a href="<?php echo $this->url('registration');?>"><?php echo $this->translate('Sign up'); ?></a> |  
+		<a href="<?php echo $this->url('forgotten-password');?>"><?php echo $this->translate('Forgot your password?'); ?></a>
+	</div>
+</div>
+<?php 
+	echo $this->form()->closeTag();
+?>	

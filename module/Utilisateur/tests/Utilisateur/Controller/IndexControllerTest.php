@@ -20,6 +20,15 @@ class UtilisateurControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertControllerClass ( 'IndexController' );
 		$this->assertMatchedRouteName ( 'utilisateur' );
 	}
+	public function testLoginActionCanBeAccessed() {
+		$this->dispatch ( '/login' );
+		$this->assertResponseStatusCode ( 200 );
+	
+		$this->assertModuleName ( 'Utilisateur' );
+		$this->assertControllerName ( 'Utilisateur\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertMatchedRouteName ( 'login' );
+	}	
 	/*
 	public function testAddActionRedirectsAfterValidPost()
 	{
