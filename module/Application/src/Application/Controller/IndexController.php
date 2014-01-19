@@ -36,6 +36,12 @@ class IndexController extends AbstractActionController
     {
         return new ViewModel();
     }
+    public function sitemapAction()
+    {
+    	$viewmodel = new ViewModel();
+    	$viewmodel->setTerminal(true);
+    	return $viewmodel;
+    }
     public function suivreAction()
     {
     	//Récupération de la configuration Mantis

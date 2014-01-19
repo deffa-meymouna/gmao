@@ -80,4 +80,15 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertActionName('fonction');
 		$this->assertMatchedRouteName ( 'application' );
 	}
+	public function testSiteMapActionCanBeAccessed() {
+	
+		$this->dispatch ( '/gmao/sitemap' );
+		$this->assertResponseStatusCode ( 200 );
+	
+		$this->assertModuleName ( 'Application' );
+		$this->assertControllerName ( 'Application\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('sitemap');
+		$this->assertMatchedRouteName ( 'application' );
+	}
 }
