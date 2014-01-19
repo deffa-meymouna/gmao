@@ -14,7 +14,6 @@
  * Default value: 'aFGQ475SDsdfsaf2342'
  * Accepted values: Any string
  */
-const STATIC_SALT = 'gmaoDefaultStaticSalt';
 
 $settings = array(
     /**
@@ -48,11 +47,7 @@ $settings = array(
      */
     'nav_menu' => true,
  
- /**
- * You do not need to edit below this line
- * ---------------------------------------
- */
-    'static_salt' => STATIC_SALT,
+    'static_salt' => 'gmaoDefaultStaticSalt',
 );
 return array(
     'csnuser' => $settings,

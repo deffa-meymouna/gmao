@@ -6,8 +6,7 @@ return array(
     	'Album',
 	    'DoctrineModule',
     	'DoctrineORMModule',
-    	'CsnUser',
-    	'Utilisateur'
+    	'CsnUser'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

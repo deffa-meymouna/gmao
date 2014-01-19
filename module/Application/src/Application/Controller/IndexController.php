@@ -14,6 +14,12 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+	/**
+	 * 
+	 * @var array
+	 */
+	protected $options;
+	
     public function indexAction()
     {
         return new ViewModel();
@@ -32,16 +38,16 @@ class IndexController extends AbstractActionController
     }
     public function suivreAction()
     {
-    	//FIXME : Find the good practice to Invoke config;
-    	$config = $this->getEvent()->getApplication()->getConfig();
-    	$username = $config['mantis']['username'];
-    	$password = $config['mantis']['password'];
-    	$projectId = $config['mantis']['projectId'];
-    	$filtreDemandeEvolution = $config['mantis']['evolutionFilterId'];
-    	$filtreBugBloquant = $config['mantis']['bugFilterId'];
+    	//Récupération de la configuration Mantis
+    	$mantis = $this->getOptions();
+    	$username = $mantis['username'];
+    	$password = $mantis['password'];
+    	$projectId = $mantis['projectId'];
+    	$filtreDemandeEvolution = $mantis['evolutionFilterId'];
+    	$filtreBugBloquant = $mantis['bugFilterId'];
     	
     	//Appel du Service SOAP
-   		$c = new \SoapClient($config['mantis']['soap']);
+   		$c = new \SoapClient($mantis['soap']);
     	$versions = $c->mc_project_get_versions($username,$password,$projectId);
    		$demandes = $c->mc_filter_get_issues($username,$password,$projectId,$filtreDemandeEvolution);
    		$bugs = $c->mc_filter_get_issues($username,$password,$projectId,$filtreBugBloquant);
@@ -56,4 +62,29 @@ class IndexController extends AbstractActionController
        		)
         );
     }
+    /**
+     * set options
+     *
+     * @return IndexController
+     */
+    public function setOptions($options)
+    {
+    	$this->options = $options;
+    
+    	return $this;
+    }
+    
+    /**
+     * get options
+     *
+     * @return ModuleOptions
+     */
+    public function getOptions()
+    {
+    	if (!$this->options) {
+    		$this->setOptions($this->getServiceLocator()->get('mantis'));
+    	}
+    
+    	return $this->options;
+    }    
 }

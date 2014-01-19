@@ -6,43 +6,43 @@
  * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-class Module
-{
-    public function onBootstrap(MvcEvent $e)
-    {
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-        $translator = $e->getApplication()->getServiceManager()->get('translator');
-        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
-        	$translator
-        	->setLocale(locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-        	->setFallbackLocale('fr_FR');
-        }else{
-        	$translator
-        	->setLocale('fr_FR');
-        }
-    }
-
-    public function getConfig()
-    {
-        return include __DIR__ . '/config/module.config.php';
-    }
-
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
-    }
+class Module {
+	public function onBootstrap(MvcEvent $e) {
+		$eventManager = $e->getApplication ()->getEventManager ();
+		$moduleRouteListener = new ModuleRouteListener ();
+		$moduleRouteListener->attach ( $eventManager );
+		$translator = $e->getApplication ()->getServiceManager ()->get ( 'translator' );
+		if (isset ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] )) {
+			$translator->setLocale ( locale_accept_from_http ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] ) )->setFallbackLocale ( 'fr_FR' );
+		} else {
+			$translator->setLocale ( 'fr_FR' );
+		}
+	}
+	public function getConfig() {
+		return include __DIR__ . '/config/module.config.php';
+	}
+	public function getAutoloaderConfig() {
+		return array (
+				'Zend\Loader\StandardAutoloader' => array (
+						'namespaces' => array (
+								__NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__ 
+						) 
+				) 
+		);
+	}
+	public function getServiceConfig() {
+		return array (
+				'factories' => array (
+						'mantis' => function ($serviceManager) {
+							$config = $serviceManager->get('Config');							
+							return $config ['mantis'];
+						} 
+				) 
+		);
+	}
 }

@@ -10,25 +10,47 @@
  * control, so do not include passwords or other sensitive information in this
  * file.
  */
-
-return array(
-     'db' => array(
-         'driver'         => 'Pdo',
-         'driver_options' => array(
-             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-         ),
-     ),
-     'service_manager' => array(
-         'factories' => array(
-             'Zend\Db\Adapter\Adapter'
-                     => 'Zend\Db\Adapter\AdapterServiceFactory',
-         ),
-     ),
-	 'mantis' => array (
-	 	'soap' 	=> 'http://127.0.0.1/mantis/api/soap/mantisconnect.php?wsdl',
-	 	'projectId' 	=> 1,
-	 	'evolutionFilterId' => 2,
-	 	'bugFilterId'	=> 3
-	 		
-	)
- );
+return array (
+		'db' => array (
+				'driver' => 'Pdo',
+				'driver_options' => array (
+						PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'' 
+				) 
+		),
+		'service_manager' => array (
+				'factories' => array (
+						'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+						'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+				) 
+		),
+		'mantis' => array (
+				'soap' => 'http://127.0.0.1/mantis/api/soap/mantisconnect.php?wsdl',
+				'projectId' => 1,
+				'evolutionFilterId' => 2,
+				'bugFilterId' => 3 
+		),
+		'navigation' => array(
+				'default' => array(
+						array(
+								'label' => 'Home',
+								'route' => 'home',
+						),
+						/*array(
+								'label' => 'Page #1',
+								'route' => 'page-1',
+								'pages' => array(
+										array(
+												'label' => 'Child #1',
+												'route' => 'page-1-child',
+										),
+								),
+						),
+						array(
+								'label' => 'Page #2',
+								'route' => 'page-2',
+						),*/
+				),
+		),
+		 
+)
+;
