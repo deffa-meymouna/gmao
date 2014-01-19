@@ -1,3 +1,24 @@
-<strong>Module:</strong>        Utilisateur &raquo;
-<strong>Controller:</strong>    Index &raquo;
-<strong>Action:</strong>        index
+<?php 
+	$user = $this->identity();
+	echo $this->partial('csn-user/layout/nav-menu', array('navMenu' => $this->navMenu)); 
+?>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2 class="panel-title">
+			Bienvenue 
+			<span class="text-info"><?php echo ($user)?$this->escapeHtml($user->getUsername()):' Invité'?></span>
+		</h2>
+	</div>
+	<div class="panel-body">
+		<p class="text-justify">
+		<?php if ($user):?>
+			Félicitations&nbsp;! 
+			Vous êtes correctement identifié sur <i class="fa fa-road"></i>&nbsp;GMAO.
+		<?php else:?>
+			Vous vous trouvez sur la page des profils utilisateurs. 
+			Pour <a href="<?php echo $this->url('editProfile');?>">consulter et modifier</a> votre profil, 
+			veuillez vous <a href="<?php echo $this->url('login');?>">identifier</a> ou vous <a href="<?php $this->url('registration')?>">inscrire</a> !
+		<?php endif;?>
+		</p>
+	</div>
+</div>
