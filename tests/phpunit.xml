@@ -13,6 +13,9 @@
 		<testsuite name="Album Tests">
 			<directory>../module/Album/tests/Album</directory>
 		</testsuite>
+		<testsuite name="Utilisateur Tests">
+			<directory>../module/Utilisateur/tests/Utilisateur</directory>
+		</testsuite>
 		<testsuite name="CsnUsers Tests">
 			<directory>../vendor/coolcsn/csn-user/test</directory>
 		</testsuite>
