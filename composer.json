@@ -1,5 +1,5 @@
 {
-    "name": "gmao",
+    "name": "Alexandre-T/gmao",
     "description": "Road equipments GMAO Application",
     "license": "Apache License v2",
     "keywords": [
@@ -10,9 +10,17 @@
         "DIR-EST"
     ],
     "homepage": "http://www.at-it-fr/",
+     "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Alexandre-T/zend-bootstrap"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
-	"coolcsn/csn-user" : "dev-master",
-        "zendframework/zendframework": "2.2.5"
+		"coolcsn/csn-user" : "dev-master",
+        "zendframework/zendframework": "2.2.5",
+        "alexandre-t/zend-bootstrap" : "*@dev"
+        
     }
 }
