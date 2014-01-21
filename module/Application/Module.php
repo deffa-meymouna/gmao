@@ -18,7 +18,7 @@ class Module {
 		$moduleRouteListener->attach ( $eventManager );
 		$translator = $e->getApplication ()->getServiceManager ()->get ( 'translator' );
 		if (isset ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] )) {
-			$translator->setLocale ( locale_accept_from_http ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] ) )->setFallbackLocale ( 'fr_FR' );
+			$translator->setLocale ( \Locale::acceptFromHttp ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] ) )->setFallbackLocale ( 'fr_FR' );
 		} else {
 			$translator->setLocale ( 'fr_FR' );
 		}

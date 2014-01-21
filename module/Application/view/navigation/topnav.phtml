@@ -8,7 +8,7 @@
         <?php if( ! $hasChildren): ?>
         <li <?php if($page->isActive(true)) echo 'class="active"'?>>
             <a class="nav-header" href="<?php echo $page->getHref() ?>" <?php if ($page->getTitle()) echo 'title="'.$page->getTitle().'"'; ?>>
-	           	<?php if (!empty($page->get('icon'))):?>
+	           	<?php if ($page->get('icon')):?>
 	            <i class="fa fa-<?php echo $page->get('icon');?>"></i> 
 	            <?php endif;?>
 	            <?php echo $this->translate($page->getLabel()) ?>
@@ -17,7 +17,7 @@
         <?php else: ?>
         <li class="dropdown <?php if ($page->isActive(true)) echo ' active';?>">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	           	<?php if (!empty($page->get('icon'))):?>
+	           	<?php if ($page->get('icon')):?>
 	            <i class="fa fa-<?php echo $page->get('icon');?>"></i> 
 	            <?php endif;?>
             <span><?php echo $this->translate($page->getLabel()) ?>&nbsp;<b class="caret"></b></span>
@@ -29,7 +29,7 @@
                 <?php if( ! $child->isVisible() || !$this->navigation()->accept($child)) continue; ?>
                 <li>
                     <a href="<?php echo $child->getHref() ?>" <?php if ($child->getTitle()) echo 'title="'.$this->translate($child->getTitle()).'"'; ?>>
-                    	<?php if (!empty($child->get('icon'))):?>
+                    	<?php if ($child->get('icon')):?>
                         <i class="fa fa-<?php echo $child->get('icon');?>"></i> 
                         <?php endif;?>
                         <?php echo $this->translate($child->getLabel()) ?>

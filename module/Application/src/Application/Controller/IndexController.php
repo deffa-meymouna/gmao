@@ -46,22 +46,40 @@ class IndexController extends AbstractActionController
     {
     	//Récupération de la configuration Mantis
     	$mantis = $this->getOptions();
-    	$username = $mantis['username'];
-    	$password = $mantis['password'];
-    	$projectId = $mantis['projectId'];
-    	$filtreDemandeEvolution = $mantis['evolutionFilterId'];
-    	$filtreBugBloquant = $mantis['bugFilterId'];
-    	
-    	//Appel du Service SOAP
-   		$c = new \SoapClient($mantis['soap']);
-    	$versions = $c->mc_project_get_versions($username,$password,$projectId);
-   		$demandes = $c->mc_filter_get_issues($username,$password,$projectId,$filtreDemandeEvolution);
-   		$bugs = $c->mc_filter_get_issues($username,$password,$projectId,$filtreBugBloquant);
-    	unset($c);
-    	
+    	if (is_array($mantis) && key_exists('username',$mantis) && key_exists('password',$mantis) && key_exists('projectId',$mantis) && key_exists('evolutionFilterId',$mantis) && key_exists('bugFilterId',$mantis)){
+    		$username = $mantis['username'];
+    		$password = $mantis['password'];
+    		$projectId = $mantis['projectId'];
+    		$filtreDemandeEvolution = $mantis['evolutionFilterId'];
+    		$filtreBugBloquant = $mantis['bugFilterId'];
+    		
+    		//Appel du Service SOAP
+    		try{
+    			$c = new \SoapClient($mantis['soap']);
+    			$versions = $c->mc_project_get_versions($username,$password,$projectId);
+    			$demandes = $c->mc_filter_get_issues($username,$password,$projectId,$filtreDemandeEvolution);
+    			$bugs = $c->mc_filter_get_issues($username,$password,$projectId,$filtreBugBloquant);
+    			unset($c);
+    		}catch (\SoapFault $soapFault){
+    			//@todo log error
+    			return new ViewModel(
+	    			array(
+	    				'error'	=> true,
+	       			)
+        		);
+    		}
+    	} else {
+    		//@todo log configuration file not load and not parametred
+	    	return new ViewModel(
+	    		array(
+	    			'error'	=> true,
+	       		)
+        	);
+    	}
    		//Création de la vue
         return new ViewModel(
     		array(
+    			'error'	=> false,
     			'versions' => $versions,
     			'bugs' => $bugs,
     			'demandes' => $demandes

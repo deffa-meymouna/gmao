@@ -1,9 +1,16 @@
-<ul class="breadcrumb">
-	<li>GMAO</li>
-	<li>Présentation</li>
-	<li>Suivi de développement</li>
-</ul>
 <h2>Suivi de développement</h2>
+<?php if ($this->error):?>
+<div class="row">	
+	<div class="alert alert-danger col-sm-offset-3 col-sm-6">
+		<a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+		<h4>Le service Mantis n'est pas disponible actuellement.</h4>
+		<p class="text-justify">
+			Nous ne pouvons pas vous présenter la liste des versions actuelles de <i class="fa fa-road"></i>&nbsp;GMAO.
+			Nous vous invitons à interroger ultérieurement cette page.			
+		</p>
+	</div>
+</div>
+<?php else: //no error?>
 <div class="row">
 	<div class="col-sm-4">
 		<div class="panel panel-default">
@@ -102,3 +109,4 @@
 		</div>
 	</div>
 </div>
+<?php endif; // no error?>
