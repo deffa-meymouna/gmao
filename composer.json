@@ -14,11 +14,15 @@
         {
             "type": "vcs",
             "url": "https://github.com/Alexandre-T/zend-bootstrap"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Alexandre-T/CsnUser"
         }
     ],
     "require": {
         "php": ">=5.3.3",
-		"coolcsn/csn-user" : "dev-master",
+		"alexandre-t/csn-user" : "*@dev",
         "zendframework/zendframework": "2.2.5",
         "alexandre-t/zend-bootstrap" : "*@dev"
         
