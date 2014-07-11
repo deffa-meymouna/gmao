@@ -44,7 +44,11 @@ class Module {
 						'mantis' => function ($serviceManager) {
 							$config = $serviceManager->get('Config');							
 							return $config ['mantis'];
-						} 
+						},
+						'cerbere' => function ($serviceManager) {
+							$config = $serviceManager->get('Config');
+							return $config ['cerbere'];
+						},
 				) 
 		);
 	}

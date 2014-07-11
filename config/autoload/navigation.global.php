@@ -68,6 +68,14 @@ return array (
 																				
 								) 
 						),
+						array(
+								'icon'	=> 'sign-in',
+								'label' => 'Login',
+								'route' => 'user-index',
+								'priority' => 0.8,
+								'changefreq' => 'weekly',
+								'action' => 'login'
+						),
 						/*array(
 								'label' => 'Page #1',
 								'route' => 'page-1',
