@@ -28,6 +28,6 @@ return array (
 				'projectId' => 1,
 				'evolutionFilterId' => 2,
 				'bugFilterId' => 3 
-		),			
+		),		 
 )
 ;

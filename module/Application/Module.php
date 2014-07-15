@@ -42,7 +42,7 @@ class Module {
 		return array (
 				'factories' => array (
 						'mantis' => function ($serviceManager) {
-							$config = $serviceManager->get('Config');							
+							$config = $serviceManager->get('Config');
 							return $config ['mantis'];
 						},
 						'cerbere' => function ($serviceManager) {

@@ -102,6 +102,7 @@ class IndexController extends \CsnUser\Controller\IndexController {
 						$sessionManager = new SessionManager();
 						$sessionManager->rememberMe($time);
 					}
+					return $this->redirect()->toRoute('user-index');
 				}
 				
 

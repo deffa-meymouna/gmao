@@ -17,18 +17,19 @@ return array(
          'username' => 'YOUR USERNAME HERE',
          'password' => 'YOUR PASSWORD HERE',
      ),
-     'mantis' => array (
+     	'mantis' => array (
      	 'username' => 'YOUR MANTIS USERNAME HERE',
          'password' => 'YOUR MANTIS PASSWORD HERE',
      ),
      'cerbere' => array(
-				'host' => "ENTER YOUR CAS SERVER URL",
-				'port' => 443,
-				
-				'context' => "ENTER YOUR CAS SERVER CONTEXT URL",
-				'certificat' => false,
-				'pathCertificat' => "ENTER YOUR PATH CERTIFICAT",
-				
-				'applicationExitURL' => "ENTER YOUR APPLICATION URL"
-		)
+		'host' => "ENTER YOUR CAS SERVER URL",
+		
+		'port' => 443,
+		
+		'context' => "ENTER YOUR CAS SERVER CONTEXT URL",
+		'certificat' => false, //False if u don't use certificat
+		'pathCertificat' => "ENTER YOUR PATH CERTIFICAT",
+		
+		'applicationExitURL' => "ENTER YOUR APPLICATION URL"
+	)
  );

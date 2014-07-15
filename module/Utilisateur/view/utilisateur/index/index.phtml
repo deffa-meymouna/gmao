@@ -1,7 +1,7 @@
 <?php
 /**
  * CsnUser - Coolcsn Zend Framework 2 User Module
- * 
+ *
  * @link https://github.com/coolcsn/CsnUser for the canonical source repository
  * @copyright Copyright (c) 2005-2013 LightSoft 2005 Ltd. Bulgaria
  * @license https://github.com/coolcsn/CsnUser/blob/master/LICENSE BSDLicense
@@ -18,19 +18,24 @@ echo $this->partial('csn-user/layout/nav-menu', array('navMenu' => $this->navMen
 
 <div class="jumbotron">
 <?php if($user = $this->identity()) { ?>
-  <h1 style="float:left;">
+  <h1>
     <?php echo $this->translate('Welcome') ?>
     <a href="<?php echo $this->url('user-register', array('action' => 'edit-profile'));?>">
-      <span class="zf-green"><?php echo $this->escapeHtml($user->getUsername()); ?></span>
-    </a>
+      <?php echo $this->escapeHtml($user->getUsername()); ?>
+    </a>!
   </h1>
-  <a href="<?php echo $this->url('user-index', array('action' => 'logout'));?>" class="btn btn-success btn-lg" style="float:right; margin-top: 25px">
-    <?php echo $this->translate('Log Out'); ?>
-  </a>
-  <div style="clear: both"></div>
-  <div class="row">
-    <?php echo $this->translate('Congratulations! You have successfully logged in.') ?>
-  </div>
+  	<p>
+    	<?php echo $this->translate('Congratulations! You have successfully logged in.') ?>
+    </p>
+  	<nav class="btn-group">
+    	<a href="<?php echo $this->url('user-register', array('action' => 'edit-profile'));?>" class="btn btn-default btn-lg">
+		    <i class="fa fa-pencil"></i>&nbsp;<?php echo $this->translate('Edit profile'); ?>
+		</a>
+  		<a href="<?php echo $this->url('user-index', array('action' => 'logout'));?>" class="btn btn-default btn-lg">
+		    <i class="fa fa-sign-out"></i>&nbsp;<?php echo $this->translate('Log Out'); ?>
+		</a>
+	</nav>
+
 <?php } else { ?>
   <h1><?php echo $this->translate('Welcome') ?><span  style="color: #FF8C00"> <?php echo $this->translate('Guest') ?></span>!</h1>
   <div>
