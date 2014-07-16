@@ -1,225 +1,361 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ZendSkeletonApplication\n"
+"Project-Id-Version: GMAOApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-11 21:49+0100\n"
-"PO-Revision-Date: 2014-01-11 21:49+0100\n"
+"POT-Creation-Date: 2014-07-16 08:43+0100\n"
+"PO-Revision-Date: 2014-07-16 08:46+0100\n"
 "Last-Translator: Alexandre Tranchant <Alexandre.Tranchant@gmail.com>\n"
 "Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-KeywordsList: translate;label\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 "X-Poedit-SearchPath-1: ../..\n"
 
-#: ../view/layout/layout.phtml:6 ../view/layout/layout.phtml:37
-#: ../../Application/view/layout/layout.phtml:6
-#: ../../Application/view/layout/layout.phtml:37
-msgid "GMAO"
-msgstr "GMAO"
-
-#: ../view/layout/layout.phtml:41
-#: ../../Application/view/layout/layout.phtml:41
-msgid "Home"
-msgstr "Accueil"
-
-#: ../view/layout/layout.phtml:50
-#: ../../Application/view/layout/layout.phtml:50
-msgid "All rights reserved."
-msgstr "Tous droits réservés."
-
-#: ../view/application/index/index.phtml:2
-#: ../../Application/view/application/index/index.phtml:2
-#, php-format
-msgid "Welcome to %sZend Framework 2%s"
-msgstr "Bienvenue dans le %sZend Framework 2%s"
-
-#: ../view/application/index/index.phtml:3
-#: ../../Application/view/application/index/index.phtml:3
+#: ../../Utilisateur/src/Utilisateur/Controller/IndexController.php:78
 #, php-format
 msgid ""
-"Congratulations! You have successfully installed the %sZF2 Skeleton "
-"Application%s. You are currently running Zend Framework version %s. This "
-"skeleton can serve as a simple starting point for you to begin building your "
-"application on ZF2."
+"Hello %s Your authentication credentials are not declared into this "
+"application"
 msgstr ""
-"Félicitations ! Vous avez installé avec succès le %sZF2 Skeleton Application"
-"%s. Vous utilisez actuellement Zend Framework version %s. Cette structure "
-"peut vous servir comme un point de départ simple pour démarrer la "
-"construction de votre application avec ZF2."
+"Bonjour %s Vos accréditations ne sont pas déclarées dans cette application"
 
-#: ../view/application/index/index.phtml:4
+#: ../../Utilisateur/src/Utilisateur/Controller/IndexController.php:80
+msgid "Your authentication credentials are not declared into this application"
+msgstr "Vos accréditations ne sont pas déclarées dans cette application"
+
+#: ../../Utilisateur/src/Utilisateur/Controller/IndexController.php:89
+msgid "Your username is disabled. Please contact an administrator."
+msgstr "Votre compte a été désactivé. Veuillez contacter un administrateur."
+
+#: ../../Utilisateur/src/Utilisateur/Controller/IndexController.php:91
+msgid "Your authentication credentials are not valid"
+msgstr "Vos identifiants de connexion ne sont pas valides"
+
+#: ../../Utilisateur/src/Utilisateur/Controller/IndexController.php:110
+msgid "Something went wrong during login! Please, try again later."
+msgstr ""
+"Une erreur est survenue durant la connexion. Veuillez réessayer plus tard."
+
+#: ../../Album/view/album/album/index.phtml:4
+msgid "My albums"
+msgstr "Mes albums"
+
+#: ../../Application/view/application/index/index.phtml:2
+#: ../view/application/index/index.phtml:2
+#, php-format
+msgid "%sLa%s %sGMAO%s %sdédiée aux équipements de la route%s"
+msgstr ""
+
 #: ../../Application/view/application/index/index.phtml:4
-msgid "Fork Zend Framework 2 on GitHub"
-msgstr "Faites un Fork de Zend Framework 2 sur GitHub"
+#: ../view/application/index/index.phtml:4
+#, php-format
+msgid ""
+"Ce service de %sGMAO infogérée par %sAT-IT.FR%s est spécialisé pour les "
+"équipements dynamiques autoroutiers."
+msgstr ""
 
-#: ../view/application/index/index.phtml:12
-#: ../../Application/view/application/index/index.phtml:12
-msgid "Follow Development"
+#: ../../Application/view/application/index/index.phtml:9
+#: ../view/application/index/index.phtml:9
+msgid "Découvrir le service"
+msgstr ""
+
+#: ../../Application/view/application/index/index.phtml:11
+#: ../view/application/index/index.phtml:11
+msgid "Connexion"
+msgstr ""
+
+#: ../../Application/view/application/index/index.phtml:22
+#: ../view/application/index/index.phtml:22
+msgid "Suivre le développement"
+msgstr ""
+
+#: ../../Application/view/application/index/index.phtml:25
+#: ../view/application/index/index.phtml:25
+#, php-format
+msgid ""
+"%sGMAO%s est un service en constant développement. Vous travaillez dans "
+"l'univers des routes&nbsp;? Vous ne trouvez pas de solution informatique "
+"infogérée capable de répondre aux besoins spécifiques des autoroutiers et "
+"des équipements dynamiques&nbsp;? Alors n'hésitez pas à découvrir les "
+"fonctions de notre %sGMAO%s&nbsp;! Ce produit étant en constante évolution, "
+"n'hésitez pas à nous faire part de vos demandes spécifiques que nous "
+"intégrerons rapidement à nos demandes d'évolutions."
+msgstr ""
+
+#: ../../Application/view/application/index/index.phtml:27
+#: ../view/application/index/index.phtml:27
+#, fuzzy
+msgid "Portail de développement"
 msgstr "Suivre le développement"
 
-#: ../view/application/index/index.phtml:15
-#: ../../Application/view/application/index/index.phtml:15
-#, php-format
-msgid ""
-"Zend Framework 2 is under active development. If you are interested in "
-"following the development of ZF2, there is a special ZF2 portal on the "
-"official Zend Framework website which provides links to the ZF2 %swiki%s, "
-"%sdev blog%s, %sissue tracker%s, and much more. This is a great resource for "
-"staying up to date with the latest developments!"
+#: ../../Application/view/application/index/index.phtml:35
+#: ../view/application/index/index.phtml:35
+msgid "Découvrir les fonctionnalités"
 msgstr ""
-"Zend Framework 2 est en cours de développement. Si vous êtes intéressé pour "
-"suivre l'évolution de ZF2, il existe un portail dédié à ZF2 sur le site "
-"officiel Zend Framework qui propose des liens vers le %swiki%s ZF2, %sdev "
-"blog%s, %ssuivi des problèmes%s, et bien plus encore. Il s'agit d'une "
-"excellente ressource pour rester à jour sur les dernières évolutions !"
 
-#: ../view/application/index/index.phtml:16
-#: ../../Application/view/application/index/index.phtml:16
-msgid "ZF2 Development Portal"
-msgstr "Portail sur le développement de ZF2"
-
-#: ../view/application/index/index.phtml:24
-#: ../../Application/view/application/index/index.phtml:24
-msgid "Discover Modules"
-msgstr "Découvrez les modules"
-
-#: ../view/application/index/index.phtml:27
-#: ../../Application/view/application/index/index.phtml:27
-#, php-format
+#: ../../Application/view/application/index/index.phtml:38
+#: ../view/application/index/index.phtml:38
 msgid ""
-"The community is working on developing a community site to serve as a "
-"repository and gallery for ZF2 modules. The project is available %son GitHub"
-"%s. The site is currently live and currently contains a list of some of the "
-"modules already available for ZF2."
+"L'équipe de www.at-it.fr, forte de son expérience dans les équipements "
+"autoroutiers propose une solution évolutive répondant aux particularités des "
+"services d'exploitations publics et privés."
 msgstr ""
-"La communauté travaille sur le développement d'un site communautaire avec "
-"l'objectif de servir de dépôt et de galerie  pour les modules ZF2. Le projet "
-"est disponible %ssur GitHub%s. Le site est déjà en ligne, et contient une "
-"liste non exhaustive des modules déjà disponibles pour ZF2."
 
-#: ../view/application/index/index.phtml:28
-#: ../../Application/view/application/index/index.phtml:28
-msgid "Explore ZF2 Modules"
-msgstr "Explorer les modules ZF2"
+#: ../../Application/view/application/index/index.phtml:39
+#: ../view/application/index/index.phtml:39
+#, php-format
+msgid "Découvrir les fonctions de %sGMAO%s"
+msgstr ""
 
-#: ../view/application/index/index.phtml:36
-#: ../../Application/view/application/index/index.phtml:36
-msgid "Help &amp; Support"
+#: ../../Application/view/application/index/index.phtml:47
+#: ../view/application/index/index.phtml:47
+#, fuzzy
+msgid "Aide &amp; Support"
 msgstr "Aide &amp; support"
 
-#: ../view/application/index/index.phtml:39
-#: ../../Application/view/application/index/index.phtml:39
-#, php-format
+#: ../../Application/view/application/index/index.phtml:50
+#: ../view/application/index/index.phtml:50
 msgid ""
-"If you need any help or support while developing with ZF2, you may reach us "
-"via IRC: %s#zftalk on Freenode%s. We'd love to hear any questions or "
-"feedback you may have regarding the beta releases. Alternatively, you may "
-"subscribe and post questions to the %smailing lists%s."
+"Notre solution ne se limite pas à la vente d'un produit de GMAO. Nous "
+"fournissons également une gamme de services vous permettant d'alléger la "
+"charge administrative de vos équipes de maintenance&nbsp;:"
 msgstr ""
-"Si vous avez besoin d'aide ou de support en développant avec ZF2, vous "
-"pouvez nous joindre sur IRC : %s#zftalk sur Freenode%s. Nous aimerions avoir "
-"vos questions ou vos commentaires que vous pourriez avoir au sujet des "
-"versions bêta. Sinon, vous pouvez vous abonner, et poser des questions sur "
-"la %sliste de diffusion%s."
 
-#: ../view/application/index/index.phtml:40
-#: ../../Application/view/application/index/index.phtml:40
-msgid "Ping us on IRC"
-msgstr "Rejoignez-nous sur IRC"
+#: ../../Application/view/application/index/index.phtml:52
+#: ../view/application/index/index.phtml:52
+msgid "Une hot-line téléphonique,"
+msgstr ""
 
-#: ../view/error/index.phtml:1 ../../Application/view/error/index.phtml:1
-msgid "An error occurred"
-msgstr "Une erreur est survenue"
+#: ../../Application/view/application/index/index.phtml:53
+#: ../view/application/index/index.phtml:53
+msgid "L'hébergement de la solution informatique,"
+msgstr ""
 
-#: ../view/error/index.phtml:8 ../view/error/404.phtml:53
-#: ../../Application/view/error/index.phtml:8
-#: ../../Application/view/error/404.phtml:53
-msgid "Additional information"
-msgstr "Informations complémentaires"
+#: ../../Application/view/application/index/index.phtml:54
+#: ../view/application/index/index.phtml:54
+msgid ""
+"L'importation de votre ancienne base de données ou de vos fichiers "
+"Excel&trade; ou Calc&trade;,"
+msgstr ""
 
-#: ../view/error/index.phtml:11 ../view/error/index.phtml:35
-#: ../view/error/404.phtml:56 ../view/error/404.phtml:80
-#: ../../Application/view/error/index.phtml:11
-#: ../../Application/view/error/index.phtml:35
-#: ../../Application/view/error/404.phtml:56
-#: ../../Application/view/error/404.phtml:80
-msgid "File"
-msgstr "Fichier"
+#: ../../Application/view/application/index/index.phtml:55
+#: ../view/application/index/index.phtml:55
+msgid "L'intégration des nouveaux équipements,"
+msgstr ""
 
-#: ../view/error/index.phtml:15 ../view/error/index.phtml:39
-#: ../view/error/404.phtml:60 ../view/error/404.phtml:84
-#: ../../Application/view/error/index.phtml:15
-#: ../../Application/view/error/index.phtml:39
-#: ../../Application/view/error/404.phtml:60
-#: ../../Application/view/error/404.phtml:84
-msgid "Message"
-msgstr "Message"
+#: ../../Application/view/application/index/index.phtml:56
+#: ../view/application/index/index.phtml:56
+msgid "La personnalisation de tableaux de bord ou de rapports,"
+msgstr ""
 
-#: ../view/error/index.phtml:19 ../view/error/index.phtml:43
-#: ../view/error/404.phtml:64 ../view/error/404.phtml:88
-#: ../../Application/view/error/index.phtml:19
-#: ../../Application/view/error/index.phtml:43
-#: ../../Application/view/error/404.phtml:64
-#: ../../Application/view/error/404.phtml:88
-msgid "Stack trace"
-msgstr "Pile d'exécution"
+#: ../../Application/view/application/index/index.phtml:58
+#: ../view/application/index/index.phtml:58
+msgid "Contactez-nous"
+msgstr ""
 
-#: ../view/error/index.phtml:29 ../view/error/404.phtml:74
-#: ../../Application/view/error/index.phtml:29
-#: ../../Application/view/error/404.phtml:74
-msgid "Previous exceptions"
-msgstr "Exceptions précédentes"
-
-#: ../view/error/index.phtml:58 ../view/error/404.phtml:103
-#: ../../Application/view/error/index.phtml:58
-#: ../../Application/view/error/404.phtml:103
-msgid "No Exception available"
-msgstr "Aucune exception disponible"
-
-#: ../view/error/404.phtml:1 ../../Application/view/error/404.phtml:1
+#: ../../Application/view/error/404.phtml:1 ../view/error/404.phtml:1
 msgid "A 404 error occurred"
 msgstr "Une erreur 404 est survenue"
 
-#: ../view/error/404.phtml:10 ../../Application/view/error/404.phtml:10
+#: ../../Application/view/error/404.phtml:10 ../view/error/404.phtml:10
 msgid "The requested controller was unable to dispatch the request."
 msgstr "Le contrôleur demandé n'a pas pu dispatcher la requête."
 
-#: ../view/error/404.phtml:13 ../../Application/view/error/404.phtml:13
+#: ../../Application/view/error/404.phtml:13 ../view/error/404.phtml:13
 msgid ""
 "The requested controller could not be mapped to an existing controller class."
 msgstr ""
 "Le contrôleur demandé ne correspond pas à une classe existante de contrôleur."
 
-#: ../view/error/404.phtml:16 ../../Application/view/error/404.phtml:16
+#: ../../Application/view/error/404.phtml:16 ../view/error/404.phtml:16
 msgid "The requested controller was not dispatchable."
 msgstr "Le contrôleur demandé n'est pas dispatchable."
 
-#: ../view/error/404.phtml:19 ../../Application/view/error/404.phtml:19
+#: ../../Application/view/error/404.phtml:19 ../view/error/404.phtml:19
 msgid "The requested URL could not be matched by routing."
 msgstr "L'URL demandée n'a pas pu trouver de route correspondante."
 
-#: ../view/error/404.phtml:22 ../../Application/view/error/404.phtml:22
+#: ../../Application/view/error/404.phtml:22 ../view/error/404.phtml:22
 msgid "We cannot determine at this time why a 404 was generated."
 msgstr ""
 "Nous ne pouvons pas déterminer pour le moment pourquoi une 404 a été générée."
 
-#: ../view/error/404.phtml:34 ../../Application/view/error/404.phtml:34
+#: ../../Application/view/error/404.phtml:34 ../view/error/404.phtml:34
 msgid "Controller"
 msgstr "Contrôleur"
 
-#: ../view/error/404.phtml:41 ../../Application/view/error/404.phtml:41
+#: ../../Application/view/error/404.phtml:41 ../view/error/404.phtml:41
 #, php-format
 msgid "resolves to %s"
 msgstr "résout en %s"
 
-#: ../../Album/view/album/album/index.phtml:4
-msgid "My albums"
-msgstr "Mes albums"
+#: ../../Application/view/error/404.phtml:53
+#: ../../Application/view/error/index.phtml:8 ../view/error/404.phtml:53
+#: ../view/error/index.phtml:8
+msgid "Additional information"
+msgstr "Informations complémentaires"
+
+#: ../../Application/view/error/404.phtml:56
+#: ../../Application/view/error/404.phtml:80
+#: ../../Application/view/error/index.phtml:11
+#: ../../Application/view/error/index.phtml:35 ../view/error/404.phtml:56
+#: ../view/error/404.phtml:80 ../view/error/index.phtml:11
+#: ../view/error/index.phtml:35
+msgid "File"
+msgstr "Fichier"
+
+#: ../../Application/view/error/404.phtml:60
+#: ../../Application/view/error/404.phtml:84
+#: ../../Application/view/error/index.phtml:15
+#: ../../Application/view/error/index.phtml:39 ../view/error/404.phtml:60
+#: ../view/error/404.phtml:84 ../view/error/index.phtml:15
+#: ../view/error/index.phtml:39
+msgid "Message"
+msgstr "Message"
+
+#: ../../Application/view/error/404.phtml:64
+#: ../../Application/view/error/404.phtml:88
+#: ../../Application/view/error/index.phtml:19
+#: ../../Application/view/error/index.phtml:43 ../view/error/404.phtml:64
+#: ../view/error/404.phtml:88 ../view/error/index.phtml:19
+#: ../view/error/index.phtml:43
+msgid "Stack trace"
+msgstr "Pile d'exécution"
+
+#: ../../Application/view/error/404.phtml:74
+#: ../../Application/view/error/index.phtml:29 ../view/error/404.phtml:74
+#: ../view/error/index.phtml:29
+msgid "Previous exceptions"
+msgstr "Exceptions précédentes"
+
+#: ../../Application/view/error/404.phtml:103
+#: ../../Application/view/error/index.phtml:58 ../view/error/404.phtml:103
+#: ../view/error/index.phtml:58
+msgid "No Exception available"
+msgstr "Aucune exception disponible"
+
+#: ../../Application/view/error/index.phtml:1 ../view/error/index.phtml:1
+msgid "An error occurred"
+msgstr "Une erreur est survenue"
+
+#: ../../Application/view/layout/layout.phtml:15
+#: ../../Application/view/layout/layout.phtml:47
+#: ../view/layout/layout.phtml:15 ../view/layout/layout.phtml:47
+msgid "GMAO"
+msgstr "GMAO"
+
+#: ../../Application/view/layout/layout.phtml:59
+#: ../view/layout/layout.phtml:59
+#, php-format
+msgid "&copy; 2005 - %s par %s"
+msgstr "&copy; 2005 - %s par %s"
+
+#: ../../Application/view/layout/layout.phtml:59
+#: ../view/layout/layout.phtml:59
+msgid "All rights reserved."
+msgstr "Tous droits réservés."
+
+#: ../../Application/view/navigation/breadcrumbs.phtml:3
+#: ../view/navigation/breadcrumbs.phtml:3
+msgid "Home"
+msgstr "Accueil"
+
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:23
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:41
+msgid "Welcome"
+msgstr "Bienvenue"
+
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:29
+msgid "Congratulations! You have successfully logged in."
+msgstr "Félicitations vous êtes correctement authentifié"
+
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:33
+msgid "Edit Profile"
+msgstr "Modifier le profil"
+
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:36
+msgid "Log Out"
+msgstr "Déconnexion"
+
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:41
+msgid "Guest"
+msgstr "Invité"
+
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:43
+msgid "Please login to use this application."
+msgstr "Veuillez vous identifier pour utiliser cette application."
+
+#~ msgid "Welcome to %sZend Framework 2%s"
+#~ msgstr "Bienvenue dans le %sZend Framework 2%s"
+
+#~ msgid ""
+#~ "Congratulations! You have successfully installed the %sZF2 Skeleton "
+#~ "Application%s. You are currently running Zend Framework version %s. This "
+#~ "skeleton can serve as a simple starting point for you to begin building "
+#~ "your application on ZF2."
+#~ msgstr ""
+#~ "Félicitations ! Vous avez installé avec succès le %sZF2 Skeleton "
+#~ "Application%s. Vous utilisez actuellement Zend Framework version %s. "
+#~ "Cette structure peut vous servir comme un point de départ simple pour "
+#~ "démarrer la construction de votre application avec ZF2."
+
+#~ msgid "Fork Zend Framework 2 on GitHub"
+#~ msgstr "Faites un Fork de Zend Framework 2 sur GitHub"
+
+#~ msgid ""
+#~ "Zend Framework 2 is under active development. If you are interested in "
+#~ "following the development of ZF2, there is a special ZF2 portal on the "
+#~ "official Zend Framework website which provides links to the ZF2 %swiki%s, "
+#~ "%sdev blog%s, %sissue tracker%s, and much more. This is a great resource "
+#~ "for staying up to date with the latest developments!"
+#~ msgstr ""
+#~ "Zend Framework 2 est en cours de développement. Si vous êtes intéressé "
+#~ "pour suivre l'évolution de ZF2, il existe un portail dédié à ZF2 sur le "
+#~ "site officiel Zend Framework qui propose des liens vers le %swiki%s ZF2, "
+#~ "%sdev blog%s, %ssuivi des problèmes%s, et bien plus encore. Il s'agit "
+#~ "d'une excellente ressource pour rester à jour sur les dernières "
+#~ "évolutions !"
+
+#~ msgid "ZF2 Development Portal"
+#~ msgstr "Portail sur le développement de ZF2"
+
+#~ msgid "Discover Modules"
+#~ msgstr "Découvrez les modules"
+
+#~ msgid ""
+#~ "The community is working on developing a community site to serve as a "
+#~ "repository and gallery for ZF2 modules. The project is available %son "
+#~ "GitHub%s. The site is currently live and currently contains a list of "
+#~ "some of the modules already available for ZF2."
+#~ msgstr ""
+#~ "La communauté travaille sur le développement d'un site communautaire avec "
+#~ "l'objectif de servir de dépôt et de galerie  pour les modules ZF2. Le "
+#~ "projet est disponible %ssur GitHub%s. Le site est déjà en ligne, et "
+#~ "contient une liste non exhaustive des modules déjà disponibles pour ZF2."
+
+#~ msgid "Explore ZF2 Modules"
+#~ msgstr "Explorer les modules ZF2"
+
+#~ msgid ""
+#~ "If you need any help or support while developing with ZF2, you may reach "
+#~ "us via IRC: %s#zftalk on Freenode%s. We'd love to hear any questions or "
+#~ "feedback you may have regarding the beta releases. Alternatively, you may "
+#~ "subscribe and post questions to the %smailing lists%s."
+#~ msgstr ""
+#~ "Si vous avez besoin d'aide ou de support en développant avec ZF2, vous "
+#~ "pouvez nous joindre sur IRC : %s#zftalk sur Freenode%s. Nous aimerions "
+#~ "avoir vos questions ou vos commentaires que vous pourriez avoir au sujet "
+#~ "des versions bêta. Sinon, vous pouvez vous abonner, et poser des "
+#~ "questions sur la %sliste de diffusion%s."
+
+#~ msgid "Ping us on IRC"
+#~ msgstr "Rejoignez-nous sur IRC"
 
 #~ msgid "Skeleton Application"
 #~ msgstr "Skeleton Application"

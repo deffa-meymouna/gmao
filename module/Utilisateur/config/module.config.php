@@ -2,8 +2,9 @@
 return array (
 		'controllers' => array (
 				'invokables' => array (
-						'Utilisateur\Controller\Index' => 'Utilisateur\Controller\IndexController' 
-				) 
+						'Utilisateur\Controller\Index' => 'Utilisateur\Controller\IndexController',
+						'Utilisateur\Controller\Registration' => 'Utilisateur\Controller\RegistrationController'
+				)
 		),
 		'router' => array (
 				'routes' => array (
@@ -12,32 +13,31 @@ return array (
 								'options' => array (
 										'route' => '/user[/:action]',
 										'constraints' => array (
-												'action' => '[a-zA-Z][a-zA-Z0-9_-]*' 
+												'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
 										),
 										'defaults' => array (
 												'controller' => 'Utilisateur\Controller\Index',
-												'action' => 'index' 
-										) 
+												'action' => 'index'
+										)
 								),
-								'may_terminate' => true 
+								'may_terminate' => true
 						),
-						
-						//@todo empêcher l'enregistrement d'uilisateur en redirigeant la route.
-						/*'user-register' => array (
+
+						'user-register' => array (
 								'type' => 'Segment',
 								'options' => array (
 										'route' => '/user/register[/:action][/:id]',
 										'constraints' => array (
 												'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-												'id' => '[a-zA-Z0-9]*' 
+												'id' => '[a-zA-Z0-9]*'
 										),
 										'defaults' => array (
-												'controller' => 'CsnUser\Controller\Registration',
-												'action' => 'index' 
-										) 
+												'controller' => 'Utilisateur\Controller\Registration',
+												'action' => 'index'
+										)
 								),
-								'may_terminate' => true 
-						),*/
+								'may_terminate' => true
+						),
 						'user-admin' => array (
 								'type' => 'Segment',
 								'options' => array (
@@ -45,20 +45,20 @@ return array (
 										'constraints' => array (
 												'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 												'id' => '[0-9]+',
-												'state' => '[0-9]' 
+												'state' => '[0-9]'
 										),
 										'defaults' => array (
 												'controller' => 'CsnUser\Controller\Admin',
-												'action' => 'index' 
-										) 
+												'action' => 'index'
+										)
 								),
-								'may_terminate' => true 
-						) 
-				) 
+								'may_terminate' => true
+						)
+				)
 		),
 		'view_manager' => array (
 				'template_path_stack' => array (
-						'Utilisateur' => __DIR__ . '/../view' 
-				) 
-		) 
+						'Utilisateur' => __DIR__ . '/../view'
+				)
+		)
 );

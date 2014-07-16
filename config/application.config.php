@@ -66,4 +66,14 @@ return array(
    // Initial configuration with which to seed the ServiceManager.
    // Should be compatible with Zend\ServiceManager\Config.
    // 'service_manager' => array(),
+	'translator' => array(
+			'translation_file_patterns' => array(
+					array(
+							'type'     => 'gettext',
+							'base_dir' => __DIR__ . '/../language',
+							'pattern'  => '%s.mo',
+							'text_domain' => "utilisateur",
+					),
+			),
+	),
 );

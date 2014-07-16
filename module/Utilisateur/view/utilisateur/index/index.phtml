@@ -12,32 +12,33 @@
  * @author Martin Briglia <martin@mgscreativa.com>
  */
 
-echo $this->partial('csn-user/layout/nav-menu', array('navMenu' => $this->navMenu, 'user' => $this->identity()));
+echo $this->partial('csn-user/layout/nav-menu',
+		array('navMenu' => $this->navMenu, 'user' => $this->identity()));
 
 ?>
 
 <div class="jumbotron">
 <?php if($user = $this->identity()) { ?>
   <h1>
-    <?php echo $this->translate('Welcome') ?>
+    <?php echo $this->translate('Welcome','csnuser') ?>
     <a href="<?php echo $this->url('user-register', array('action' => 'edit-profile'));?>">
       <?php echo $this->escapeHtml($user->getUsername()); ?>
     </a>!
   </h1>
   	<p>
-    	<?php echo $this->translate('Congratulations! You have successfully logged in.') ?>
+    	<?php echo $this->translate('Congratulations! You have successfully logged in.','csnuser') ?>
     </p>
   	<nav class="btn-group">
     	<a href="<?php echo $this->url('user-register', array('action' => 'edit-profile'));?>" class="btn btn-default btn-lg">
-		    <i class="fa fa-pencil"></i>&nbsp;<?php echo $this->translate('Edit profile'); ?>
+		    <i class="fa fa-pencil"></i>&nbsp;<?php echo $this->translate('Edit Profile','csnuser'); ?>
 		</a>
   		<a href="<?php echo $this->url('user-index', array('action' => 'logout'));?>" class="btn btn-default btn-lg">
-		    <i class="fa fa-sign-out"></i>&nbsp;<?php echo $this->translate('Log Out'); ?>
+		    <i class="fa fa-sign-out"></i>&nbsp;<?php echo $this->translate('Log Out','csnuser'); ?>
 		</a>
 	</nav>
 
 <?php } else { ?>
-  <h1><?php echo $this->translate('Welcome') ?><span  style="color: #FF8C00"> <?php echo $this->translate('Guest') ?></span>!</h1>
+  <h1><?php echo $this->translate('Welcome','csnuser') ?><span  style="color: #FF8C00"> <?php echo $this->translate('Guest','csnuser') ?></span>&nbsp;!</h1>
   <div>
     <?php echo $this->translate('Please login to use this application.') ?>
   </div>

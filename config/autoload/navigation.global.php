@@ -7,9 +7,9 @@
 		'label' => 'Home', // Label text
 		'title' => 'home', //Title attribute for links
 		'route' => 'home'  //route map
-		'changefreq' => '' //For Sitemap, valid values are always hourly daily weekly monthly yearly never  
+		'changefreq' => '' //For Sitemap, valid values are always hourly daily weekly monthly yearly never
 		'lastmod' => '' //For Sitemap, valid values are W3C Date or YYYY-MM-DD
-		'priority' => '1.0' //The value should be a decimal between 0.0 and 1.0  
+		'priority' => '1.0' //The value should be a decimal between 0.0 and 1.0
  */
 return array (
 		'navigation' => array (
@@ -36,7 +36,7 @@ return array (
 												'route' => 'application',
 												'priority' => 0.9,
 												'changefreq' => 'daily',
-												'action' => 'fonction' 
+												'action' => 'fonction'
 										),
 										array (
 												'icon'	=> 'globe',
@@ -45,7 +45,7 @@ return array (
 												'route' => 'application',
 												'priority' => 0.7,
 												'changefreq' => 'weekly',
-												'action' => 'service' 
+												'action' => 'service'
 										),
 										array (
 												'icon'	=> 'code',
@@ -54,7 +54,7 @@ return array (
 												'route' => 'application',
 												'priority' => 0.7,
 												'changefreq' => 'daily',
-												'action' => 'suivre' 
+												'action' => 'suivre'
 										),
 										array (
 												'icon'	=> 'phone',
@@ -65,12 +65,12 @@ return array (
 												'changefreq' => 'monthly',
 												'action' => 'contact'
 										),
-																				
-								) 
+
+								)
 						),
 						array(
 								'icon'	=> 'sign-in',
-								'label' => 'Login',
+								'label' => 'Log In',
 								'route' => 'user-index',
 								'priority' => 0.8,
 								'changefreq' => 'weekly',
@@ -90,6 +90,6 @@ return array (
 								'label' => 'Page #2',
 								'route' => 'page-2',
 						),*/
-				) 
-		) 
+				)
+		)
 );
