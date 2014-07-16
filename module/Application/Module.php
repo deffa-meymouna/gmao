@@ -34,8 +34,8 @@ class Module {
 				'Zend\Loader\StandardAutoloader' => array (
 						'namespaces' => array (
 								__NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__
-						) 
-				) 
+						)
+				)
 		);
 	}
 	public function getServiceConfig() {
@@ -49,7 +49,11 @@ class Module {
 							$config = $serviceManager->get('Config');
 							return $config ['cerbere'];
 						},
-				) 
+						'acl' => function ($serviceManager) {
+							$acl = new \CsnAuthorization\Acl\Acl($serviceManager);
+							return $acl;
+						}
+				)
 		);
 	}
 }

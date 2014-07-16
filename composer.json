@@ -32,6 +32,7 @@
         "php": ">=5.3.3",
 		"coolcsn/csn-user" : "dev-master",
 		"coolcsn/csn-authorization" : "dev-master",
+		"coolcsn/csn-acl-navigation" : "dev-master",
         "zendframework/zendframework": "2.2.5",
         "alexandre-t/zend-bootstrap" : "*@dev",
         "jasig/phpcas" : "1.3.x-dev"

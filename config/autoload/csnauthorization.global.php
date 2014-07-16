@@ -87,6 +87,11 @@ return array(
                     'index' => 'guest',
                 ),
             ),
+            'deny' => array(
+            		'Utilisateur\Controller\Index' => array(
+            				'login' => 'member',
+            		),
+            ),
         ),
     ),
 );
