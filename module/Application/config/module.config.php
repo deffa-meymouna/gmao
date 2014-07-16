@@ -68,6 +68,12 @@ return array(
                 'base_dir' => __DIR__ . '/../language',
                 'pattern'  => '%s.mo',
             ),
+            array(
+            		'type'     => 'gettext',
+            		'base_dir' => __DIR__ . '/../../CsnAuthorization/language',
+            		'pattern'  => '%s.mo',
+            		'text_domain' => 'csnauthorization',
+            ),
         ),
     ),
     'controllers' => array(
