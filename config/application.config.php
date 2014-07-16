@@ -7,6 +7,7 @@ return array(
 	    'DoctrineModule',
     	'DoctrineORMModule',
     	'CsnUser',
+    	'CsnAuthorization',
     	'Utilisateur'
     ),
 

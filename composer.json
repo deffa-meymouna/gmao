@@ -21,12 +21,17 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/ghiamar/CsnAuthorization"
+        },        
+        {
+            "type": "vcs",
             "url": "https://github.com/Jasig/phpCAS"
         }
     ],
     "require": {
         "php": ">=5.3.3",
-		"alexandre-t/csn-user" : "*@dev",
+		"coolcsn/csn-user" : "dev-master",
+		"coolcsn/csn-authorization" : "dev-master",
         "zendframework/zendframework": "2.2.5",
         "alexandre-t/zend-bootstrap" : "*@dev",
         "jasig/phpcas" : "1.3.x-dev"
