@@ -3,7 +3,7 @@ return array (
 		'controllers' => array (
 				'invokables' => array (
 						'Utilisateur\Controller\Index' => 'Utilisateur\Controller\IndexController',
-						'Utilisateur\Controller\Registration' => 'Utilisateur\Controller\RegistrationController'
+						'Utilisateur\Controller\Registration' => 'Utilisateur\Controller\RegistrationController',
 				)
 		),
 		'router' => array (
@@ -22,6 +22,21 @@ return array (
 								),
 								'may_terminate' => true
 						),
+						'user-register' => array (
+								'type' => 'Segment',
+								'options' => array (
+										'route' => '/user/register[/:action]',
+										'constraints' => array (
+												'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
+										),
+										'defaults' => array (
+												'controller' => 'Utilisateur\Controller\Registration',
+												'action' => 'index'
+										)
+								),
+								'may_terminate' => true
+						),
+
 				),
 		),
 		'view_manager' => array (

@@ -78,6 +78,9 @@ return array(
                 'CsnUser\Controller\Admin' => array(
                 	'all' => 'admin',
                 ),
+                'CsnUser\Controller\Registration' => array(
+                		'all' => 'member',
+                ),
                 /**
                  * This rule is for Zend Developer Tools Doctrine ORM Module YumlController for drawing
                  * Doctrine entities dependency graph. You can remove it if you don't plan to use
