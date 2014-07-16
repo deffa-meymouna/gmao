@@ -1,16 +1,19 @@
 <?php
-	//Préparation du menu 
+	//Préparation du menu
 	$partialMenu = array('navigation/topnav.phtml', 'default');
 	$this->navigation('navigation')->menu()->setPartial($partialMenu);
 	$partialBreadcrumbs = array('navigation/breadcrumbs.phtml', 'default');
 	$this->navigation('navigation')->breadcrumbs()->setPartial($partialBreadcrumbs);
 	//Doctype
 	echo $this->doctype();
+
+	//Est-on connecté ?
+	$user = $this->identity();
 ?>
 <html lang="fr">
 	<head>
 		<meta charset="utf-8">
-		<?php 
+		<?php
 			// Le titre
 			echo $this->headTitle($this->translate('GMAO'))->setSeparator(' - ')->setAutoEscape(false);
 			// Les meta
@@ -48,7 +51,35 @@
 				</div>
 				<div class="collapse navbar-collapse">
 					<?php echo $this->navigation('navigation')->menu()->render(); ?>
+					<?php if ($user): ?>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="fa fa-user"></i>
+							<?php echo $this->escapehtml($user->getUsername())?>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a href="<?php echo $this->url('user-register',array('action' => 'edit-profil')); ?>">
+									<i class="fa fa-pencil"></i>&nbsp;<?php echo $this->translate('Edit Profil');?>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="<?php echo $this->url('user-index',array('action' => 'logout')); ?>">
+									<i class="fa fa-sign-out"></i>&nbsp;<?php echo $this->translate('Log Out');?>
+								</a>
+							</li>
+						</ul>
+					</ul>
+					<?php else: ?>
+						<a href="<?php echo $this->url('user-index',array('action' => 'login')); ?>" class="pull-right navbar-btn btn btn-success">
+							<i class="fa fa-sign-in"></i>&nbsp;<?php echo $this->translate('Log In');?>
+						</a>
+					<?php endif;?>
 				</div><!--/.nav-collapse -->
+
 			</div>
 		</nav>
 		<div class="container">

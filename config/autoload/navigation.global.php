@@ -13,6 +13,7 @@
  *		'label' => 'Home', // Label text
  *		'title' => 'home', //Title attribute for links
  *		'route' => 'home'  //route map
+ *		'class' => Add a class to li tag
  *		'changefreq' => '' //For Sitemap, valid values are always hourly daily weekly monthly yearly never
  *		'lastmod' => '' //For Sitemap, valid values are W3C Date or YYYY-MM-DD
  *		'priority' => '1.0' //The value should be a decimal between 0.0 and 1.0
@@ -76,25 +77,6 @@ return array (
 						'action' => 'contact'
 					)
 				)
-			),
-			array (
-				'icon' => 'sign-in',
-				'label' => 'Log In',
-				'route' => 'user-index',
-				'priority' => 0.8,
-				'changefreq' => 'weekly',
-				'action' => 'login',
-				'resource' => 'Utilisateur\Controller\Index',
-				'privilege' => 'login'
-			),
-			array (
-				'icon' => 'sign-out',
-				'label' => 'Logout',
-				'route' => 'user-index',
-				'controller' => 'Index',
-				'action' => 'logout',
-				'resource' => 'Utilisateur\Controller\Index',
-				'privilege' => 'logout'
 			),
 			array(
 				'icon' => 'user',

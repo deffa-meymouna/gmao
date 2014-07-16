@@ -6,10 +6,15 @@
         <?php if( ! $page->isVisible() || !$this->navigation()->accept($page)) continue; ?>
         <?php $hasChildren = $page->hasPages() ?>
         <?php if( ! $hasChildren): ?>
-        <li <?php if($page->isActive(true)) echo 'class="active"'?>>
-            <a class="nav-header" href="<?php echo $page->getHref() ?>" <?php if ($page->getTitle()) echo 'title="'.$page->getTitle().'"'; ?>>
+        	<?php
+        		$class="";
+        		$class.=$page->isActive(true)?' active ':'';
+        		$class.=$page->get('class')?$page->get('class'):'';
+        	?>
+        <li <?php if($class) echo 'class="'.$this->escapehtmlattr($class).'"';?>>
+            <a class="nav-header" href="<?php echo $page->getHref() ?>" <?php if ($page->getTitle()) echo 'title="'.$this->escapehtmlattr($page->getTitle()).'"'; ?>>
 	           	<?php if ($page->get('icon')):?>
-	            <i class="fa fa-<?php echo $page->get('icon');?>"></i> 
+	            <i class="fa fa-<?php echo $page->get('icon');?>"></i>
 	            <?php endif;?>
 	            <?php echo $this->translate($page->getLabel()) ?>
             </a>
@@ -18,7 +23,7 @@
         <li class="dropdown <?php if ($page->isActive(true)) echo ' active';?>">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	           	<?php if ($page->get('icon')):?>
-	            <i class="fa fa-<?php echo $page->get('icon');?>"></i> 
+	            <i class="fa fa-<?php echo $page->get('icon');?>"></i>
 	            <?php endif;?>
             <span><?php echo $this->translate($page->getLabel()) ?>&nbsp;<b class="caret"></b></span>
             </a>
@@ -30,14 +35,14 @@
                 <li>
                     <a href="<?php echo $child->getHref() ?>" <?php if ($child->getTitle()) echo 'title="'.$this->translate($child->getTitle()).'"'; ?>>
                     	<?php if ($child->get('icon')):?>
-                        <i class="fa fa-<?php echo $child->get('icon');?>"></i> 
+                        <i class="fa fa-<?php echo $child->get('icon');?>"></i>
                         <?php endif;?>
                         <?php echo $this->translate($child->getLabel()) ?>
                     </a>
                 </li>
             <?php endforeach ?>
             </ul>
-         </li>   
+         </li>
         <?php endif ?>
         <?php $count++ ?>
     <?php endforeach ?>

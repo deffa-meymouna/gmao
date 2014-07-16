@@ -88,9 +88,7 @@ return array(
                 ),
             ),
             'deny' => array(
-            		'Utilisateur\Controller\Index' => array(
-            				'login' => 'member',
-            		),
+
             ),
         ),
     ),
