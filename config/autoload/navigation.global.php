@@ -114,7 +114,7 @@ return array (
 			array(
 				'icon' => 'users',
 				'label' => 'Rôles',
-				'route' => 'user-admin',
+				'route' => 'role-admin',
 				'priority' => 0.4,
 				'changefreq' => 'weekly',
 				'resource' => 'CsnAuthorization\Controller\RoleAdmin',
