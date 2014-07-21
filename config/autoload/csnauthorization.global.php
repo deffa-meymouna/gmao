@@ -64,10 +64,10 @@ return array(
                 /**
                  * This Application
                  */
-                'Utilisateur\Controller\Index' => array(
+                'Cerbere\Controller\Index' => array(
                     'all' => 'guest',
                 ),
-                'Utilisateur\Controller\Registration' => array(
+                'Cerbere\Controller\Registration' => array(
                 	'all' => 'member',
                 ),
                 'CsnAuthorization\Controller\RoleAdmin' => array(
@@ -77,7 +77,7 @@ return array(
                 	'all' => 'admin',
                 ),
                 'CsnUser\Controller\Registration' => array(
-                		'all' => 'member',
+               		'all' => 'member',
                 ),
                 /**
                  * This rule is for Zend Developer Tools Doctrine ORM Module YumlController for drawing
