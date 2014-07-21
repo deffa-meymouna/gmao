@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GMAOApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-16 08:43+0100\n"
-"PO-Revision-Date: 2014-07-16 08:46+0100\n"
+"POT-Creation-Date: 2014-07-21 11:10+0100\n"
+"PO-Revision-Date: 2014-07-21 11:12+0100\n"
 "Last-Translator: Alexandre Tranchant <Alexandre.Tranchant@gmail.com>\n"
 "Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
 "Language: fr_FR\n"
@@ -29,15 +29,15 @@ msgstr ""
 msgid "Your authentication credentials are not declared into this application"
 msgstr "Vos accréditations ne sont pas déclarées dans cette application"
 
-#: ../../Utilisateur/src/Utilisateur/Controller/IndexController.php:89
+#: ../../Utilisateur/src/Utilisateur/Controller/IndexController.php:88
 msgid "Your username is disabled. Please contact an administrator."
 msgstr "Votre compte a été désactivé. Veuillez contacter un administrateur."
 
-#: ../../Utilisateur/src/Utilisateur/Controller/IndexController.php:91
+#: ../../Utilisateur/src/Utilisateur/Controller/IndexController.php:90
 msgid "Your authentication credentials are not valid"
 msgstr "Vos identifiants de connexion ne sont pas valides"
 
-#: ../../Utilisateur/src/Utilisateur/Controller/IndexController.php:110
+#: ../../Utilisateur/src/Utilisateur/Controller/IndexController.php:109
 msgid "Something went wrong during login! Please, try again later."
 msgstr ""
 "Une erreur est survenue durant la connexion. Veuillez réessayer plus tard."
@@ -244,20 +244,39 @@ msgstr "Aucune exception disponible"
 msgid "An error occurred"
 msgstr "Une erreur est survenue"
 
-#: ../../Application/view/layout/layout.phtml:15
-#: ../../Application/view/layout/layout.phtml:47
-#: ../view/layout/layout.phtml:15 ../view/layout/layout.phtml:47
+#: ../../Application/view/layout/layout.phtml:18
+#: ../../Application/view/layout/layout.phtml:50
+#: ../view/layout/layout.phtml:18 ../view/layout/layout.phtml:50
 msgid "GMAO"
 msgstr "GMAO"
 
-#: ../../Application/view/layout/layout.phtml:59
-#: ../view/layout/layout.phtml:59
+#: ../../Application/view/layout/layout.phtml:65
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:29
+#: ../../Utilisateur/view/utilisateur/registration/edit-profile.phtml:54
+#: ../view/layout/layout.phtml:65
+msgid "Edit Profile"
+msgstr "Modifier le profil"
+
+#: ../../Application/view/layout/layout.phtml:71
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:32
+#: ../../Utilisateur/view/utilisateur/index/login.phtml:21
+#: ../view/layout/layout.phtml:71
+msgid "Log Out"
+msgstr "Déconnexion"
+
+#: ../../Application/view/layout/layout.phtml:78
+#: ../view/layout/layout.phtml:78
+msgid "Log In"
+msgstr "Connexion"
+
+#: ../../Application/view/layout/layout.phtml:90
+#: ../view/layout/layout.phtml:90
 #, php-format
 msgid "&copy; 2005 - %s par %s"
 msgstr "&copy; 2005 - %s par %s"
 
-#: ../../Application/view/layout/layout.phtml:59
-#: ../view/layout/layout.phtml:59
+#: ../../Application/view/layout/layout.phtml:90
+#: ../view/layout/layout.phtml:90
 msgid "All rights reserved."
 msgstr "Tous droits réservés."
 
@@ -266,30 +285,51 @@ msgstr "Tous droits réservés."
 msgid "Home"
 msgstr "Accueil"
 
-#: ../../Utilisateur/view/utilisateur/index/index.phtml:23
-#: ../../Utilisateur/view/utilisateur/index/index.phtml:41
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:19
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:37
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: ../../Utilisateur/view/utilisateur/index/index.phtml:29
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:25
 msgid "Congratulations! You have successfully logged in."
 msgstr "Félicitations vous êtes correctement authentifié"
 
-#: ../../Utilisateur/view/utilisateur/index/index.phtml:33
-msgid "Edit Profile"
-msgstr "Modifier le profil"
-
-#: ../../Utilisateur/view/utilisateur/index/index.phtml:36
-msgid "Log Out"
-msgstr "Déconnexion"
-
-#: ../../Utilisateur/view/utilisateur/index/index.phtml:41
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:37
 msgid "Guest"
 msgstr "Invité"
 
-#: ../../Utilisateur/view/utilisateur/index/index.phtml:43
+#: ../../Utilisateur/view/utilisateur/index/index.phtml:39
 msgid "Please login to use this application."
 msgstr "Veuillez vous identifier pour utiliser cette application."
+
+#: ../../Utilisateur/view/utilisateur/registration/edit-profile.phtml:32
+msgid "First Name"
+msgstr "Prénom"
+
+#: ../../Utilisateur/view/utilisateur/registration/edit-profile.phtml:38
+msgid "Last Name"
+msgstr "Nom de famille"
+
+#: ../../Utilisateur/view/utilisateur/registration/edit-profile.phtml:48
+#, fuzzy
+msgid "Update Profile"
+msgstr "Modifier le profil"
+
+#: ../../Utilisateur/view/utilisateur/registration/edit-profile.phtml:65
+msgid "Your Username"
+msgstr "Votre nom d'utilisateur"
+
+#: ../../Utilisateur/view/utilisateur/registration/edit-profile.phtml:68
+msgid "Your Email"
+msgstr "Votre email"
+
+#: ../../Utilisateur/view/utilisateur/registration/edit-profile.phtml:72
+msgid "Your First/Last Name"
+msgstr "Vos prénom et nom de famille"
+
+#: ../../Utilisateur/view/utilisateur/registration/edit-profile.phtml:90
+msgid "Your Language"
+msgstr "Votre langue"
 
 #~ msgid "Welcome to %sZend Framework 2%s"
 #~ msgstr "Bienvenue dans le %sZend Framework 2%s"
