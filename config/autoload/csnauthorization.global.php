@@ -65,9 +65,7 @@ return array(
                  * This Application
                  */
                 'Utilisateur\Controller\Index' => array(
-                    'index' => 'guest',
-                    'login' => 'guest',
-                    'logout' => 'member',
+                    'all' => 'guest',
                 ),
                 'Utilisateur\Controller\Registration' => array(
                 	'all' => 'member',

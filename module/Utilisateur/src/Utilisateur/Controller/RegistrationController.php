@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Zend Framework (http://framework.zend.com/)
+ * GMAO - GMAO Application Zend Framework 2 User Module
  *
- * @link      http://github.com/zendframework/Utilisateur for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @link https://github.com/Alexandre-T/gmao for the canonical source repository
+ * @copyright Copyright (c) 2005-2014 Alexandre Tranchant
+ * @license https://github.com/Alexandre-T/gmao/blob/master/LICENSE MIT
+ * @author Alexandre Tranchant <Alexandre.Tranchant@gmail.com>
  */
 namespace Utilisateur\Controller;
 
