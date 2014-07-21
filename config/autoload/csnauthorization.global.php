@@ -77,7 +77,7 @@ return array(
                 	'all' => 'admin',
                 ),
                 'CsnUser\Controller\Registration' => array(
-                		'all' => 'member',
+               		'all' => 'member',
                 ),
                 /**
                  * This rule is for Zend Developer Tools Doctrine ORM Module YumlController for drawing
