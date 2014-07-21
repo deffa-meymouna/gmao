@@ -1,35 +1,34 @@
 {
-    "name": "Alexandre-T/gmao",
-    "description": "Road equipments GMAO Application",
-    "license": "Apache License v2",
-    "keywords": [
-        "gmao",
-        "equipement",
-        "dynamique",
-        "route",
-        "CEREMA"
-    ],
-    "homepage": "http://www.at-it-fr/",
-     "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Alexandre-T/zend-bootstrap"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Alexandre-T/cerbere"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Jasig/phpCAS"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.3",
-		"coolcsn/csn-acl-navigation" : "dev-master",
-        "zendframework/zendframework": "2.2.5",
-        "alexandre-t/zend-bootstrap" : "*@dev",
-        "alexandre-t/cerbere" : "*@dev",
-        "jasig/phpcas" : "1.3.x-dev"
-    }
+  "name" : "Alexandre-T/gmao",
+  "description" : "Road equipments GMAO Application",
+  "version" : "0.0.0",
+  "require" : {
+    "php" : ">=5.3.3",
+    "coolcsn/csn-acl-navigation" : "dev-master",
+    "zendframework/zendframework" : "2.2.5",
+    "alexandre-t/zend-bootstrap" : "*@dev",
+    "coolcsn/csn-user" : "dev-master",
+    "coolcsn/csn-authorization" : "dev-master",
+    "alexandre-t/cerbere" : "dev-master",
+    "jasig/phpcas" : "1.3.x-dev"
+  },
+  "repositories" : [ {
+    "type" : "vcs",
+    "url" : "https://github.com/Alexandre-T/zend-bootstrap"
+  }, {
+    "type" : "vcs",
+    "url" : "https://github.com/Alexandre-T/cerbere"
+  }, {
+    "type" : "vcs",
+    "url" : "https://github.com/Alexandre-T/CsnUser"
+  }, {
+    "type" : "vcs",
+    "url" : "https://github.com/ghiamar/CsnAuthorization"
+  }, {
+    "type" : "vcs",
+    "url" : "https://github.com/Jasig/phpCAS"
+  } ],
+  "keywords" : [ "gmao", "equipement", "dynamique", "route", "CEREMA" ],
+  "license" : "Apache License v2",
+  "homepage" : "http://www.at-it-fr/"
 }
