@@ -20,6 +20,9 @@
     "url" : "https://github.com/Alexandre-T/cerbere"
   }, {
     "type" : "vcs",
+    "url" : "https://github.com/Alexandre-T/CsnAclNavigation"
+  }, {
+    "type" : "vcs",
     "url" : "https://github.com/Alexandre-T/CsnUser"
   }, {
     "type" : "vcs",
