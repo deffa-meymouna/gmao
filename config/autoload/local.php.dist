@@ -12,12 +12,9 @@
  */
 
 return array(
-     'db' => array(
-         'dsn'      => 'mysql:dbname=YOUR DATABASENAME HERE;host=YOUR MYSQL SERVERNAME HERE',
-         'username' => 'YOUR USERNAME HERE',
-         'password' => 'YOUR PASSWORD HERE',
-     ),
-     	'mantis' => array (
+  	 'mantis' => array (
+         //Enter the url to Mantis API Soap service
+         'soap' => 'http://127.0.0.1/mantis/api/soap/mantisconnect.php?wsdl',
      	 'username' => 'YOUR MANTIS USERNAME HERE',
          'password' => 'YOUR MANTIS PASSWORD HERE',
      ),

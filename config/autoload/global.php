@@ -11,23 +11,19 @@
  * file.
  */
 return array (
-		'db' => array (
-				'driver' => 'Pdo',
-				'driver_options' => array (
-						PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'' 
-				) 
-		),
 		'service_manager' => array (
 				'factories' => array (
 						'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
 						'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
-				) 
+				)
 		),
 		'mantis' => array (
-				'soap' => 'http://127.0.0.1/mantis/api/soap/mantisconnect.php?wsdl',
+				//Enter the number project in your Mantis
 				'projectId' => 1,
+				//Enter the evolution filter Id
 				'evolutionFilterId' => 2,
-				'bugFilterId' => 3 
-		),		 
+				//Enter the bug filter id
+				'bugFilterId' => 3
+		),
 )
 ;
