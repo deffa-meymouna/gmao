@@ -1,1 +1,0 @@
-Module Album à supprimer avant la mise en prod mais servant actuellement d'exemple

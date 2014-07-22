@@ -82,15 +82,26 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertActionName('suivre');
 		$this->assertMatchedRouteName ( 'application' );
 	}
-	public function testFonctionActionCanBeAccessed() {
+	public function testExemple1ActionCanBeAccessed() {
 
-		$this->dispatch ( '/main/fonction' );
+		$this->dispatch ( '/main/exemple1' );
 		$this->assertResponseStatusCode ( 200 );
 
 		$this->assertModuleName ( 'Application' );
 		$this->assertControllerName ( 'Application\Controller\Index' );
 		$this->assertControllerClass ( 'IndexController' );
-		$this->assertActionName('fonction');
+		$this->assertActionName('exemple1');
+		$this->assertMatchedRouteName ( 'application' );
+	}
+	public function testExemple2ActionCanBeAccessed() {
+
+		$this->dispatch ( '/main/exemple2' );
+		$this->assertResponseStatusCode ( 200 );
+
+		$this->assertModuleName ( 'Application' );
+		$this->assertControllerName ( 'Application\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('exemple2');
 		$this->assertMatchedRouteName ( 'application' );
 	}
 	public function testSiteMapActionCanBeAccessed() {

@@ -61,13 +61,28 @@ class IndexController extends AbstractActionController
     {
     	return new ViewModel();
     }
+
     public function serviceAction()
     {
         return new ViewModel();
     }
-    public function fonctionAction()
+    /**
+     * Action exemple1
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function exemple1Action()
     {
         return new ViewModel();
+    }
+    /**
+     * Action exemple2
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function exemple2Action()
+    {
+    	return new ViewModel();
     }
     public function sitemapAction()
     {
