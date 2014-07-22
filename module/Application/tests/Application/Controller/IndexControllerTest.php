@@ -5,7 +5,12 @@ namespace Application\Controller;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class IndexControllerTest extends AbstractHttpControllerTestCase {
+	//Trace error activated
 	protected $traceError = true;
+	/**
+	 * Set Up from
+	 * @link http://framework.zend.com/manual/2.3/en/modules/zend.test.phpunit.html
+	 */
 	public function setUp() {
 		$this->setApplicationConfig ( include __DIR__ . '/../../../../../config/application.config.php' );
 		parent::setUp ();
@@ -13,6 +18,14 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 	public function testIndexActionCanBeAccessed() {
 
 		$this->dispatch ( '' );
+		$this->assertResponseStatusCode ( 200 );
+		$this->assertModuleName ( 'Application' );
+		$this->assertControllerName ( 'Application\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('index');
+		$this->assertMatchedRouteName ( 'home' );
+
+		$this->dispatch ( '/' );
 		$this->assertResponseStatusCode ( 200 );
 		$this->assertModuleName ( 'Application' );
 		$this->assertControllerName ( 'Application\Controller\Index' );
@@ -89,6 +102,17 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertControllerName ( 'Application\Controller\Index' );
 		$this->assertControllerClass ( 'IndexController' );
 		$this->assertActionName('sitemap');
+		$this->assertMatchedRouteName ( 'application' );
+	}
+	public function testLockActionCanNotBeAccessed() {
+
+		$this->dispatch ( '/main/lock' );
+		$this->assertResponseStatusCode ( 403 );
+
+		$this->assertModuleName ( 'Application' );
+		$this->assertControllerName ( 'Application\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('lock');
 		$this->assertMatchedRouteName ( 'application' );
 	}
 }

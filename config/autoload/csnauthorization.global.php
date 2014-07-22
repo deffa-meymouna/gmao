@@ -36,6 +36,7 @@ return array(
             'member' => 'guest',
             'technician' => 'member',
             'admin' => 'technician',
+            'roleInexistant' => null,
         ),
         'resources' => array(
             'allow' => array(
@@ -59,7 +60,11 @@ return array(
                  * standard home page.
                  */
                 'Application\Controller\Index' => array(
-                    'all' => 'guest',
+                    'all' 	=> 'guest',
+                    //Comme le rôle n'existe pas, l'action lock
+                    //est impossible à appeler et retourne toujours
+                    //une erreur 403 même pour un administrateur
+                    'lock'	=> 'roleInexistant'
                 ),
                 /**
                  * This Application
@@ -89,7 +94,11 @@ return array(
                 ),
             ),
             'deny' => array(
-
+	            'Application\Controller\Index' => array(
+	            	//Cette page est interdite à tous les invités
+	            	//Ce n'est que pour un exemple de l'application blanche
+            		'lock' 	=> 'guest',
+	            ),
             ),
         ),
     ),

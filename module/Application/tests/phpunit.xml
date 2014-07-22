@@ -10,8 +10,8 @@
 		<testsuite name="Application Tests">
 			<directory>./Application</directory>
 		</testsuite>
-		<testsuite name="Album Tests">
-			<directory>../../Album/tests/Album</directory>
-		</testsuite>
+        <testsuite name="Application Controller Tests">
+            <directory>./Application/Controller</directory>
+        </testsuite>
 	</testsuites>
 </phpunit>

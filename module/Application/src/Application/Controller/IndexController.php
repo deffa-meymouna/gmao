@@ -15,18 +15,51 @@ use Zend\View\Model\ViewModel;
 class IndexController extends AbstractActionController
 {
 	/**
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $options;
-	
+	/**
+	 * Cette action ne gère rien intrasèquement,
+	 * elle retourne la vue simplement.
+	 * @return Zend\View\Model\ViewModel
+	 *
+	 */
     public function indexAction()
     {
         return new ViewModel();
     }
+	/**
+	 * Cette action ne gère rien intrasèquement,
+	 * elle retourne la vue simplement.
+	 * @todo permettre l'envoi d'un mail via melanie
+	 *
+	 * @return Zend\View\Model\ViewModel
+	 *
+	 */
     public function contactAction()
     {
         return new ViewModel();
+    }
+    /**
+     * Cette action ne gère rien intrasèquement,
+     * elle retourne la vue simplement.
+     *
+     * Normalement, elle doit rester inacessible
+     * En effet, dans le fichier csnauthorization.global.php, seul un
+     * utilisateur ayant le rôle "roleInexistant" peut y accéder
+     * Ce rôle n'existant pas, on entre jamais dans cette action
+     *
+     * Cette action a uniquement été implémentée pour être testée
+     * Cf la méthode testLockActionCanNotBeAccessed de la classe ci-dessous
+     *
+     * @link Application\Controller\IndexControllerTest
+     * @return Zend\View\Model\ViewModel
+     *
+     */
+    public function lockAction()
+    {
+    	return new ViewModel();
     }
     public function serviceAction()
     {
@@ -52,7 +85,7 @@ class IndexController extends AbstractActionController
     		$projectId = $mantis['projectId'];
     		$filtreDemandeEvolution = $mantis['evolutionFilterId'];
     		$filtreBugBloquant = $mantis['bugFilterId'];
-    		
+
     		//Appel du Service SOAP
     		try{
     			$c = new \SoapClient($mantis['soap']);
@@ -94,10 +127,10 @@ class IndexController extends AbstractActionController
     public function setOptions($options)
     {
     	$this->options = $options;
-    
+
     	return $this;
     }
-    
+
     /**
      * get options
      *
@@ -108,7 +141,7 @@ class IndexController extends AbstractActionController
     	if (!$this->options) {
     		$this->setOptions($this->getServiceLocator()->get('mantis'));
     	}
-    
+
     	return $this->options;
-    }    
+    }
 }
