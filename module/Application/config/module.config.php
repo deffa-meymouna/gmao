@@ -27,7 +27,7 @@ return array(
             'application' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/gmao[/:action]',
+                    'route'    => '/main[/:action]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Application\Controller\Index',
@@ -39,7 +39,7 @@ return array(
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/gmao[/:action]',
+                            'route'    => '/main[/:action]',
                             'constraints' => array(
                                 'controller' => 'Index',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',

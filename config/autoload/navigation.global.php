@@ -26,7 +26,7 @@ return array (
 			array (
 				'icon' => 'home',
 				'label' => 'Home',
-				'title' => 'GMAO',
+				'title' => 'Blanche',
 				'route' => 'home',
 				'priority' => 1,
 				'changefreq' => 'weekly',
@@ -35,33 +35,33 @@ return array (
 			),
 			array (
 				'icon' => 'road',
-				'label' => 'Présentation',
+				'label' => 'Exemple',
 				'route' => 'application',
 				'priority' => 0.8,
 				'changefreq' => 'weekly',
 				'pages' => array (
 					array (
 						'icon' => 'eye',
-						'label' => 'Découvrir les fonctionnalités',
-						'title' => 'Découvrir les fonctionnalités de l\'application GMAO',
+						'label' => 'Sous-Exemple 1.1',
+						'title' => 'Editez cette section 1.1',
 						'route' => 'application',
 						'priority' => 0.9,
 						'changefreq' => 'daily',
-						'action' => 'fonction'
+						'action' => 'exemple1'
 					),
 					array (
 						'icon' => 'globe',
-						'label' => 'Découvrir les services',
-						'title' => 'Découvrir les services de AT-IT',
+						'label' => 'Sous-Exemple 1.2',
+						'title' => 'Editez cette section 1.1',
 						'route' => 'application',
 						'priority' => 0.7,
 						'changefreq' => 'weekly',
-						'action' => 'service'
+						'action' => 'exemple2'
 					),
 					array (
 						'icon' => 'code',
 						'label' => 'Suivre les évolutions',
-						'title' => 'Se connecter au portail de développement pour suivre les évolutions de GMAO',
+						'title' => 'Se connecter au portail de développement pour suivre les évolutions de l\'application blanche',
 						'route' => 'application',
 						'priority' => 0.7,
 						'changefreq' => 'daily',
