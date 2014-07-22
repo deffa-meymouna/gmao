@@ -15,7 +15,7 @@
 		<meta charset="utf-8">
 		<?php
 			// Le titre
-			echo $this->headTitle($this->translate('GMAO'))->setSeparator(' - ')->setAutoEscape(false);
+			echo $this->headTitle($this->translate('Application blanche'))->setSeparator(' - ')->setAutoEscape(false);
 			// Les meta
 			echo "\n".$this->headMeta()
 			->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -47,7 +47,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo $this->url('home') ?>"><span class=""><i class="fa fa-road"></i></span>&nbsp;<?php echo $this->translate('GMAO') ?></a>
+					<a class="navbar-brand" href="<?php echo $this->url('home') ?>"><span class=""><i class="fa fa-file-o"></i></span>&nbsp;<?php echo $this->translate('Application blanche') ?></a>
 				</div>
 				<div class="collapse navbar-collapse">
 					<?php echo $this->navigation('navigation')->menu()->render(); ?>
@@ -87,7 +87,7 @@
 			<?php echo $this->content; ?>
 			<hr>
 			<footer>
-				<p><?php echo sprintf($this->translate("&copy; 2005 - %s par %s"),date('Y'),'<i class="fa fa-link"></i>&nbsp;<a href="http://www.at-it.fr" title="at-it.fr">www.at-it.fr</a>'); ?>. <?php echo $this->translate('All rights reserved.') ?></p>
+				<p><?php echo sprintf($this->translate("&copy; 2005 - %s par %s"),date('Y'),'<i class="fa fa-link"></i>&nbsp;<a href="http://www.cerema.fr" title="Cerema">Cerema - DTerSO - DTISPV - Trevise</a>'); ?>. <?php echo $this->translate('All rights reserved.') ?></p>
 			</footer>
 		</div> <!-- /container -->
 		<?php echo $this->inlineScript() ?>
