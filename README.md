@@ -5,9 +5,9 @@ Cette application se base sur le noyau de [l'Application Blanche]
 (https://github.com/Alexandre-T/gmao/tree/blanche).
 
 Elle a pour objectif de :
-1. Gérer les sous-réseaux
-2. Gérer les adresses IP libres, utilisées et réservées
-3. Gérer les machines associées à ces IP
+  1. Gérer les sous-réseaux
+  2. Gérer les adresses IP libres, utilisées et réservées
+  3. Gérer les machines associées à ces IP
 
 Installation
 ----
