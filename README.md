@@ -1,20 +1,18 @@
-Application blanche
+Application IP-Trevise
 ====
 
-Cette branche a pour objectif de donner naissance à une application blanche 
-telle Zend Skeleton mais intégrant plusieurs fonctionnalités complémentaires :
-  * La connexion via Cerbere (Fait)
-  * La gestion des utilisateurs depuis l'interface graphique (Fait)
-  * La gestion des rôles depuis l'interface graphique (Fait)
-  * La gestion des rôles de chaque utilisateur (Fait)
-  * La gestion des ressources et des rôles nécessaires depuis les fichiers de configuration (Fait)
-  * Un contrôleur Index avec quelques actions de démonstration (A faire)
-  * Le paramétrage Mantis vers les bugs recensés et les demandes d'évolutions en cours (A valider)
+Cette application se base sur le noyau de [l'Application Blanche]
+(https://github.com/Alexandre-T/gmao/tree/blanche).
+
+Elle a pour objectif de :
+1. Gérer les sous-réseaux
+2. Gérer les adresses IP libres, utilisées et réservées
+3. Gérer les machines associées à ces IP
 
 Installation
 ----
 1. Téléchargez l'application : 
-https://github.com/Alexandre-T/gmao/archive/blanche.zip
+https://github.com/Alexandre-T/gmao/archive/ip-trevise.zip
 2. Décompressez l'archive dans le répertoire souhaité ```/var/www/blanche```
 3. Configurez un hôte virtuel Apache pointant sur le répertoire.
 Le répertoire docs contient un exemple d'hôte virtuel pour Apache 2.4
