@@ -1,30 +1,43 @@
 <?php $identified = !empty($this->identity());?>
 <div class="jumbotron">
-    <h1><?php echo sprintf($this->translate('%sIP-Trevise%s %sLa gestion de vos adresses IP%s'), '<i class="fa fa-sitemap"></i>&nbsp;<span class="text-success">', '</span>','<small>','</small>') ?></h1>
+    <h1><?php echo sprintf($this->translate('%sL\'Application blanche%s %sest un noyau%s'), '<i class="fa fa-file-o"></i>&nbsp;<span class="text-success">', '</span>','<small>','</small>') ?></h1>
     <p><?php
-    	echo sprintf($this->translate('Cette application a pour objectif de répondre aux besoins des administrateurs réseaux pour le suivi des adresses IP attribuées :'),
+    	echo sprintf($this->translate('Cette %sapplication blanche ne répond à aucune fonctionnalité métier. Mais elle répond aux fonctionnalités standards d\'une application:'),
     		'<i class="fa fa-file-o"></i>&nbsp;') ?></p>
    	<div class="row">
-   		<div class="col-md-6 col-xs-12 col-sm-6">
+   		<div class="col-md-4 col-xs-12 col-sm-6">
    			<ul class="list-unstyled">
 		    	<li>
-		    		<i class="fa fa-fw fa-sitemap"></i>&nbsp;<?php echo $this->translate('Gestion des sous-réseaux');?>
+		    		<i class="fa fa-fw fa-user"></i>&nbsp;<?php echo $this->translate('Gestion des utilisateurs');?>
 		    	</li>
 		    	<li>
-		    		<i class="fa fa-fw fa-share-alt"></i>&nbsp;<?php echo $this->translate('Gestion des adresses IP libres, réservées ou attribuées');?>
+		    		<i class="fa fa-fw fa-users"></i>&nbsp;<?php echo $this->translate('Gestion des rôles');?>
 		    	</li>
 		    	<li>
-		    		<i class="fa fa-fw fa-desktop"></i>&nbsp;<?php echo $this->translate('Gestion des machines');?>
+		    		<i class="fa fa-fw fa-lock"></i>&nbsp;<?php echo $this->translate('Connexion cerbérisée (phpCAS)');?>
 		    	</li>
 		    </ul>
    		</div>
-   		<div class="col-md-6 col-xs-12 col-sm-6">
+   		<div class="col-md-4 col-xs-12 col-sm-6">
    			<ul class="list-unstyled">
 		    	<li>
-		    		<i class="fa fa-fw fa-users"></i>&nbsp;<?php echo $this->translate('Gestion des utilisateurs, de leurs rôles');?>
+		    		<i class="fa fa-fw fa-sort-amount-asc"></i>&nbsp;<?php echo $this->translate('Menu de navigation sécurisé');?>
 		    	</li>
 		    	<li>
-		    		<i class="fa fa-fw fa-lock"></i>&nbsp;<?php echo $this->translate('Connexion sécurisées par Cerbère (phpCas)');?>
+		    		<i class="fa fa-fw fa-sitemap"></i>&nbsp;<?php echo $this->translate('Paramétrage du sitemap');?>
+		    	</li>
+		    	<li>
+		    		<i class="fa fa-fw fa-minus-circle"></i>&nbsp;<?php echo $this->translate('Sécurisation des pages selon le profil');?>
+		    	</li>
+		    </ul>
+   		</div>
+   		<div class="col-md-4 col-xs-12 col-sm-6">
+   			<ul class="list-unstyled">
+		    	<li>
+		    		<i class="fa fa-fw fa-clipboard"></i>&nbsp;<?php echo $this->translate('Gestion des icones');?>
+		    	</li>
+		    	<li>
+		    		<i class="fa fa-fw fa-flag"></i>&nbsp;<?php echo $this->translate('Traduction multilingue');?>
 		    	</li>
 		    	<li>
 		    		<i class="fa fa-fw fa-github-alt"></i>&nbsp;<?php echo $this->translate('Suivi des bugs et évolution avec Mantis');?>
@@ -72,8 +85,8 @@
                 <h3 class="panel-title"><i class="fa fa-eye"></i>&nbsp;<?php echo $this->translate('Découvrir les fonctionnalités') ?></h3>
             </div>
             <div class="panel-body">
-                <p class="text-justify"><?php echo $this->translate("L'équipe Titane du Cerema, forte de son expérience dans les équipements autoroutiers peut vous proposer des applications évolutives spécialisées dans l'exploitation routière. Cette application blanche ne dispose d'aucune fonctionnalité métier. Elle se veut un noyau central maintenu par l'équipe Trevise permettant de gérer les fonctionnalités courantes d'une application."); ?></p>
-                <p><a class="btn btn-default pull-right" href="<?php echo $this->basePath('/main/fonction');?>"><?php echo sprintf($this->translate('Découvrir %sl\'Application blanche%s'),'<i class="fa fa-file-o"></i>&nbsp;<strong>','</strong>'); ?> <i class="fa fa-angle-double-right"></i></a></p>
+                <p class="text-justify"><?php echo $this->translate("L'application IP-Trevise permet de suivre les attributions d'adresses IP dans des réseaux dépourvus de DHCP."); ?></p>
+                <p><a class="btn btn-default pull-right" href="<?php echo $this->url('application',array('action' => 'fonction'));?>"><?php echo sprintf($this->translate('Découvrir %sIP Trevise%s'),'<i class="fa fa-sitemap"></i>&nbsp;<strong>','</strong>'); ?> <i class="fa fa-angle-double-right"></i></a></p>
             </div>
         </div>
     </div>

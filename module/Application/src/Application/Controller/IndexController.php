@@ -84,6 +84,12 @@ class IndexController extends AbstractActionController
     {
     	return new ViewModel();
     }
+    /**
+     * Action Découvrir les fonctionnalités
+     */
+    public function fonctionAction(){
+    	return new ViewModel();
+    }
     public function sitemapAction()
     {
     	$viewmodel = new ViewModel();
