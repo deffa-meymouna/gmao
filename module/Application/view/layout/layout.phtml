@@ -15,7 +15,7 @@
 		<meta charset="utf-8">
 		<?php
 			// Le titre
-			echo $this->headTitle($this->translate('Application blanche'))->setSeparator(' - ')->setAutoEscape(false);
+			echo $this->headTitle($this->translate('IP-Trevise'))->setSeparator(' - ')->setAutoEscape(false);
 			// Les meta
 			echo "\n".$this->headMeta()
 			->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -47,7 +47,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo $this->url('home') ?>"><span class=""><i class="fa fa-file-o"></i></span>&nbsp;<?php echo $this->translate('Application blanche') ?></a>
+					<a class="navbar-brand" href="<?php echo $this->url('home') ?>"><span class=""><i class="fa fa-sitemap"></i></span>&nbsp;<?php echo $this->translate('IP-Trevise') ?></a>
 				</div>
 				<div class="collapse navbar-collapse">
 					<?php echo $this->navigation('navigation')->menu()->render(); ?>
