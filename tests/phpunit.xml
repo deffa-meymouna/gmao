@@ -10,6 +10,9 @@
 		<testsuite name="Application Tests">
 			<directory>../module/Application/tests/Application</directory>
 		</testsuite>
+		<testsuite name="Réseaux Tests">
+            <directory>../module/Reseau/tests/Reseau</directory>
+        </testsuite>
 		<!-- 
 		<testsuite name="CsnUsers Tests">
 			<directory>../vendor/coolcsn/csn-user/test</directory>
