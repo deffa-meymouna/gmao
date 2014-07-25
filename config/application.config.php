@@ -8,7 +8,8 @@ return array(
     	'CsnUser',
     	'CsnAuthorization',
     	'CsnAclNavigation',
-    	'Cerbere'
+    	'Cerbere',
+    	'Reseau'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

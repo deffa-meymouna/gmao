@@ -40,6 +40,13 @@ return array(
         ),
         'resources' => array(
             'allow' => array(
+            	/**
+            	 * IP-Trevise
+            	 */
+        		'Reseau\Controller\Index' => array(
+        			'index'	=>	'member',
+        			'all'	=>	'technician',
+        		),
                 /**
                  *  ACL for CsnCms articles
                  */

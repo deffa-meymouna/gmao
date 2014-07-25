@@ -34,20 +34,20 @@ return array (
 				'privilege' => 'index'
 			),
 			array (
-				'icon' => 'road',
-				'label' => 'Exemple',
+				'icon' => 'eye',
+				'label' => 'Consultation',
 				'route' => 'application',
 				'priority' => 0.8,
 				'changefreq' => 'weekly',
 				'pages' => array (
 					array (
 						'icon' => 'eye',
-						'label' => 'Sous-Exemple 1.1',
-						'title' => 'Editez cette section 1.1',
-						'route' => 'application',
+						'label' => 'Listing des réseaux',
+						'title' => 'Listing complet des réseaux',
+						'route' => 'reseau',
 						'priority' => 0.9,
 						'changefreq' => 'daily',
-						'action' => 'exemple1'
+						'action' => 'index'
 					),
 					array (
 						'icon' => 'globe',
