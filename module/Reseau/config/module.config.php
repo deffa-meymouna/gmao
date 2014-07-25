@@ -28,4 +28,25 @@ return array(
             'Reseau' => __DIR__ . '/../view',
         ),
     ),
+	'doctrine' => array(
+			'configuration' => array(
+					'orm_default' => array(
+							'generate_proxies' => true,
+					),
+			),
+			'driver' => array(
+					'reseau_driver' => array(
+							'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+							'cache' => 'array',
+							'paths' => array(
+								__DIR__ . '/../src/Reseau/Entity',
+							),
+					),
+					'orm_default' => array(
+							'drivers' => array(
+									'Reseau\Entity' => 'reseau_driver',
+							),
+					),
+			),
+	),
 );

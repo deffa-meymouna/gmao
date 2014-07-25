@@ -3,6 +3,7 @@
 return array(
     'Reseau\Module'                        => __DIR__ . '/Module.php',
     'Reseau\Controller\IndexController' => __DIR__ . '/src/Reseau/Controller/IndexController.php',
+	'Reseau\Entity\Reseau' => __DIR__ . '/src/Reseau/Entity/Reseau.php',
     'ReseauTest\Framework\TestCase'        => __DIR__ . '/tests/Reseau/Framework/TestCase.php',
     'ReseauTest\SampleTest'                => __DIR__ . '/tests/Reseau/SampleTest.php',
 );

@@ -11,16 +11,39 @@
 namespace Reseau\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
 
 class IndexController extends AbstractActionController
 {
+	/**
+	 * @var ModuleOptions
+	 */
+	protected $options;
+
+	/**
+	 * @var Doctrine\ORM\EntityManager
+	 */
+	protected $entityManager;
+
+	/**
+	 * @var Zend\Mvc\I18n\Translator
+	 */
+	protected $translatorHelper;
+
+	/**
+	 * @var Zend\Form\Form
+	 */
+	protected $userFormHelper;
+
 	/**
 	 * Listing des réseaux
 	 *
 	 */
     public function indexAction()
     {
-        return array();
+    	$reseaux = $this->getEntityManager()->getRepository('Reseau\Entity\Reseau')->findall();
+    	return new ViewModel(array('reseaux' => $reseaux));
     }
 
     public function fooAction()

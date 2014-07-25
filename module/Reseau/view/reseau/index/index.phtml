@@ -1,3 +1,26 @@
-<strong>Module:</strong>        Reseau &raquo;
-<strong>Controller:</strong>    Index &raquo;
-<strong>Action:</strong>        index
+<div class="page-header">
+<h1>Linsting des réseaux référencés</h1>
+</div>
+<?php if (empty($this->reseaux)):?>
+<div class="row text-justify">
+	<div class="col-sm-offset-3 col-sm-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-info-circle"></i>&nbsp;Aucun réseau</h2>
+			</div>
+			<div class="panel-body">
+				<ul class="fa-ul">
+					<li>Aucun réseau n'a encore été référencé dans l'application</li>
+				</ul>
+			</div>
+			<div class="panel-footer">
+				<ul class="btn-grp">
+					<li class="btn btn-default"><i class="fa fa-plus fa-fw"></i>&nbsp;Créer un nouveau réseau</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<?php else:?>
+<?php var_dump($this->reseaux);?>
+<?php endif;?>
