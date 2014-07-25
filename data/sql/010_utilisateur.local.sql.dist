@@ -1,0 +1,24 @@
+/*==============================================================*/
+/* Nom de SGBD :  AT - PG9                                      */
+/* Date de cr�ation :  24/07/2014 16:06:23                      */
+/*==============================================================*/
+
+
+/*==============================================================*/
+/* Utilisateur : usr_iptrevise_application                      */
+/*==============================================================*/
+create user usr_iptrevise_application
+    encrypted password 'ENTREZ LE MOT DE PASSE DE VOTRE CHOIX';
+
+/*==============================================================*/
+/* Utilisateur : usr_iptrevise_lecteur                          */
+/*==============================================================*/
+create user usr_iptrevise_lecteur
+    encrypted password 'ENTREZ LE MOT DE PASSE DE VOTRE CHOIX';
+
+/*==============================================================*/
+/* Utilisateur : usr_iptrevise_proprietaire                     */
+/*==============================================================*/
+create user usr_iptrevise_proprietaire
+    encrypted password 'ENTREZ LE MOT DE PASSE DE VOTRE CHOIX';
+
