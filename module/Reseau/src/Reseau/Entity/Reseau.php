@@ -10,99 +10,31 @@
 
 namespace Reseau\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+//use Doctrine\ORM\Mapping as ORM;
 //use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
 
-/**
- * Doctrine ORM implementation of Reseau entity
- *
- * @ORM\Entity
- * @ORM\Table(name="`te_reseau_res`")
- */
 class Reseau
 {
+	/**
+	 * @var EntityManager
+	 */
+	private $entityManager;
+	/**
+	 * Constructeur
+	 *
+	 * @param EntityManager $entityManager
+	 */
+	public function __construct(EntityManager $entityManager){
+		$this->entityManager = $entityManager;
+	}
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="res_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * Liste tous les réseaux depuis la vue
+     * @return
      */
-    protected $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="res_lib", type="string", length=32, nullable=false, unique=false)
-     */
-    protected $libelle;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="res_des", type="text", nullable=true)
-     */
-    protected $description;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="res_couleur", type="text", length=6, nullable=false)
-     */
-    protected $couleur = '000000'; //Couleur noire
-
-    /**
-     * Construct
-     *
-     * Construct some referenced columns arrays
-     */
-    public function __construct()
-    {
-
+    public function listerTousLesReseaux(){
+    	$vue = $reseaux = $this->entityManager->getRepository('Reseau\Entity\Orm\View\Reseau');
+    	return $vue->findall();
     }
-	/**
-	 * @return the $libelle
-	 */
-	public function getLibelle() {
-		return $this->libelle;
-	}
-
-	/**
-	 * @return the $description
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-
-	/**
-	 * @return the $couleur
-	 */
-	public function getCouleur() {
-		return $this->couleur;
-	}
-
-	/**
-	 * @param string $libelle
-	 */
-	public function setLibelle($libelle) {
-		$this->libelle = $libelle;
-	}
-
-	/**
-	 * @param string $description
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
-
-	/**
-	 * @param string $couleur
-	 */
-	public function setCouleur($couleur) {
-		$this->couleur = $couleur;
-	}
-
-
-
 
 }

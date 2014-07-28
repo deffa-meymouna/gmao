@@ -12,6 +12,7 @@ namespace Reseau\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Reseau\Entity\Reseau;
 
 
 class IndexController extends AbstractActionController
@@ -42,7 +43,8 @@ class IndexController extends AbstractActionController
 	 */
     public function indexAction()
     {
-    	$reseaux = $this->getEntityManager()->getRepository('Reseau\Entity\Reseau')->findall();
+    	$reseau = new Reseau($this->getEntityManager());
+    	$reseaux = $reseau->listerTousLesReseaux();
     	return new ViewModel(array('reseaux' => $reseaux));
     }
 

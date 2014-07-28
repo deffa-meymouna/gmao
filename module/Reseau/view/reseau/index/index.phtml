@@ -1,8 +1,8 @@
 <div class="page-header">
 <h1>Linsting des réseaux référencés</h1>
 </div>
-<?php if (empty($this->reseaux)):?>
 <div class="row text-justify">
+<?php if (empty($this->reseaux)):?>
 	<div class="col-sm-offset-3 col-sm-6">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -22,5 +22,73 @@
 	</div>
 </div>
 <?php else:?>
-<?php var_dump($this->reseaux);?>
+<?php foreach ($reseaux as $reseau):?>
+<?php //@var Reseau\Entity\Orm\Table\Reseau $reseau ?>
+<div class="row">
+	<?php $couleur = sprintf('style="color:#%s"',$this->escapehtmlattr($reseau->getCouleur()));?>
+	<div class="col-sm-6 col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title text-center">
+					<i <?php echo $couleur;?> class="fa fa-quote-left pull-left"></i>
+						<?php echo $this->escapehtml($reseau->getLibelle());?>
+					<i <?php echo $couleur;?> class="fa fa-quote-right pull-right"></i>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<i class="fa fa-sitemap fa-2x fa-border pull-left" <?php echo $couleur;?>></i>
+				<div class="progress">
+					<?php $pourcentage = $this->escapehtmlattr(sprintf('%.0f',$reseau->getIpPourcentageOccupe()));?>
+					<?php
+						if( $reseau->getIpPourcentageOccupe() < 60){
+							$couleurBar = 'progress-bar-success';
+						}elseif($reseau->getIpPourcentageOccupe()<80){
+							$couleurBar = 'progress-bar-warning';
+						}else {
+							$couleurBar = 'progress-bar-danger';
+						}
+					?>
+  					<div class="progress-bar <?php echo $couleurBar;?> progress-bar-striped" role="progressbar" aria-valuenow="<?php echo $pourcentage;?>" aria-valuemin="0" aria-valuemax="100">
+    					<?php echo $pourcentage?>%
+  					</div>
+				</div>
+				<div class="clearfix "></div>
+				<dl class="dl-horizontal">
+	  				<dt><?php echo $this->translate('Description');?>&nbsp;:</dt>
+	  				<dd><?php echo $this->escapehtml($reseau->getDescription());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+	  				<dt><?php echo $this->translate('Réseau');?>&nbsp;:</dt>
+	  				<dd><?php echo $this->escapehtml($reseau->getCIDR());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+	  				<dt><?php echo $this->translate('Masque');?>&nbsp;:</dt>
+	  				<dd><?php echo $this->escapehtml($reseau->getMasque());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+	  				<dt><?php echo $this->translate('Broadcast');?>&nbsp;:</dt>
+	  				<dd><?php echo $this->escapehtml($reseau->getBroadcast());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+	  				<dt><?php echo $this->translate('Passerelle');?>&nbsp;:</dt>
+	  				<dd><?php echo $this->escapehtml($reseau->getPasserelle());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+	  				<dt><?php echo $this->translate('Occupations IP');?>&nbsp;:</dt>
+	  				<dd><abbr title="<?php echo $this->escapehtmlattr(sprintf($this->translate('%d adresses IP occupées sur %d adresses théoriquement disponibles'),$reseau->getQuantiteIp(),$reseau->getIpTheoriquementDisponible()));?>"><?php echo sprintf('%d / %d',$reseau->getQuantiteIp(),$reseau->getIpTheoriquementDisponible())?></abbr>
+				</dl>
+			</div>
+			<div class="panel-footer">
+				<div class="btn-group text-right">
+					<a class="btn btn-default" href="#" title="<?php echo $this->escapehtml($this->translate('Ajouter une adresse IP à ce réseau'));?>"><i class="fa fa-plus"></i></a>
+					<a class="btn btn-default" href="#" title="<?php echo $this->escapehtml($this->translate('Consulter ce réseau'));?>"><i class="fa fa-search"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endforeach;?>
+</div>
+<ul class="btn-grp">
+	<li class="btn btn-default"><i class="fa fa-plus fa-fw"></i>&nbsp;Créer un nouveau réseau</li>
+</ul>
 <?php endif;?>
