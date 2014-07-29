@@ -1,5 +1,11 @@
+<?php $cpt = 0;?>
 <div class="page-header">
-<h1>Linsting des réseaux référencés</h1>
+	<div class="btn-grp pull-right">
+		<a class="btn btn-primary" href="<?php echo $this->url('reseau',array('action' => 'creer'));?>" title="<?php echo $this->escapehtmlattr($this->translate('Créer un nouveau réseau'))?>">
+			<i class="fa fa-sitemap fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Créer un nouveau réseau'));?>
+		</a>
+	</div>
+	<h1>Linsting des réseaux référencés</h1>
 </div>
 <div class="row text-justify">
 <?php if (empty($this->reseaux)):?>
@@ -22,11 +28,13 @@
 	</div>
 </div>
 <?php else:?>
-<?php foreach ($reseaux as $reseau):?>
-<?php //@var Reseau\Entity\Orm\Table\Reseau $reseau ?>
+<?php foreach ($this->reseaux as $reseau):?>
+<?php //@var Reseau\Entity\View\Reseau $reseau ?>
+<?php if ($cpt % 2 == 0):?>
 <div class="row">
+<?php endif;?>
 	<?php $couleur = sprintf('style="color:#%s"',$this->escapehtmlattr($reseau->getCouleur()));?>
-	<div class="col-sm-6 col-sm-6">
+	<div class="col-sm-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h2 class="panel-title text-center">
@@ -86,9 +94,13 @@
 			</div>
 		</div>
 	</div>
-<?php endforeach;?>
+<?php if ($cpt++ % 2 || $reseau == end($reseaux)):?>
 </div>
-<div class="btn-grp">
-	<a class="btn btn-default" href="<?php echo $this->url('reseau',array('action' => 'creer'));?>" title="<?php echo $this->escapehtmlattr($this->translate('Créer un nouveau réseau'))?>"><i class="fa fa-plus fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Créer un nouveau réseau'));?></a>
+<?php endif;?>
+<?php endforeach;?>
+<div class="btn-grp pull-right">
+	<a class="btn btn-primary" href="<?php echo $this->url('reseau',array('action' => 'creer'));?>" title="<?php echo $this->escapehtmlattr($this->translate('Créer un nouveau réseau'))?>">
+		<i class="fa fa-sitemap fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Créer un nouveau réseau'));?>
+	</a>
 </div>
 <?php endif;?>

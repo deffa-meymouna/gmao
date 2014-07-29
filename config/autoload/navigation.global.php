@@ -34,8 +34,8 @@ return array (
 				'privilege' => 'index'
 			),
 			array (
-				'icon' => 'eye',
-				'label' => 'Consultation',
+				'icon' => 'sitemap',
+				'label' => 'Réseau',
 				'route' => 'application',
 				'priority' => 0.8,
 				'changefreq' => 'weekly',
@@ -48,6 +48,17 @@ return array (
 						'priority' => 0.9,
 						'changefreq' => 'daily',
 						'action' => 'index'
+					),
+					array (
+						'icon' => 'plus',
+						'label' => 'Création d\'un nouveau réseau',
+						'title' => 'Création d\'un nouveau réseau',
+						'route' => 'reseau',
+						'priority' => 0.9,
+						'changefreq' => 'daily',
+						'action' => 'creer',
+						'resource' => 'Reseau\Controller\Index',
+						'privilege' => 'creer',
 					),
 					array (
 						'icon' => 'globe',
