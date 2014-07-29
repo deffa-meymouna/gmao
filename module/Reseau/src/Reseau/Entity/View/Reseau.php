@@ -8,10 +8,10 @@
  * @author Alexandre Tranchant <Alexandre.Tranchant@gmail.com>
  */
 
-namespace Reseau\Entity\Orm\View;
+namespace Reseau\Entity\View;
 
 use Doctrine\ORM\Mapping as ORM;
-use Reseau\Entity\Orm\Table\Reseau as TableReseau;
+use Reseau\Entity\Table\Reseau as TableReseau;
 //use Doctrine\Common\Collections\ArrayCollection;
 
 /**

@@ -9,6 +9,7 @@ return array(
     	'CsnAuthorization',
     	'CsnAclNavigation',
     	'Cerbere',
+    	'TwbBundle',
     	'Reseau'
     ),
 

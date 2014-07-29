@@ -12,8 +12,9 @@ namespace Reseau\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Reseau\Entity\Reseau;
-
+use Reseau\Entity\Reseaux;
+use Reseau\Form\ReseauForm;
+use Reseau\Form\ReseauFilter;
 
 class IndexController extends AbstractActionController
 {
@@ -35,7 +36,7 @@ class IndexController extends AbstractActionController
 	/**
 	 * @var Zend\Form\Form
 	 */
-	protected $userFormHelper;
+	protected $reseauFormHelper;
 
 	/**
 	 * Listing des réseaux
@@ -43,16 +44,51 @@ class IndexController extends AbstractActionController
 	 */
     public function indexAction()
     {
-    	$reseau = new Reseau($this->getEntityManager());
-    	$reseaux = $reseau->listerTousLesReseaux();
+    	$reseauService = new Reseaux($this->getEntityManager());
+    	$reseaux = $reseauService->listerTousLesReseaux();
     	return new ViewModel(array('reseaux' => $reseaux));
     }
-
-    public function fooAction()
+	/**
+	 * Action de création d'un réseau
+	 *
+	 * @return Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>|\Zend\View\Model\ViewModel
+	 */
+    public function creerAction()
     {
-        // This shows the :controller and :action parameters in default route
-        // are working when you browse to /index/index/foo
-        return array();
+		$form = new ReseauForm();
+
+        $form->setAttributes(array(
+            'action' => $this->url()->fromRoute('reseau', array('action' => 'creer')),
+            'name' => 'creerUnReseau'
+        ));
+        $form->get('submit')->setAttributes(array(
+                'value' => $this->getTranslatorHelper()->translate('Créer un reseau'),
+        ));
+
+        if($this->getRequest()->isPost()) {
+        	$entityManager = $this->getEntityManager();
+            $form->setData($this->getRequest()->getPost());
+            $form->setInputFilter(new ReseauFilter());
+            if($form->isValid()) {
+				$unReseau = Reseaux::creerUnNouveauReseau($form);
+				//Enregistrement
+				Reseaux::enregistrerUnReseau($unReseau,$entityManager);
+                $this->flashMessenger()->addSuccessMessage($this->getTranslatorHelper()->translate('Le réseau a été créé avec succès', 'iptrevise'));
+                return $this->redirect()->toRoute('reseau');
+            } else {
+                //Marche pas
+                //die('invalide');
+            	$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Les informations envoyées comportent des erreurs. Veuillez les rectifier puis les renvoyer !'));
+                //return $this->redirect()->toRoute('reseau');
+            }
+        }
+
+        $viewModel = new ViewModel(array(
+            'form' => $form,
+            'headerLabel' => $this->getTranslatorHelper()->translate('Créer un réseau'),
+        ));
+        //$viewModel->setTemplate('csn-authorization/role-admin/role-form');
+        return $viewModel;
     }
 
 
@@ -83,20 +119,5 @@ class IndexController extends AbstractActionController
 
     	return $this->translatorHelper;
     }
-
-    /**
-     * get userFormHelper
-     *
-     * @return  Zend\Form\Form
-     */
-    protected function getReseauFormHelper()
-    {
-    	if (null === $this->reseauFormHelper) {
-    		$this->reseauFormHelper = $this->getServiceLocator()->get('iptrevise_reseau_form');
-    	}
-
-    	return $this->reseauFormHelper;
-    }
-
 
 }

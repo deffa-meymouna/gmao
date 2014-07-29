@@ -1,0 +1,21 @@
+<?php
+/**
+ * Reseau - Reseau Form
+ *
+ * @link https://github.com/Alexandre-T/gmao for the canonical source repository
+ * @copyright Copyright (c) 2005-2014 Alexandre Tranchant
+ * @license https://github.com/Alexandre-T/gmao/blob/master/LICENSE MIT
+ * @author Alexandre Tranchant <Alexandre.Tranchant@gmail.com>
+ */
+
+$this->form->prepare();
+?>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><?php echo $this->headerLabel;?></h3>
+  </div>
+  <div class="panel-body">
+    <?php echo $this->form($this->form); ?>
+  </div>
+</div>
+

@@ -88,7 +88,7 @@
 	</div>
 <?php endforeach;?>
 </div>
-<ul class="btn-grp">
-	<li class="btn btn-default"><i class="fa fa-plus fa-fw"></i>&nbsp;Créer un nouveau réseau</li>
-</ul>
+<div class="btn-grp">
+	<a class="btn btn-default" href="<?php echo $this->url('reseau',array('action' => 'creer'));?>" title="<?php echo $this->escapehtmlattr($this->translate('Créer un nouveau réseau'))?>"><i class="fa fa-plus fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Créer un nouveau réseau'));?></a>
+</div>
 <?php endif;?>

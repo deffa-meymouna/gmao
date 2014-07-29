@@ -8,7 +8,7 @@
  * @author Alexandre Tranchant <Alexandre.Tranchant@gmail.com>
  */
 
-namespace Reseau\Entity\Orm\Table;
+namespace Reseau\Entity\Table;
 
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Db\Sql\Ddl\Column\Integer;
@@ -71,16 +71,6 @@ class Reseau
      * @ORM\Column(name="res_masque",type="smallint",nullable=false)
      */
     protected $masque;
-
-    /**
-     * Construct
-     *
-     * Construct some referenced columns arrays
-     */
-    public function __construct()
-    {
-
-    }
 
 	/**
 	 * @return the $libelle
@@ -156,6 +146,14 @@ class Reseau
 	public function setIp($ip) {
 		$this->ip = $ip;
 	}
+	/**
+	 * Prend une adresse ip au format 192.168.1.0
+	 *
+	 * @param String $chaineIp
+	 */
+	public function setIpFromString($chaineIp) {
+		$this->ip = ip2long($chaineIp);
+	}
 
 	/**
 	 * @return the $passerelle
@@ -169,6 +167,12 @@ class Reseau
 	 */
 	public function setPasserelle($passerelle) {
 		$this->passerelle = $passerelle;
+	}
+	/**
+	 * @param string $passerelle
+	 */
+	public function setPasserelleFromString($passerelle) {
+		$this->passerelle = ip2long($passerelle);
 	}
 
 	/**
