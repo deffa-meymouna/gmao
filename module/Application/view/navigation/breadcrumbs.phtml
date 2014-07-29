@@ -1,6 +1,6 @@
 <?php if (count($this->pages)):?>
 	<ol class="breadcrumb">
-		<li><i class="fa fa-file-o"></i>&nbsp;<a href="<?php echo $this->url('home')?>" title="<?php echo $this->translate('Home');?>"><?php echo $this->translate('Application blanche')?></a></li>
+		<li><i class="fa fa-file-o"></i>&nbsp;<a href="<?php echo $this->url('home')?>" title="<?php echo $this->translate('Home');?>"><?php echo $this->translate('IP-Trevise')?></a></li>
 		<?php foreach ($this->pages as $page): ?>
 		<?php /* @var $page Zend\Navigation\Page\Mvc */?>
 		<li><a href="<?php echo $page->getHref() ?>" <?php echo $page->getTitle()?'title="'.$this->translate($page->getTitle()).'"':'';?>><?php echo $this->translate($page->getLabel())?></a></li>
