@@ -14,7 +14,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Reseau\Entity\Reseaux;
 
-class ReseauFactory implements FactoryInterface
+class ReseauService implements FactoryInterface
 {
 	/**
 	 * (non-PHPdoc)

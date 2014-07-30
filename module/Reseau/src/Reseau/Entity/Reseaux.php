@@ -44,8 +44,8 @@ class Reseaux
      * @param ReseauForm $form
      * @return Reseau
      */
-    public static function creerUnNouveauReseau(ReseauForm $form){
-    	$nouveauReseau = new Reseau();
+    public function creerUnNouveauReseau(ReseauForm $form){
+    	$nouveauReseau = new ReseauTable();
 		$nouveauReseau->setCouleur(substr($form->get('couleur')->getValue(),1));
 		$nouveauReseau->setDescription($form->get('description')->getValue());
 		$nouveauReseau->setIpFromString($form->get('ip')->getValue());
@@ -60,9 +60,9 @@ class Reseaux
 	 * @param Reseau $unReseau
 	 * @param EntityManagerInterface $entityManager
 	 */
-	public static function enregistrerUnReseau(ReseauTable $unReseau, EntityManagerInterface $entityManager){
-		$entityManager->persist($unReseau);
-		$entityManager->flush();
+	public function enregistrerUnReseau(ReseauTable $unReseau){
+		$this->entityManager->persist($unReseau);
+		$this->entityManager->flush();
 	}
 	/**
 	 * Recherche un Reseau selon son Id
@@ -71,8 +71,8 @@ class Reseaux
 	 * @param EntityManagerInterface $entityManager
 	 * @return Reseau\Entity\View\Reseau
 	 */
-	public static function rechercherUnReseauSelonId($id, EntityManagerInterface $entityManager){
-		$reseaux = $entityManager->getRepository('Reseau\Entity\Table\Reseau');
+	public function rechercherUnReseauSelonId($id){
+		$reseaux = $this->entityManager->getRepository('Reseau\Entity\Table\Reseau');
 		return $reseaux->find($id);
 	}
 	/**

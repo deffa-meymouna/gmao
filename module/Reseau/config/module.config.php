@@ -60,7 +60,12 @@ return array(
 	),
 	'service_manager' => array(
 		'factories' =>	array(
-			'ReseauService'	=> 'Reseau\Service\Factory\ReseauFactory',
+			'ReseauService'	=> 'Reseau\Service\Factory\ReseauService',
+		),
+		'invokables' => array(
+			'reseauForm' => 'Reseau\Form\ReseauForm',
 		)
-	)
+	),
+
+
 );

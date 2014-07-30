@@ -77,6 +77,43 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertMatchedRouteName ( 'reseau' );
 		$this->assertRedirectTo('/reseau');
 	}
+	public function testCreerActionWithoutReseauCanNotBeAccessedByMember(){
+		$this->mockLogin('member');
+		$this->dispatch ( '/reseau/creer' );
+		$this->assertResponseStatusCode ( 403 );
+		$this->assertModuleName ( 'Reseau' );
+		$this->assertControllerName ( 'Reseau\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('creer');
+		$this->assertMatchedRouteName ( 'reseau' );
+	}
+	public function testCreerActionWithoutReseauCanBeAccessedByTechnician(){
+		$this->mockLogin('technician');
+		$this->dispatch ( '/reseau/creer' );
+		$this->assertResponseStatusCode ( 200 );
+		$this->assertModuleName ( 'Reseau' );
+		$this->assertControllerName ( 'Reseau\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('creer');
+		$this->assertMatchedRouteName ( 'reseau' );
+	}
+	public function testCreerActionInValidFormIsNotSaved(){
+		$post = array(
+				'foo' => 'foobar',
+				'bar' => 'foobar'
+		);
+		$this->mockLogin('technician');
+		$this->dispatch ( '/reseau/creer', 'POST', $post );
+		$this->assertResponseStatusCode ( 200 );
+		$this->assertModuleName ( 'Reseau' );
+		$this->assertControllerName ( 'Reseau\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('creer');
+		$this->assertMatchedRouteName ( 'reseau' );
+	}
+
+
+
 
 	/**
 	 * Mock Role

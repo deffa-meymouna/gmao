@@ -34,6 +34,11 @@ class IndexController extends AbstractActionController
 	protected $reseauService;
 
 	/**
+	 * @var Reseau\Form\ReseauForm
+	 */
+	protected $reseauForm;
+
+	/**
 	 * @var Zend\Mvc\I18n\Translator
 	 */
 	protected $translatorHelper;
@@ -50,7 +55,6 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
     	$reseauService = $this->getReseauService();
-    	//$reseauService = new Reseaux($this->getEntityManager());
     	$reseaux = $reseauService->listerTousLesReseaux();
     	return new ViewModel(array('reseaux' => $reseaux));
     }
@@ -61,7 +65,7 @@ class IndexController extends AbstractActionController
 	 */
     public function creerAction()
     {
-		$form = new ReseauForm();
+		$form = $this->getReseauForm();
 
         $form->setAttributes(array(
             'action' => $this->url()->fromRoute('reseau', array('action' => 'creer')),
@@ -75,9 +79,10 @@ class IndexController extends AbstractActionController
             $form->setData($this->getRequest()->getPost());
             $form->setInputFilter(new ReseauFilter());
             if($form->isValid()) {
-				$unReseau = Reseaux::creerUnNouveauReseau($form);
+            	$reseauService = $this->getReseauService();
+				$unReseau = $reseauService->creerUnNouveauReseau($form);
 				//Enregistrement
-				Reseaux::enregistrerUnReseau($unReseau,$this->getEntityManager());
+				$reseauService->enregistrerUnReseau($unReseau);
                 $this->flashMessenger()->addSuccessMessage($this->getTranslatorHelper()->translate('Le réseau a été créé avec succès', 'iptrevise'));
                 return $this->redirect()->toRoute('reseau');
             } else {
@@ -92,7 +97,6 @@ class IndexController extends AbstractActionController
             'form' => $form,
             'headerLabel' => $this->getTranslatorHelper()->translate('Créer un réseau'),
         ));
-        //$viewModel->setTemplate('csn-authorization/role-admin/role-form');
         return $viewModel;
     }
     /**
@@ -106,7 +110,9 @@ class IndexController extends AbstractActionController
     		$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Identifiant réseau invalide', 'iptrevise'));
     		return $this->redirect()->toRoute('reseau');
     	}
-		$unReseau = Reseaux::rechercherUnReseauSelonId($id,$this->getEntityManager());
+
+    	$reseauService = $this->getReseauService();
+		$unReseau = $reseauService->rechercherUnReseauSelonId($id,$this->getEntityManager());
 		if (empty($unReseau)){
 			$this->flashMessenger()->addWarningMessage($this->getTranslatorHelper()->translate('Le réseau sélectionné n\'a pas été trouvé ou n\'existe plus', 'iptrevise'));
 			return $this->redirect()->toRoute('reseau');
@@ -141,6 +147,20 @@ class IndexController extends AbstractActionController
     	}
 
     	return $this->reseauService;
+    }
+
+    /**
+     * get reseauForm
+     *
+     * @return
+     */
+    protected function getReseauForm()
+    {
+    	if (null === $this->reseauForm) {
+    		$this->reseauForm = $this->getServiceLocator()->get('ReseauForm');
+    	}
+
+    	return $this->reseauForm;
     }
 
     /**
