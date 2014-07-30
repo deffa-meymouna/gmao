@@ -57,5 +57,10 @@ return array(
 					'message_close_string'     => '</li></ul></div>',
 					'message_separator_string' => '</li><li>'
 			)
+	),
+	'service_manager' => array(
+		'factories' =>	array(
+			'ReseauService'	=> 'Reseau\Service\Factory\ReseauFactory',
+		)
 	)
 );

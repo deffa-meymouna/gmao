@@ -29,6 +29,11 @@ class IndexController extends AbstractActionController
 	protected $entityManager;
 
 	/**
+	 * @var Reseau\Entity\Reseaux
+	 */
+	protected $reseauService;
+
+	/**
 	 * @var Zend\Mvc\I18n\Translator
 	 */
 	protected $translatorHelper;
@@ -44,7 +49,8 @@ class IndexController extends AbstractActionController
 	 */
     public function indexAction()
     {
-    	$reseauService = new Reseaux($this->getEntityManager());
+    	$reseauService = $this->getReseauService();
+    	//$reseauService = new Reseaux($this->getEntityManager());
     	$reseaux = $reseauService->listerTousLesReseaux();
     	return new ViewModel(array('reseaux' => $reseaux));
     }
@@ -123,6 +129,19 @@ class IndexController extends AbstractActionController
 
     }
 
+    /**
+     * get reseauService
+     *
+     * @return Reseaux
+     */
+    protected function getReseauService()
+    {
+    	if (null === $this->reseauService) {
+    		$this->reseauService = $this->getServiceLocator()->get('ReseauService');
+    	}
+
+    	return $this->reseauService;
+    }
 
     /**
      * get entityManager
