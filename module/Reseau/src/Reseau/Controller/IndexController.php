@@ -66,13 +66,12 @@ class IndexController extends AbstractActionController
         ));
 
         if($this->getRequest()->isPost()) {
-        	$entityManager = $this->getEntityManager();
             $form->setData($this->getRequest()->getPost());
             $form->setInputFilter(new ReseauFilter());
             if($form->isValid()) {
 				$unReseau = Reseaux::creerUnNouveauReseau($form);
 				//Enregistrement
-				Reseaux::enregistrerUnReseau($unReseau,$entityManager);
+				Reseaux::enregistrerUnReseau($unReseau,$this->getEntityManager());
                 $this->flashMessenger()->addSuccessMessage($this->getTranslatorHelper()->translate('Le réseau a été créé avec succès', 'iptrevise'));
                 return $this->redirect()->toRoute('reseau');
             } else {
@@ -89,6 +88,39 @@ class IndexController extends AbstractActionController
         ));
         //$viewModel->setTemplate('csn-authorization/role-admin/role-form');
         return $viewModel;
+    }
+    /**
+     * Action de suppression d'un réseau
+     *
+     */
+    public function supprimerAction(){
+    	$id = (int) $this->params()->fromRoute('reseau', 0);
+
+    	if ($id == 0) {
+    		$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Identifiant réseau invalide', 'iptrevise'));
+    		return $this->redirect()->toRoute('reseau');
+    	}
+		$unReseau = Reseaux::rechercherUnReseauSelonId($id,$this->getEntityManager());
+		if (empty($unReseau)){
+			$this->flashMessenger()->addWarningMessage($this->getTranslatorHelper()->translate('Le réseau sélectionné n\'a pas été trouvé ou n\'existe plus', 'iptrevise'));
+			return $this->redirect()->toRoute('reseau');
+		}
+
+		$confirmation = (int) $this->params()->fromRoute('confirmation', 0);
+
+		if($confirmation == 1){
+			Reseaux::supprimerUnReseau($unReseau,$this->getEntityManager());
+			$message = sprintf($this->getTranslatorHelper()->translate("Réseau %s supprimé avec succès", 'iptrevise'),$unReseau->getCIDR());
+			$this->flashMessenger()->addSuccessMessage($message);
+			return $this->redirect()->toRoute('reseau');
+		}elseif($confirmation == 2){
+			$message = sprintf($this->getTranslatorHelper()->translate("Annulation demandée. Le réseau %s nà pas été supprimé", 'iptrevise'),$unReseau->getCIDR());
+			$this->flashMessenger()->addInfoMessage($message);
+			return $this->redirect()->toRoute('reseau');
+		}
+
+		return new ViewModel(array('reseau' => $unReseau));
+
     }
 
 

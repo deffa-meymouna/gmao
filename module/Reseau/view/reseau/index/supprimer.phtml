@@ -1,0 +1,27 @@
+<?php $cpt = 0;?>
+<div class="page-header">
+	<h1><i class="fa fa-fw fa-trash-o"></i>&nbsp;Suppression d'un réseau</h1>
+</div>
+<div class="row text-justify">
+	<div class="col-sm-offset-3 col-sm-6">
+		<div class="panel panel-danger">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-interrogation"></i>&nbsp;Demande de confirmation</h2>
+			</div>
+			<div class="panel-body">
+				<p><strong>Êtes-vous sûr de vouloir supprimer le réseau suivant :</strong></p>
+				<ul class="">
+					<li>Libellé&nbsp;: <?php echo $this->escapehtml($this->reseau->getLibelle());?></li>
+					<li>Adresse Réseau<?php echo $this->escapehtml($this->reseau->getCIDR());?></li>
+					<li><?php echo $this->escapehtml($this->reseau->getDescription());?></li>
+				</ul>
+			</div>
+			<div class="panel-footer text-right">
+				<div class="btn-group">
+					<a href="<?php echo $this->url('reseau',array('action'=>'supprimer','reseau'=>$this->reseau->getId(),'confirmation'=>1));?>" title="" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Supprimer</a>
+					<a href="<?php echo $this->url('reseau',array('action'=>'supprimer','reseau'=>$this->reseau->getId(),'confirmation'=>2));?>" title="" class="btn btn-default"><i class="fa fa-reply fa-fw"></i>&nbsp;Annuler</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

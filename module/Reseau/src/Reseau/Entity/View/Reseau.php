@@ -11,16 +11,16 @@
 namespace Reseau\Entity\View;
 
 use Doctrine\ORM\Mapping as ORM;
-use Reseau\Entity\Table\Reseau as TableReseau;
+use Reseau\Entity\Abs\Reseau as ReseauAbstract;
 //use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Doctrine ORM implementation of Reseau entity
  *
  * @ORM\Entity
- * @ORM\Table(name="`ve_reseau_res`")
+ * @ORM\Table(name="ve_reseau_res")
  */
-class Reseau extends TableReseau
+class Reseau extends ReseauAbstract
 {
 
     /**

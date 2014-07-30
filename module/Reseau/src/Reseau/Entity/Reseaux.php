@@ -12,7 +12,8 @@ namespace Reseau\Entity;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Reseau\Form\ReseauForm;
-use Reseau\Entity\Table\Reseau;
+use Reseau\Entity\Table\Reseau as ReseauTable;
+use Reseau\Entity\Abs\Reseau   as ReseauEntity;
 
 class Reseaux
 {
@@ -33,7 +34,7 @@ class Reseaux
      * @return
      */
     public function listerTousLesReseaux(){
-    	$vue = $reseaux = $this->entityManager->getRepository('Reseau\Entity\View\Reseau');
+    	$vue = $this->entityManager->getRepository('Reseau\Entity\View\Reseau');
     	return $vue->findall();
     }
     /**
@@ -59,9 +60,29 @@ class Reseaux
 	 * @param Reseau $unReseau
 	 * @param EntityManagerInterface $entityManager
 	 */
-	public static function enregistrerUnReseau(Reseau $unReseau, EntityManagerInterface $entityManager){
+	public static function enregistrerUnReseau(ReseauTable $unReseau, EntityManagerInterface $entityManager){
 		$entityManager->persist($unReseau);
 		$entityManager->flush();
 	}
-
+	/**
+	 * Recherche un Reseau selon son Id
+	 *
+	 * @param integer $id
+	 * @param EntityManagerInterface $entityManager
+	 * @return Reseau\Entity\View\Reseau
+	 */
+	public static function rechercherUnReseauSelonId($id, EntityManagerInterface $entityManager){
+		$reseaux = $entityManager->getRepository('Reseau\Entity\Table\Reseau');
+		return $reseaux->find($id);
+	}
+	/**
+	 * Supprime un reseau
+	 *
+	 * @param ReseauEntity $reseau
+	 * @param EntityManagerInterface $entityManager
+	 */
+	public static function supprimerUnReseau(ReseauEntity $reseau, EntityManagerInterface $entityManager){
+		$entityManager->remove($reseau);
+		$entityManager->flush();
+	}
 }

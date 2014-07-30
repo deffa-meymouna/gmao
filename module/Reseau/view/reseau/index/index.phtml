@@ -7,6 +7,14 @@
 	</div>
 	<h1>Linsting des réseaux référencés</h1>
 </div>
+<?php
+	$flash = $this->flashmessenger();
+	echo $flash->render('error',   array('alert', 'alert-dismissable', 'alert-danger'));
+	echo $flash->render('warning', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('info',    array('alert', 'alert-dismissable', 'alert-info'));
+	echo $flash->render('default', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('success', array('alert', 'alert-dismissable', 'alert-success'));
+?>
 <div class="row text-justify">
 <?php if (empty($this->reseaux)):?>
 	<div class="col-sm-offset-3 col-sm-6">
@@ -86,10 +94,11 @@
 	  				<dd><abbr title="<?php echo $this->escapehtmlattr(sprintf($this->translate('%d adresses IP occupées sur %d adresses théoriquement disponibles'),$reseau->getQuantiteIp(),$reseau->getIpTheoriquementDisponible()));?>"><?php echo sprintf('%d / %d',$reseau->getQuantiteIp(),$reseau->getIpTheoriquementDisponible())?></abbr>
 				</dl>
 			</div>
-			<div class="panel-footer">
-				<div class="btn-group text-right">
+			<div class="panel-footer text-right">
+				<div class="btn-group">
 					<a class="btn btn-default" href="#" title="<?php echo $this->escapehtml($this->translate('Ajouter une adresse IP à ce réseau'));?>"><i class="fa fa-plus"></i></a>
 					<a class="btn btn-default" href="#" title="<?php echo $this->escapehtml($this->translate('Consulter ce réseau'));?>"><i class="fa fa-search"></i></a>
+					<a class="btn btn-danger <?php echo ($reseau->getQuantiteIP())?' disabled ':'';?>" href="<?php echo $this->url('reseau',array('action' => 'supprimer','reseau' => $reseau->getId()));?>" title="<?php echo $this->escapehtml($this->translate('Supprimer ce réseau'));?>"><i class="fa fa-trash-o"></i></a>
 				</div>
 			</div>
 		</div>
