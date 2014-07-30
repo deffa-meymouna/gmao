@@ -45,6 +45,39 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertActionName('index');
 		$this->assertMatchedRouteName ( 'reseau' );
 	}
+	public function testSupprimerActionCanNotBeAccessedByMember() {
+		$this->mockLogin('member');
+		$this->dispatch ( '/reseau/supprimer' );
+		$this->assertResponseStatusCode ( 403 );
+		$this->assertModuleName ( 'Reseau' );
+		$this->assertControllerName ( 'Reseau\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('supprimer');
+		$this->assertMatchedRouteName ( 'reseau' );
+	}
+	public function testSupprimerActionCanBeAccessedByTechnician() {
+		$this->mockLogin('technician');
+		//@todo MOCK ServiceReseau !
+		$this->dispatch ( '/reseau/supprimer/2' );
+		$this->assertResponseStatusCode ( 200 );
+		$this->assertModuleName ( 'Reseau' );
+		$this->assertControllerName ( 'Reseau\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('supprimer');
+		$this->assertMatchedRouteName ( 'reseau' );
+	}
+	public function testSupprimerActionWithoutReseauIsRedirected(){
+		$this->mockLogin('technician');
+		$this->dispatch ( '/reseau/supprimer' );
+		$this->assertResponseStatusCode ( 302 );
+		$this->assertModuleName ( 'Reseau' );
+		$this->assertControllerName ( 'Reseau\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('supprimer');
+		$this->assertMatchedRouteName ( 'reseau' );
+		$this->assertRedirectTo('/reseau');
+	}
+
 	/**
 	 * Mock Role
 	 * @param string role
@@ -66,6 +99,5 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 
 		$this->getApplicationServiceLocator()->setAllowOverride(true);
 		$this->getApplicationServiceLocator()->setService('Zend\Authentication\AuthenticationService', $authMock);
-
 	}
 }
