@@ -5,6 +5,7 @@ namespace Reseau\Controller;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use CsnUser\Entity\User;
 use CsnUser\Entity\Role;
+use Reseau\Entity\Table\Reseau;
 
 class IndexControllerTest extends AbstractHttpControllerTestCase {
 	//Trace error activated
@@ -97,12 +98,28 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertActionName('creer');
 		$this->assertMatchedRouteName ( 'reseau' );
 	}
-	public function testCreerActionInValidFormIsNotSaved(){
+	public function testCreerActionInvalidFormIsNotSaved(){
 		$post = array(
 				'foo' => 'foobar',
 				'bar' => 'foobar'
 		);
 		$this->mockLogin('technician');
+		$this->dispatch ( '/reseau/creer', 'POST', $post );
+		$this->assertResponseStatusCode ( 200 );
+		$this->assertModuleName ( 'Reseau' );
+		$this->assertControllerName ( 'Reseau\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('creer');
+		$this->assertMatchedRouteName ( 'reseau' );
+	}
+	public function testCreerActionValidFormIsSaved(){
+		$post = array(
+				'foo' => 'foobar',
+				'bar' => 'foobar'
+		);
+		$this->mockLogin('technician');
+		$this->mockForm(true);
+		$this->mockReseauService();
 		$this->dispatch ( '/reseau/creer', 'POST', $post );
 		$this->assertResponseStatusCode ( 200 );
 		$this->assertModuleName ( 'Reseau' );
@@ -136,5 +153,44 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 
 		$this->getApplicationServiceLocator()->setAllowOverride(true);
 		$this->getApplicationServiceLocator()->setService('Zend\Authentication\AuthenticationService', $authMock);
+	}
+
+	/**
+	 * Mock Form
+	 * @param string role
+	 */
+	protected function mockForm($isValid = true){
+		$formMock = $this->getMock('Reseau\Form\ReseauForm');
+		$formMock->expects($this->any())
+			->method('isValid')
+			->will($this->returnValue($isValid));
+
+		$this->getApplicationServiceLocator()->setAllowOverride(true);
+		$this->getApplicationServiceLocator()->setService('Reseau\Form\ReseauForm', $formMock);
+	}
+	/**
+	 * Mock Reseau Entity Service
+	 * @param string role
+	 */
+	protected function mockReseauService(){
+		$unReseau = new Reseau();
+		$reseauServiceMock = $this->getMockBuilder('Reseau\Entity\Reseaux')
+            ->disableOriginalConstructor()
+			->getMock();
+		$reseauServiceMock->expects($this->any())
+			->method('creerUnNouveauReseau')
+			->will($this->returnValue($unReseau));
+
+		$reseauServiceMock->expects($this->any())
+			->method('enregistrerUnReseau')
+			->will($this->returnValue(true));
+
+		$reseauFactoryMock = $this->getMock('Reseau\Service\Factory\ReseauService');
+		$reseauServiceMock->expects($this->any())
+			->method('createService')
+			->will($this->returnValue(null));
+
+		$this->getApplicationServiceLocator()->setAllowOverride(true);
+		$this->getApplicationServiceLocator()->setService('ReseauService', $reseauFactoryMock);
 	}
 }
