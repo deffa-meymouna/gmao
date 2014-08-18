@@ -58,6 +58,28 @@ class IndexController extends AbstractActionController
     	$reseaux = $reseauService->listerTousLesReseaux();
     	return new ViewModel(array('reseaux' => $reseaux));
     }
+    /**
+     * Consulter un des réseaux
+     */
+    public function consulterAction()
+    {
+    	//Récupération du réseau
+    	$id = (int) $this->params()->fromRoute('reseau', 0);
+
+    	if ($id == 0) {
+    		$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Identifiant réseau invalide', 'iptrevise'));
+    		return $this->redirect()->toRoute('reseau');
+    	}
+
+    	$reseauService = $this->getReseauService();
+    	$unReseau = $reseauService->rechercherUnReseauSelonId($id);
+    	if (empty($unReseau)){
+    		$this->flashMessenger()->addWarningMessage($this->getTranslatorHelper()->translate('Le réseau sélectionné n\'a pas été trouvé ou n\'existe plus', 'iptrevise'));
+    		return $this->redirect()->toRoute('reseau');
+    	}
+
+
+    }
 	/**
 	 * Action de création d'un réseau
 	 *
@@ -121,7 +143,7 @@ class IndexController extends AbstractActionController
 		$confirmation = (int) $this->params()->fromRoute('confirmation', 0);
 
 		if($confirmation == 1){
-			Reseaux::supprimerUnReseau($unReseau,$this->getEntityManager());
+			$reseauService->supprimerUnReseau($unReseau);
 			$message = sprintf($this->getTranslatorHelper()->translate("Réseau %s supprimé avec succès", 'iptrevise'),$unReseau->getCIDR());
 			$this->flashMessenger()->addSuccessMessage($message);
 			return $this->redirect()->toRoute('reseau');

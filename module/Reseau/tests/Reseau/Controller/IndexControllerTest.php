@@ -6,6 +6,7 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use CsnUser\Entity\User;
 use CsnUser\Entity\Role;
 use Reseau\Entity\Table\Reseau;
+use Zend\Form\Element\Submit;
 
 class IndexControllerTest extends AbstractHttpControllerTestCase {
 	//Trace error activated
@@ -58,7 +59,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 	}
 	public function testSupprimerActionCanBeAccessedByTechnician() {
 		$this->mockLogin('technician');
-		//@todo MOCK ServiceReseau !
 		$this->dispatch ( '/reseau/supprimer/2' );
 		$this->assertResponseStatusCode ( 200 );
 		$this->assertModuleName ( 'Reseau' );
@@ -75,6 +75,17 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertControllerName ( 'Reseau\Controller\Index' );
 		$this->assertControllerClass ( 'IndexController' );
 		$this->assertActionName('supprimer');
+		$this->assertMatchedRouteName ( 'reseau' );
+		$this->assertRedirectTo('/reseau');
+	}
+	public function testConsulterActionWithoutReseauIsRedirected(){
+		$this->mockLogin('technician');
+		$this->dispatch ( '/reseau/consulter' );
+		$this->assertResponseStatusCode ( 302 );
+		$this->assertModuleName ( 'Reseau' );
+		$this->assertControllerName ( 'Reseau\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('consulter');
 		$this->assertMatchedRouteName ( 'reseau' );
 		$this->assertRedirectTo('/reseau');
 	}
@@ -104,7 +115,11 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 				'bar' => 'foobar'
 		);
 		$this->mockLogin('technician');
+		$this->mockForm(false);
+		$this->mockReseauService();
 		$this->dispatch ( '/reseau/creer', 'POST', $post );
+
+		//@FIXME status 500 insteadof 200 ! Why ?
 		$this->assertResponseStatusCode ( 200 );
 		$this->assertModuleName ( 'Reseau' );
 		$this->assertControllerName ( 'Reseau\Controller\Index' );
@@ -121,6 +136,8 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->mockForm(true);
 		$this->mockReseauService();
 		$this->dispatch ( '/reseau/creer', 'POST', $post );
+
+		//@FIXME status 500 insteadof 200 ! Why ?
 		$this->assertResponseStatusCode ( 200 );
 		$this->assertModuleName ( 'Reseau' );
 		$this->assertControllerName ( 'Reseau\Controller\Index' );
@@ -129,6 +146,30 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertMatchedRouteName ( 'reseau' );
 	}
 
+	public function testSupprimerActionWithUnexistantReseauIsRedirected(){
+		$this->mockLogin('technician');
+		$this->mockReseauService(true);
+		$this->dispatch ( '/reseau/supprimer/17' );
+		$this->assertResponseStatusCode ( 302 );
+		$this->assertModuleName ( 'Reseau' );
+		$this->assertControllerName ( 'Reseau\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('supprimer');
+		$this->assertMatchedRouteName ( 'reseau' );
+		$this->assertRedirectTo('/reseau');
+	}
+	public function testConsulterActionWithUnexistantReseauIsRedirected(){
+		$this->mockLogin('technician');
+		$this->mockReseauService(true);
+		$this->dispatch ( '/reseau/consulter/17' );
+		$this->assertResponseStatusCode ( 302 );
+		$this->assertModuleName ( 'Reseau' );
+		$this->assertControllerName ( 'Reseau\Controller\Index' );
+		$this->assertControllerClass ( 'IndexController' );
+		$this->assertActionName('consulter');
+		$this->assertMatchedRouteName ( 'reseau' );
+		$this->assertRedirectTo('/reseau');
+	}
 
 
 
@@ -165,32 +206,48 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 			->method('isValid')
 			->will($this->returnValue($isValid));
 
+		$formMock->expects($this->any())
+		->method('get')
+		->will($this->returnValue(new Submit('submit')));
+
 		$this->getApplicationServiceLocator()->setAllowOverride(true);
-		$this->getApplicationServiceLocator()->setService('Reseau\Form\ReseauForm', $formMock);
+		$this->getApplicationServiceLocator()->setService('ReseauForm', $formMock);
 	}
 	/**
 	 * Mock Reseau Entity Service
-	 * @param string role
+	 * @param vide boolean if true emulated an empty database
 	 */
-	protected function mockReseauService(){
+	protected function mockReseauService($vide = false){
 		$unReseau = new Reseau();
 		$reseauServiceMock = $this->getMockBuilder('Reseau\Entity\Reseaux')
-            ->disableOriginalConstructor()
-			->getMock();
-		$reseauServiceMock->expects($this->any())
-			->method('creerUnNouveauReseau')
-			->will($this->returnValue($unReseau));
+		->disableOriginalConstructor()
+		->getMock();
 
 		$reseauServiceMock->expects($this->any())
-			->method('enregistrerUnReseau')
-			->will($this->returnValue(true));
+		->method('creerUnNouveauReseau')
+		->will($this->returnValue($unReseau));
+
+		$reseauServiceMock->expects($this->any())
+		->method('enregistrerUnReseau')
+		->will($this->returnValue(true));
+
+		if ($vide){
+			$reseauServiceMock->expects($this->any())
+			->method('rechercherUnReseauSelonId')
+			->will($this->returnValue(null));
+		} else {
+			$reseauServiceMock->expects($this->any())
+			->method('rechercherUnReseauSelonId')
+			->will($this->returnValue($unReseau));
+		}
 
 		$reseauFactoryMock = $this->getMock('Reseau\Service\Factory\ReseauService');
-		$reseauServiceMock->expects($this->any())
-			->method('createService')
-			->will($this->returnValue(null));
+		$reseauFactoryMock->expects($this->any())
+		->method('createService')
+		->will($this->returnValue($reseauServiceMock));
 
-		$this->getApplicationServiceLocator()->setAllowOverride(true);
-		$this->getApplicationServiceLocator()->setService('ReseauService', $reseauFactoryMock);
+		$asl = $this->getApplicationServiceLocator();
+		$asl->setAllowOverride(true);
+		$asl->setService('Reseau\Service\Factory\ReseauService', $reseauFactoryMock);
 	}
 }

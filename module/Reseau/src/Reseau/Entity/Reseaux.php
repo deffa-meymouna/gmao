@@ -58,7 +58,6 @@ class Reseaux
 	 * Enregistre un Reseau
 	 *
 	 * @param Reseau $unReseau
-	 * @param EntityManagerInterface $entityManager
 	 */
 	public function enregistrerUnReseau(ReseauTable $unReseau){
 		$this->entityManager->persist($unReseau);
@@ -68,7 +67,6 @@ class Reseaux
 	 * Recherche un Reseau selon son Id
 	 *
 	 * @param integer $id
-	 * @param EntityManagerInterface $entityManager
 	 * @return Reseau\Entity\View\Reseau
 	 */
 	public function rechercherUnReseauSelonId($id){
@@ -79,10 +77,9 @@ class Reseaux
 	 * Supprime un reseau
 	 *
 	 * @param ReseauEntity $reseau
-	 * @param EntityManagerInterface $entityManager
 	 */
-	public static function supprimerUnReseau(ReseauEntity $reseau, EntityManagerInterface $entityManager){
-		$entityManager->remove($reseau);
-		$entityManager->flush();
+	public function supprimerUnReseau(ReseauEntity $reseau){
+		$this->entityManager->remove($reseau);
+		$this->entityManager->flush();
 	}
 }
