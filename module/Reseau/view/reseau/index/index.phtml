@@ -97,7 +97,7 @@
 			<div class="panel-footer text-right">
 				<div class="btn-group">
 					<a class="btn btn-default" href="#" title="<?php echo $this->escapehtml($this->translate('Ajouter une adresse IP à ce réseau'));?>"><i class="fa fa-plus"></i></a>
-					<a class="btn btn-default" href="#" title="<?php echo $this->escapehtml($this->translate('Consulter ce réseau'));?>"><i class="fa fa-search"></i></a>
+					<a class="btn btn-default" href="<?php echo $this->url('reseau',array('action' => 'consulter','reseau' => $reseau->getId()));?>" title="<?php echo $this->escapehtml($this->translate('Consulter ce réseau'));?>"><i class="fa fa-search"></i></a>
 					<a class="btn btn-danger <?php echo ($reseau->getQuantiteIP())?' disabled ':'';?>" href="<?php echo $this->url('reseau',array('action' => 'supprimer','reseau' => $reseau->getId()));?>" title="<?php echo $this->escapehtml($this->translate('Supprimer ce réseau'));?>"><i class="fa fa-trash-o"></i></a>
 				</div>
 			</div>

@@ -74,6 +74,16 @@ class Reseaux
 		return $reseaux->find($id);
 	}
 	/**
+	 * Recherche un Reseau selon son Id En mode Lecture seule
+	 *
+	 * @param integer $id
+	 * @return Reseau\Entity\View\Reseau
+	 */
+	public function rechercherUnReseauSelonIdEnLectureSeule($id){
+		$reseaux = $this->entityManager->getRepository('Reseau\Entity\View\Reseau');
+		return $reseaux->find($id);
+	}
+	/**
 	 * Supprime un reseau
 	 *
 	 * @param ReseauEntity $reseau

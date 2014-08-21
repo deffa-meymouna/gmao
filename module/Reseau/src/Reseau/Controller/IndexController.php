@@ -34,6 +34,11 @@ class IndexController extends AbstractActionController
 	protected $reseauService;
 
 	/**
+	 * @var Reseau\Entity\Ips
+	 */
+	protected $ipService;
+
+	/**
 	 * @var Reseau\Form\ReseauForm
 	 */
 	protected $reseauForm;
@@ -72,12 +77,20 @@ class IndexController extends AbstractActionController
     	}
 
     	$reseauService = $this->getReseauService();
-    	$unReseau = $reseauService->rechercherUnReseauSelonId($id);
+    	$unReseau = $reseauService->rechercherUnReseauSelonIdEnLectureSeule($id);
     	if (empty($unReseau)){
     		$this->flashMessenger()->addWarningMessage($this->getTranslatorHelper()->translate('Le réseau sélectionné n\'a pas été trouvé ou n\'existe plus', 'iptrevise'));
     		return $this->redirect()->toRoute('reseau');
     	}
 
+    	$ipService = $this->getIpService();
+    	$ips = $ipService->rechercherLesIPDuReseauSelonId($id);
+
+    	$viewModel = new ViewModel(array(
+    		'unReseau' => $unReseau,
+    		'ips'	   => $ips
+    	));
+    	return $viewModel;
 
     }
 	/**
@@ -169,6 +182,20 @@ class IndexController extends AbstractActionController
     	}
 
     	return $this->reseauService;
+    }
+
+    /**
+     * get IPService
+     *
+     * @return Ips
+     */
+    protected function getIpService()
+    {
+    	if (null === $this->ipService) {
+    		$this->ipService = $this->getServiceLocator()->get('IpService');
+    	}
+
+    	return $this->ipService;
     }
 
     /**

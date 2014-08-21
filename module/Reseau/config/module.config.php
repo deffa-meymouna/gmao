@@ -61,6 +61,7 @@ return array(
 	'service_manager' => array(
 		'factories' =>	array(
 			'ReseauService'	=> 'Reseau\Service\Factory\ReseauService',
+			'IpService'		=> 'Reseau\Service\Factory\IpService',
 		),
 		'invokables' => array(
 			'reseauForm' => 'Reseau\Form\ReseauForm',

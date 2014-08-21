@@ -31,6 +31,12 @@ abstract class Reseau
     protected $id;
 
     /**
+     * @var \Reseau\Entity\Table\Ip
+     * @ORM\OneToMany(targetEntity="Ip", mappedBy="reseau")
+     */
+    protected $ips;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="res_lib", type="string", length=32, nullable=false, unique=false)
@@ -200,4 +206,18 @@ abstract class Reseau
 	public function getBroadcast(){
 		return long2ip($this->ip + pow(2,32-$this->masque)-1);
 	}
+	/**
+	 * @return the $ips
+	 */
+	public function getIps() {
+		return $this->ips;
+	}
+
+	/**
+	 * @param \Reseau\Entity\Table\Ip $ips
+	 */
+	public function setIps($ips) {
+		$this->ips = $ips;
+	}
+
 }

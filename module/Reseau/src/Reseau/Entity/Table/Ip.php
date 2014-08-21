@@ -11,15 +11,14 @@
 namespace Reseau\Entity\Table;
 
 use Doctrine\ORM\Mapping as ORM;
-use Reseau\Entity\Abs\Reseau as ReseauAbstract;
-//use Doctrine\Common\Collections\ArrayCollection;
+use Reseau\Entity\Abs\Ip as IpAbstract;
 
 /**
  * Doctrine ORM implementation of Reseau entity
  *
  * @ORM\Entity
- * @ORM\Table(name="`te_reseau_res`")
+ * @ORM\Table(name="`te_ip_ip`")
  */
-class Reseau extends ReseauAbstract
+class Ip extends IpAbstract
 {
 }
