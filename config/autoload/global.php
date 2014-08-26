@@ -19,11 +19,11 @@ return array (
 		),
 		'mantis' => array (
 				//Enter the number project in your Mantis
-				'projectId' => 1,
+				'projectId' => 4,
 				//Enter the evolution filter Id
 				'evolutionFilterId' => 2,
 				//Enter the bug filter id
-				'bugFilterId' => 3
+ 				'bugFilterId' => 3
 		),
 )
 ;
