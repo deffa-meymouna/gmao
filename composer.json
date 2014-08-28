@@ -1,6 +1,6 @@
 {
-  "name" : "Alexandre-T/gmao",
-  "description" : "Road equipments GMAO Application",
+  "name" : "Alexandre-T/iptrevise",
+  "description" : "IP-Trevise Application",
   "version" : "0.0.0",
   "require" : {
     "php" : ">=5.3.3",
