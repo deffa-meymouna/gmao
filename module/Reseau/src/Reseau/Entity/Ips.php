@@ -59,9 +59,7 @@ class Ips
     	//La première ip possible est l'adresse du réseau + 1
     	$resultat = $unReseau->getIp() + 1;
     	//Je boucle sur toutes les ips de la table à la recherche du premier trou
-    	var_dump($resultat);
     	foreach ($ips as $ip){
-    		var_dump($ip->getIp());
     		if ($ip->getIp() > $resultat){
     			//on est dans un trou, on peut rendre la valeur
     			return $resultat;
