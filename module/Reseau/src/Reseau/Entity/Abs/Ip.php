@@ -51,7 +51,7 @@ abstract class Ip
     protected $description;
 
     /**
-     * @var Integer
+     * @var Long
      *
      * @ORM\Column(name="ip_adresse",type="bigint",nullable=false)
      */
@@ -100,10 +100,10 @@ abstract class Ip
 	}
 
 	/**
-	 * @return string the $ip
+	 * @return long the $ip
 	 */
 	public function getIp() {
-		return long2ip($this->ip);
+		return $this->ip;
 	}
 
 	/**
@@ -118,7 +118,7 @@ abstract class Ip
 	 * @param String $chaineIp
 	 */
 	public function setIpFromString($chaineIp) {
-		$this->ip = ip2long($chaineIp);
+		$this->ip = sprintf('%u',ip2long($chaineIp));
 	}
 	/**
 	 * @return the $reseauId

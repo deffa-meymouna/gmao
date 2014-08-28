@@ -1,0 +1,22 @@
+<?php
+	$this->reservationIpForm->prepare();
+?>
+<div class="page-header">
+	<h1><i class="fa fa-fw fa-plus"></i>&nbsp;Réserver une adresse IP</h1>
+</div>
+<div class="row text-justify">
+	<div class="col-sm-offset-1 col-sm-10">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+					<i class="fa fa-interrogation"></i>
+					Réservation d'une adresse IP pour le réseau&nbsp;:
+					<?php echo $this->escapehtml($this->unReseau->getLibelle());?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<?php echo $this->form($this->reservationIpForm); ?>
+			</div>
+		</div>
+	</div>
+</div>

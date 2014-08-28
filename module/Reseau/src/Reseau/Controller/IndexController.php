@@ -12,9 +12,8 @@ namespace Reseau\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Reseau\Entity\Reseaux;
-use Reseau\Form\ReseauForm;
 use Reseau\Form\ReseauFilter;
+use Zend\Http\PhpEnvironment\Response;
 
 class IndexController extends AbstractActionController
 {
@@ -42,6 +41,15 @@ class IndexController extends AbstractActionController
 	 * @var Reseau\Form\ReseauForm
 	 */
 	protected $reseauForm;
+	/**
+	 * @var Reseau\Form\ReservationIpForm
+	 */
+	protected $reservationIpForm;
+	/**
+	 * @var Reseau\Form\ReservationIpFilter
+	 */
+	protected $reservationIpFilter;
+
 
 	/**
 	 * @var Zend\Mvc\I18n\Translator
@@ -63,36 +71,84 @@ class IndexController extends AbstractActionController
     	$reseaux = $reseauService->listerTousLesReseaux();
     	return new ViewModel(array('reseaux' => $reseaux));
     }
+
     /**
      * Consulter un des réseaux
+     *
+     * @return \Zend\View\Model\ViewModel
      */
     public function consulterAction()
     {
     	//Récupération du réseau
-    	$id = (int) $this->params()->fromRoute('reseau', 0);
-
-    	if ($id == 0) {
-    		$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Identifiant réseau invalide', 'iptrevise'));
-    		return $this->redirect()->toRoute('reseau');
-    	}
-
-    	$reseauService = $this->getReseauService();
-    	$unReseau = $reseauService->rechercherUnReseauSelonIdEnLectureSeule($id);
-    	if (empty($unReseau)){
-    		$this->flashMessenger()->addWarningMessage($this->getTranslatorHelper()->translate('Le réseau sélectionné n\'a pas été trouvé ou n\'existe plus', 'iptrevise'));
-    		return $this->redirect()->toRoute('reseau');
+    	$unReseau=$this->getReseauFromUrl();
+    	if ($unReseau instanceof Response){
+    		//Redirection
+    		return $unReseau;
     	}
 
     	$ipService = $this->getIpService();
-    	$ips = $ipService->rechercherLesIPDuReseauSelonId($id);
+
+    	$ips = $ipService->rechercherLesIPDuReseauSelonId($unReseau);
 
     	$viewModel = new ViewModel(array(
     		'unReseau' => $unReseau,
     		'ips'	   => $ips
     	));
     	return $viewModel;
-
     }
+
+    public function reserverIpAction()
+    {
+    	//Initialisation des variables
+    	$reseauService = $this->getReseauService();
+    	$unReseau = $this->getReseauFromUrl();
+    	if ($unReseau instanceof Response){
+    		//Redirection
+    		return $unReseau;
+    	}
+    	$ipService = $this->getIpService();
+    	$reservationIpForm   = $this->getReservationIpForm();
+    	$reservationIpFilter = $this->getReservationIpFilter();
+
+    	if($this->getRequest()->isPost()) {
+            $reservationIpForm->setData($this->getRequest()->getPost());
+            $reservationIpForm->setInputFilter($reservationIpFilter);
+            if($reservationIpForm->isValid()) {
+				//Création de l'Entité IP
+            	$uneIp = $ipService->creerUneNouvelleIp($reservationIpForm,$unReseau);
+            	if ($ipService->isUnique($uneIp,$unReseau)){
+            		//Enregistrement
+            		$ipService->enregistrerUneIp($uneIp);
+            		$this->flashMessenger()->addSuccessMessage($this->getTranslatorHelper()->translate('L\'Ip a été référencée avec succès.', 'iptrevise'));
+            		return $this->redirect()->toRoute('reseau',array('action'=>'consulter','reseau'=>$unReseau->getId()));
+            	}else{
+   	                //$array= $reservationIpForm->getMessages();
+	                $array['ip']['isUnique']=$this->getTranslatorHelper()->translate(
+            			'Cette adresse Ip est déjà déclaré dans ce réseau'
+            		);
+    	        	$reservationIpForm->setMessages($array);
+            	}
+            } else {
+                //Marche pas
+                //die('invalide');
+            	$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Les informations envoyées comportent des erreurs. Veuillez les rectifier puis les renvoyer !'));
+            }
+        }else{
+        	//Initialisation du formulaire avec les données métier
+        	$ip = $ipService->rechercherLaPremiereIpDisponibleDuReseau($unReseau);
+        	// @var $reservationIpForm Reseau\Form\ReservationIpForm
+        	$reservationIpForm->get('ip')->setValue(long2ip($ip));
+        }
+
+    	$viewModel = new ViewModel(array(
+    			'unReseau' 			=> $unReseau,
+    			'reservationIpForm'	=> $reservationIpForm
+    	));
+    	return $viewModel;
+    }
+
+
+
 	/**
 	 * Action de création d'un réseau
 	 *
@@ -139,24 +195,15 @@ class IndexController extends AbstractActionController
      *
      */
     public function supprimerAction(){
-    	$id = (int) $this->params()->fromRoute('reseau', 0);
-
-    	if ($id == 0) {
-    		$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Identifiant réseau invalide', 'iptrevise'));
-    		return $this->redirect()->toRoute('reseau');
+    	$unReseau = $this->getReseauFromUrl(true);
+    	if ($unReseau instanceof Response){
+    		//Redirection
+    		return $unReseau;
     	}
-
-    	$reseauService = $this->getReseauService();
-		$unReseau = $reseauService->rechercherUnReseauSelonId($id,$this->getEntityManager());
-		if (empty($unReseau)){
-			$this->flashMessenger()->addWarningMessage($this->getTranslatorHelper()->translate('Le réseau sélectionné n\'a pas été trouvé ou n\'existe plus', 'iptrevise'));
-			return $this->redirect()->toRoute('reseau');
-		}
-
 		$confirmation = (int) $this->params()->fromRoute('confirmation', 0);
 
 		if($confirmation == 1){
-			$reseauService->supprimerUnReseau($unReseau);
+			$this->getReseauService()->supprimerUnReseau($unReseau);
 			$message = sprintf($this->getTranslatorHelper()->translate("Réseau %s supprimé avec succès", 'iptrevise'),$unReseau->getCIDR());
 			$this->flashMessenger()->addSuccessMessage($message);
 			return $this->redirect()->toRoute('reseau');
@@ -173,7 +220,7 @@ class IndexController extends AbstractActionController
     /**
      * get reseauService
      *
-     * @return Reseaux
+     * @return Reseau\Entity\Reseaux
      */
     protected function getReseauService()
     {
@@ -183,11 +230,24 @@ class IndexController extends AbstractActionController
 
     	return $this->reseauService;
     }
+    /**
+     * get reservationIpFilter
+     *
+     * @return Reseau\Form\ReservationIpFilter
+     */
+    protected function getReservationIpFilter()
+    {
+    	if (null === $this->reservationIpFilter) {
+    		$this->reservationIpFilter = $this->getServiceLocator()->get('ReservationIpFilter');
+    	}
+
+    	return $this->reservationIpFilter;
+    }
 
     /**
      * get IPService
      *
-     * @return Ips
+     * @return Reseau\Entity\Ips
      */
     protected function getIpService()
     {
@@ -238,6 +298,44 @@ class IndexController extends AbstractActionController
     	}
 
     	return $this->translatorHelper;
+    }
+    /**
+     *
+     * @return \Reseau\Form\ReservationIpForm
+     */
+    protected function getReservationIpForm(){
+    	if (null === $this->reservationIpForm) {
+    		$this->reservationIpForm = $this->getServiceLocator()->get('ReservationIpForm');
+    	}
+
+    	return $this->reservationIpForm;
+    }
+    /**
+     *
+     * @return unknown
+     */
+    protected function getReseauFromUrl($writable = false){
+    	$id = (int) $this->params()->fromRoute('reseau', 0);
+
+    	if ($id == 0) {
+    		$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Identifiant réseau invalide', 'iptrevise'));
+    		return $this->redirect()->toRoute('reseau');
+    	}
+
+    	$reseauService = $this->getReseauService();
+        if ($writable){
+        	//recherche d'une table
+    		$rechercherUnReseauSelonId = 'rechercherUnReseauSelonId';
+    	}else{
+    		//recherche d'une vue
+    		$rechercherUnReseauSelonId = 'rechercherUnReseauSelonIdEnLectureSeule';
+    	}
+    	$unReseau = $reseauService->$rechercherUnReseauSelonId($id);
+    	if (empty($unReseau)){
+    		$this->flashMessenger()->addWarningMessage($this->getTranslatorHelper()->translate('Le réseau sélectionné n\'a pas été trouvé ou n\'existe plus', 'iptrevise'));
+    		return $this->redirect()->toRoute('reseau');
+    	}
+    	return $unReseau;
     }
 
 }

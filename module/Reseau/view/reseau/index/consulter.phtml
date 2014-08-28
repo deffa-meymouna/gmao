@@ -54,8 +54,14 @@
 			</div>
 			<div class="panel-body text-center">
 				<div class="btn-group">
-					<a class="btn btn-default" href="#" title=""><i class="fa fa-plus"></i> Référencer une adresse IP</a>
-					<a class="btn btn-default" href="#" title=""><i class="fa fa-plus"></i> Réserver une adresse IP</a>
+					<a class="btn btn-default" href="#" title="<?php echo$this->escapehtmlattr($this->translate('Référencer une adresse IP'));?>">
+						<i class="fa fa-plus"></i>
+						<?php echo $this->escapehtml($this->translate('Référencer une adresse IP'));?>
+					</a>
+					<a class="btn btn-default" href="<?php echo $this->url('reseau',array('action' => 'reserverIP', 'reseau' => $this->unReseau->getId()));?>" title="<?php echo $this->escapehtmlattr($this->translate('Réserver une adresse IP'));?>">
+						<i class="fa fa-plus"></i>
+						<?php echo$this->escapehtml($this->translate('Réserver une adresse IP'));?>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -110,12 +116,12 @@
 		<?php foreach ($this->ips as $key => $ip):?>
 		<tr>
 			<td headers="number"><?php echo $this->escapehtml($key + 1);?></td>
-			<td headers="ips_adresse"><?php echo $this->escapehtml($ip->getIp());?></td>
+			<td headers="ips_adresse"><?php echo $this->ip($ip->getIp());?></td>
 			<td headers="ips_libelle"><?php echo $this->escapehtml($ip->getLibelle());?></td>
 			<td headers="ips_description"><?php echo $this->escapehtml($ip->getDescription());?></td>
 			<td headers="ips_machine">
 				<?php if (null === $ip->getMachineId()):?>
-					<em>Aucune machine</em>
+					<em><?php echo $this->escapehtml($this->translate('Aucune machine associée'));?></em>
 				<?php else: ?>
 					<?php echo $this->escapehtml($ip->getMachineLibelle());?>
 				<?php endif;?>

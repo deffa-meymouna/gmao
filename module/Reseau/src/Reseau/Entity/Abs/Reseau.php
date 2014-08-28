@@ -136,13 +136,20 @@ abstract class Reseau
 	 * @return string the $ip
 	 */
 	public function getIp() {
+		return $this->ip;
+	}
+	/**
+	 * @return string the $ip
+	 */
+	public function getIpInString() {
 		return long2ip($this->ip);
 	}
+
 	/**
 	 * @return string the $ip/$mask
 	 */
 	public function getCIDR(){
-		return $this->getIp().'/'.$this->masque;
+		return $this->getIpInString().'/'.$this->masque;
 	}
 
 	/**
@@ -157,7 +164,7 @@ abstract class Reseau
 	 * @param String $chaineIp
 	 */
 	public function setIpFromString($chaineIp) {
-		$this->ip = ip2long($chaineIp);
+		$this->ip = sprintf('%u',ip2long($chaineIp));
 	}
 
 	/**
@@ -177,7 +184,7 @@ abstract class Reseau
 	 * @param string $passerelle
 	 */
 	public function setPasserelleFromString($passerelle) {
-		$this->passerelle = ip2long($passerelle);
+		$this->passerelle = sprintf('%u',ip2long($passerelle));
 	}
 
 	/**

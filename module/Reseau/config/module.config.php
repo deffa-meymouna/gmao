@@ -51,6 +51,11 @@ return array(
 					),
 			),
 	),
+	'view_helpers' => array(
+			'invokables' => array(
+					'ip' => 'Reseau\View\Helper\Ip',
+			),
+	),
 	'view_helper_config' => array(
 			'flashmessenger' => array(
 					'message_open_format'      => '<div%s><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>',
@@ -64,7 +69,10 @@ return array(
 			'IpService'		=> 'Reseau\Service\Factory\IpService',
 		),
 		'invokables' => array(
-			'reseauForm' => 'Reseau\Form\ReseauForm',
+			'reseauForm'   => 'Reseau\Form\ReseauForm',
+			'reseauFilter' => 'Reseau\Form\ReseauFilter',
+			'reservationIpForm'   => 'Reseau\Form\ReservationIpForm',
+			'reservationIpFilter' => 'Reseau\Form\ReservationIpFilter',
 		)
 	),
 
