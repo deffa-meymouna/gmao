@@ -108,8 +108,8 @@
 			<th id="number">#</th>
 			<th id="ips_adresse"><?php echo $this->escapehtml($this->translate('Adresse IP'));?></th>
 			<th id="ips_libelle"><?php echo $this->escapehtml($this->translate('Informations'));?></th>
-			<th id="ips_description"><?php echo $this->escapehtml($this->translate('Observations'));?></th>
 			<th id="ips_machine"><?php echo $this->escapehtml($this->translate('Machine'));?></th>
+			<th id="action"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -118,13 +118,24 @@
 			<td headers="number"><?php echo $this->escapehtml($key + 1);?></td>
 			<td headers="ips_adresse"><?php echo $this->ip($ip->getIp());?></td>
 			<td headers="ips_libelle"><?php echo $this->escapehtml($ip->getLibelle());?></td>
-			<td headers="ips_description"><?php echo $this->escapehtml($ip->getDescription());?></td>
 			<td headers="ips_machine">
 				<?php if (null === $ip->getMachineId()):?>
 					<em><?php echo $this->escapehtml($this->translate('Aucune machine associée'));?></em>
 				<?php else: ?>
 					<?php echo $this->escapehtml($ip->getMachineLibelle());?>
 				<?php endif;?>
+			</td>
+			<td headers="action">
+				<div class="btn-group">
+					<a class="btn btn-default btn-xs" href="#"
+						title="<?php echo $this->escapehtmlattr($this->translate('Associer à une machine'));?>">
+						<i class="fa fa-link"></i>
+					</a>
+					<a class="btn btn-danger btn-xs" href="#"
+						title="<?php echo $this->escapehtmlattr($this->translate('Supprimer cette adresse Ip'));?>">
+						<i class="fa fa-trash-o"></i>
+					</a>
+				</div>
 			</td>
 		</tr>
 		<?php endforeach;?>
@@ -134,8 +145,8 @@
 			<th headers="number">#</th>
 			<th headers="ips_adresse"><?php echo $this->escapehtml($this->translate('Adresse IP'));?></th>
 			<th headers="ips_libelle"><?php echo $this->escapehtml($this->translate('Informations'));?></th>
-			<th headers="ips_description"><?php echo $this->escapehtml($this->translate('Observations'));?></th>
 			<th headers="ips_machine"><?php echo $this->escapehtml($this->translate('Machine'));?></th>
+			<th headers="action"></th>
 		</tr>
 	</tfoot>
 
