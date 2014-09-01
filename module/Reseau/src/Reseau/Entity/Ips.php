@@ -11,7 +11,6 @@
 namespace Reseau\Entity;
 
 use Doctrine\ORM\EntityManagerInterface;
-//use Reseau\Form\ReseauForm;
 use Reseau\Entity\Abs\Reseau   as ReseauEntity;
 use Reseau\Form\ReservationIpForm;
 use Reseau\Entity\Table\Ip;
@@ -116,6 +115,37 @@ class Ips
      */
     public function enregistrerUneIp(Ip $uneIp){
     	$this->entityManager->persist($uneIp);
+    	$this->entityManager->flush();
+    }
+
+    /**
+     * Recherche une Ip selon son Id
+     *
+     * @param integer $id
+     * @return Reseau\Entity\View\Ip
+     */
+    public function rechercherUneIpSelonId($id){
+    	$ips = $this->entityManager->getRepository('Reseau\Entity\Table\Ip');
+    	return $ips->find($id);
+    }
+    /**
+     * Recherche une Ip selon son Id En mode Lecture seule
+     *
+     * @param integer $id
+     * @return Reseau\Entity\View\Ip
+     */
+    public function rechercherUneIpSelonIdEnLectureSeule($id){
+    	$ips = $this->entityManager->getRepository('Reseau\Entity\View\Ip');
+    	return $ips->find($id);
+    }
+
+    /**
+     * Supprime une Ip
+     *
+     * @param IpEntity $reseau
+     */
+    public function supprimerUneIp(IpEntity $ip){
+    	$this->entityManager->remove($ip);
     	$this->entityManager->flush();
     }
 
