@@ -208,12 +208,47 @@ class IndexController extends AbstractActionController
 			$this->flashMessenger()->addSuccessMessage($message);
 			return $this->redirect()->toRoute('reseau');
 		}elseif($confirmation == 2){
-			$message = sprintf($this->getTranslatorHelper()->translate("Annulation demandée. Le réseau %s nà pas été supprimé", 'iptrevise'),$unReseau->getCIDR());
+			$message = sprintf($this->getTranslatorHelper()->translate("Annulation demandée. Le réseau %s n'a pas été supprimé", 'iptrevise'),$unReseau->getCIDR());
 			$this->flashMessenger()->addInfoMessage($message);
 			return $this->redirect()->toRoute('reseau');
 		}
 
 		return new ViewModel(array('reseau' => $unReseau));
+
+    }
+	/**
+     * Action de suppression d'une ip
+	 * @return \Zend\Http\PhpEnvironment\Response|Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>|\Zend\View\Model\ViewModel
+	 */
+    public function supprimerIpAction(){
+    	$unReseau = $this->getReseauFromUrl();
+    	if ($unReseau instanceof Response){
+    		//Redirection
+    		return $unReseau;
+    	}
+
+    	$uneIp = $this->getIpFromUrl(true);
+    	if ($uneIp instanceof Response){
+    		//Redirection
+    		return $uneIp;
+    	}
+    	$confirmation = (int) $this->params()->fromRoute('confirmation', 0);
+
+    	if($confirmation == 1){
+    		$this->getIpService()->supprimerUneIp($uneIp);
+    		$message = sprintf($this->getTranslatorHelper()->translate("Adresse IP %s supprimée avec succès", 'iptrevise'),long2ip($uneIp->getIp()));
+    		$this->flashMessenger()->addSuccessMessage($message);
+    		return $this->redirect()->toRoute('reseau',array('action'=>'consulter','reseau'=>$unReseau->getId()));
+    	}elseif($confirmation == 2){
+    		$message = sprintf($this->getTranslatorHelper()->translate("Annulation demandée. L'adresse IP %s n'a pas été supprimée", 'iptrevise'),long2ip($uneIp->getIp()));
+    		$this->flashMessenger()->addInfoMessage($message);
+    		return $this->redirect()->toRoute('reseau',array('action'=>'consulter','reseau'=>$unReseau->getId()));
+    	}
+
+    	return new ViewModel(array(
+    			'unReseau' => $unReseau,
+    			'uneIp'	 => $uneIp,
+    	));
 
     }
 
@@ -336,6 +371,34 @@ class IndexController extends AbstractActionController
     		return $this->redirect()->toRoute('reseau');
     	}
     	return $unReseau;
+    }
+
+    /**
+     *
+     * @return unknown
+     */
+    protected function getIpFromUrl($writable = false){
+    	$id = (int) $this->params()->fromRoute('ip', 0);
+
+    	if ($id == 0) {
+    		$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Identifiant Ip invalide', 'iptrevise'));
+    		return $this->redirect()->toRoute('reseau');
+    	}
+
+    	$ipService = $this->getIpService();
+    	if ($writable){
+    		//recherche d'une table
+    		$rechercherUneIpSelonId = 'rechercherUneIpSelonId';
+    	}else{
+    		//recherche d'une vue
+    		$rechercherUneIpSelonId = 'rechercherUnIpSelonIdEnLectureSeule';
+    	}
+    	$uneIp = $ipService->$rechercherUneIpSelonId($id);
+    	if (empty($uneIp)){
+    		$this->flashMessenger()->addWarningMessage($this->getTranslatorHelper()->translate('Le réseau sélectionné n\'a pas été trouvé ou n\'existe plus', 'iptrevise'));
+    		return $this->redirect()->toRoute('reseau');
+    	}
+    	return $uneIp;
     }
 
 }
