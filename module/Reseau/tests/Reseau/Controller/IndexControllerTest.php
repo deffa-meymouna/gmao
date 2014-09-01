@@ -7,6 +7,7 @@ use CsnUser\Entity\User;
 use CsnUser\Entity\Role;
 use Reseau\Entity\Table\Reseau;
 use Zend\Form\Element\Submit;
+use Zend\Stdlib\Parameters;
 
 class IndexControllerTest extends AbstractHttpControllerTestCase {
 	//Trace error activated
@@ -110,14 +111,18 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertMatchedRouteName ( 'reseau' );
 	}
 	public function testCreerActionInvalidFormIsNotSaved(){
-		$post = array(
+		$post = new Parameters(array(
 				'foo' => 'foobar',
 				'bar' => 'foobar'
-		);
+		));
 		$this->mockLogin('technician');
-		$this->mockForm(false);
+		//$this->mockForm(false);
 		$this->mockReseauService();
-		$this->dispatch ( '/reseau/creer', 'POST', $post );
+		$request = $this->getRequest();
+		$request->setMethod('POST');
+		$request->setPost($post);
+
+		$this->dispatch ( '/reseau/creer' );
 
 		//@FIXME status 500 insteadof 200 ! Why ?
 		$this->assertResponseStatusCode ( 200 );
