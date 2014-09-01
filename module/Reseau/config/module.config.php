@@ -10,10 +10,11 @@ return array(
             'reseau' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/reseau[/:action][/:reseau][/:confirmation]',
+                    'route' => '/reseau[/:action][/:reseau][/:ip][/:confirmation]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                     	'reseau' => '[0-9]*',
+                    	'ip'     => '[0-9]*',
                     	'confirmation' => '[0-2]',
                     ),
                     'defaults' => array(

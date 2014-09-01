@@ -11,7 +11,7 @@
 ?>
 <div class="row text-justify">
 	<div class="col-sm-6">
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h2 class="panel-title">
 					<?php echo $this->translate('Généralités');?>
@@ -127,11 +127,13 @@
 			</td>
 			<td headers="action">
 				<div class="btn-group">
-					<a class="btn btn-default btn-xs" href="#"
+					<a class="btn btn-default btn-xs"
+						href="<?php echo $this->url('reseau',array('action' => 'associerIp', 'reseau' => $this->unReseau->getId(), 'ip' => $ip->getId()));?>"
 						title="<?php echo $this->escapehtmlattr($this->translate('Associer à une machine'));?>">
 						<i class="fa fa-link"></i>
 					</a>
-					<a class="btn btn-danger btn-xs" href="#"
+					<a class="btn btn-danger btn-xs"
+						href="<?php echo $this->url('reseau',array('action' => 'supprimerIp', 'reseau' => $this->unReseau->getId(), 'ip' => $ip->getId()));?>"
 						title="<?php echo $this->escapehtmlattr($this->translate('Supprimer cette adresse Ip'));?>">
 						<i class="fa fa-trash-o"></i>
 					</a>
