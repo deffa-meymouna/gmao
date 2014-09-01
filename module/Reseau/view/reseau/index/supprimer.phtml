@@ -18,8 +18,8 @@
 			</div>
 			<div class="panel-footer text-right">
 				<div class="btn-group">
-					<a href="<?php echo $this->url('reseau',array('action'=>'supprimer','reseau'=>$this->reseau->getId(),'confirmation'=>1));?>" title="" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Supprimer</a>
-					<a href="<?php echo $this->url('reseau',array('action'=>'supprimer','reseau'=>$this->reseau->getId(),'confirmation'=>2));?>" title="" class="btn btn-default"><i class="fa fa-reply fa-fw"></i>&nbsp;Annuler</a>
+					<a href="<?php echo $this->url('reseau',array('action'=>'supprimer','reseau'=>$this->reseau->getId(),'ip'=>0, 'confirmation'=>1));?>" title="" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Supprimer</a>
+					<a href="<?php echo $this->url('reseau',array('action'=>'supprimer','reseau'=>$this->reseau->getId(),'ip'=>0, 'confirmation'=>2));?>" title="" class="btn btn-default"><i class="fa fa-reply fa-fw"></i>&nbsp;Annuler</a>
 				</div>
 			</div>
 		</div>
