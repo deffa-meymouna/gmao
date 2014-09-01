@@ -41,7 +41,7 @@ return array (
 				'changefreq' => 'weekly',
 				'pages' => array (
 					array (
-						'icon' => 'eye',
+						'icon' => 'sitemap',
 						'label' => 'Listing des réseaux',
 						'title' => 'Listing complet des réseaux',
 						'route' => 'reseau',
@@ -61,13 +61,13 @@ return array (
 						'privilege' => 'creer',
 					),
 					array (
-						'icon' => 'globe',
-						'label' => 'Sous-Exemple 1.2',
-						'title' => 'Editez cette section 1.1',
-						'route' => 'application',
+						'icon' => 'desktop',
+						'label' => 'Listing des machines',
+						'title' => 'Listing complet des machines',
+						'route' => 'machine',
 						'priority' => 0.7,
 						'changefreq' => 'weekly',
-						'action' => 'exemple2'
+						'action' => 'index'
 					),
 					array (
 						'icon' => 'code',
@@ -78,7 +78,7 @@ return array (
 						'changefreq' => 'daily',
 						'action' => 'suivre'
 					),
-					array (
+					/* array (
 						'icon' => 'phone',
 						'label' => 'Contactez nous !',
 						'title' => 'Accéder au formulaire de contact',
@@ -86,7 +86,7 @@ return array (
 						'priority' => 0.3,
 						'changefreq' => 'monthly',
 						'action' => 'contact'
-					)
+					)*/
 				)
 			),
 			array(

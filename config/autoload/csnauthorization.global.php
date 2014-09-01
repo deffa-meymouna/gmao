@@ -47,6 +47,13 @@ return array(
         			'index'	=>	'member',
         			'all'	=>	'technician',
         		),
+        		/**
+        		 * IP-Trevise
+        		 */
+        		'Machine\Controller\Index' => array(
+        				'index'	=>	'member',
+        				'all'	=>	'technician',
+        		),
                 /**
                  *  ACL for CsnCms articles
                  */
