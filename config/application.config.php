@@ -11,7 +11,6 @@ return array(
     	'Cerbere',
     	'TwbBundle',
     	'Reseau',
-    	'Machine'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
