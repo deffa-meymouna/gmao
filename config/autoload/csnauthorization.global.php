@@ -44,13 +44,14 @@ return array(
             	 * IP-Trevise
             	 */
         		'Reseau\Controller\Index' => array(
-        			'index'	=>	'member',
-        			'all'	=>	'technician',
+        			'index'		=>	'member',
+        			'consulter' =>	'member',
+        			'all'		=>	'technician',
         		),
         		/**
         		 * IP-Trevise
         		 */
-        		'Machine\Controller\Index' => array(
+        		'Reseau\Controller\Machine' => array(
         				'index'	=>	'member',
         				'all'	=>	'technician',
         		),

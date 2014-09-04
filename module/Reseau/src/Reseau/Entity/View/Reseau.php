@@ -26,9 +26,9 @@ class Reseau extends ReseauAbstract
     /**
      * @var string
      *
-     * @ORM\Column(name="mip_quantite", type="integer")
+     * @ORM\Column(name="mac_quantite", type="integer")
      */
-    protected $mip_quantite;
+    protected $mac_quantite;
 
     /**
      * @var string
@@ -49,6 +49,14 @@ class Reseau extends ReseauAbstract
 	 */
 	public function getIpPourcentageOccupe(){
 		return $this->ip_quantite / $this->getIpTheoriquementDisponible() * 100;
+	}
+
+	/**
+	 *
+	 * @return number
+	 */
+	public function getQuantiteMachine(){
+		return $this->mac_quantite;
 	}
 
 }

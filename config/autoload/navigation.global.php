@@ -65,6 +65,8 @@ return array (
 						'label' => 'Listing des machines',
 						'title' => 'Listing complet des machines',
 						'route' => 'machine',
+						'action'=> 'index',
+						'resource' => 'Reseau\Controller\Machine',
 						'priority' => 0.7,
 						'changefreq' => 'weekly',
 						'action' => 'index'
