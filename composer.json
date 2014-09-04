@@ -17,9 +17,6 @@
     "url" : "https://github.com/neilime/zf2-twb-bundle"
   }, {
     "type" : "vcs",
-    "url" : "https://github.com/Alexandre-T/zend-bootstrap"
-  }, {
-    "type" : "vcs",
     "url" : "https://github.com/Alexandre-T/cerbere"
   }, {
     "type" : "vcs",
@@ -34,7 +31,7 @@
     "type" : "vcs",
     "url" : "https://github.com/Jasig/phpCAS"
   } ],
-  "keywords" : [ "gmao", "equipement", "dynamique", "route", "CEREMA" ],
+  "keywords" : [ "ip", "trevise", "adresse", "route", "CEREMA" ],
   "license" : "Apache License v2",
   "homepage" : "http://www.at-it-fr/"
 }
