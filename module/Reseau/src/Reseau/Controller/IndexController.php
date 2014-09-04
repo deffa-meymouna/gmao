@@ -85,13 +85,14 @@ class IndexController extends AbstractActionController
     		//Redirection
     		return $unReseau;
     	}
-
+		$createur  = $unReseau->getCreateur();
     	$ipService = $this->getIpService();
 
     	$ips = $ipService->rechercherLesIPDuReseauSelonId($unReseau);
 
     	$viewModel = new ViewModel(array(
     		'unReseau' => $unReseau,
+    		'createur' => $createur,
     		'ips'	   => $ips
     	));
     	return $viewModel;
@@ -172,6 +173,7 @@ class IndexController extends AbstractActionController
             if($form->isValid()) {
             	$reseauService = $this->getReseauService();
 				$unReseau = $reseauService->creerUnNouveauReseau($form);
+				$unReseau->setCreateur($this->identity());
 				//Enregistrement
 				$reseauService->enregistrerUnReseau($unReseau);
                 $this->flashMessenger()->addSuccessMessage($this->getTranslatorHelper()->translate('Le réseau a été créé avec succès', 'iptrevise'));

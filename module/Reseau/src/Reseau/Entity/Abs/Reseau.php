@@ -40,7 +40,7 @@ abstract class Reseau
     /**
      *
      * @var User
-     * @ORM\ManyToOne(targetEntity="CsnUser\Entity\User")
+     * @ORM\ManyToOne(targetEntity="\CsnUser\Entity\User")
      * @ORM\JoinColumn(name="usr_id", referencedColumnName="id")
      */
     protected $createur;
@@ -245,7 +245,7 @@ abstract class Reseau
 	/**
 	 * @param User $createur
 	 */
-	public function setCreateur(User $createur) {
+	public function setCreateur(User $createur) {
 		$this->createur = $createur;
 	}
 
