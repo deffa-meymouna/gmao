@@ -41,7 +41,7 @@ class ReservationIpFilter extends InputFilter
 
         $this->add(array(
             'name' => 'description',
-            'required' => true,
+            'required' => false,
             'filters' => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
