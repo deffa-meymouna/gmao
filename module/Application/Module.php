@@ -10,6 +10,7 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Validator\AbstractValidator;
 
 class Module {
 	public function onBootstrap(MvcEvent $e) {
@@ -22,6 +23,12 @@ class Module {
 		} else {
 			$translator->setLocale ( 'fr_FR' );
 		}
+		$translator->addTranslationFile(
+				'phpArray',
+				__DIR__ . '/../../vendor/zendframework/zendframework/resources/languages/fr/Zend_Validate.php',
+				'default'
+		);
+		AbstractValidator::setDefaultTranslator($translator);
 	}
 	public function getConfig() {
 		return include __DIR__ . '/config/module.config.php';
