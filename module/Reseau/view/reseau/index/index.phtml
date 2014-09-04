@@ -20,17 +20,26 @@
 	<div class="col-sm-offset-3 col-sm-6">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2 class="panel-title"><i class="fa fa-info-circle"></i>&nbsp;Aucun réseau</h2>
+				<h2 class="panel-title">
+					<i class="fa fa-info-circle"></i>
+					<?php echo $this->escapehtml($this->translate('Aucun réseau'))?>
+				</h2>
 			</div>
 			<div class="panel-body">
 				<ul class="fa-ul">
-					<li>Aucun réseau n'a encore été référencé dans l'application</li>
+					<li>
+						<?php echo $this->escapehtml($this->translate("Aucun réseau n'a encore été référencé dans l'application !"))?>
+					</li>
 				</ul>
 			</div>
-			<div class="panel-footer">
-				<ul class="btn-grp">
-					<li class="btn btn-default"><i class="fa fa-plus fa-fw"></i>&nbsp;Créer un nouveau réseau</li>
-				</ul>
+			<div class="panel-footer text-center">
+				<a
+					class="btn btn-primary"
+					href="<?php echo $this->url('reseau',array('action' => 'creer'));?>"
+					title="<?php echo $this->escapehtmlattr($this->translate('Créer un nouveau réseau'))?>">
+					<i class="fa fa-sitemap"></i>
+					<?php echo $this->escapehtml($this->translate('Créer un nouveau réseau'))?>
+				</a>
 			</div>
 		</div>
 	</div>
