@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  AT - PG9                                      */
-/* Date de création :  24/07/2014 17:36:02                      */
+/* Date de création :  04/09/2014 12:11:20                      */
 /*==============================================================*/
 
 
@@ -61,14 +61,119 @@ comment on domain d_masque is
 'Masque d''une adresse IP';
 
 /*==============================================================*/
+/* Table : friends                                              */
+/*==============================================================*/
+create table friends (
+   user_id              int4                 not null,
+   friend_id            int4                 not null
+)
+without oids;
+
+-- Définit la propriété de la table
+alter table friends owner to usr_iptrevise_proprietaire
+;
+/*==============================================================*/
+/* Table : language                                             */
+/*==============================================================*/
+create table language (
+   id                   SERIAL not null,
+   name                 varchar(15)          not null,
+   abbreviation         varchar(10)          not null
+)
+without oids;
+
+-- Définit la propriété de la table
+alter table language owner to usr_iptrevise_proprietaire
+;
+/*==============================================================*/
+/* Table : privilege                                            */
+/*==============================================================*/
+create table privilege (
+   id                   SERIAL not null,
+   role_id              int4                 null,
+   is_allowed           bool                 not null,
+   resource             varchar(100)         not null,
+   privilege            varchar(100)         not null
+)
+without oids;
+
+-- Définit la propriété de la table
+alter table privilege owner to usr_iptrevise_proprietaire
+;
+/*==============================================================*/
+/* Table : question                                             */
+/*==============================================================*/
+create table question (
+   id                   SERIAL not null,
+   question             varchar(50)          not null
+)
+without oids;
+
+-- Définit la propriété de la table
+alter table question owner to usr_iptrevise_proprietaire
+;
+/*==============================================================*/
+/* Table : resource                                             */
+/*==============================================================*/
+create table resource (
+   id                   SERIAL not null,
+   name                 varchar(100)         not null
+)
+without oids;
+
+-- Définit la propriété de la table
+alter table resource owner to usr_iptrevise_proprietaire
+;
+/*==============================================================*/
+/* Table : role                                                 */
+/*==============================================================*/
+create table role (
+   id                   SERIAL not null,
+   name                 varchar(30)          not null,
+   description          varchar(100)         not null
+)
+without oids;
+
+-- Définit la propriété de la table
+alter table role owner to usr_iptrevise_proprietaire
+;
+/*==============================================================*/
+/* Table : roles_parents                                        */
+/*==============================================================*/
+create table roles_parents (
+   role_id              int4                 not null,
+   parent_id            int4                 not null
+)
+without oids;
+
+-- Définit la propriété de la table
+alter table roles_parents owner to usr_iptrevise_proprietaire
+;
+/*==============================================================*/
+/* Table : state                                                */
+/*==============================================================*/
+create table state (
+   id                   SERIAL not null,
+   state                VARCHAR(50)          not null
+)
+without oids;
+
+-- Définit la propriété de la table
+alter table state owner to usr_iptrevise_proprietaire
+;
+/*==============================================================*/
 /* Table : te_ip_ip                                             */
 /*==============================================================*/
 create table te_ip_ip (
    ip_id                SERIAL not null,
    res_id               INT4                 not null,
+   mac_id               INT4                 null,
+   usr_id               int4                 not null,
    ip_adresse           d_ip                 not null,
    ip_lib               d_lib                not null,
-   ip_des               d_des                null
+   ip_des               d_des                null,
+   ip_interface         d_lib                null,
+   ip_nat               d_bool               not null default false
 );
 
 comment on table te_ip_ip is
@@ -80,6 +185,9 @@ comment on column te_ip_ip.ip_id is
 comment on column te_ip_ip.res_id is
 'Identifiant du réseau';
 
+comment on column te_ip_ip.mac_id is
+'Identifiant de la machine';
+
 comment on column te_ip_ip.ip_adresse is
 'Adresse IP';
 
@@ -89,6 +197,12 @@ comment on column te_ip_ip.ip_lib is
 comment on column te_ip_ip.ip_des is
 'Description de l''adresse IP';
 
+comment on column te_ip_ip.ip_interface is
+'Nom de l''interface';
+
+comment on column te_ip_ip.ip_nat is
+'Interface natée';
+
 -- Définit la propriété de la table
 alter table te_ip_ip owner to usr_iptrevise_proprietaire
 ;
@@ -97,6 +211,8 @@ alter table te_ip_ip owner to usr_iptrevise_proprietaire
 /*==============================================================*/
 create table te_machine_mac (
    mac_id               SERIAL not null,
+   ip_id                int4                 null,
+   usr_id               int4                 not null,
    mac_lib              d_lib                not null,
    mac_des              d_des                null,
    mac_interface        d_entier_court       null,
@@ -108,6 +224,12 @@ comment on table te_machine_mac is
 
 comment on column te_machine_mac.mac_id is
 'Identifiant de la machine';
+
+comment on column te_machine_mac.ip_id is
+'Identifiant de l''entité IP';
+
+comment on column te_machine_mac.usr_id is
+'Créateur de la machine';
 
 comment on column te_machine_mac.mac_lib is
 'Libellé de la machine';
@@ -129,6 +251,7 @@ alter table te_machine_mac owner to usr_iptrevise_proprietaire
 /*==============================================================*/
 create table te_reseau_res (
    res_id               SERIAL not null,
+   usr_id               int4                 not null,
    res_lib              d_lib                not null,
    res_des              d_des                null,
    res_ip               d_ip                 not null,
@@ -142,6 +265,9 @@ comment on table te_reseau_res is
 
 comment on column te_reseau_res.res_id is
 'Identifiant du réseau';
+
+comment on column te_reseau_res.usr_id is
+'Identifiant du créateur';
 
 comment on column te_reseau_res.res_lib is
 'Libellé du réseau';
@@ -165,30 +291,70 @@ comment on column te_reseau_res.res_passerelle is
 alter table te_reseau_res owner to usr_iptrevise_proprietaire
 ;
 /*==============================================================*/
-/* Table : tj_machine_ip                                        */
+/* Table : "user"                                               */
 /*==============================================================*/
-create table tj_machine_ip (
-   ip_id                INT4                 not null,
-   mac_id               INT4                 not null,
-   interface            d_entier_court       null,
-   nat                  d_bool               null
-);
-
-comment on table tj_machine_ip is
-'Table de jointure entre les machines et les ips. Cette table liste donc l''ensemble des adresses ip de chaque machine';
-
-comment on column tj_machine_ip.ip_id is
-'Identifiant de l''entité IP';
-
-comment on column tj_machine_ip.mac_id is
-'Identifiant de la machine';
-
-comment on column tj_machine_ip.interface is
-'Numéro de l''interface (optionnel)';
-
-comment on column tj_machine_ip.nat is
-'Est à vrai si cette adresse ip est naté';
+create table "user" (
+   id                   SERIAL not null,
+   role_id              int4                 not null,
+   language_id          int4                 not null,
+   state_id             int4                 not null,
+   question_id          int4                 not null,
+   username             varchar(30)          not null,
+   first_name           varchar(40)          null,
+   last_name            varchar(40)          null,
+   email                varchar(60)          not null,
+   password             varchar(60)          not null,
+   answer               varchar(100)         not null,
+   picture              varchar(255)         null,
+   registration_date    timestamp            null,
+   registration_token   varchar(32)          null,
+   email_confirmed      bool                 not null
+)
+without oids;
 
 -- Définit la propriété de la table
-alter table tj_machine_ip owner to usr_iptrevise_proprietaire
+alter table "user" owner to usr_iptrevise_proprietaire
+;
+/*==============================================================*/
+/* Vue : ve_ip_ip                                               */
+/*==============================================================*/
+create or replace view ve_ip_ip as
+select 	res.res_id,res_lib, res_des, res_ip, res_masque, res_couleur, res_passerelle, 
+	usr.username, usr.email, usr.first_name,usr.last_name,
+	count(distinct ip.ip_id) as ip_quantite, 
+	count(distinct mac.mac_id) as mip_quantite 
+
+from te_reseau_res as res
+inner join "user" as usr on usr.id = res.usr_id
+left outer join te_ip_ip as ip on ip.res_id = res.res_id
+left outer join te_machine_mac as mac ON mac.mac_id = ip.mac_id
+
+group by res.res_id,res_lib,res_des,res_ip,res_masque,res_couleur,res_passerelle,usr.username, usr.email, usr.first_name,usr.last_name
+order by res_ip asc, res_masque desc
+;
+
+comment on view ve_ip_ip is
+'Vue des IPs avec jointure externe vers les machines associées s''il y en a';
+
+-- Définition du propriétaire de la vue
+alter table ve_ip_ip owner to usr_iptrevise_proprietaire
+;
+/*==============================================================*/
+/* Vue : ve_reseau_res                                          */
+/*==============================================================*/
+create or replace view ve_reseau_res as
+SELECT  res.res_id, res.res_lib, res.res_des, res.res_ip, res.res_masque, res.res_couleur, res.res_passerelle, 
+        usr.username, usr.email, usr.first_name,usr.last_name,
+        count(DISTINCT ip.ip_id) AS ip_quantite, count(DISTINCT ip.mac_id) AS mac_quantite
+   FROM te_reseau_res res
+   inner join "user" as usr on usr.id = res.usr_id
+   LEFT JOIN te_ip_ip ip ON ip.res_id = res.res_id   
+  GROUP BY res.res_id, res.res_lib, res.res_des, res.res_ip, res.res_masque, res.res_couleur, res.res_passerelle, usr.username, usr.email, usr.first_name,usr.last_name
+  order by res.res_ip;
+
+comment on view ve_reseau_res is
+'Vue permettant de lister les réseaux et possédant des informations importantes';
+
+-- Définition du propriétaire de la vue
+alter table ve_reseau_res owner to usr_iptrevise_proprietaire
 ;
