@@ -111,6 +111,7 @@
 			<th id="number">#</th>
 			<th id="ips_adresse"><?php echo $this->escapehtml($this->translate('Adresse IP'));?></th>
 			<th id="ips_libelle"><?php echo $this->escapehtml($this->translate('Informations'));?></th>
+			<th id="ips_libelle"><?php echo $this->escapehtml($this->translate('Référencé par'));?></th>
 			<th id="ips_machine"><?php echo $this->escapehtml($this->translate('Machine'));?></th>
 			<th id="action"></th>
 		</tr>
@@ -121,6 +122,7 @@
 			<td headers="number"><?php echo $this->escapehtml($key + 1);?></td>
 			<td headers="ips_adresse"><?php echo $this->ip($ip->getIp());?></td>
 			<td headers="ips_libelle"><?php echo $this->escapehtml($ip->getLibelle());?></td>
+			<td headers="ips_createur"><?php echo $this->escapehtml($ip->getCreateur()->getUsername());?></td>
 			<td headers="ips_machine">
 				<?php if (null === $ip->getMachineId()):?>
 					<em><?php echo $this->escapehtml($this->translate('Aucune machine associée'));?></em>
@@ -150,6 +152,7 @@
 			<th headers="number">#</th>
 			<th headers="ips_adresse"><?php echo $this->escapehtml($this->translate('Adresse IP'));?></th>
 			<th headers="ips_libelle"><?php echo $this->escapehtml($this->translate('Informations'));?></th>
+			<th headers="ips_libelle"><?php echo $this->escapehtml($this->translate('Référencé par'));?></th>
 			<th headers="ips_machine"><?php echo $this->escapehtml($this->translate('Machine'));?></th>
 			<th headers="action"></th>
 		</tr>

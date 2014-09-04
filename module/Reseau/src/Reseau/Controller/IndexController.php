@@ -117,6 +117,7 @@ class IndexController extends AbstractActionController
             if($reservationIpForm->isValid()) {
 				//Création de l'Entité IP
             	$uneIp = $ipService->creerUneNouvelleIp($reservationIpForm,$unReseau);
+            	$uneIp->setCreateur($this->identity());
             	if ($ipService->isUnique($uneIp,$unReseau)){
             		//Enregistrement
             		$ipService->enregistrerUneIp($uneIp);
