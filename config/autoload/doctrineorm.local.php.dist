@@ -1,6 +1,11 @@
 <?php
 return array(
     'doctrine' => array(
+        'configuration' => array(
+            'orm_default' => array(
+                'sql_logger' => 'ZF2DoctrineSQLLogger',
+            ),
+        ),
         'connection' => array(
             // default connection name
             'orm_default' => array(
