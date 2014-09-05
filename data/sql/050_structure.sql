@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  AT - PG9                                      */
-/* Date de création :  04/09/2014 12:11:20                      */
+/* Date de création :  05/09/2014 14:04:25                      */
 /*==============================================================*/
 
 
@@ -319,19 +319,10 @@ alter table "user" owner to usr_iptrevise_proprietaire
 /* Vue : ve_ip_ip                                               */
 /*==============================================================*/
 create or replace view ve_ip_ip as
-select 	res.res_id,res_lib, res_des, res_ip, res_masque, res_couleur, res_passerelle, 
-	usr.username, usr.email, usr.first_name,usr.last_name,
-	count(distinct ip.ip_id) as ip_quantite, 
-	count(distinct mac.mac_id) as mip_quantite 
-
-from te_reseau_res as res
-inner join "user" as usr on usr.id = res.usr_id
-left outer join te_ip_ip as ip on ip.res_id = res.res_id
-left outer join te_machine_mac as mac ON mac.mac_id = ip.mac_id
-
-group by res.res_id,res_lib,res_des,res_ip,res_masque,res_couleur,res_passerelle,usr.username, usr.email, usr.first_name,usr.last_name
-order by res_ip asc, res_masque desc
-;
+SELECT ip.ip_id, res_id, ip.usr_id, ip_adresse, ip_lib, ip_des, ip_interface, ip_nat, mac.mac_id, mac.mac_lib, mac.mac_des, mac.mac_interface, mac.mac_type
+   FROM te_ip_ip as ip
+   LEFT JOIN te_machine_mac as mac ON mac.mac_id = ip.mac_id
+  ORDER BY ip.ip_adresse;
 
 comment on view ve_ip_ip is
 'Vue des IPs avec jointure externe vers les machines associées s''il y en a';
@@ -344,12 +335,12 @@ alter table ve_ip_ip owner to usr_iptrevise_proprietaire
 /*==============================================================*/
 create or replace view ve_reseau_res as
 SELECT  res.res_id, res.res_lib, res.res_des, res.res_ip, res.res_masque, res.res_couleur, res.res_passerelle, 
-        usr.username, usr.email, usr.first_name,usr.last_name,
+        res.usr_id, usr.username, usr.email, usr.first_name,usr.last_name,
         count(DISTINCT ip.ip_id) AS ip_quantite, count(DISTINCT ip.mac_id) AS mac_quantite
    FROM te_reseau_res res
    inner join "user" as usr on usr.id = res.usr_id
    LEFT JOIN te_ip_ip ip ON ip.res_id = res.res_id   
-  GROUP BY res.res_id, res.res_lib, res.res_des, res.res_ip, res.res_masque, res.res_couleur, res.res_passerelle, usr.username, usr.email, usr.first_name,usr.last_name
+  GROUP BY res.res_id, res.res_lib, res.res_des, res.res_ip, res.res_masque, res.res_couleur, res.res_passerelle, res.usr_id, usr.username, usr.email, usr.first_name,usr.last_name
   order by res.res_ip;
 
 comment on view ve_reseau_res is
