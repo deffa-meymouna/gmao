@@ -5,16 +5,17 @@
   "require" : {
     "php" : ">=5.3.3",
     "coolcsn/csn-acl-navigation" : "dev-master",
-    "zendframework/zendframework" : "2.2.5",
-    "alexandre-t/zend-bootstrap" : "*@dev",
+    "zendframework/zendframework" : "2.3.1",
+    "neilime/zf2-twb-bundle": "2.3.0",
     "coolcsn/csn-user" : "dev-master",
     "coolcsn/csn-authorization" : "dev-master",
     "alexandre-t/cerbere" : "dev-master",
-    "jasig/phpcas" : "1.3.x-dev"
+    "jasig/phpcas" : "1.3.x-dev",
+    "tburschka/zf2-doctrine-sql-logger": "dev-master"
   },
   "repositories" : [ {
     "type" : "vcs",
-    "url" : "https://github.com/Alexandre-T/zend-bootstrap"
+    "url" : "https://github.com/neilime/zf2-twb-bundle"
   }, {
     "type" : "vcs",
     "url" : "https://github.com/Alexandre-T/cerbere"
@@ -27,6 +28,9 @@
   }, {
     "type" : "vcs",
     "url" : "https://github.com/ghiamar/CsnAuthorization"
+  },  {
+    "type" : "vcs",
+    "url" : "https://github.com/tburschka/zf2-doctrine-sql-logger"
   }, {
     "type" : "vcs",
     "url" : "https://github.com/Jasig/phpCAS"
