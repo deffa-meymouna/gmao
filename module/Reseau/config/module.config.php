@@ -90,6 +90,7 @@ return array (
 				),
 				'invokables' => array (
 						'reseauForm' => 'Reseau\Form\ReseauForm',
+						'machineForm' => 'Reseau\Form\MachineForm',
 						'reseauFilter' => 'Reseau\Form\ReseauFilter',
 						'reservationIpForm' => 'Reseau\Form\ReservationIpForm',
 						'reservationIpFilter' => 'Reseau\Form\ReservationIpFilter'
