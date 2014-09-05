@@ -1,0 +1,56 @@
+<?php $cpt = 0;?>
+<div class="page-header">
+	<div class="btn-grp pull-right">
+		<a class="btn btn-primary" href="<?php echo $this->url('machine',array('action' => 'creer'));?>" title="<?php echo $this->escapehtmlattr($this->translate('Référencer une nouvelle machine'))?>">
+			<i class="fa fa-desktop fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Référencer une nouvelle machine'));?>
+		</a>
+	</div>
+	<h1><?php echo $this->escapehtml($this->translate('Listing des machines référencées'))?></h1>
+</div>
+<?php
+	$flash = $this->flashmessenger();
+	echo $flash->render('error',   array('alert', 'alert-dismissable', 'alert-danger'));
+	echo $flash->render('warning', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('info',    array('alert', 'alert-dismissable', 'alert-info'));
+	echo $flash->render('default', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('success', array('alert', 'alert-dismissable', 'alert-success'));
+?>
+<div class="row text-justify">
+<?php if (empty($this->machines)):?>
+	<div class="col-sm-offset-3 col-sm-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+					<i class="fa fa-info-circle"></i>
+					<?php echo $this->escapehtml($this->translate('Aucune machine'))?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<ul class="fa-ul">
+					<li>
+						<?php echo $this->escapehtml($this->translate("Aucune machine n'a encore été référencée dans l'application !"))?>
+					</li>
+				</ul>
+			</div>
+			<div class="panel-footer text-center">
+				<a
+					class="btn btn-primary"
+					href="<?php echo $this->url('machine',array('action' => 'creer'));?>"
+					title="<?php echo $this->escapehtmlattr($this->translate('Référencer une nouvelle machine'))?>">
+					<i class="fa fa-desktop"></i>
+					<?php echo $this->escapehtml($this->translate('Référencer une nouvelle machine'))?>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<?php else:?>
+<?php foreach ($this->machines as $machine):?>
+<?php //@var Reseau\Entity\View\Machine $machine ?>
+<?php endforeach;?>
+<div class="btn-grp pull-right">
+	<a class="btn btn-primary" href="<?php echo $this->url('machine',array('action' => 'creer'));?>" title="<?php echo $this->escapehtmlattr($this->translate('Référencer une nouvelle machine'))?>">
+		<i class="fa fa-desktop fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Référencer une nouvelle machine'));?>
+	</a>
+</div>
+<?php endif;?>
