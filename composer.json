@@ -10,7 +10,8 @@
     "coolcsn/csn-user" : "dev-master",
     "coolcsn/csn-authorization" : "dev-master",
     "alexandre-t/cerbere" : "dev-master",
-    "jasig/phpcas" : "1.3.x-dev"
+    "jasig/phpcas" : "1.3.x-dev",
+    "tburschka/zf2-doctrine-sql-logger": "dev-master"
   },
   "repositories" : [ {
     "type" : "vcs",
@@ -27,6 +28,9 @@
   }, {
     "type" : "vcs",
     "url" : "https://github.com/ghiamar/CsnAuthorization"
+  },  {
+    "type" : "vcs",
+    "url" : "https://github.com/tburschka/zf2-doctrine-sql-logger"
   }, {
     "type" : "vcs",
     "url" : "https://github.com/Jasig/phpCAS"

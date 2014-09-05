@@ -15,8 +15,15 @@ return array (
 				'factories' => array (
 						'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
 						'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+						'doctrine.sql_logger' => function () {
+							$writer = new Zend\Log\Writer\Stream('data/log/logger_doctrine_sql.log');
+							$logger = new Zend\Log\Logger();
+							$logger->addWriter($writer);
+							return $logger;
+						},
 				)
 		),
+		//Configuration
 		'mantis' => array (
 				//Enter the number project in your Mantis
 				'projectId' => 4,
@@ -24,6 +31,12 @@ return array (
 				'evolutionFilterId' => 2,
 				//Enter the bug filter id
  				'bugFilterId' => 3
+		),
+		'ZF2DoctrineSQLLogger' => array(
+				'entitymanager'     => 'doctrine.entitymanager.orm_default',
+				'logger'            => 'doctrine.sql_logger',
+				'priority'          => Zend\Log\Logger::NOTICE,
+				'log_executiontime' => false,
 		),
 )
 ;
