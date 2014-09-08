@@ -36,7 +36,7 @@ class Machines
      */
     public function listerToutesLesMachines(Paginator $paginator = null){
 
-    	$repository = $this->entityManager->getRepository('Reseau\Entity\Table\Machine');
+    	$repository = $this->entityManager->getRepository('Reseau\Entity\View\Machine');
 
     	if ($paginator){
     		//$adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('Machine')));
