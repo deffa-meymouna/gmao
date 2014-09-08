@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  AT - PG9                                      */
-/* Date de création :  05/09/2014 14:04:25                      */
+/* Date de création :  08/09/2014 15:01:03                      */
 /*==============================================================*/
 
 
@@ -211,7 +211,6 @@ alter table te_ip_ip owner to usr_iptrevise_proprietaire
 /*==============================================================*/
 create table te_machine_mac (
    mac_id               SERIAL not null,
-   ip_id                int4                 null,
    usr_id               int4                 not null,
    mac_lib              d_lib                not null,
    mac_des              d_des                null,
@@ -224,9 +223,6 @@ comment on table te_machine_mac is
 
 comment on column te_machine_mac.mac_id is
 'Identifiant de la machine';
-
-comment on column te_machine_mac.ip_id is
-'Identifiant de l''entité IP';
 
 comment on column te_machine_mac.usr_id is
 'Créateur de la machine';
@@ -329,6 +325,29 @@ comment on view ve_ip_ip is
 
 -- Définition du propriétaire de la vue
 alter table ve_ip_ip owner to usr_iptrevise_proprietaire
+;
+/*==============================================================*/
+/* Vue : ve_machine_mac                                         */
+/*==============================================================*/
+create or replace view ve_machine_mac as
+select mac.mac_id, mac.usr_id, mac.mac_lib, mac.mac_des, mac.mac_interface, mac.mac_type,
+       count(distinct ip.ip_id) as ip_count,
+       count(distinct res.res_id) as res_count,
+       usr.username
+  from te_machine_mac as mac
+ inner join "user" as usr 
+         on usr.id = mac.usr_id
+ left outer join te_ip_ip as ip 
+              on ip.mac_id = mac.mac_id
+ left outer join te_reseau_res as res
+              on res.res_id = ip.res_id
+ group by mac.mac_id, mac.usr_id, mac.mac_lib, mac.mac_des, mac.mac_interface, mac.mac_type,usr.username;
+
+comment on view ve_machine_mac is
+'Vue permettant d''afficher des informations importantes et rapides sur les ips et les réseaux qui la composent ainsi que sur son créateur';
+
+-- Définition du propriétaire de la vue
+alter table ve_machine_mac owner to usr_iptrevise_proprietaire
 ;
 /*==============================================================*/
 /* Vue : ve_reseau_res                                          */

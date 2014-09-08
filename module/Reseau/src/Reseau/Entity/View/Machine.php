@@ -8,7 +8,7 @@
  * @author Alexandre Tranchant <Alexandre.Tranchant@gmail.com>
  */
 
-namespace Reseau\Entity\Table;
+namespace Reseau\Entity\View;
 
 use Doctrine\ORM\Mapping as ORM;
 use Reseau\Entity\Abs\Machine as MachineAbs;
@@ -17,26 +17,38 @@ use Reseau\Entity\Abs\Machine as MachineAbs;
  * Doctrine ORM implementation of Machine entity
  *
  * @ORM\Entity
- * @ORM\Table(name="`te_machine_mac`")
+ * @ORM\Table(name="`ve_machine_mac`")
  */
 class Machine extends MachineAbs
 {
+	/**
+	 * @var Integer
+	 *
+	 * @ORM\Column(name="res_count",type="integer",nullable=true)
+	 */
+	protected $reseauQuantite;
+
+	/**
+	 * @var Integer
+	 *
+	 * @ORM\Column(name="ip_count",type="integer",nullable=true)
+	 */
+	protected $ipQuantite;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_username", type="string", length=32, nullable=false, unique=false)
+     */
+	protected $username;
+
 	public function getReseauCount(){
-		$reseau = array();
-		//@todo add a warning information for optimization !
-		foreach($this->getIps() as $ip){
-			$reseauId = $ip->getReseauId();
-			if (null != $reseauId && !in_array($reseauId,$reseau)){
-				$reseau[]=$reseauId;
-			}
-		}
-		return count($reseau);
+		return $this->reseauQuantite;
 	}
 	public function getIpCount(){
-		//add a debug information for optimization !
-		return $this->getIps()->count();
+		return $this->ipQuantite;
 	}
 	public function getUsername(){
-		return $this->getCreateur()->getUsername();
+		return $this->username;
 	}
+
 }

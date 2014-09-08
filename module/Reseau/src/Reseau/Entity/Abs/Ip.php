@@ -47,7 +47,7 @@ abstract class Ip
     /**
      *
      * @var Machine
-     * @ORM\ManyToOne(targetEntity="\Reseau\Entity\Table\Machine")
+     * @ORM\ManyToOne(targetEntity="\Reseau\Entity\Table\Machine",inversedBy="ips")
      * @ORM\JoinColumn(name="mac_id", referencedColumnName="mac_id")
      */
     protected $machine;

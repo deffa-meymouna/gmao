@@ -54,6 +54,7 @@
 			<th id="machineInterface">Interfaces</th>
 			<th id="machineCreateur">Référencée par</th>
 			<th id="machineIp">IPs</th>
+			<th id="machineReseau">Réseaux</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -66,7 +67,8 @@
 			<td headers="machineType"><?php echo $this->escapehtml($machine->getType());?></td>
 			<td headers="machineInterface"><?php echo $this->escapehtml($machine->getInterface());?></td>
 			<td headers="machineCreateur"><?php echo $this->escapehtml($machine->getCreateur()->getUsername());?></td>
-			<td headers="machineIp"><?php echo count(($machine->getIps()));?></td>
+			<td headers="machineIp"><?php echo $this->escapehtml($machine->getIpCount());?></td>
+			<td headers="machineReseau"><?php echo $this->escapehtml($machine->getIpCount());?></td>
 		</tr>
 		<?php endforeach;?>
 	</tbody>
@@ -78,6 +80,7 @@
 			<th headers="machineInterface">Interfaces</th>
 			<th headers="machineCreateur">Référencée par</th>
 			<th headers="machineIp">IPs</th>
+			<th headers="machineReseau">Réseaux</th>
 		</tr>
 	</tfoot>
 </table>

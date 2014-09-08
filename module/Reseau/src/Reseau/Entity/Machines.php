@@ -11,6 +11,7 @@
 namespace Reseau\Entity;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Zend\Paginator\Paginator;
 use Reseau\Entity\Abs\Reseau   as ReseauEntity;
 use Reseau\Entity\Table\Machine as MachineTable;
 use Reseau\Form\MachineForm;
@@ -33,9 +34,24 @@ class Machines
      * Liste toutes les machines
      * @return
      */
-    public function listerToutesLesMachines(){
-    	$vue = $this->entityManager->getRepository('Reseau\Entity\Table\Machine');
-    	return $vue->findall();
+    public function listerToutesLesMachines(Paginator $paginator = null){
+
+    	$repository = $this->entityManager->getRepository('Reseau\Entity\Table\Machine');
+
+    	if ($paginator){
+    		//$adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('Machine')));
+    		//$paginator = new Paginator ($adapter);
+    		//$paginator->setDefaultItemCountPerPage(10);
+    		//$page = (int)$this->params()->fromQuery('page');
+    		//if($page) $paginator->setCurrentPageNumber($page);
+    		//$view->setVariable('paginator',$paginator);
+    	}
+    	/*$query = $this->entityManager->createQueryBuilder()
+    		->from('Machine')
+    		->innerJoin('Ips')
+    		->addSelect('COUNT(Machine) as quantiteMachine')
+    		->addGroupBy('Machine.id');*/
+    	return $repository->findall();
     }
     /**
      * Service de création d'une Entité Machine à partir d'un formulaire valide
