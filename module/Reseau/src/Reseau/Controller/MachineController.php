@@ -5,6 +5,7 @@ namespace Reseau\Controller;
 use Reseau\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Reseau\Service\Factory\MachineService;
+use Reseau\Form\MachineFilter;
 
 /**
  * MachineController

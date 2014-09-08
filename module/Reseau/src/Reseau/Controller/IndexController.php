@@ -10,7 +10,7 @@
 
 namespace Reseau\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Reseau\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Reseau\Form\ReseauFilter;
 use Zend\Http\PhpEnvironment\Response;

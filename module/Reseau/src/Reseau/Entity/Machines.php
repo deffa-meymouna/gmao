@@ -11,9 +11,9 @@
 namespace Reseau\Entity;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Reseau\Form\ReseauForm;
-use Reseau\Entity\Table\Reseau as ReseauTable;
 use Reseau\Entity\Abs\Reseau   as ReseauEntity;
+use Reseau\Entity\Table\Machine as MachineTable;
+use Reseau\Form\MachineForm;
 
 class Machines
 {
@@ -44,8 +44,12 @@ class Machines
      * @param MachineForm $form
      * @return Machine
      */
-    public function creerUnNouveauReseau(MachineForm $form){
+    public function creerUneNouvelleMachine(MachineForm $form){
     	$nouvelleMachine = new MachineTable();
+		$nouvelleMachine->setDescription($form->get('description')->getValue());
+		$nouvelleMachine->setLibelle($form->get('libelle')->getValue());
+		$nouvelleMachine->setInterface($form->get('interface')->getValue());
+		$nouvelleMachine->setType($form->get('type')->getValue());
 		return $nouvelleMachine;
     }
 	/**
