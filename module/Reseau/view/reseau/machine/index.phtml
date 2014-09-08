@@ -55,6 +55,7 @@
 			<th id="machineCreateur">Référencée par</th>
 			<th id="machineIp">IPs</th>
 			<th id="machineReseau">Réseaux</th>
+			<th id="actions"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -69,6 +70,20 @@
 			<td headers="machineCreateur"><?php echo $this->escapehtml($machine->getCreateur()->getUsername());?></td>
 			<td headers="machineIp"><?php echo $this->escapehtml($machine->getIpCount());?></td>
 			<td headers="machineReseau"><?php echo $this->escapehtml($machine->getIpCount());?></td>
+			<td headers="action">
+				<div class="btn-group">
+					<a class="btn btn-default btn-xs"
+					    href="<?php echo $this->url('machine',array('action'=>'consulter', 'machine' => $machine->getId()));?>"
+					    title="<?php echo $this->escapehtmlattr($this->translate('Consulter cette machine'));?>">
+						<i class="fa fa-search"></i>
+					</a>
+					<a class="btn btn-danger btn-xs"
+					    href="<?php echo $this->url('machine',array('action'=>'supprimer', 'machine' => $machine->getId()));?>"
+					    title="<?php echo $this->escapehtmlattr($this->translate('Supprimer cette machine'));?>">
+					    <i class="fa fa-trash-o "></i>
+					</a>
+				</div>
+			</td>
 		</tr>
 		<?php endforeach;?>
 	</tbody>
