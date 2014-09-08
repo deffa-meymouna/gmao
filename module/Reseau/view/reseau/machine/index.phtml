@@ -45,9 +45,42 @@
 	</div>
 </div>
 <?php else:?>
-<?php foreach ($this->machines as $machine):?>
-<?php //@var Reseau\Entity\View\Machine $machine ?>
-<?php endforeach;?>
+<table class="table table-hover table-striped table-bordered">
+	<thead>
+		<tr>
+			<th id="number">#</th>
+			<th id="machineLibelle">Machine</th>
+			<th id="machineType">Type</th>
+			<th id="machineInterface">Interfaces</th>
+			<th id="machineCreateur">Référencée par</th>
+			<th id="machineIp">IPs</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($this->machines as $machine):?>
+		<?php //@var Reseau\Entity\Table\Machine $machine ?>
+		<?php $cpt++;?>
+		<tr>
+			<td headers="number"><?php echo $cpt;?></td>
+			<td headers="machineLibelle"><?php echo $this->escapehtml($machine->getLibelle());?></td>
+			<td headers="machineType"><?php echo $this->escapehtml($machine->getType());?></td>
+			<td headers="machineInterface"><?php echo $this->escapehtml($machine->getInterface());?></td>
+			<td headers="machineCreateur"><?php echo $this->escapehtml($machine->getCreateur()->getUsername());?></td>
+			<td headers="machineIp"><?php echo count(($machine->getIps()));?></td>
+		</tr>
+		<?php endforeach;?>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th headers="number">#</th>
+			<th headers="machineLibelle">Machine</th>
+			<th headers="machineType">Type</th>
+			<th headers="machineInterface">Interfaces</th>
+			<th headers="machineCreateur">Référencée par</th>
+			<th headers="machineIp">IPs</th>
+		</tr>
+	</tfoot>
+</table>
 <div class="btn-grp pull-right">
 	<a class="btn btn-primary" href="<?php echo $this->url('machine',array('action' => 'creer'));?>" title="<?php echo $this->escapehtmlattr($this->translate('Référencer une nouvelle machine'))?>">
 		<i class="fa fa-desktop fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Référencer une nouvelle machine'));?>

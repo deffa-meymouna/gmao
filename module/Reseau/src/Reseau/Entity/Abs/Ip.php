@@ -45,6 +45,14 @@ abstract class Ip
     protected $createur;
 
     /**
+     *
+     * @var Machine
+     * @ORM\ManyToOne(targetEntity="\Reseau\Entity\Table\Machine")
+     * @ORM\JoinColumn(name="mac_id", referencedColumnName="mac_id")
+     */
+    protected $machine;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="ip_lib", type="string", length=32, nullable=false, unique=false)
@@ -154,6 +162,20 @@ abstract class Ip
 	public function setCreateur(User $createur) {
 		$this->createur = $createur;
 	}
+	/**
+	 * @return the $machine
+	 */
+	public function getMachine() {
+		return $this->machine;
+	}
+
+	/**
+	 * @param \Reseau\Entity\Abs\Machine $machine
+	 */
+	public function setMachine($machine) {
+		$this->machine = $machine;
+	}
+
 
 
 }

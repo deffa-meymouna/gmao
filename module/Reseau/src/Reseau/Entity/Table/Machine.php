@@ -11,6 +11,7 @@
 namespace Reseau\Entity\Table;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Doctrine ORM implementation of Machine entity
@@ -70,6 +71,11 @@ class Machine
      * @ORM\Column(name="mac_type", type="string", length=32, nullable=true, unique=false)
      */
     protected $type;
+
+    public function __construct(){
+   		$this->ips = new ArrayCollection();
+    }
+
 	/**
 	 * @return the $id
 	 */
