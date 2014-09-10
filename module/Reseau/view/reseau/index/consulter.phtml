@@ -44,7 +44,7 @@
 				</dl>
 			</div>
 			<div class="panel-footer text-right">
-				<small><em><?php echo $this->escapehtml(sprintf($this->translate('Réseau référencé par %s'),$this->createur->getUsername()));?></em></small>
+				<small><em><?php echo $this->escapehtml(sprintf($this->translate('Réseau référencé par %s'),$this->unReseau->getCreateurUsername()));?></em></small>
 			</div>
 		</div>
 	</div>
@@ -122,12 +122,15 @@
 			<td headers="number"><?php echo $this->escapehtml($key + 1);?></td>
 			<td headers="ips_adresse"><?php echo $this->ip($ip->getIp());?></td>
 			<td headers="ips_libelle"><?php echo $this->escapehtml($ip->getLibelle());?></td>
-			<td headers="ips_createur"><?php echo $this->escapehtml($ip->getCreateur()->getUsername());?></td>
+			<td headers="ips_createur"><?php echo $this->escapehtml($ip->getCreateurUsername());?></td>
 			<td headers="ips_machine">
 				<?php if (null === $ip->getMachineId()):?>
 					<em><?php echo $this->escapehtml($this->translate('Aucune machine associée'));?></em>
 				<?php else: ?>
-					<?php echo $this->escapehtml($ip->getMachineLibelle());?>
+					<a href="<?php echo $this->url('machine',array('action'=>'consulter','machine'=>$ip->getMachineId()));?>"
+					   title="<?php echo $this->escapehtmlattr(sprintf($this->translate('Accéder à la machine %s'),$ip->getMachineLibelle()));?>">
+						<?php echo $this->escapehtml($ip->getMachineLibelle());?>
+					</a>
 				<?php endif;?>
 			</td>
 			<td headers="action">

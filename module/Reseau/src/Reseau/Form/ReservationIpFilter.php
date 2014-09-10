@@ -94,12 +94,13 @@ class ReservationIpFilter extends InputFilter
         		'filters' => array(
         				array('name' => 'StripTags'),
         				array('name' => 'StringTrim'),
+        				array('name' => 'Int'),
         		),
         		'validators' => array(
         				array(
         						'name' => 'InArray',
         						'options' => array(
-        								'haystack' => array('0','1'),
+        								'haystack' => array(0,1),
         						)
         				),
         		),

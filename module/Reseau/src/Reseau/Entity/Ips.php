@@ -15,6 +15,7 @@ use Reseau\Entity\Abs\Reseau   as ReseauEntity;
 use Reseau\Form\ReservationIpForm;
 use Reseau\Entity\Table\Ip;
 use Reseau\Entity\Abs\Ip as IpEntity;
+use Reseau\Entity\Abs\Machine;
 
 class Ips
 {
@@ -81,9 +82,11 @@ class Ips
     public function creerUneNouvelleIp(ReservationIpForm $form, ReseauEntity $unReseau){
     	$ip = new Ip();
     	$ip->setDescription($form->get('description')->getValue());
-    	$ip->setReseauId($unReseau->getId());
+    	$ip->setReseau($unReseau);
     	$ip->setIpFromString($form->get('ip')->getValue());
     	$ip->setLibelle($form->get('libelle')->getValue());
+    	$ip->setInterface($form->get('interface')->getValue());
+    	$ip->setNat($form->get('nat')->getValue());
     	return $ip;
     }
     /**
@@ -93,16 +96,11 @@ class Ips
      * @param ReseauEntity $unReseau
      * @return boolean
      */
-    public function isUnique(IpEntity $ip, ReseauEntity $unReseau = null){
-    	if (null === $unReseau){
-    		$idReseau = $ip->getReseauId();
-    	}else{
-    		$idReseau = $unReseau->getId();
-    	}
-    	$vue = $this->entityManager->getRepository('Reseau\Entity\Table\Ip');
+    public function isUnique(IpEntity $ip, ReseauEntity $unReseau){
+    	$vue = $this->entityManager->getRepository('Reseau\Entity\View\Ip');
     	$ips = $vue->findBy(
     			array(
-    				'reseauId' => $idReseau,
+    				'reseauId' => $unReseau->getId(),
     				'ip' => $ip->getIp()
     			)
     	);
@@ -149,4 +147,11 @@ class Ips
     	$this->entityManager->flush();
     }
 
+    /**
+     *
+     */
+    public function rechercherLesIPDUneMachine(Machine $machine){
+    	$ips = $this->entityManager->getRepository('Reseau\Entity\View\Ip');
+    	return $ips->findByMachineId($machine->getId());
+    }
 }

@@ -20,6 +20,11 @@ abstract class AbstractActionController extends ZendActionController
 	protected $entityManager;
 
 	/**
+	 * @var Reseau\Entity\Ips
+	 */
+	protected $ipService;
+
+	/**
 	 * @var Zend\Mvc\I18n\Translator
 	 */
 	protected $translatorHelper;
@@ -36,6 +41,20 @@ abstract class AbstractActionController extends ZendActionController
     	}
 
     	return $this->entityManager;
+    }
+
+    /**
+     * get IPService
+     *
+     * @return Reseau\Entity\Ips
+     */
+    protected function getIpService()
+    {
+    	if (null === $this->ipService) {
+    		$this->ipService = $this->getServiceLocator()->get('IpService');
+    	}
+
+    	return $this->ipService;
     }
 
     /**

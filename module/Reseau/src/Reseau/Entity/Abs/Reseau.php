@@ -13,7 +13,6 @@ namespace Reseau\Entity\Abs;
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Db\Sql\Ddl\Column\Integer;
 use Reseau\Entity\Abs\Reseau;
-use CsnUser\Entity\User;
 //use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -36,14 +35,6 @@ abstract class Reseau
      * @ORM\OneToMany(targetEntity="Ip", mappedBy="reseau")
      */
     protected $ips;
-
-    /**
-     *
-     * @var User
-     * @ORM\ManyToOne(targetEntity="\CsnUser\Entity\User")
-     * @ORM\JoinColumn(name="usr_id", referencedColumnName="id")
-     */
-    protected $createur;
 
     /**
      * @var string
@@ -236,18 +227,16 @@ abstract class Reseau
 		$this->ips = $ips;
 	}
 	/**
-	 * @return the $createur
+	 * Createur Id
+	 *
+	 * return integer
 	 */
-	public function getCreateur() {
-		return $this->createur;
-	}
-
+	abstract public function getCreateurId();
 	/**
-	 * @param User $createur
+	 * Createur Username
+	 *
+	 * @return string
 	 */
-	public function setCreateur(User $createur) {
-		$this->createur = $createur;
-	}
-
+	abstract public function getCreateurUsername();
 
 }

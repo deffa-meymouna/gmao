@@ -21,18 +21,7 @@ use Reseau\Entity\Abs\Ip as IpAbstract;
  */
 class Ip extends IpAbstract
 {
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="ip_interface", type="smallint", nullable=true)
-	 */
-	protected $interface;
-	/**
-	 * @var boolean
-	 *
-	 * @ORM\Column(name="ip_nat", type="boolean", nullable=false)
-	 */
-	protected $nat;
+
 	/**
 	 * @var string
 	 *
@@ -51,19 +40,41 @@ class Ip extends IpAbstract
 	 * @ORM\Column(name="mac_des", type="text", nullable=true)
 	 */
 	protected $machineDescription;
-	/**
-	 * @return the $interface
-	 */
-	public function getInterface() {
-		return $this->interface;
-	}
 
 	/**
-	 * @return the $nat
+	 * @var string
+	 *
+	 * @ORM\Column(name="usr_username", type="text", nullable=false)
 	 */
-	public function getNat() {
-		return $this->nat;
-	}
+	protected $username;
+
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="res_id", type="integer", nullable=false)
+	 */
+	protected $reseauId;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="res_lib", type="string", nullable=false)
+	 */
+	protected $reseauLibelle;
+
+	/**
+	 * @var long
+	 *
+	 * @ORM\Column(name="res_ip", type="bigint", nullable=false)
+	 */
+	protected $reseauIp;
+
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="res_masque", type="smallint", nullable=false)
+	 */
+	protected $reseauMasque;
 
 	/**
 	 * @return the $machineId
@@ -87,42 +98,31 @@ class Ip extends IpAbstract
 	}
 
 	/**
-	 * @param number $interface
+	 * @return the $username
 	 */
-	public function setInterface($interface) {
-		$this->interface = $interface;
+	public function getCreateurUsername() {
+		return $this->username;
 	}
 
 	/**
-	 * @param boolean $nat
+	 * @return the $reseauId
 	 */
-	public function setNat($nat) {
-		$this->nat = $nat;
+	public function getReseauId() {
+		return $this->reseauId;
 	}
 
 	/**
-	 * @param string $machineId
+	 * @return the $reseauLibelle
 	 */
-	public function setMachineId($machineId) {
-		$this->machineId = $machineId;
+	public function getReseauLibelle() {
+		return $this->reseauLibelle;
 	}
 
 	/**
-	 * @param string $machineLibelle
+	 * @return the $reseauCIDR
 	 */
-	public function setMachineLibelle($machineLibelle) {
-		$this->machineLibelle = $machineLibelle;
+	public function getReseauCIDR() {
+		return long2ip($this->reseauIp). '/'. $this->reseauMasque;
 	}
-
-	/**
-	 * @param string $machineDescription
-	 */
-	public function setMachineDescription($machineDescription) {
-		$this->machineDescription = $machineDescription;
-	}
-
-
-
-
 
 }

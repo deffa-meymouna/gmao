@@ -23,19 +23,9 @@ class IndexController extends AbstractActionController
 	protected $options;
 
 	/**
-	 * @var Doctrine\ORM\EntityManager
-	 */
-	protected $entityManager;
-
-	/**
 	 * @var Reseau\Entity\Reseaux
 	 */
 	protected $reseauService;
-
-	/**
-	 * @var Reseau\Entity\Ips
-	 */
-	protected $ipService;
 
 	/**
 	 * @var Reseau\Form\ReseauForm
@@ -85,14 +75,12 @@ class IndexController extends AbstractActionController
     		//Redirection
     		return $unReseau;
     	}
-		$createur  = $unReseau->getCreateur();
     	$ipService = $this->getIpService();
 
     	$ips = $ipService->rechercherLesIPDuReseauSelonId($unReseau);
 
     	$viewModel = new ViewModel(array(
     		'unReseau' => $unReseau,
-    		'createur' => $createur,
     		'ips'	   => $ips
     	));
     	return $viewModel;
@@ -102,7 +90,7 @@ class IndexController extends AbstractActionController
     {
     	//Initialisation des variables
     	$reseauService = $this->getReseauService();
-    	$unReseau = $this->getReseauFromUrl();
+    	$unReseau = $this->getReseauFromUrl(true);
     	if ($unReseau instanceof Response){
     		//Redirection
     		return $unReseau;
@@ -280,20 +268,6 @@ class IndexController extends AbstractActionController
     	}
 
     	return $this->reservationIpFilter;
-    }
-
-    /**
-     * get IPService
-     *
-     * @return Reseau\Entity\Ips
-     */
-    protected function getIpService()
-    {
-    	if (null === $this->ipService) {
-    		$this->ipService = $this->getServiceLocator()->get('IpService');
-    	}
-
-    	return $this->ipService;
     }
 
     /**

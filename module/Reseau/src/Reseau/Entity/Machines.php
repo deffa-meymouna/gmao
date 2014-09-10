@@ -83,9 +83,9 @@ class Machines
 	 * @param integer $id
 	 * @return Reseau\Entity\View\Reseau
 	 */
-	public function rechercherUnReseauSelonId($id){
-		$reseaux = $this->entityManager->getRepository('Reseau\Entity\Table\Reseau');
-		return $reseaux->find($id);
+	public function rechercherUneMachineSelonId($id){
+		$machines = $this->entityManager->getRepository('Reseau\Entity\Table\Machine');
+		return $machines->find($id);
 	}
 	/**
 	 * Recherche un Reseau selon son Id En mode Lecture seule
@@ -93,17 +93,25 @@ class Machines
 	 * @param integer $id
 	 * @return Reseau\Entity\View\Reseau
 	 */
-	public function rechercherUnReseauSelonIdEnLectureSeule($id){
-		$reseaux = $this->entityManager->getRepository('Reseau\Entity\View\Reseau');
-		return $reseaux->find($id);
+	public function rechercherUneMachineSelonIdEnLectureSeule($id){
+		$machines = $this->entityManager->getRepository('Reseau\Entity\View\Machine');
+		return $machines->find($id);
 	}
 	/**
 	 * Supprime un reseau
 	 *
 	 * @param ReseauEntity $reseau
 	 */
-	public function supprimerUnReseau(ReseauEntity $reseau){
-		$this->entityManager->remove($reseau);
+	public function supprimerUneMachine(MachineTable $machine,$cascade = true){
+		if($cascade){
+			//on supprime les IPs
+			foreach($machine->getIps() as $ip){
+				$this->entityManager->remove($ip);
+			}
+		}else{
+			//on n'a rien à faire car il y a fk_ip_mac possede un on delete set null
+		}
+		$this->entityManager->remove($machine);
 		$this->entityManager->flush();
 	}
 }

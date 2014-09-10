@@ -24,18 +24,32 @@ class Reseau extends ReseauAbstract
 {
 
     /**
-     * @var string
+     * @var integer
      *
      * @ORM\Column(name="mac_quantite", type="integer")
      */
     protected $mac_quantite;
 
     /**
-     * @var string
+     * @var integer
      *
      * @ORM\Column(name="ip_quantite", type="integer")
      */
     protected $ip_quantite;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="usr_id", type="integer")
+     */
+    protected $createurID;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="usr_username", type="string")
+     */
+    protected $createurUsername;
 
     /**
      *
@@ -58,5 +72,21 @@ class Reseau extends ReseauAbstract
 	public function getQuantiteMachine(){
 		return $this->mac_quantite;
 	}
+	/* (non-PHPdoc)
+	 * @see \Reseau\Entity\Abs\Reseau::getCreateurId()
+	 */
+	public function getCreateurId() {
+		return $this->createurId;
+	}
+
+	/* (non-PHPdoc)
+	 * @see \Reseau\Entity\Abs\Reseau::getCreateurUsername()
+	 */
+	public function getCreateurUsername() {
+		return $this->createurUsername;
+	}
+
+
+
 
 }

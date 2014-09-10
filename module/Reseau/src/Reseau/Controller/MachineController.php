@@ -2,10 +2,12 @@
 
 namespace Reseau\Controller;
 
-use Reseau\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Http\PhpEnvironment\Response;
+use Reseau\Controller\AbstractActionController;
 use Reseau\Service\Factory\MachineService;
 use Reseau\Form\MachineFilter;
+
 
 /**
  * MachineController
@@ -41,6 +43,32 @@ class MachineController extends AbstractActionController {
 		$machineService = $this->getMachineService();
     	$machines = $machineService->listerToutesLesMachines();
     	return new ViewModel(array('machines' => $machines));
+	}
+
+	/**
+	 * Consulter une des machines
+	 *
+	 * @return \Zend\View\Model\ViewModel
+	 */
+	public function consulterAction()
+	{
+		//Récupération du réseau
+		$uneMachine=$this->getMachineFromUrl();
+		if ($uneMachine instanceof Response){
+			//Redirection
+			return $uneMachine;
+		}
+		$createur  = $uneMachine->getCreateur();
+		$ipService = $this->getIpService();
+
+		$ips = $ipService->rechercherLesIPDUneMachine($uneMachine);
+
+		$viewModel = new ViewModel(array(
+				'uneMachine' => $uneMachine,
+				'createur' => $createur,
+				'ips'	   => $ips
+		));
+		return $viewModel;
 	}
 
 	public function creerAction(){
@@ -100,5 +128,32 @@ class MachineController extends AbstractActionController {
 		}
 
 		return $this->machineService;
+	}
+	/**
+	 *
+	 * @return unknown
+	 */
+	protected function getMachineFromUrl($writable = false){
+		$id = (int) $this->params()->fromRoute('machine', 0);
+
+		if ($id == 0) {
+			$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Identifiant machine invalide', 'iptrevise'));
+			return $this->redirect()->toRoute('machine');
+		}
+
+		$machineService = $this->getMachineService();
+		if ($writable){
+			//recherche d'une table
+			$rechercherUneMachineSelonId = 'rechercherUneMachineSelonId';
+		}else{
+			//recherche d'une vue
+			$rechercherUneMachineSelonId = 'rechercherUneMachineSelonIdEnLectureSeule';
+		}
+		$uneMachine = $machineService->$rechercherUneMachineSelonId($id);
+		if (empty($uneMachine)){
+			$this->flashMessenger()->addWarningMessage($this->getTranslatorHelper()->translate('La machine sélectionnée n\'a pas été trouvée ou n\'existe plus', 'iptrevise'));
+			return $this->redirect()->toRoute('machine');
+		}
+		return $uneMachine;
 	}
 }

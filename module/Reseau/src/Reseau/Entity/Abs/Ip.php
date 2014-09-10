@@ -12,7 +12,6 @@ namespace Reseau\Entity\Abs;
 
 use Doctrine\ORM\Mapping as ORM;
 use Reseau\Entity\Abs\Reseau;
-use CsnUser\Entity\User;
 
 /**
  * Doctrine ORM abstract implementation of Reseau entity
@@ -30,29 +29,6 @@ abstract class Ip
     protected $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="res_id", type="integer")
-     */
-    protected $reseauId;
-
-    /**
-     *
-     * @var User
-     * @ORM\ManyToOne(targetEntity="\CsnUser\Entity\User")
-     * @ORM\JoinColumn(name="usr_id", referencedColumnName="id")
-     */
-    protected $createur;
-
-    /**
-     *
-     * @var Machine
-     * @ORM\ManyToOne(targetEntity="\Reseau\Entity\Table\Machine",inversedBy="ips")
-     * @ORM\JoinColumn(name="mac_id", referencedColumnName="mac_id")
-     */
-    protected $machine;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="ip_lib", type="string", length=32, nullable=false, unique=false)
@@ -65,6 +41,19 @@ abstract class Ip
      * @ORM\Column(name="ip_des", type="text", nullable=true)
      */
     protected $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ip_interface", type="smallint", nullable=true)
+     */
+    protected $interface;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="ip_nat", type="boolean", nullable=false)
+     */
+    protected $nat;
 
     /**
      * @var Long
@@ -81,6 +70,20 @@ abstract class Ip
 	}
 
 	/**
+	 * @return the $interface
+	 */
+	public function getInterface() {
+		return $this->interface;
+	}
+
+	/**
+	 * @return the $nat
+	 */
+	public function getNat() {
+		return $this->nat;
+	}
+
+	/**
 	 * @return the $description
 	 */
 	public function getDescription() {
@@ -92,6 +95,20 @@ abstract class Ip
 	 */
 	public function setLibelle($libelle) {
 		$this->libelle = $libelle;
+	}
+
+	/**
+	 * @param number $interface
+	 */
+	public function setInterface($interface) {
+		$this->interface = $interface;
+	}
+
+	/**
+	 * @param boolean $nat
+	 */
+	public function setNat($nat) {
+		$this->nat = $nat;
 	}
 
 	/**
@@ -136,46 +153,39 @@ abstract class Ip
 	public function setIpFromString($chaineIp) {
 		$this->ip = sprintf('%u',ip2long($chaineIp));
 	}
-	/**
-	 * @return the $reseauId
-	 */
-	public function getReseauId() {
-		return $this->reseauId;
-	}
 
 	/**
-	 * @param number $reseauId
+	 * @return integer the $reseauId
 	 */
-	public function setReseauId($reseauId) {
-		$this->reseauId = $reseauId;
-	}
-	/**
-	 * @return the $createur
-	 */
-	public function getCreateur() {
-		return $this->createur;
-	}
+	abstract public function getReseauId();
 
 	/**
-	 * @param User $createur
+	 * @return string the $reseauLibelle
 	 */
-	public function setCreateur(User $createur) {
-		$this->createur = $createur;
-	}
-	/**
-	 * @return the $machine
-	 */
-	public function getMachine() {
-		return $this->machine;
-	}
+	abstract public function getReseauLibelle();
 
 	/**
-	 * @param \Reseau\Entity\Abs\Machine $machine
+	 * @return string the $reseau CIDR
 	 */
-	public function setMachine($machine) {
-		$this->machine = $machine;
-	}
+	abstract public function getReseauCIDR();
 
+	/**
+	 * @return the $machineId
+	 */
+	abstract public function getMachineId();
 
+	/**
+	 * @return the $machineLibelle
+	 */
+	abstract public function getMachineLibelle();
 
+	/**
+	 * @return the $machineDescription
+	 */
+	abstract public function getMachineDescription();
+
+	/**
+	 * @return the $username
+	 */
+	abstract public function getCreateurUsername();
 }
