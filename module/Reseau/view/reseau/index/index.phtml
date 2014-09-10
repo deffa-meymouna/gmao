@@ -1,7 +1,7 @@
 <?php $cpt = 0;?>
 <div class="page-header">
 	<div class="btn-grp pull-right">
-		<a class="btn btn-primary" href="<?php echo $this->url('reseau',array('action' => 'creer'));?>" title="<?php echo $this->escapehtmlattr($this->translate('Créer un nouveau réseau'))?>">
+		<a class="btn btn-primary tooltip-link" href="<?php echo $this->url('reseau',array('action' => 'creer'));?>" title="<?php echo $this->escapehtmlattr($this->translate('Créer un nouveau réseau'))?>">
 			<i class="fa fa-sitemap fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Créer un nouveau réseau'));?>
 		</a>
 	</div>
@@ -34,7 +34,7 @@
 			</div>
 			<div class="panel-footer text-center">
 				<a
-					class="btn btn-primary"
+					class="btn btn-primary tooltip-link"
 					href="<?php echo $this->url('reseau',array('action' => 'creer'));?>"
 					title="<?php echo $this->escapehtmlattr($this->translate('Créer un nouveau réseau'))?>">
 					<i class="fa fa-sitemap"></i>
@@ -105,9 +105,9 @@
 			</div>
 			<div class="panel-footer text-right">
 				<div class="btn-group">
-					<a class="btn btn-default" href="<?php echo $this->url('reseau',array('action' => 'reserverIp','reseau' => $reseau->getId()));?>" title="<?php echo $this->escapehtml($this->translate('Réserver une adresse IP de ce réseau'));?>"><i class="fa fa-plus"></i></a>
-					<a class="btn btn-default" href="<?php echo $this->url('reseau',array('action' => 'consulter','reseau' => $reseau->getId()));?>" title="<?php echo $this->escapehtml($this->translate('Consulter ce réseau'));?>"><i class="fa fa-search"></i></a>
-					<a class="btn btn-danger <?php echo ($reseau->getQuantiteIP())?' disabled ':'';?>" href="<?php echo $this->url('reseau',array('action' => 'supprimer','reseau' => $reseau->getId()));?>" title="<?php echo $this->escapehtml($this->translate('Supprimer ce réseau'));?>"><i class="fa fa-trash-o"></i></a>
+					<a class="btn btn-default tooltip-link" href="<?php echo $this->url('reseau',array('action' => 'reserverIp','reseau' => $reseau->getId()));?>" title="<?php echo $this->escapehtml($this->translate('Réserver une adresse IP de ce réseau'));?>"><i class="fa fa-plus"></i></a>
+					<a class="btn btn-default tooltip-link" href="<?php echo $this->url('reseau',array('action' => 'consulter','reseau' => $reseau->getId()));?>" title="<?php echo $this->escapehtml($this->translate('Consulter ce réseau'));?>"><i class="fa fa-search"></i></a>
+					<a class="btn btn-danger tooltip-link <?php echo ($reseau->getQuantiteIP())?' disabled ':'';?>" href="<?php echo $this->url('reseau',array('action' => 'supprimer','reseau' => $reseau->getId()));?>" title="<?php echo $this->escapehtml($this->translate('Supprimer ce réseau'));?>"><i class="fa fa-trash-o"></i></a>
 				</div>
 			</div>
 		</div>
@@ -117,7 +117,7 @@
 <?php endif;?>
 <?php endforeach;?>
 <div class="btn-grp pull-right">
-	<a class="btn btn-primary" href="<?php echo $this->url('reseau',array('action' => 'creer'));?>" title="<?php echo $this->escapehtmlattr($this->translate('Créer un nouveau réseau'))?>">
+	<a class="btn btn-primary tooltip-link" href="<?php echo $this->url('reseau',array('action' => 'creer'));?>" title="<?php echo $this->escapehtmlattr($this->translate('Créer un nouveau réseau'))?>">
 		<i class="fa fa-sitemap fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Créer un nouveau réseau'));?>
 	</a>
 </div>

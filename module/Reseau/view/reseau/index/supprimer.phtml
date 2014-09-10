@@ -18,8 +18,12 @@
 			</div>
 			<div class="panel-footer text-right">
 				<div class="btn-group">
-					<a href="<?php echo $this->url('reseau',array('action'=>'supprimer','reseau'=>$this->reseau->getId(),'ip'=>0, 'confirmation'=>1));?>" title="" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Supprimer</a>
-					<a href="<?php echo $this->url('reseau',array('action'=>'supprimer','reseau'=>$this->reseau->getId(),'ip'=>0, 'confirmation'=>2));?>" title="" class="btn btn-default"><i class="fa fa-reply fa-fw"></i>&nbsp;Annuler</a>
+					<a href="<?php echo $this->url('reseau',array('action'=>'supprimer','reseau'=>$this->reseau->getId(),'ip'=>0, 'confirmation'=>1));?>"
+					  title="<?php echo $this->escapehtml($this->translateattr('Supprimer'))?>"
+					  class="btn btn-danger tooltip-link"><i class="fa fa-trash-o fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Supprimer'))?></a>
+					<a href="<?php echo $this->url('reseau',array('action'=>'supprimer','reseau'=>$this->reseau->getId(),'ip'=>0, 'confirmation'=>2));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Annuler'))?>"
+					  class="btn btn-default tooltip-link"><i class="fa fa-reply fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Annuler'))?></a>
 				</div>
 			</div>
 		</div>

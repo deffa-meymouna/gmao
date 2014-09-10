@@ -57,11 +57,11 @@
 			</div>
 			<div class="panel-body text-center">
 				<div class="btn-group">
-					<a class="btn btn-default" href="#" title="<?php echo$this->escapehtmlattr($this->translate('Référencer une adresse IP'));?>">
+					<a class="btn btn-default tooltip-link" href="#" title="<?php echo$this->escapehtmlattr($this->translate('Référencer une adresse IP'));?>">
 						<i class="fa fa-plus"></i>
 						<?php echo $this->escapehtml($this->translate('Référencer une adresse IP'));?>
 					</a>
-					<a class="btn btn-default" href="<?php echo $this->url('reseau',array('action' => 'reserverIP', 'reseau' => $this->unReseau->getId()));?>" title="<?php echo $this->escapehtmlattr($this->translate('Réserver une adresse IP'));?>">
+					<a class="btn btn-default tooltip-link" href="<?php echo $this->url('reseau',array('action' => 'reserverIP', 'reseau' => $this->unReseau->getId()));?>" title="<?php echo $this->escapehtmlattr($this->translate('Réserver une adresse IP'));?>">
 						<i class="fa fa-plus"></i>
 						<?php echo$this->escapehtml($this->translate('Réserver une adresse IP'));?>
 					</a>
@@ -135,12 +135,12 @@
 			</td>
 			<td headers="action">
 				<div class="btn-group">
-					<a class="btn btn-default btn-xs"
+					<a class="btn btn-default btn-xs tooltip-link"
 						href="<?php echo $this->url('reseau',array('action' => 'associerIp', 'reseau' => $this->unReseau->getId(), 'ip' => $ip->getId()));?>"
 						title="<?php echo $this->escapehtmlattr($this->translate('Associer à une machine'));?>">
 						<i class="fa fa-link"></i>
 					</a>
-					<a class="btn btn-danger btn-xs"
+					<a class="btn btn-danger btn-xs tooltip-link"
 						href="<?php echo $this->url('reseau',array('action' => 'supprimerIp', 'reseau' => $this->unReseau->getId(), 'ip' => $ip->getId()));?>"
 						title="<?php echo $this->escapehtmlattr($this->translate('Supprimer cette adresse Ip'));?>">
 						<i class="fa fa-trash-o"></i>
