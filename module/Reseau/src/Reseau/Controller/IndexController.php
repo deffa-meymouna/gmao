@@ -349,33 +349,4 @@ class IndexController extends AbstractActionController
     	}
     	return $unReseau;
     }
-
-    /**
-     *
-     * @return unknown
-     */
-    protected function getIpFromUrl($writable = false){
-    	$id = (int) $this->params()->fromRoute('ip', 0);
-
-    	if ($id == 0) {
-    		$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Identifiant Ip invalide', 'iptrevise'));
-    		return $this->redirect()->toRoute('reseau');
-    	}
-
-    	$ipService = $this->getIpService();
-    	if ($writable){
-    		//recherche d'une table
-    		$rechercherUneIpSelonId = 'rechercherUneIpSelonId';
-    	}else{
-    		//recherche d'une vue
-    		$rechercherUneIpSelonId = 'rechercherUnIpSelonIdEnLectureSeule';
-    	}
-    	$uneIp = $ipService->$rechercherUneIpSelonId($id);
-    	if (empty($uneIp)){
-    		$this->flashMessenger()->addWarningMessage($this->getTranslatorHelper()->translate('Le réseau sélectionné n\'a pas été trouvé ou n\'existe plus', 'iptrevise'));
-    		return $this->redirect()->toRoute('reseau');
-    	}
-    	return $uneIp;
-    }
-
 }

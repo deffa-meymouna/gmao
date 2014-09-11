@@ -96,7 +96,7 @@
 			<td headers="action">
 				<div class="btn-group">
 				    <a class="btn btn-warning btn-xs tooltip-link"
-						href="<?php echo $this->url('reseau',array('action' => 'dissocierIp', 'reseau' => $ip->getReseauId(), 'ip' => $ip->getId()));?>"
+						href="<?php echo $this->url('machine',array('action' => 'dissocierIp', 'ip' => $ip->getId()));?>"
 						title="<?php echo $this->escapehtmlattr($this->translate('Dissocier une IP d\'une machine'));?>">
 						<i class="fa fa-unlink"></i>
 					</a>

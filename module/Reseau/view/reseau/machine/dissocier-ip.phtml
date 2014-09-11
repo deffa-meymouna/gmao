@@ -1,0 +1,38 @@
+<?php $cpt = 0;?>
+<div class="page-header">
+	<h1><i class="fa fa-fw fa-unlink"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Dissocier une adresse d\'une machine'))?></h1>
+</div>
+<div class="row text-justify">
+	<div class="col-sm-offset-2 col-sm-8">
+		<div class="panel panel-danger">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+					<i class="fa fa-interrogation"></i>&nbsp;
+					<?php echo $this->escapehtml($this->translate('Demande de confirmation'));?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<p><strong><?php echo $this->escapehtml(sprintf($this->translate('Êtes-vous sûr de vouloir dissocier l\'adresse IP %s de la machine %s'),$this->ip($this->uneIp->getIp()),$this->uneMachine->getLibelle()));?>&nbsp;:</strong></p>
+				<p>
+					<small>
+						La machine et l'adresse IP ne seront pas supprimées.
+						La machine disposera d'une adresse IP de moins.
+						L'adresse IP ne sera plus rattachée à une machine,
+						mais sera toujours considérée comme réservée.
+					</small>
+				</p>
+			</div>
+
+			<div class="panel-footer text-right">
+				<div class="btn-group">
+					<a href="<?php echo $this->url('machine',array('action'=>'dissocierIp','ip'=>$this->uneIp->getId(), 'confirmation'=>1));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Dissocier la machine de cette adresse IP'))?>"
+					  class="btn btn-default tooltip-link"><i class="fa fa-unlink fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Dissocier'))?></a>
+					<a href="<?php echo $this->url('machine',array('action'=>'dissocierIp','ip'=>$this->uneIp->getId(), 'confirmation'=>2));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Annulation, aucune action ne sera entreprise'))?>"
+					  class="btn btn-default tooltip-link"><i class="fa fa-reply fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Annuler'))?></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

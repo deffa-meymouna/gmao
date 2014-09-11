@@ -152,6 +152,48 @@ class MachineController extends AbstractActionController {
 	}
 
 	/**
+	 * Action de suppression d'un réseau
+	 *
+	 */
+	public function dissocierIpAction(){
+		$uneIp = $this->getIpFromUrl(true);
+		if ($uneIp instanceof Response){
+			//Redirection
+			return $uneIp;
+		}
+
+		$uneMachine = $uneIp->getMachine();
+		if (null == $uneMachine){
+			$message = sprintf($this->getTranslatorHelper()->translate('Cette adresse IP n\'était associée à aucune machine.', 'iptrevise'),$uneIp->getLibelle());
+			$this->flashMessenger()->addErrorMessage($message);
+			return $this->redirect()->toRoute('reseau',array('action' => 'consulter','reseau' => $uneIp->getReseau()->getId()));
+		}
+
+		$confirmation = (int) $this->params()->fromRoute('confirmation', 0);
+		if($confirmation == 1){
+			$uneIp->setMachine(null);
+			$ipService = $this->getIpService();
+			$ipService->enregistrerUneIp($uneIp);
+			$message = sprintf("L'adresse IP %s est dissociée de la machine %s",long2ip($uneIp->getIp()),$uneMachine->getLibelle());
+			$message = $this->getTranslatorHelper()->translate($message,'iptrevise');
+			$this->flashMessenger()->addSuccessMessage($message);
+			return $this->redirect()->toRoute('machine');
+		}elseif($confirmation == 2){
+			$message = sprintf("Annulation demandée. L'adresse IP %s est toujours associée à la machine %s",long2ip($uneIp->getIp()),$uneMachine->getLibelle());
+			$message = $this->getTranslatorHelper()->translate($message,'iptrevise');
+			$this->flashMessenger()->addInfoMessage($message);
+			return $this->redirect()->toRoute('machine',array('action'=>'consulter','machine'=>$uneMachine->getId()));
+		}
+
+		return new ViewModel(array(
+				'uneMachine' => $uneMachine,
+				'uneIp'	  => $uneIp,
+		));
+
+	}
+
+
+	/**
 	 * get machineForm
 	 *
 	 * @return
