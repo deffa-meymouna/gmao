@@ -129,8 +129,7 @@ class Ip extends IpAbstract
 	 * @see \Reseau\Entity\Abs\Ip::getCreateurUsername()
 	 */
 	public function getCreateurUsername() {
-		// TODO Auto-generated method stub
-
+		return $this->getCreateur()->getUsername();
 	}
 
 	/* (non-PHPdoc)

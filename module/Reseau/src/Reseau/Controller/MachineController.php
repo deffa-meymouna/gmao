@@ -109,6 +109,49 @@ class MachineController extends AbstractActionController {
 	}
 
 	/**
+	 * Action de suppression d'un réseau
+	 *
+	 */
+	public function supprimerAction(){
+		$uneMachine = $this->getMachineFromUrl(true);
+		if ($uneMachine instanceof Response){
+			//Redirection
+			return $uneMachine;
+		}
+		$confirmation = (int) $this->params()->fromRoute('confirmation', 0);
+
+		if($confirmation == 1){
+			$supprimerIP = (int) $this->params()->fromRoute('ip', 0);
+			if (2 == $supprimerIP){
+				$this->getMachineService()->supprimerUneMachine($uneMachine,false);
+				$message = "La machine %s a été supprimée avec succès. Elle ne disposait pas d'adresse IP.";
+			}elseif (1 == $supprimerIP){
+				$this->getMachineService()->supprimerUneMachine($uneMachine,true);
+				$message = "La machine %s et les adresses IPs associées ont été supprimées avec succès";
+			}else{
+				$this->getMachineService()->supprimerUneMachine($uneMachine,false);
+				$message = "La machine %s a été supprimée avec succès. Ces IPs ont été préservées et dissociées de toute machine.";
+			}
+			$message = sprintf($this->getTranslatorHelper()->translate($message, 'iptrevise'),$uneMachine->getLibelle());
+			$this->flashMessenger()->addSuccessMessage($message);
+			return $this->redirect()->toRoute('machine');
+		}elseif($confirmation == 2){
+			$message = sprintf($this->getTranslatorHelper()->translate("Annulation demandée. La machine %s n'a pas été supprimée", 'iptrevise'),$uneMachine->getLibelle());
+			$this->flashMessenger()->addInfoMessage($message);
+			return $this->redirect()->toRoute('machine');
+		}
+
+		$ipService = $this->getIpService();
+		$ips = $ipService->rechercherLesIPDUneMachine($uneMachine);
+
+		return new ViewModel(array(
+			'uneMachine' => $uneMachine,
+			'ips'	  => $ips,
+		));
+
+	}
+
+	/**
 	 * get machineForm
 	 *
 	 * @return

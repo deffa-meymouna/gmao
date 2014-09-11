@@ -47,7 +47,7 @@ class Machine extends MachineAbs
 	public function getIpCount(){
 		return $this->ipQuantite;
 	}
-	public function getUsername(){
+	public function getCreateurUsername(){
 		return $this->username;
 	}
 

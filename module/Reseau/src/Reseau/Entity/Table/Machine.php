@@ -36,7 +36,7 @@ class Machine extends MachineAbs
 		//add a debug information for optimization !
 		return $this->getIps()->count();
 	}
-	public function getUsername(){
+	public function getCreateurUsername(){
 		return $this->getCreateur()->getUsername();
 	}
 }

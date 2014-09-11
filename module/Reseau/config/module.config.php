@@ -28,7 +28,7 @@ return array (
 						'machine' => array (
 								'type' => 'Segment',
 								'options' => array (
-										'route' => '/machine[/:action][/:machine][/:ip][/:confirmation]',
+										'route' => '/machine[/:action][/:machine][/ip[/:ip]][/confirmation[/:confirmation]]',
 										'constraints' => array (
 												'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 												'machine' => '[0-9]*',

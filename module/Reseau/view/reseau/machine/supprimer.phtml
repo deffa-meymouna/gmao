@@ -1,0 +1,60 @@
+<?php $cpt = 0;?>
+<div class="page-header">
+	<h1><i class="fa fa-fw fa-trash-o"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Supprimer une machine'))?></h1>
+</div>
+<div class="row text-justify">
+	<div class="col-sm-offset-2 col-sm-8">
+		<div class="panel panel-danger">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+					<i class="fa fa-interrogation"></i>&nbsp;
+					<?php echo $this->escapehtml($this->translate('Demande de confirmation'));?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<p><strong><?php echo $this->escapehtml($this->translate('Êtes-vous sûr de vouloir supprimer le réseau suivant'));?>&nbsp;:</strong></p>
+				<ul class="">
+					<li>Machine&nbsp;: <?php echo $this->escapehtml($this->uneMachine->getLibelle());?></li>
+					<?php if(count($this->ips)):?>
+					<li>Adresses Ip de la machine&nbsp;:
+						<ul>
+							<?php foreach ($this->ips as $ip):?>
+							<li>
+								<?php echo $this->ip($ip->getIp());?>
+								<small>(&nbsp;<?php echo $this->escapehtml($ip->getReseauLibelle());?>&nbsp;)</small>
+							</li>
+							<?php endforeach;?>
+						</ul>
+					</li>
+					<?php else:?>
+					<li><small><?php echo $this->escapehtml($this->translate('Cette machine ne dispose pas d\'adresse IP'));?></small></li>
+					<?php endif;?>
+					<li>
+						<?php echo $this->escapehtml(sprintf($this->translate('Machine référencée par %s'),$this->uneMachine->getCreateurUsername()));?>
+					</li>
+					<li>Description&nbsp;:<?php echo $this->escapehtml($this->uneMachine->getDescription());?></li>
+				</ul>
+			</div>
+
+			<div class="panel-footer text-right">
+				<div class="btn-group">
+					<?php if (count($this->ips)):?>
+					<a href="<?php echo $this->url('machine',array('action'=>'supprimer','machine'=>$this->uneMachine->getId(),'ip'=>1, 'confirmation'=>1));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Supprimer la machine et TOUTES les adresses IP associées'))?>"
+					  class="btn btn-primary tooltip-link"><i class="fa fa-trash-o fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('TOUT supprimer'))?></a>
+					<a href="<?php echo $this->url('machine',array('action'=>'supprimer','machine'=>$this->uneMachine->getId(),'ip'=>0, 'confirmation'=>1));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Supprimer la machine, mais conserver les adresses IP'))?>"
+					  class="btn btn-default tooltip-link"><i class="fa fa-trash-o fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Supprimer la machine'))?></a>
+					<?php else: ?>
+					<a href="<?php echo $this->url('machine',array('action'=>'supprimer','machine'=>$this->uneMachine->getId(),'ip'=>2, 'confirmation'=>1));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Supprimer la machine'))?>"
+					  class="btn btn-primary tooltip-link"><i class="fa fa-trash-o fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Supprimer la machine'))?></a>
+					<?php endif;?>
+					<a href="<?php echo $this->url('machine',array('action'=>'supprimer','machine'=>$this->uneMachine->getId(), 'ip' => null, 'confirmation'=>2));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Annuler'))?>"
+					  class="btn btn-default tooltip-link"><i class="fa fa-reply fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Annuler'))?></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
