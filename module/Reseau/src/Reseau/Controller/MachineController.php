@@ -138,7 +138,7 @@ class MachineController extends AbstractActionController {
 		}elseif($confirmation == 2){
 			$message = sprintf($this->getTranslatorHelper()->translate("Annulation demandée. La machine %s n'a pas été supprimée", 'iptrevise'),$uneMachine->getLibelle());
 			$this->flashMessenger()->addInfoMessage($message);
-			return $this->redirect()->toRoute('machine');
+			return $this->redirect()->toRoute('machine', array('action'=>'consulter','machine'=>$uneMachine->getId()));
 		}
 
 		$ipService = $this->getIpService();
