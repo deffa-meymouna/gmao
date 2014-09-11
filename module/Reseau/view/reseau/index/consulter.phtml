@@ -57,13 +57,17 @@
 			</div>
 			<div class="panel-body text-center">
 				<div class="btn-group">
-					<a class="btn btn-default tooltip-link" href="#" title="<?php echo$this->escapehtmlattr($this->translate('Référencer une adresse IP'));?>">
-						<i class="fa fa-plus"></i>
-						<?php echo $this->escapehtml($this->translate('Référencer une adresse IP'));?>
+					<a class="btn btn-default tooltip-link"
+					    href="<?php echo $this->url('reseau',array('action' => 'referencerIP', 'reseau' => $this->unReseau->getId()));?>"
+					   title="<?php echo$this->escapehtmlattr($this->translate('Créer une machine et une IP qui seront automatiquement associées'));?>">
+						<i class="fa fa-link"></i>
+						<?php echo $this->escapehtml($this->translate('Référencer une IP'));?>
 					</a>
-					<a class="btn btn-default tooltip-link" href="<?php echo $this->url('reseau',array('action' => 'reserverIP', 'reseau' => $this->unReseau->getId()));?>" title="<?php echo $this->escapehtmlattr($this->translate('Réserver une adresse IP'));?>">
+					<a class="btn btn-default tooltip-link"
+					    href="<?php echo $this->url('reseau',array('action' => 'reserverIP', 'reseau' => $this->unReseau->getId()));?>"
+					   title="<?php echo $this->escapehtmlattr($this->translate('Réserver une adresse IP sans y associer de machine'));?>">
 						<i class="fa fa-plus"></i>
-						<?php echo$this->escapehtml($this->translate('Réserver une adresse IP'));?>
+						<?php echo$this->escapehtml($this->translate('Réserver une IP'));?>
 					</a>
 				</div>
 			</div>
