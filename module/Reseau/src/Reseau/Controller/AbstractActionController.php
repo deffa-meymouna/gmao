@@ -25,6 +25,13 @@ abstract class AbstractActionController extends ZendActionController
 	protected $ipService;
 
 	/**
+	 *
+	 * @var Reseau\Entity\Machines
+	 */
+	protected $machineService;
+
+
+	/**
 	 * @var Zend\Mvc\I18n\Translator
 	 */
 	protected $translatorHelper;
@@ -83,6 +90,19 @@ abstract class AbstractActionController extends ZendActionController
     	}
 
     	return $this->ipService;
+    }
+    /**
+     * get MachineService
+     *
+     * @return Reseau\Entity\Machines
+     */
+    protected function getMachineService()
+    {
+    	if (null === $this->machineService) {
+    		$this->machineService = $this->getServiceLocator()->get('MachineService');
+    	}
+
+    	return $this->machineService;
     }
 
     /**

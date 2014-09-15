@@ -40,6 +40,14 @@ class IndexController extends AbstractActionController
 	 */
 	protected $reservationIpFilter;
 
+	/**
+	 * @var Reseau\Form\ReferencementIpForm
+	 */
+	protected $referencementIpForm;
+	/**
+	 * @var Reseau\Form\ReferencementIpFilter
+	 */
+	protected $referencementIpFilter;
 
 	/**
 	 * @var Zend\Mvc\I18n\Translator
@@ -86,6 +94,60 @@ class IndexController extends AbstractActionController
     	return $viewModel;
     }
 
+    public function referencerIpAction()
+    {
+    	//Initialisation des variables
+    	$reseauService = $this->getReseauService();
+    	$unReseau = $this->getReseauFromUrl(true);
+    	if ($unReseau instanceof Response){
+    		//Redirection
+    		return $unReseau;
+    	}
+    	$ipService = $this->getIpService();
+    	$referencerIpForm   = $this->getReferencementIpForm();
+    	$referencerIpFilter = $this->getReferencementIpFilter();
+
+    	if($this->getRequest()->isPost()) {
+    		$referencerIpForm->setData($this->getRequest()->getPost());
+    		$referencerIpForm->setInputFilter($referencerIpFilter);
+    		if($referencerIpForm->isValid()) {
+				$machineService = $this->getMachineService();
+    			//Création de l'Entité IP
+    			$uneMachine = $machineService->referencerUneNouvelleMachine($referencerIpForm);
+				$uneIp      = $ipService->referencerUneNouvelleIp($referencerIpForm,$uneMachine,$unReseau);
+    			$uneIp->setCreateur($this->identity());
+    			$uneMachine->setCreateur($this->identity());
+    			if ($ipService->isUnique($uneIp,$unReseau)){
+    				//Enregistrement
+    				$ipService->enregistrerUneIp($uneIp);
+    				$machineService->enregistrerUneMachine($uneMachine);
+    				$this->flashMessenger()->addSuccessMessage($this->getTranslatorHelper()->translate('L\'Ip et la machine ont été référencées avec succès.', 'iptrevise'));
+    				return $this->redirect()->toRoute('reseau',array('action'=>'consulter','reseau'=>$unReseau->getId()));
+    			}else{
+    				//$array= $reservationIpForm->getMessages();
+    				$array['ip']['isUnique']=$this->getTranslatorHelper()->translate(
+    						'Cette adresse Ip est déjà déclarée dans ce réseau'
+    				);
+    				$referencerIpForm->setMessages($array);
+    			}
+    		} else {
+    			//Marche pas
+    			//die('invalide');
+    			$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Les informations envoyées comportent des erreurs. Veuillez les rectifier puis les renvoyer !'));
+    		}
+    	}else{
+    		//Initialisation du formulaire avec les données métier
+    		$ip = $ipService->rechercherLaPremiereIpDisponibleDuReseau($unReseau);
+    		// @var $reservationIpForm Reseau\Form\ReservationIpForm
+    		$referencerIpForm->get('ip')->setValue(long2ip($ip));
+    	}
+
+    	$viewModel = new ViewModel(array(
+    			'unReseau' 			=> $unReseau,
+    			'referencementIpForm'	=> $referencerIpForm
+    	));
+    	return $viewModel;
+    }
     public function reserverIpAction()
     {
     	//Initialisation des variables
@@ -109,7 +171,7 @@ class IndexController extends AbstractActionController
             	if ($ipService->isUnique($uneIp,$unReseau)){
             		//Enregistrement
             		$ipService->enregistrerUneIp($uneIp);
-            		$this->flashMessenger()->addSuccessMessage($this->getTranslatorHelper()->translate('L\'Ip a été référencée avec succès.', 'iptrevise'));
+            		$this->flashMessenger()->addSuccessMessage($this->getTranslatorHelper()->translate('L\'Ip a été réservée avec succès.', 'iptrevise'));
             		return $this->redirect()->toRoute('reseau',array('action'=>'consulter','reseau'=>$unReseau->getId()));
             	}else{
    	                //$array= $reservationIpForm->getMessages();
@@ -271,6 +333,20 @@ class IndexController extends AbstractActionController
     }
 
     /**
+     * get reservationIpFilter
+     *
+     * @return Reseau\Form\ReferencementIpFilter
+     */
+    protected function getReferencementIpFilter()
+    {
+    	if (null === $this->referencementIpFilter) {
+    		$this->referencementIpFilter = $this->getServiceLocator()->get('ReferencementIpFilter');
+    	}
+
+    	return $this->referencementIpFilter;
+    }
+
+    /**
      * get reseauForm
      *
      * @return
@@ -321,6 +397,18 @@ class IndexController extends AbstractActionController
     	}
 
     	return $this->reservationIpForm;
+    }
+
+    /**
+     *
+     * @return \Reseau\Form\ReferencementIpForm
+     */
+    protected function getReferencementIpForm(){
+    	if (null === $this->referencementIpForm) {
+    		$this->referencementIpForm = $this->getServiceLocator()->get('ReferencementIpForm');
+    	}
+
+    	return $this->referencementIpForm;
     }
     /**
      *

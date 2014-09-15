@@ -93,7 +93,9 @@ return array (
 						'machineForm' => 'Reseau\Form\MachineForm',
 						'reseauFilter' => 'Reseau\Form\ReseauFilter',
 						'reservationIpForm' => 'Reseau\Form\ReservationIpForm',
-						'reservationIpFilter' => 'Reseau\Form\ReservationIpFilter'
+						'reservationIpFilter' => 'Reseau\Form\ReservationIpFilter',
+						'referencementIpForm' => 'Reseau\Form\ReferencementIpForm',
+						'referencementIpFilter' => 'Reseau\Form\ReferencementIpFilter'
 				)
 		)
 )

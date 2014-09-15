@@ -15,6 +15,7 @@ use Zend\Paginator\Paginator;
 use Reseau\Entity\Abs\Reseau   as ReseauEntity;
 use Reseau\Entity\Table\Machine as MachineTable;
 use Reseau\Form\MachineForm;
+use Reseau\Form\ReferencementIpForm;
 
 class Machines
 {
@@ -67,6 +68,21 @@ class Machines
 		$nouvelleMachine->setInterface($form->get('interface')->getValue());
 		$nouvelleMachine->setType($form->get('type')->getValue());
 		return $nouvelleMachine;
+    }
+    /**
+     * Service de création d'une Entité Machine à partir d'un formulaire valide
+     * et préalablement filtré de type ReferencerIPForm
+     *
+     * @param MachineForm $form
+     * @return Machine
+     */
+    public function referencerUneNouvelleMachine(ReferencementIpForm $form){
+    	$nouvelleMachine = new MachineTable();
+    	$nouvelleMachine->setDescription($form->get('mac_description')->getValue());
+    	$nouvelleMachine->setLibelle($form->get('mac_libelle')->getValue());
+    	$nouvelleMachine->setInterface($form->get('mac_interface')->getValue());
+    	$nouvelleMachine->setType($form->get('mac_type')->getValue());
+    	return $nouvelleMachine;
     }
 	/**
 	 * Enregistre une Machine

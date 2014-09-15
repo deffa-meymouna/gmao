@@ -36,7 +36,7 @@ class Ip extends IpAbstract
 	/**
 	 *
 	 * @var Machine
-	 * @ORM\ManyToOne(targetEntity="\Reseau\Entity\Table\Machine",inversedBy="ips")
+	 * @ORM\ManyToOne(targetEntity="\Reseau\Entity\Table\Machine",inversedBy="ips",cascade={"persist"})
 	 * @ORM\JoinColumn(name="mac_id", referencedColumnName="mac_id")
 	 */
 	protected $machine;

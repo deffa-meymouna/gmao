@@ -23,11 +23,6 @@ class MachineController extends AbstractActionController {
 	 * @var Doctrine\ORM\EntityManager
 	 */
 	protected $entityManager;
-	/**
-	 *
-	 * @var MachineService
-	 */
-	protected $machineService;
 
 	/**
 	 *
@@ -205,14 +200,6 @@ class MachineController extends AbstractActionController {
 		}
 
 		return $this->machineForm;
-	}
-	protected function getMachineService()
-	{
-		if (null === $this->machineService) {
-			$this->machineService = $this->getServiceLocator()->get('MachineService');
-		}
-
-		return $this->machineService;
 	}
 	/**
 	 *

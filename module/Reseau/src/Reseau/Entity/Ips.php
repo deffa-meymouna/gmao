@@ -16,6 +16,8 @@ use Reseau\Form\ReservationIpForm;
 use Reseau\Entity\Table\Ip;
 use Reseau\Entity\Abs\Ip as IpEntity;
 use Reseau\Entity\Abs\Machine;
+use Reseau\Entity\Table\Machine as MachineTable;
+use Reseau\Form\ReferencementIpForm;
 
 class Ips
 {
@@ -87,6 +89,25 @@ class Ips
     	$ip->setLibelle($form->get('libelle')->getValue());
     	$ip->setInterface($form->get('interface')->getValue());
     	$ip->setNat($form->get('nat')->getValue());
+    	return $ip;
+    }
+    /**
+     * Création d'une ip depuis un formulaire de référencement et un réseau
+     *
+     * @param ReferencementIpForm $form
+     * @param MachineTable $uneMachine
+     * @param ReseauEntity $unReseau
+     * @return \Reseau\Entity\Table\Ip
+     */
+    public function referencerUneNouvelleIp(ReferencementIpForm $form, MachineTable $machine, ReseauEntity $unReseau){
+    	$ip = new Ip();
+    	$ip->setDescription($form->get('ip_description')->getValue());
+    	$ip->setReseau($unReseau);
+    	$ip->setIpFromString($form->get('ip')->getValue());
+    	$ip->setLibelle($form->get('ip_libelle')->getValue());
+    	$ip->setInterface(null);
+    	$ip->setNat(false);
+    	$ip->setMachine($machine);
     	return $ip;
     }
     /**
