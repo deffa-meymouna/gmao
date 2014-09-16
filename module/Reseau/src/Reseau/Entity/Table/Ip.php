@@ -73,7 +73,7 @@ class Ip extends IpAbstract
 	/**
 	 * @param \Reseau\Entity\Abs\Machine $machine
 	 */
-	public function setMachine(MachineAbstract $machine) {
+	public function setMachine(MachineAbstract $machine = null) {
 		$this->machine = $machine;
 	}
 

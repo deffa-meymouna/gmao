@@ -1,0 +1,33 @@
+<div class="page-header">
+	<h1><i class="fa fa-fw fa-unlink"></i>&nbsp;Dissociation d'une adresse Ip et de sa machine</h1>
+</div>
+<div class="row text-justify">
+	<div class="col-sm-offset-3 col-sm-6">
+		<div class="panel panel-danger">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-interrogation"></i>&nbsp;Demande de confirmation</h2>
+			</div>
+			<div class="panel-body">
+				<p><strong>Actuellement, la base de données a pour information que l'IP et la machine suivante sont associées :</strong></p>
+				<ul class="">
+					<li>Ip&nbsp;: <?php echo $this->ip($this->uneIp->getIp()) ?>
+					<li>Reseau&nbsp;:
+						<?php echo $this->escapehtml($this->unReseau->getLibelle());?>&nbsp;:
+						<em><?php echo $this->escapehtml($this->unReseau->getCIDR());?></em>
+					</li>
+					<li>Machine&nbsp;: <?php echo $this->escapehtml($this->uneMachine->getLibelle());?></li>
+				</ul>
+			</div>
+			<div class="panel-footer text-right">
+				<div class="btn-group">
+					<a href="<?php echo $this->url('reseau',array('action'=>'dissocierIp','reseau'=>$this->unReseau->getId(),'ip' => $this->uneIp->getId(),'confirmation'=>1));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Dissociation, la machine et l\'adresse IP ne seront plus associées'))?>"
+					  class="btn btn-danger tooltip-link"><i class="fa fa-trash-o fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Dissocier'))?></a>
+					<a href="<?php echo $this->url('reseau',array('action'=>'dissocierIp','reseau'=>$this->unReseau->getId(),'ip' => $this->uneIp->getId(),'confirmation'=>2));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Annulation, aucune action ne sera entreprise'))?>"
+					  class="btn btn-default tooltip-link"><i class="fa fa-reply fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Annuler'))?></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

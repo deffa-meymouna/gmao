@@ -138,10 +138,21 @@
 				<?php endif;?>
 			</td>
 			<td headers="action">
-				<div class="btn-group">
+				<div class="btn-group pull-right">
+					<?php if (null !== $ip->getMachineId()):?>
+					<a class="btn btn-warning btn-xs tooltip-link"
+						href="<?php echo $this->url('reseau',array('action' => 'dissocierIp', 'reseau' => $this->unReseau->getId(), 'ip' => $ip->getId()));?>"
+						title="<?php echo $this->escapehtmlattr($this->translate('Dissocier l\'IP de cette machine'));?>">
+						<i class="fa fa-unlink"></i>
+					</a>
+					<?php endif;?>
 					<a class="btn btn-default btn-xs tooltip-link"
 						href="<?php echo $this->url('reseau',array('action' => 'associerIp', 'reseau' => $this->unReseau->getId(), 'ip' => $ip->getId()));?>"
+						<?php if (null === $ip->getMachineId()):?>
 						title="<?php echo $this->escapehtmlattr($this->translate('Associer à une machine'));?>">
+						<?php else:?>
+						title="<?php echo $this->escapehtmlattr($this->translate('Associer à une autre machine'));?>">
+						<?php endif;?>
 						<i class="fa fa-link"></i>
 					</a>
 					<a class="btn btn-danger btn-xs tooltip-link"

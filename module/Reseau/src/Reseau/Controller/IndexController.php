@@ -94,6 +94,52 @@ class IndexController extends AbstractActionController
     	return $viewModel;
     }
 
+    /**
+     * Action de dissociation d'une ip d'une machine
+     * @return \Zend\Http\PhpEnvironment\Response|Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>|\Zend\View\Model\ViewModel
+     */
+    public function dissocierIpAction(){
+    	$unReseau = $this->getReseauFromUrl();
+    	if ($unReseau instanceof Response){
+    		//Redirection
+    		return $unReseau;
+    	}
+
+    	$uneIp = $this->getIpFromUrl(true);
+    	if ($uneIp instanceof Response){
+    		//Redirection
+    		return $uneIp;
+    	}
+    	$uneMachine = $uneIp->getMachine();
+    	if (null == $uneMachine){
+    		$message = sprintf($this->getTranslatorHelper()->translate("L'adresse IP %s n'est associée à aucune machine", 'iptrevise'),long2ip($uneIp->getIp()));
+    		$this->flashMessenger()->addWarningMessage($message);
+    		return $this->redirect()->toRoute('reseau',array('action'=>'consulter','reseau'=>$unReseau->getId()));
+    	}
+
+    	$confirmation = (int) $this->params()->fromRoute('confirmation', 0);
+
+    	if($confirmation == 1){
+
+    		$uneIp->setMachine(null);
+    		$this->getIpService()->enregistrerUneIp($uneIp);
+    		$message = sprintf($this->getTranslatorHelper()->translate("L'adresse IP %s et la machine %s sont maintenant dissociées", 'iptrevise'),long2ip($uneIp->getIp()),$uneMachine->getLibelle());
+    		$this->flashMessenger()->addSuccessMessage($message);
+    		return $this->redirect()->toRoute('reseau',array('action'=>'consulter','reseau'=>$unReseau->getId()));
+    	}elseif($confirmation == 2){
+    		$message = sprintf($this->getTranslatorHelper()->translate("Annulation demandée. L'adresse IP %s et la machine %s n'ont pas été dissociées", 'iptrevise'),long2ip($uneIp->getIp()),$uneMachine->getLibelle());
+    		$this->flashMessenger()->addInfoMessage($message);
+    		return $this->redirect()->toRoute('reseau',array('action'=>'consulter','reseau'=>$unReseau->getId()));
+    	}
+
+    	return new ViewModel(array(
+    			'unReseau' 		=> $unReseau,
+    			'uneMachine'	=> $uneMachine,
+    			'uneIp'	 => $uneIp,
+    	));
+
+    }
+
     public function referencerIpAction()
     {
     	//Initialisation des variables
