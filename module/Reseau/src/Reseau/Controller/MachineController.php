@@ -7,6 +7,8 @@ use Zend\Http\PhpEnvironment\Response;
 use Reseau\Controller\AbstractActionController;
 use Reseau\Service\Factory\MachineService;
 use Reseau\Form\MachineFilter;
+use Reseau\Entity\Abs\Machine;
+use Reseau\Form\IpPourMachineFilter;
 
 
 /**
@@ -28,6 +30,8 @@ class MachineController extends AbstractActionController {
 	 *
 	 */
 	protected $machineForm;
+
+	protected $ipPourMachineForm;
 
 	/**
 	 * Listing des machines
@@ -55,10 +59,13 @@ class MachineController extends AbstractActionController {
 		}
 		$createur  = $uneMachine->getCreateur();
 		$ipService = $this->getIpService();
+		$reseauService = $this->getReseauService();
 
 		$ips = $ipService->rechercherLesIPDUneMachine($uneMachine);
+		$reseaux = $reseauService->listerTousLesReseaux();
 
 		$viewModel = new ViewModel(array(
+				'reseaux'	 => $reseaux,
 				'uneMachine' => $uneMachine,
 				'createur' => $createur,
 				'ips'	   => $ips
@@ -99,6 +106,61 @@ class MachineController extends AbstractActionController {
 		$viewModel = new ViewModel(array(
 				'form' => $form,
 				'headerLabel' => $this->getTranslatorHelper()->translate('Référencer une nouvelle machine'),
+		));
+		return $viewModel;
+	}
+	/**
+	 * Action qui crée une IP et l'associe à la machine courante
+	 *
+	 * @return \Zend\Http\PhpEnvironment\Response|Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>|\Zend\View\Model\ViewModel
+	 */
+	public function creerIpAction(){
+		$uneMachine = $this->getMachineFromUrl(true);
+		if ($uneMachine instanceof Response){
+			//Redirection
+			return $uneMachine;
+		}
+		$unReseau = $this->getReseauFromUrl(true);
+		if ($unReseau instanceof Response){
+			//Redirection
+			return $unReseau;
+		}
+		$ipService = $this->getIpService();
+		$form = $this->getCreerIpPourMachineForm();
+		$form->get('machine')->setValue($uneMachine->getLibelle());
+		$form->get('ip')->setValue(long2ip($ipService->rechercherLaPremiereIpDisponibleDuReseau($unReseau)));
+
+		if($this->getRequest()->isPost()) {
+			$form->setData($this->getRequest()->getPost());
+			$form->setInputFilter(new IpPourMachineFilter());
+			if($form->isValid()) {
+				$uneIp = $ipService->creerUneNouvelleIpPourMachine($form,$unReseau,$uneMachine);
+				$uneIp->setCreateur($this->identity());
+				if ($ipService->isUnique($uneIp,$unReseau)){
+					//Enregistrement
+					$ipService->enregistrerUneIp($uneIp);
+					$message = $this->getTranslatorHelper()->translate('La machine %s a été associée avec succès à l\'IP %s', 'iptrevise');
+					$message = sprintf($message,$uneMachine->getLibelle(),long2Ip($uneIp->getIp()));
+					$this->flashMessenger()->addSuccessMessage($message);
+					return $this->redirect()->toRoute('machine',array('action'=>'consulter','machine'=>$uneMachine->getId()));
+				}else{
+					//$array= $reservationIpForm->getMessages();
+					$array['ip']['isUnique']=$this->getTranslatorHelper()->translate(
+							'Cette adresse Ip est déjà déclaré dans ce réseau'
+					);
+					$form->setMessages($array);
+				}
+			} else {
+				//Marche pas
+				//die('invalide');
+				$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Les informations envoyées comportent des erreurs. Veuillez les rectifier puis les renvoyer !'));
+				//return $this->redirect()->toRoute('reseau');
+			}
+		}
+		$viewModel = new ViewModel(array(
+				'form' 			=> $form,
+				'uneMachine'	=> $uneMachine,
+				'unReseau'		=> $unReseau,
 		));
 		return $viewModel;
 	}
@@ -202,6 +264,20 @@ class MachineController extends AbstractActionController {
 		return $this->machineForm;
 	}
 	/**
+	 * getCreerIpPourMachineForm
+	 *
+	 * @return
+	 */
+	protected function getCreerIpPourMachineForm()
+	{
+		if (null === $this->ipPourMachineForm) {
+			$this->ipPourMachineForm = $this->getServiceLocator()->get('IpPourMachineForm');
+		}
+
+		return $this->ipPourMachineForm;
+	}
+
+	/**
 	 *
 	 * @return unknown
 	 */
@@ -227,5 +303,37 @@ class MachineController extends AbstractActionController {
 			return $this->redirect()->toRoute('machine');
 		}
 		return $uneMachine;
+	}
+	/**
+	 *
+	 * @return unknown
+	 */
+	protected function getReseauFromUrl($writable = false, Machine $uneMachine = null){
+		if( null == $uneMachine){
+			$route = null;
+		}else{
+			$route = array('action'=>'consulter','machine' => $uneMachine->getId());
+		}
+		$id = (int) $this->params()->fromRoute('reseau', 0);
+
+		if ($id == 0) {
+			$this->flashMessenger()->addErrorMessage($this->getTranslatorHelper()->translate('Identifiant réseau invalide', 'iptrevise'));
+			return $this->redirect()->toRoute('machine',$route);
+		}
+
+		$reseauService = $this->getReseauService();
+		if ($writable){
+			//recherche d'une table
+			$rechercherUnReseauSelonId = 'rechercherUnReseauSelonId';
+		}else{
+			//recherche d'une vue
+			$rechercherUnReseauSelonId = 'rechercherUnReseauSelonIdEnLectureSeule';
+		}
+		$unReseau = $reseauService->$rechercherUnReseauSelonId($id);
+		if (empty($unReseau)){
+			$this->flashMessenger()->addWarningMessage($this->getTranslatorHelper()->translate('Le réseau sélectionné n\'a pas été trouvé ou n\'existe plus', 'iptrevise'));
+			return $this->redirect()->toRoute('machine',$route);
+		}
+		return $unReseau;
 	}
 }

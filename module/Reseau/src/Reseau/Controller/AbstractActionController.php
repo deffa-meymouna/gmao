@@ -20,6 +20,11 @@ abstract class AbstractActionController extends ZendActionController
 	protected $entityManager;
 
 	/**
+	 * @var Reseau\Entity\Reseaux
+	 */
+	protected $reseauService;
+
+	/**
 	 * @var Reseau\Entity\Ips
 	 */
 	protected $ipService;
@@ -104,7 +109,19 @@ abstract class AbstractActionController extends ZendActionController
 
     	return $this->machineService;
     }
+    /**
+     * get reseauService
+     *
+     * @return Reseau\Entity\Reseaux
+     */
+    protected function getReseauService()
+    {
+    	if (null === $this->reseauService) {
+    		$this->reseauService = $this->getServiceLocator()->get('ReseauService');
+    	}
 
+    	return $this->reseauService;
+    }
     /**
      * get translatorHelper
      *

@@ -92,6 +92,20 @@ class Ips
     	return $ip;
     }
     /**
+     * Crée une IP et l'associe à une IP
+     * @param ReservationIpForm $form
+     * @param ReseauEntity $unReseau
+     * @param Machine $machine
+     * @return \Reseau\Entity\Table\Ip
+     */
+	public function creerUneNouvelleIpPourMachine(ReservationIpForm $form,ReseauEntity $unReseau, Machine $machine){
+    	$nouvelleIp = $this->creerUneNouvelleIp($form, $unReseau);
+    	$nouvelleIp->setMachine($machine);
+    	return $nouvelleIp;
+    }
+
+
+    /**
      * Création d'une ip depuis un formulaire de référencement et un réseau
      *
      * @param ReferencementIpForm $form

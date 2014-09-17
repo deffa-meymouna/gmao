@@ -28,10 +28,11 @@ return array (
 						'machine' => array (
 								'type' => 'Segment',
 								'options' => array (
-										'route' => '/machine[/:action][/:machine][/ip[/:ip]][/confirmation[/:confirmation]]',
+										'route' => '/machine[/:action][/:machine][/reseau[/:reseau]][/ip[/:ip]][/confirmation[/:confirmation]]',
 										'constraints' => array (
 												'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 												'machine' => '[0-9]*',
+												'reseau' => '[0-9]*',
 												'ip' => '[0-9]*',
 												'confirmation' => '[0-2]'
 										),
@@ -89,6 +90,8 @@ return array (
 						'ReseauService' => 'Reseau\Service\Factory\ReseauService'
 				),
 				'invokables' => array (
+						'IpPourMachineForm' => 'Reseau\Form\IpPourMachineForm',
+						'IpPourMachineFilter' => 'Reseau\Form\IpPourMachineFilter',
 						'reseauForm' => 'Reseau\Form\ReseauForm',
 						'machineForm' => 'Reseau\Form\MachineForm',
 						'reseauFilter' => 'Reseau\Form\ReseauFilter',

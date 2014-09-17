@@ -21,12 +21,6 @@ class IndexController extends AbstractActionController
 	 * @var ModuleOptions
 	 */
 	protected $options;
-
-	/**
-	 * @var Reseau\Entity\Reseaux
-	 */
-	protected $reseauService;
-
 	/**
 	 * @var Reseau\Form\ReseauForm
 	 */
@@ -351,19 +345,6 @@ class IndexController extends AbstractActionController
 
     }
 
-    /**
-     * get reseauService
-     *
-     * @return Reseau\Entity\Reseaux
-     */
-    protected function getReseauService()
-    {
-    	if (null === $this->reseauService) {
-    		$this->reseauService = $this->getServiceLocator()->get('ReseauService');
-    	}
-
-    	return $this->reseauService;
-    }
     /**
      * get reservationIpFilter
      *
