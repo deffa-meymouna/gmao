@@ -96,7 +96,7 @@ class ReservationIpForm extends Form
     		'attributes' => array('type' => 'submit'),
     		'options' => array(
     			'label' => 'Réserver l\'adresse IP',
-    			'column-size' => 'sm-9 col-sm-offset-2'
+    			'column-size' => 'sm-9 col-sm-offset-3'
     		)
         ));
     }
