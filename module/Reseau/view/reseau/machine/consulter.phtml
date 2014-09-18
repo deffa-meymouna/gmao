@@ -58,13 +58,34 @@
 							<?php echo $this->escapehtml($this->translate('Nouvelle IP'));?>
 							<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" role="menu">
+					<ul class="dropdown-menu" role="menu" >
 						<?php foreach ($this->reseaux as $reseau):?>
     						<li>
     							<a href="<?php echo $this->url('machine',array('action'=>'creerIp','machine'=>$this->uneMachine->getId(),'reseau'=>$reseau->getId()));?>"
     							  class="tooltip-left"
     							  title="<?php echo $this->escapehtmlattr(sprintf($this->translate('Associer cette machine à une nouvelle IP du réseau %s'),$reseau->getCIDR()));?>">
     							  <?php echo $this->escapehtmlattr(sprintf($this->translate('Sur le réseau %s - %s'),$reseau->getLibelle(),$reseau->getCIDR()));?>
+    							</a>
+    						</li>
+    					<?php endforeach;?>
+  					</ul>
+  				</div>
+  				<div class="btn-group">
+  					<button type="button"
+					       class="btn btn-default tooltip-top dropdown-toggle"
+					       data-toggle="dropdown"
+					       title="<?php echo $this->escapehtmlattr($this->translate('Associer une IP existante à cette machine'));?>">
+							<i class="fa fa-link fa-fw"></i>
+							<?php echo $this->escapehtml($this->translate('Association une IP'));?>
+							<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" id="dropdown2">
+						<?php foreach ($this->reseaux as $reseau):?>
+    						<li>
+    							<a href="<?php echo $this->url('machine',array('action'=>'associer','machine'=>$this->uneMachine->getId(),'reseau'=>$reseau->getId()));?>"
+    							  class="tooltip-left"
+    							  title="<?php echo $this->escapehtmlattr(sprintf($this->translate('Associer cette machine à une IP existante du réseau %s'),$reseau->getCIDR()));?>">
+    							  <?php echo $this->escapehtmlattr(sprintf($this->translate('Du réseau %s - %s'),$reseau->getLibelle(),$reseau->getCIDR()));?>
     							</a>
     						</li>
     					<?php endforeach;?>
@@ -81,18 +102,6 @@
 				<?php endif;?>
 				<hr/>
 				<div class="btn-group">
-					<a class="btn btn-default tooltip-link"
-					    href="<?php echo $this->url('machine',array('action' => 'creerIP', 'machine' => $this->uneMachine->getId()));?>"
-					   title="<?php echo $this->escapehtmlattr($this->translate('Créer une nouvelle IP qui sera immédiatement associée à cette machine'));?>">
-						<i class="fa fa-plus fa-fw"></i>
-						<?php echo $this->escapehtml($this->translate('Nouvelle IP'));?>
-					</a>
-					<a class="btn btn-default tooltip-link"
-					    href="<?php echo $this->url('machine',array('action' => 'associerIP', 'machine' => $this->uneMachine->getId()));?>"
-					   title="<?php echo $this->escapehtmlattr($this->translate('Associer une IP déjà existante à cette machine'));?>">
-						<i class="fa fa-link fa-fw"></i>
-						<?php echo$this->escapehtml($this->translate('Associer une IP'));?>
-					</a>
 					<a class="btn btn-danger tooltip-link"
 					    href="<?php echo $this->url('machine',array('action' => 'supprimer', 'machine' => $this->uneMachine->getId()));?>"
 					   title="<?php echo $this->escapehtmlattr($this->translate('Supprimer cette machine'));?>">
