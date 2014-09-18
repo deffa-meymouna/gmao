@@ -5,10 +5,10 @@ namespace Reseau\Controller;
 use Zend\View\Model\ViewModel;
 use Zend\Http\PhpEnvironment\Response;
 use Reseau\Controller\AbstractActionController;
-use Reseau\Service\Factory\MachineService;
 use Reseau\Form\MachineFilter;
 use Reseau\Entity\Abs\Machine;
 use Reseau\Form\IpPourMachineFilter;
+use Reseau\Entity\Abs\Ip;
 
 
 /**
@@ -33,6 +33,62 @@ class MachineController extends AbstractActionController {
 
 	protected $ipPourMachineForm;
 
+
+	public function associerIpAction(){
+		//Récupération de la machine
+		$uneMachine=$this->getMachineFromUrl(true);
+		if ($uneMachine instanceof Response){
+			//Redirection
+			return $uneMachine;
+		}
+		//Récupération du réseau
+		$unReseau=$this->getReseauFromUrl(true);
+		if ($unReseau instanceof Response){
+			//Redirection
+			return $unReseau;
+		}
+		$ipService = $this->getIpService();
+		$uneIp = $this->getIpFromUrl(true,false);
+
+		if ($uneIp instanceof Ip){
+
+			$confirmation = (int) $this->params()->fromRoute('confirmation', 0);
+
+			if($this->identity()->getId() === $uneIp->getCreateurId() || 1 == $confirmation){
+				//sauvegarde
+				$uneIp->setMachine($uneMachine);
+				$ipService->enregistrerUneIp($uneIp);
+				$message = $this->getTranslatorHelper()->translate('La machine %s a été associée avec succès à l\'IP %s', 'iptrevise');
+				$message = sprintf($message,$uneMachine->getLibelle(),long2Ip($uneIp->getIp()));
+				$this->flashMessenger()->addSuccessMessage($message);
+				return $this->redirect()->toRoute('machine',array('action'=>'consulter','machine'=>$uneMachine->getId()));
+			}elseif (2 == $confirmation){
+				//confirmation refusée
+				$message = $this->getTranslatorHelper()->translate('Annulation demandée. La machine %s n\'a pas été associée à l\'IP %s', 'iptrevise');
+				$message = sprintf($message,$uneMachine->getLibelle(),long2Ip($uneIp->getIp()));
+				$this->flashMessenger()->addWarningMessage($message);
+				return $this->redirect()->toRoute('machine',array('action'=>'associerIp','machine'=>$uneMachine->getId(),'reseau'=>$unReseau->getId()));
+			}else{
+				//demande de confirmation
+				$view = new ViewModel(array(
+						'uneIp' 		=> $uneIp,
+						'uneMachine'	=> $uneMachine,
+						'unReseau'		=>$unReseau
+				));
+				$view->setTemplate('reseau/machine/confirmer-association-ip');
+				return $view;
+			}
+
+			die('oups');
+		}else{
+			$ips = $ipService->rechercherLesIpSansMachineDuReseau($unReseau);
+			return new ViewModel(array(
+					'ips' => $ips,
+					'uneMachine'	=> $uneMachine,
+					'unReseau'	=>$unReseau
+			));
+		}
+	}
 	/**
 	 * Listing des machines
 	 *

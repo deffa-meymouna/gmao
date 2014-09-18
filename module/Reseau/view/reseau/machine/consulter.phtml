@@ -82,7 +82,7 @@
 					<ul class="dropdown-menu" role="menu" id="dropdown2">
 						<?php foreach ($this->reseaux as $reseau):?>
     						<li>
-    							<a href="<?php echo $this->url('machine',array('action'=>'associer','machine'=>$this->uneMachine->getId(),'reseau'=>$reseau->getId()));?>"
+    							<a href="<?php echo $this->url('machine',array('action'=>'associerIp','machine'=>$this->uneMachine->getId(),'reseau'=>$reseau->getId()));?>"
     							  class="tooltip-left"
     							  title="<?php echo $this->escapehtmlattr(sprintf($this->translate('Associer cette machine à une IP existante du réseau %s'),$reseau->getCIDR()));?>">
     							  <?php echo $this->escapehtmlattr(sprintf($this->translate('Du réseau %s - %s'),$reseau->getLibelle(),$reseau->getCIDR()));?>

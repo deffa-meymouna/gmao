@@ -1,0 +1,36 @@
+<?php $cpt = 0;?>
+<div class="page-header">
+	<h1><i class="fa fa-fw fa-link"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Associer une machine à une IP référencée par un autre utilisateur'))?></h1>
+</div>
+<div class="row text-justify">
+	<div class="col-sm-offset-2 col-sm-8">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+					<i class="fa fa-interrogation"></i>&nbsp;
+					<?php echo $this->escapehtml($this->translate('Demande de confirmation'));?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<p><strong><?php echo $this->escapehtml(sprintf($this->translate('Attention ! Cette adresse IP a été réservée par %s !'),$this->uneIp->getCreateurUsername()));?></strong></p>
+				<p>
+					<?php echo $this->escapehtml(sprintf($this->translate('Vous êtes sur le point d\'associer la machine %s à l\'adresse IP %s.'),$this->uneMachine->getLibelle(),long2ip($this->uneIp->getIp())));?>
+					<?php echo $this->escapehtml($this->translate('Or cette adresse IP a été réservée par un autre utilisateur que vous-même.'));?>
+					<?php echo $this->escapehtml($this->translate('Si vous voulez poursuivre, cliquez sur le bouton Associer.'));?>
+					<?php echo $this->escapehtml($this->translate('Si vous souhaitez sélectionner une autre adresse IP, cliquez sur le bouton Annuler.'));?>
+				</p>
+			</div>
+
+			<div class="panel-footer text-right">
+				<div class="btn-group">
+					<a href="<?php echo $this->url('machine',array('action'=>'associerIp','machine'=>$this->uneMachine->getId(),'reseau'=>$this->unReseau->getId(),'ip'=>$this->uneIp->getId(), 'confirmation'=>1));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Associer la machine à cette adresse IP'))?>"
+					  class="btn btn-primary tooltip-link"><i class="fa fa-link fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Associer'))?></a>
+					<a href="<?php echo $this->url('machine',array('action'=>'associerIp','machine'=>$this->uneMachine->getId(),'reseau'=>$this->unReseau->getId(),'ip'=>$this->uneIp->getId(), 'confirmation'=>2));?>"
+					   title="<?php echo $this->escapehtmlattr($this->translate('Annulation. Aucune tâche ne sera réalisée.'))?>"
+					  class="btn btn-default tooltip-link"><i class="fa fa-reply fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Annuler'))?></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

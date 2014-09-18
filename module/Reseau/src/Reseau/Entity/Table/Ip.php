@@ -123,8 +123,7 @@ class Ip extends IpAbstract
 	 * @see \Reseau\Entity\Abs\Ip::getCreateurId()
 	*/
 	public function getCreateurId() {
-		return $this->getCreateur->getId();
-
+		return $this->getCreateur()->getId();
 	}
 	/* (non-PHPdoc)
 	 * @see \Reseau\Entity\Abs\Ip::getUsername()
