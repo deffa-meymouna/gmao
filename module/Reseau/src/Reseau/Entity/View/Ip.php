@@ -51,6 +51,13 @@ class Ip extends IpAbstract
 	/**
 	 * @var integer
 	 *
+	 * @ORM\Column(name="usr_id", type="integer", nullable=false)
+	 */
+	protected $usr_id;
+
+	/**
+	 * @var integer
+	 *
 	 * @ORM\Column(name="res_id", type="integer", nullable=false)
 	 */
 	protected $reseauId;
@@ -102,6 +109,13 @@ class Ip extends IpAbstract
 	 */
 	public function getCreateurUsername() {
 		return $this->username;
+	}
+
+	/**
+	 * @return the $usr_id
+	 */
+	public function getCreateurId() {
+		return $this->usr_id;
 	}
 
 	/**

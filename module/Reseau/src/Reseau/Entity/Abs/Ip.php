@@ -188,4 +188,9 @@ abstract class Ip
 	 * @return the $username
 	 */
 	abstract public function getCreateurUsername();
+
+	/**
+	 * @return integer the id of createur
+	 */
+	abstract public function getCreateurId();
 }

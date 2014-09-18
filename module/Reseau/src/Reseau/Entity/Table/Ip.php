@@ -106,7 +106,7 @@ class Ip extends IpAbstract
 	 */
 	public function getMachineId() {
 		if ($this->getMachine() instanceof MachineAbstract){
-			return $this->getMachineId();
+			return $this->getMachine->getId();
 		}
 	}
 
@@ -119,6 +119,13 @@ class Ip extends IpAbstract
 		}
 	}
 
+	/* (non-PHPdoc)
+	 * @see \Reseau\Entity\Abs\Ip::getCreateurId()
+	*/
+	public function getCreateurId() {
+		return $this->getCreateur->getId();
+
+	}
 	/* (non-PHPdoc)
 	 * @see \Reseau\Entity\Abs\Ip::getUsername()
 	 */
@@ -152,4 +159,6 @@ class Ip extends IpAbstract
 	public function getReseauLibelle() {
 		return $this->getReseau()->getLibelle();
 	}
+
+
 }
