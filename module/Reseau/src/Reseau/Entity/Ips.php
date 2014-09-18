@@ -41,6 +41,15 @@ class Ips
     	$vue = $this->entityManager->getRepository('Reseau\Entity\View\Ip');
     	return $vue->findByReseauId($unReseau->getId());
     }
+    /**
+     * Liste toutes les ips d'un réseau depuis la vue
+     * @return
+     */
+    public function rechercherLesIpSansMachineDuReseau(ReseauEntity $unReseau){
+    	$vue = $this->entityManager->getRepository('Reseau\Entity\View\Ip');
+    	return $vue->findBy(array('reseauId' => $unReseau->getId(),'machineId'=>null));
+    }
+
 	/**
 	 * Retourne la première adresse IP disponible du réseau
 	 * Retourne FALSE si le réseau n'a plus d'adresse disponible
