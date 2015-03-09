@@ -124,7 +124,13 @@
 		<?php foreach ($this->ips as $key => $ip):?>
 		<tr>
 			<td headers="number"><?php echo $this->escapehtml($key + 1);?></td>
-			<td headers="ips_adresse"><?php echo $this->ip($ip->getIp());?></td>
+			<td headers="ips_adresse">
+				<a class="tooltip-link"
+				    href="<?php echo $this->url('machine',array('action'=>'consulterIp','ip'=>$ip->getId()));?>"
+				   title="<?php echo $this->escapehtmlattr(sprintf($this->translate('Informations complètes sur l\'IP %s'),$this->ip($ip->getIp())));?>">
+					<?php echo $this->ip($ip->getIp());?>
+				</a>
+			</td>
 			<td headers="ips_libelle"><?php echo $this->escapehtml($ip->getLibelle());?></td>
 			<td headers="ips_createur"><?php echo $this->escapehtml($ip->getCreateurUsername());?></td>
 			<td headers="ips_machine">

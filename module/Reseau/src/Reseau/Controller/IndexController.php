@@ -335,7 +335,7 @@ class IndexController extends AbstractActionController
     	}elseif($confirmation == 2){
     		$message = sprintf($this->getTranslatorHelper()->translate("Annulation demandée. L'adresse IP %s n'a pas été supprimée", 'iptrevise'),long2ip($uneIp->getIp()));
     		$this->flashMessenger()->addInfoMessage($message);
-    		return $this->redirect()->toRoute('reseau',array('action'=>'consulter','reseau'=>$unReseau->getId()));
+    		return $this->redirect()->toRoute('machine',array('action'=>'consulterIp','ip'=>$uneIp->getId()));
     	}
 
     	return new ViewModel(array(

@@ -129,6 +129,38 @@ class MachineController extends AbstractActionController {
 		return $viewModel;
 	}
 
+	/**
+	 * Cas d'utilisation : Consulter une IP d'un des réseaux
+	 *
+	 * @return Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>|\Zend\View\Model\ViewModel
+	 */
+	public function consulterIpAction()
+	{
+		//Récupération de l'ip
+		$uneIp=$this->getIpFromUrl();
+		if ($uneIp instanceof Response){
+			//Redirection
+			return $uneIp;
+		}
+		//Recherche du réseau associé
+		$reseauService = $this->getReseauService();
+		$unReseau  = $reseauService->rechercherUnReseauSelonId($uneIp->getReseauId());
+		//Recherche de la machine associée
+		$machineService = $this->getMachineService();
+		$uneMachine = $machineService->rechercherUneMachineSelonId($uneIp->getMachineId());
+		//Transmission à la vue
+		$viewModel = new ViewModel(array(
+				'uneIp'      => $uneIp,
+				'uneMachine' => $uneMachine,
+				'unReseau'   => $unReseau ,
+		));
+		return $viewModel;
+	}
+	/**
+	 * Cas d'utilisation : Création d'une machine
+	 *
+	 * @return Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>|\Zend\View\Model\ViewModel
+	 */
 	public function creerAction(){
 		$form = $this->getMachineForm();
 

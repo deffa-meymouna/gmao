@@ -1,0 +1,168 @@
+<div class="page-header">
+	<h1>
+		<?php echo sprintf($this->translate('Détail de l\'IP %s du réseau %s'),
+			              '<strong>'.$this->escapehtml($this->uneIp->getLibelle()).'</strong>',
+			              '<strong>'.$this->escapehtml($this->uneIp->getReseauLibelle()).'</strong>');?>
+	</h1>
+</div>
+<?php
+	$flash = $this->flashmessenger();
+	echo $flash->render('error',   array('alert', 'alert-dismissable', 'alert-danger'));
+	echo $flash->render('warning', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('info',    array('alert', 'alert-dismissable', 'alert-info'));
+	echo $flash->render('default', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('success', array('alert', 'alert-dismissable', 'alert-success'));
+?>
+<div class="row text-justify">
+	<div class="col-sm-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+					<?php echo $this->translate('Informations sur l\'adresse IP');?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Ip');?></dt>
+					<dd><?php echo $this->ip($this->uneIp->getIp());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Libellé');?></dt>
+					<dd><?php echo $this->escapehtml($this->uneIp->getLibelle());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Interface');?></dt>
+					<?php if (empty($this->uneIp->getInterface())):?>
+						<dd><em><?php echo $this->escapehtml($this->translate('L\'interface branchée n\'a pas été renseignée'));?></em></dd>
+					<?php else:?>
+						<dd>
+							<em>
+								<?php echo $this->escapehtml(sprintf($this->translate('L\'Ip est affectée à l\'interface n°%s'),$this->uneIp->getInterface()));?>
+							</em>
+						</dd>
+					<?php endif;?>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->escapehtml($this->translate('Adresse natée'));?></dt>
+					<?php if ($this->uneIp->isNat()): ?>
+						<dd><span class="label label-default"><?php echo $this->escapehtml($this->translate("Oui"));?></span></dd>
+					<?php else: ?>
+						<dd><span class="label label-default"><?php echo $this->escapehtml($this->translate("Non"));?></span></dd>
+					<?php endif;?>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Description');?></dt>
+					<dd><?php echo $this->escapehtml($this->uneIp->getDescription());?></dd>
+				</dl>
+				</div>
+			<div class="panel-footer text-right">
+				<small><em><?php echo $this->escapehtml(sprintf($this->translate('Adresse IP référencée par %s'),$this->uneIp->getCreateurUsername()));?></em></small>
+			</div>
+		</div>
+		<!-- Panneau des informations sur la machine -->
+		<?php if ($this->uneIp->hasMachine()):?>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2 class="panel-title">
+						<?php echo $this->translate('Informations sur la machine associée');?>
+					</h2>
+				</div>
+				<div class="panel-body">
+					<dl class="dl-horizontal">
+						<dt><?php echo $this->translate('Type');?></dt>
+						<dd><?php echo $this->escapehtml($this->uneMachine->getType());?></dd>
+					</dl>
+					<dl class="dl-horizontal">
+						<dt><?php echo $this->translate('Libellé');?></dt>
+						<dd><?php echo $this->escapehtml($this->uneMachine->getLibelle());?></dd>
+					</dl>
+					<dl class="dl-horizontal">
+						<dt><?php echo $this->translate('Description');?></dt>
+						<dd><?php echo $this->escapehtml($this->uneMachine->getDescription());?></dd>
+					</dl>
+					<dl class="dl-horizontal">
+						<dt><?php echo $this->translate('Nb d\'interfaces');?></dt>
+						<dd><?php echo $this->escapehtml($this->uneMachine->getInterface());?></dd>
+					</dl>
+				</div>
+				<div class="panel-footer text-right">
+					<small><em><?php echo $this->escapehtml(sprintf($this->translate('Machine référencée par %s'),$this->uneMachine->getCreateurUsername()));?></em></small>
+				</div>
+			</div>
+		<?php else:?>
+			<p class="alert alert-info">
+				<?php echo $this->escapehtml($this->translate('Cette adresse IP n\'est associée à aucune machine'));?>
+			</p>
+		<?php endif;?>
+	</div>
+	<!--  Deuxième colonne -->
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+					<?php echo $this->translate('Informations sur le réseau');?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Réseau');?></dt>
+					<dd><?php echo $this->escapehtml($this->unReseau->getLibelle());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Description');?></dt>
+					<dd><?php echo $this->escapehtml($this->unReseau->getDescription());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('IP Réseau');?></dt>
+					<dd>
+						<abbr title="<?php echo $this->escapehtmlattr($this->unReseau->getIP().' / '.$this->unReseau->getMasque());?>">
+							<?php echo $this->escapehtml($this->unReseau->getCIDR());?>
+						</abbr>
+					</dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Broadcast');?>&nbsp;:</dt>
+		  			<dd><?php echo $this->escapehtml($this->unReseau->getBroadcast());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Passerelle');?></dt>
+					<dd><?php echo $this->escapehtml($this->unReseau->getPasserelle());?></dd>
+				</dl>
+			</div>
+			<div class="panel-footer text-right">
+				<small><em><?php echo $this->escapehtml(sprintf($this->translate('Réseau référencé par %s'),$this->unReseau->getCreateurUsername()));?></em></small>
+			</div>
+		</div>
+		<!-- Panneau des actions -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+					<?php echo $this->translate('Actions');?>
+				</h2>
+			</div>
+			<div class="panel-body text-center">
+				<div class="btn-group">
+					<!-- <a  href="<?php echo $this->url('reseau',array('action' => 'modifierIp', 'reseau' => $this->uneIp->getReseauId(), 'ip' => $this->uneIp->getId()));?>"
+					   class="btn btn-default tooltip-link"
+					   title="<?php echo $this->escapehtmlattr($this->translate('Modifier cette adresse IP'));?>">
+						<i class="fa fa-pencil fa-fw"></i>
+						<?php echo $this->escapehtml($this->translate('Modifier'));?>
+					</a> -->
+					<a class="btn btn-warning tooltip-link"
+						href="<?php echo $this->url('machine',array('action' => 'dissocierIp', 'ip' => $this->uneIp->getId()));?>"
+						title="<?php echo $this->escapehtmlattr($this->translate('Dissocier une IP d\'une machine'));?>">
+						<i class="fa fa-unlink"></i>
+						<?php echo $this->escapehtml($this->translate('Dissocier'));?>
+					</a>
+					<a  href="<?php echo $this->url('reseau',array('action' => 'supprimerIp', 'reseau' => $this->uneIp->getReseauId(), 'ip' => $this->uneIp->getId()));?>"
+					   class="btn btn-danger tooltip-link"
+					   title="<?php echo $this->escapehtmlattr($this->translate('Supprimer cette adresse IP'));?>">
+						<i class="fa fa-trash-o fa-fw"></i>
+						<?php echo $this->escapehtml($this->translate('Supprimer'));?>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

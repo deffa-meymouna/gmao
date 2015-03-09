@@ -40,6 +40,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Panneau des actions -->
 	<div class="col-sm-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -113,6 +114,7 @@
 		</div>
 	</div>
 </div>
+<!-- Tableau des IPs -->
 <?php if (is_array($this->ips) && count($this->ips)):?>
 <table class="table table-condensed table-hover table-striped">
 	<thead>
@@ -129,12 +131,19 @@
 		<?php foreach ($this->ips as $key => $ip):?>
 		<tr>
 			<td headers="number"><?php echo $this->escapehtml($key + 1);?></td>
-			<td headers="ips_adresse"><?php echo $this->ip($ip->getIp());?></td>
+			<td headers="ips_adresse">
+				<a class="tooltip-link"
+				    href="<?php echo $this->url('machine',array('action'=>'consulterIp','ip'=>$ip->getId()));?>"
+				   title="<?php echo $this->escapehtmlattr(sprintf($this->translate('Informations complètes sur l\'IP %s'),$this->ip($ip->getIp())));?>">
+					<?php echo $this->ip($ip->getIp());?>
+				</a>
+			</td>
 			<td headers="ips_libelle"><?php echo $this->escapehtml($ip->getLibelle());?></td>
 			<td headers="ips_createur"><?php echo $this->escapehtml($ip->getCreateurUsername());?></td>
 			<td headers="ips_reseau">
-				<a href="<?php echo $this->url('reseau',array('action'=>'consulter','reseau'=>$ip->getReseauId()));?>"
-				  title="<?php echo $this->escapehtmlattr(sprintf($this->translate('Accéder au réseau %s'),$ip->getReseauLibelle()));?>">
+				<a class="tooltip-link"
+				    href="<?php echo $this->url('reseau',array('action'=>'consulter','reseau'=>$ip->getReseauId()));?>"
+				   title="<?php echo $this->escapehtmlattr(sprintf($this->translate('Accéder au réseau %s'),$ip->getReseauLibelle()));?>">
 				<?php echo $this->escapehtml($ip->getReseauLibelle());?>
 				</a>
 				&bull;

@@ -12,6 +12,7 @@ namespace Reseau\Entity\Abs;
 
 use Doctrine\ORM\Mapping as ORM;
 use Reseau\Entity\Abs\Reseau;
+use Reseau\Entity\Abs\Machine;
 
 /**
  * Doctrine ORM abstract implementation of Reseau entity
@@ -153,6 +154,23 @@ abstract class Ip
 	public function setIpFromString($chaineIp) {
 		$this->ip = sprintf('%u',ip2long($chaineIp));
 	}
+
+	/**
+	 * @alias getNat()
+	 * @return boolean true if is nated
+	 */
+	public function isNat() {
+		return $this->nat;
+	}
+
+	/**
+	 *
+	 * @return boolean True si l'adresse IP est associée à une machine
+	 */
+	public function hasMachine(){
+		return !empty($this->getMachineId());
+	}
+
 
 	/**
 	 * @return integer the $reseauId
