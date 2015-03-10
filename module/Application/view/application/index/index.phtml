@@ -1,4 +1,7 @@
-<?php $identified = !empty($this->identity());?>
+<?php
+	$identified = $this->identity();
+	$identified = !empty($identified);
+?>
 <div class="jumbotron">
     <h1><?php echo sprintf($this->translate('%sIP-Trevise%s %sLa gestion de vos adresses IP%s'), '<i class="fa fa-sitemap"></i>&nbsp;<span class="text-success">', '</span>','<small>','</small>') ?></h1>
     <p><?php
@@ -77,7 +80,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">

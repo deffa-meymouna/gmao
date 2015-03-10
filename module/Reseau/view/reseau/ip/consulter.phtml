@@ -32,7 +32,7 @@
 				</dl>
 				<dl class="dl-horizontal">
 					<dt><?php echo $this->translate('Interface');?></dt>
-					<?php if (empty($this->uneIp->getInterface())):?>
+					<?php if (0 == ($this->uneIp->getInterface())):?>
 						<dd><em><?php echo $this->escapehtml($this->translate('L\'interface branchée n\'a pas été renseignée'));?></em></dd>
 					<?php else:?>
 						<dd>

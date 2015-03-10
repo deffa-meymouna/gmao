@@ -168,7 +168,8 @@ abstract class Ip
 	 * @return boolean True si l'adresse IP est associée à une machine
 	 */
 	public function hasMachine(){
-		return !empty($this->getMachineId());
+		$machineId = $this->getMachineId();
+		return !empty($machineId);
 	}
 
 
