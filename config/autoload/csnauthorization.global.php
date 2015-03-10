@@ -55,7 +55,14 @@ return array(
         				'index'	=>	'member',
         				'all'	=>	'technician',
         		),
-                /**
+        		/**
+        		 * IP-Trevise
+        		 */
+        		'Reseau\Controller\Ip' => array(
+        				'index'	=>	'member',
+        				'all'	=>	'technician',
+        		),
+        		/**
                  *  ACL for CsnCms articles
                  */
                 'all' => array(

@@ -175,5 +175,6 @@ abstract class Machine
 	abstract public function getReseauCount();
 	abstract public function getIpCount();
 	abstract public function getCreateurUsername();
+	abstract public function getCreateurId();
 
 }

@@ -33,7 +33,11 @@ class MachineController extends AbstractActionController {
 
 	protected $ipPourMachineForm;
 
-
+	/**
+	 * Cas d'utilisation : Associer une IP depuis une machine
+	 *
+	 * @return \Zend\Http\PhpEnvironment\Response|Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>|\Zend\View\Model\ViewModel
+	 */
 	public function associerIpAction(){
 		//Récupération de la machine
 		$uneMachine=$this->getMachineFromUrl(true);
@@ -322,7 +326,7 @@ class MachineController extends AbstractActionController {
 			$message = sprintf("L'adresse IP %s est dissociée de la machine %s",long2ip($uneIp->getIp()),$uneMachine->getLibelle());
 			$message = $this->getTranslatorHelper()->translate($message,'iptrevise');
 			$this->flashMessenger()->addSuccessMessage($message);
-			return $this->redirect()->toRoute('machine');
+			return $this->redirect()->toRoute('machine',array('action'=>'consulter','machine'=>$uneMachine->getId()));
 		}elseif($confirmation == 2){
 			$message = sprintf("Annulation demandée. L'adresse IP %s est toujours associée à la machine %s",long2ip($uneIp->getIp()),$uneMachine->getLibelle());
 			$message = $this->getTranslatorHelper()->translate($message,'iptrevise');

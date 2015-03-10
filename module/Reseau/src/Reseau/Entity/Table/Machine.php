@@ -39,4 +39,7 @@ class Machine extends MachineAbs
 	public function getCreateurUsername(){
 		return $this->getCreateur()->getUsername();
 	}
+	public function getCreateurId(){
+		return $this->getCreateur()->getId();
+	}
 }

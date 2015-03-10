@@ -126,7 +126,7 @@
 			<td headers="number"><?php echo $this->escapehtml($key + 1);?></td>
 			<td headers="ips_adresse">
 				<a class="tooltip-link"
-				    href="<?php echo $this->url('machine',array('action'=>'consulterIp','ip'=>$ip->getId()));?>"
+				    href="<?php echo $this->url('ip',array('action'=>'consulter','ip'=>$ip->getId()));?>"
 				   title="<?php echo $this->escapehtmlattr(sprintf($this->translate('Informations complètes sur l\'IP %s'),$this->ip($ip->getIp())));?>">
 					<?php echo $this->ip($ip->getIp());?>
 				</a>
@@ -153,7 +153,7 @@
 					</a>
 					<?php endif;?>
 					<a class="btn btn-default btn-xs tooltip-link"
-						href="<?php echo $this->url('reseau',array('action' => 'associerIp', 'reseau' => $this->unReseau->getId(), 'ip' => $ip->getId()));?>"
+						href="<?php echo $this->url('ip',array('action' => 'associerMachine', 'ip' => $ip->getId()));?>"
 						<?php if (null === $ip->getMachineId()):?>
 						title="<?php echo $this->escapehtmlattr($this->translate('Associer à une machine'));?>">
 						<?php else:?>
@@ -162,7 +162,7 @@
 						<i class="fa fa-link"></i>
 					</a>
 					<a class="btn btn-danger btn-xs tooltip-link"
-						href="<?php echo $this->url('reseau',array('action' => 'supprimerIp', 'reseau' => $this->unReseau->getId(), 'ip' => $ip->getId()));?>"
+						href="<?php echo $this->url('ip',array('action' => 'supprimer', 'ip' => $ip->getId()));?>"
 						title="<?php echo $this->escapehtmlattr($this->translate('Supprimer cette adresse Ip'));?>">
 						<i class="fa fa-trash-o"></i>
 					</a>

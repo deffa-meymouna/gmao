@@ -1,0 +1,76 @@
+<?php $idUser = $this->identity()->getId();?>
+<div class="page-header">
+	<h1><i class="fa fa-fw fa-link"></i>&nbsp;<?php echo $this->escapehtml('Associer une IP à une machine existante')?></h1>
+</div>
+<p>
+	<?php echo $this->escapehtml(sprintf($this->translate('Vous êtes sur le point d\'associer l\'IP « %s » à une machine existante. Sélectionnez la machine de votre choix.'),$this->uneIp->getLibelle()));?>
+<?php
+	$flash = $this->flashmessenger();
+	echo $flash->render('error',   array('alert', 'alert-dismissable', 'alert-danger'));
+	echo $flash->render('warning', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('info',    array('alert', 'alert-dismissable', 'alert-info'));
+	echo $flash->render('default', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('success', array('alert', 'alert-dismissable', 'alert-success'));
+?>
+<?php if (is_array($this->machines) && count($this->machines)):?>
+<table class="table table-condensed table-hover table-striped">
+	<thead>
+		<tr>
+			<th id="number">#</th>
+			<th id="machines_libelle"><?php echo $this->escapehtml($this->translate('Machine'));?></th>
+			<th id="machines_type"><?php echo $this->escapehtml($this->translate('Type'));?></th>
+			<th id="machines_reference"><?php echo $this->escapehtml($this->translate('Référencée par'));?></th>
+			<th id="action"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($this->machines as $key => $machine):?>
+		<tr class="<?php echo ($machine->getCreateurId() == $idUser)?'success':'warning';?>">
+			<td headers="number"><?php echo $this->escapehtml($key + 1);?></td>
+			<td headers="machines_libelle"><?php echo $this->escapehtml($machine->getLibelle());?></td>
+			<td headers="machines_type"><?php echo $this->escapehtml($machine->getType());?></td>
+			<td headers="machines_reference"><?php echo $this->escapehtml($machine->getCreateurUsername());?></td>
+			<td headers="action">
+				<div class="btn-group">
+				    <a class="btn btn-primary btn-xs tooltip-link"
+						href="<?php echo $this->url('ip',array('action' => 'associerMachine', 'ip' => $this->uneIp->getId(), 'machine' => $machine->getId()));?>"
+						title="<?php echo $this->escapehtmlattr(sprintf($this->translate('Associer la machine %s à l\'IP %s'),$machine->getLibelle(),$this->ip($this->uneIp->getIp())));?>">
+						<i class="fa fa-link"></i>&nbsp;Associer
+					</a>
+				</div>
+			</td>
+		</tr>
+		<?php endforeach;?>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th headers="number">#</th>
+			<th headers="machines_libelle"><?php echo $this->escapehtml($this->translate('Machine'));?></th>
+			<th headers="machines_type"><?php echo $this->escapehtml($this->translate('Type'));?></th>
+			<th headers="machines_reference"><?php echo $this->escapehtml($this->translate('Référencée par'));?></th>
+			<th headers="action"></th>
+		</tr>
+	</tfoot>
+</table>
+<hr/>
+<?php $message = $this->translate('Si aucune de ces machines n\'est satisfaisante, vous pouvez en créer une nouvelle et l\'associer automatiquement à cette IP en cliquant sur le bouton suivant.');?>
+<?php else:?>
+<?php $message = $this->translate('La base de données ne référence encore aucune machine. Vous pouvez référencer une nouvelle machine et l\'associer à l\'IP courante en cliquant sur le bouton suivant');?>
+<?php endif;?>
+<div class="row">
+	<div class="col-sm-9">
+		<p class="alert alert-info text-center">
+			<?php echo $this->escapehtml($message);?>
+		</p>
+	</div>
+	<div class="col-sm-3">
+		<span class="">
+			<a href="<?php echo $this->url('ip',array('action'=>'creerMachine','ip'=>$this->uneIp->getId()));?>"
+			  title="<?php echo $this->escapehtmlattr($this->translate('Référencer une nouvelle machine et l\'associer automatiquement à cette IP'));?>"
+			  class="btn btn-primary tooltip-link">
+			  <i class="fa fa-fw fa-plus"></i>&nbsp;
+			  Référencer une machine
+			</a>
+		</span>
+	</div>
+</div>

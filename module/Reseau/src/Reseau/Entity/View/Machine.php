@@ -40,6 +40,12 @@ class Machine extends MachineAbs
      * @ORM\Column(name="usr_username", type="string", length=32, nullable=false, unique=false)
      */
 	protected $username;
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="usr_id", type="integer", nullable=false, unique=false)
+	 */
+	protected $createurId;
 
 	public function getReseauCount(){
 		return $this->reseauQuantite;
@@ -49,6 +55,9 @@ class Machine extends MachineAbs
 	}
 	public function getCreateurUsername(){
 		return $this->username;
+	}
+	public function getCreateurId(){
+		return $this->createurId;
 	}
 
 }

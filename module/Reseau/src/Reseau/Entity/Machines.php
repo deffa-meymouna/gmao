@@ -16,6 +16,7 @@ use Reseau\Entity\Abs\Reseau   as ReseauEntity;
 use Reseau\Entity\Table\Machine as MachineTable;
 use Reseau\Form\MachineForm;
 use Reseau\Form\ReferencementIpForm;
+use Reseau\Entity\Abs\Ip;
 
 class Machines
 {
@@ -68,6 +69,17 @@ class Machines
 		$nouvelleMachine->setInterface($form->get('interface')->getValue());
 		$nouvelleMachine->setType($form->get('type')->getValue());
 		return $nouvelleMachine;
+    }
+    /**
+     * Crée une IP et l'associe à une IP
+     * @param MachineForm $form
+     * @param Ip $uneIp
+     * @return \Reseau\Entity\Table\Machine
+     */
+    public function creerUneNouvelleMachinePourIp(MachineForm $form,Ip $uneIp){
+    	$nouvelleMachine = $this->creerUneNouvelleMachine($form);
+    	$uneIp->setMachine($nouvelleMachine);
+    	return $nouvelleMachine;
     }
     /**
      * Service de création d'une Entité Machine à partir d'un formulaire valide

@@ -2,8 +2,9 @@
 return array (
 		'controllers' => array (
 				'invokables' => array (
-						'Reseau\Controller\Index' => 'Reseau\Controller\IndexController',
-						'Reseau\Controller\Machine' => 'Reseau\Controller\MachineController'
+						'Reseau\Controller\Index'   => 'Reseau\Controller\IndexController',
+						'Reseau\Controller\Machine' => 'Reseau\Controller\MachineController',
+						'Reseau\Controller\Ip'      => 'Reseau\Controller\IpController'
 				)
 		),
 		'router' => array (
@@ -42,7 +43,25 @@ return array (
 										)
 								),
 								'may_terminate' => true
+						),
+						'ip' => array (
+								'type' => 'Segment',
+								'options' => array (
+										'route' => '/ip[/:action][/:ip][/machine[/:machine]][/confirmation[/:confirmation]]',
+										'constraints' => array (
+												'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+												'machine' => '[0-9]*',
+												'ip' => '[0-9]*',
+												'confirmation' => '[0-2]'
+										),
+										'defaults' => array (
+												'controller' => 'Reseau\Controller\Ip',
+												'action' => 'index'
+										)
+								),
+								'may_terminate' => true
 						)
+
 				)
 		),
 		'view_manager' => array (
@@ -92,6 +111,8 @@ return array (
 				'invokables' => array (
 						'IpPourMachineForm' => 'Reseau\Form\IpPourMachineForm',
 						'IpPourMachineFilter' => 'Reseau\Form\IpPourMachineFilter',
+						'MachinePourIpForm' => 'Reseau\Form\MachinePourIpForm',
+						'MachinePourIpFilter' => 'Reseau\Form\MachinePourIpFilter',
 						'reseauForm' => 'Reseau\Form\ReseauForm',
 						'machineForm' => 'Reseau\Form\MachineForm',
 						'reseauFilter' => 'Reseau\Form\ReseauFilter',

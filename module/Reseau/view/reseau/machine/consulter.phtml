@@ -133,7 +133,7 @@
 			<td headers="number"><?php echo $this->escapehtml($key + 1);?></td>
 			<td headers="ips_adresse">
 				<a class="tooltip-link"
-				    href="<?php echo $this->url('machine',array('action'=>'consulterIp','ip'=>$ip->getId()));?>"
+				    href="<?php echo $this->url('ip',array('action'=>'consulter','ip'=>$ip->getId()));?>"
 				   title="<?php echo $this->escapehtmlattr(sprintf($this->translate('Informations complètes sur l\'IP %s'),$this->ip($ip->getIp())));?>">
 					<?php echo $this->ip($ip->getIp());?>
 				</a>
@@ -157,7 +157,7 @@
 						<i class="fa fa-unlink"></i>
 					</a>
 					<a class="btn btn-danger btn-xs tooltip-link"
-						href="<?php echo $this->url('reseau',array('action' => 'supprimerIp', 'reseau' => $ip->getReseauId(), 'ip' => $ip->getId()));?>"
+						href="<?php echo $this->url('ip',array('action' => 'supprimer', 'ip' => $ip->getId()));?>"
 						title="<?php echo $this->escapehtmlattr($this->translate('Supprimer cette adresse Ip'));?>">
 						<i class="fa fa-trash-o"></i>
 					</a>

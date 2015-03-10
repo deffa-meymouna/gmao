@@ -309,41 +309,6 @@ class IndexController extends AbstractActionController
 		return new ViewModel(array('reseau' => $unReseau));
 
     }
-	/**
-     * Action de suppression d'une ip
-	 * @return \Zend\Http\PhpEnvironment\Response|Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>|\Zend\View\Model\ViewModel
-	 */
-    public function supprimerIpAction(){
-    	$unReseau = $this->getReseauFromUrl();
-    	if ($unReseau instanceof Response){
-    		//Redirection
-    		return $unReseau;
-    	}
-
-    	$uneIp = $this->getIpFromUrl(true);
-    	if ($uneIp instanceof Response){
-    		//Redirection
-    		return $uneIp;
-    	}
-    	$confirmation = (int) $this->params()->fromRoute('confirmation', 0);
-
-    	if($confirmation == 1){
-    		$this->getIpService()->supprimerUneIp($uneIp);
-    		$message = sprintf($this->getTranslatorHelper()->translate("Adresse IP %s supprimée avec succès", 'iptrevise'),long2ip($uneIp->getIp()));
-    		$this->flashMessenger()->addSuccessMessage($message);
-    		return $this->redirect()->toRoute('reseau',array('action'=>'consulter','reseau'=>$unReseau->getId()));
-    	}elseif($confirmation == 2){
-    		$message = sprintf($this->getTranslatorHelper()->translate("Annulation demandée. L'adresse IP %s n'a pas été supprimée", 'iptrevise'),long2ip($uneIp->getIp()));
-    		$this->flashMessenger()->addInfoMessage($message);
-    		return $this->redirect()->toRoute('machine',array('action'=>'consulterIp','ip'=>$uneIp->getId()));
-    	}
-
-    	return new ViewModel(array(
-    			'unReseau' => $unReseau,
-    			'uneIp'	 => $uneIp,
-    	));
-
-    }
 
     /**
      * get reservationIpFilter
