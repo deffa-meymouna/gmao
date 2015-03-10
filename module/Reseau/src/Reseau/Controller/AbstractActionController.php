@@ -14,6 +14,8 @@ use Zend\Mvc\Controller\AbstractActionController as ZendActionController;
 
 abstract class AbstractActionController extends ZendActionController
 {
+	const CONFIRMER = 1 ;
+	const ANNULER   = 2 ;
 	/**
 	 * @var Doctrine\ORM\EntityManager
 	 */
