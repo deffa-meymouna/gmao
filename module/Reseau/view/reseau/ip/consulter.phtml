@@ -166,7 +166,7 @@
 						<i class="fa fa-unlink"></i>
 						<?php echo $this->escapehtml($this->translate('Dissocier'));?>
 					</a>
-					<a  href="<?php echo $this->url('reseau',array('action' => 'supprimerIp', 'reseau' => $this->uneIp->getReseauId(), 'ip' => $this->uneIp->getId()));?>"
+					<a  href="<?php echo $this->url('ip',array('action' => 'supprimer', 'ip' => $this->uneIp->getId()));?>"
 					   class="btn btn-danger tooltip-link"
 					   title="<?php echo $this->escapehtmlattr($this->translate('Supprimer cette adresse IP'));?>">
 						<i class="fa fa-trash-o fa-fw"></i>
