@@ -73,7 +73,7 @@
 							$couleurBar = 'progress-bar-danger';
 						}
 					?>
-  					<div class="progress-bar <?php echo $couleurBar;?> progress-bar-striped" role="progressbar" aria-valuenow="<?php echo $pourcentage;?>" aria-valuemin="0" aria-valuemax="100">
+  					<div class="progress-bar <?php echo $couleurBar;?> progress-bar-striped" role="progressbar" aria-valuenow="<?php echo $pourcentage;?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo max(10,$pourcentage);?>%">
     					<?php echo $pourcentage?>%
   					</div>
 				</div>
