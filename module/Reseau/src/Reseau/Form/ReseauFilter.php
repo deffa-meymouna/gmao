@@ -100,7 +100,7 @@ class ReseauFilter extends InputFilter
         						'name' => 'Int',
         						'options' => array(
         								'min' => 2,
-        								'max' => 24
+        								'max' => 29
         						),
         				),
         		),

@@ -59,7 +59,7 @@ class ReseauForm extends Form
        			'type'  => 'number',
         		'placeholder' => '24',
         		'min' => 2,
-        		'max' => 24,
+        		'max' => 29,
         	),
 
         	'options' => array(
