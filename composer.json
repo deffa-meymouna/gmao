@@ -1,17 +1,17 @@
 {
   "name" : "Alexandre-T/gmao",
   "description" : "Road equipments GMAO Application",
-  "version" : "0.0.0",
+  "version" : "1.0.0",
   "require" : {
     "php" : ">=5.3.3",
     "coolcsn/csn-acl-navigation" : "dev-master",
     "zendframework/zendframework" : "2.3.1",
-    "neilime/zf2-twb-bundle": "2.3.0",
+    "neilime/zf2-twb-bundle" : "2.3.0",
     "coolcsn/csn-user" : "dev-master",
     "coolcsn/csn-authorization" : "dev-master",
     "alexandre-t/cerbere" : "dev-master",
     "jasig/phpcas" : "1.3.x-dev",
-    "tburschka/zf2-doctrine-sql-logger": "dev-master"
+    "tburschka/zf2-doctrine-sql-logger" : "dev-master"
   },
   "repositories" : [ {
     "type" : "vcs",
@@ -27,8 +27,8 @@
     "url" : "https://github.com/Alexandre-T/CsnUser"
   }, {
     "type" : "vcs",
-    "url" : "https://github.com/ghiamar/CsnAuthorization"
-  },  {
+    "url" : "https://github.com/Alexandre-T/CsnAuthorization"
+  }, {
     "type" : "vcs",
     "url" : "https://github.com/tburschka/zf2-doctrine-sql-logger"
   }, {
