@@ -4,8 +4,9 @@
   "version" : "1.0.1",
   "require" : {
     "php" : ">=5.4",
-    "zendframework/zendframework" : "2.3.1",
-    "neilime/zf2-twb-bundle" : "2.3.0",
+    "zendframework/zendframework" : "2.3.*",
+    "zf-commons/zfc-user": "dev-master",
+    "neilime/zf2-twb-bundle" : "2.*@stable",
     "tburschka/zf2-doctrine-sql-logger" : "dev-master"
   },
   "repositories" : [ {

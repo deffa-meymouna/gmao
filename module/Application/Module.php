@@ -56,10 +56,10 @@ class Module {
 							$config = $serviceManager->get('Config');
 							return $config ['cerbere'];
 						},
-						'acl' => function ($serviceManager) {
+						/*'acl' => function ($serviceManager) {
 							$acl = new \CsnAuthorization\Acl\Acl($serviceManager);
 							return $acl;
-						}
+						}*/
 				)
 		);
 	}

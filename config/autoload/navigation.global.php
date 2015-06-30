@@ -78,7 +78,7 @@ return array (
 					)
 				)
 			),
-			array(
+			/*array(
 				'icon' => 'user',
 				'label' => 'Utilisateurs',
 				'route' => 'user-admin',
@@ -142,7 +142,7 @@ return array (
 						'privilege' => 'index',
 					),
 				),
-			)
+			)*/
 /*,
 			 array(
                  'label' => 'Login',

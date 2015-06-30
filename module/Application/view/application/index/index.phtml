@@ -1,4 +1,4 @@
-<?php $identified = !empty($this->identity());?>
+<?php $identified = !empty($this->zfcUserIdentity());?>
 <div class="jumbotron">
     <h1><?php echo sprintf($this->translate('%sL\'Application blanche%s %sest un noyau%s'), '<i class="fa fa-file-o"></i>&nbsp;<span class="text-success">', '</span>','<small>','</small>') ?></h1>
     <p><?php
@@ -52,11 +52,11 @@
     		<a class="btn btn-default btn-lg" href="<?php echo $this->url('application',array('action' => 'lock'));?>">
     			<i class="fa fa-minus-circle"></i>&nbsp;<?php echo $this->translate('Page sécurisée') ?></a>
     		<?php if ($identified): ?>
-    		<a class="btn btn-success btn-lg" href="<?php echo $this->url('user-index',array('action'=>'logout'));?>">
+    		<a class="btn btn-success btn-lg" href="#@FIXME URL DE DECONNEXION">
     			<i class="fa fa-sign-out"></i>&nbsp;<?php echo $this->translate('Déconnexion') ?>
     		</a>
     		<?php else:?>
-    		<a class="btn btn-success btn-lg" href="<?php echo $this->url('user-index',array('action'=>'login'));?>">
+    		<a class="btn btn-success btn-lg" href="#@FIXME URL DE CONNEXION">
     			<i class="fa fa-sign-in"></i>&nbsp;<?php echo $this->translate('Connexion') ?>
     		</a>
     		<?php endif;?>

@@ -32,7 +32,6 @@ class IndexController extends AbstractActionController
 	/**
 	 * Cette action ne gère rien intrasèquement,
 	 * elle retourne la vue simplement.
-	 * @todo permettre l'envoi d'un mail via melanie
 	 *
 	 * @return Zend\View\Model\ViewModel
 	 *
@@ -46,7 +45,8 @@ class IndexController extends AbstractActionController
      * elle retourne la vue simplement.
      *
      * Normalement, elle doit rester inacessible
-     * En effet, dans le fichier csnauthorization.global.php, seul un
+     * En effet, dans le fichier de configuration des droits anciennement
+     * csnauthorization.global.php, seul un
      * utilisateur ayant le rôle "roleInexistant" peut y accéder
      * Ce rôle n'existant pas, on entre jamais dans cette action
      *
