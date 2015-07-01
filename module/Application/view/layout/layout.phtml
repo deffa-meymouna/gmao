@@ -68,14 +68,14 @@
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a href="#@FIXME URL DE DECONNEXION">
+								<a href="<?php echo $this->url('zfcuser',array('action' => 'logout'));?>">
 									<i class="fa fa-sign-out"></i>&nbsp;<?php echo $this->translate('Log Out');?>
 								</a>
 							</li>
 						</ul>
 					</ul>
 					<?php else: ?>
-						<a href="#@FIXME URL DE CONNEXION" class="pull-right navbar-btn btn btn-success">
+						<a href="<?php echo $this->url('zfcuser',array('action' => 'login'));?>" class="pull-right navbar-btn btn btn-success">
 							<i class="fa fa-sign-in"></i>&nbsp;<?php echo $this->translate('Log In');?>
 						</a>
 					<?php endif;?>
@@ -88,7 +88,7 @@
 			<?php echo $this->content; ?>
 			<hr>
 			<footer>
-				<p><?php echo sprintf($this->translate("&copy; 2005 - %s par %s"),date('Y'),'<i class="fa fa-link"></i>&nbsp;<a href="http://www.cerema.fr" title="Cerema">Cerema - DTerSO - DTISPV - Trevise</a>'); ?>. <?php echo $this->translate('All rights reserved.') ?></p>
+				<p><?php echo sprintf($this->translate("&copy; 2005 - %s par %s"),date('Y'),'<i class="fa fa-link"></i>&nbsp;<a href="http://www.at-it.fr" title="AT-IT">Alexandre Tranchant</a>'); ?>. <?php echo $this->translate('All rights reserved.') ?></p>
 			</footer>
 		</div> <!-- /container -->
 		<?php echo $this->inlineScript() ?>

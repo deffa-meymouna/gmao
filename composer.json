@@ -5,8 +5,11 @@
   "require" : {
     "php" : ">=5.4",
     "zendframework/zendframework" : "2.3.*",
-    "zf-commons/zfc-user": "dev-master",
+    "zf-commons/zfc-user": "1.*",
+    "zf-commons/zfc-user-doctrine-orm": "1.*",
+    "doctrine/doctrine-orm-module" : "@stable",
     "neilime/zf2-twb-bundle" : "2.*@stable",
+    "bjyoungblood/bjy-authorize" : "1.4.*",
     "tburschka/zf2-doctrine-sql-logger" : "dev-master"
   },
   "repositories" : [ {

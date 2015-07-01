@@ -1,18 +1,18 @@
 # This file is an virtual host example for Apache 2.4 
 <VirtualHost *:80>
     #Enter your mail
-    ServerAdmin webmaster@www.white.local
+    ServerAdmin webmaster@www.blanche-zfc.local
     #Enter the document root.
-    #In this case, white application was unzipped in /var/www/white directory
-    DocumentRoot "/var/www/white/public"
+    #In this case, blanche-zfc application was unzipped in /var/www/blanche-zfc directory
+    DocumentRoot "/var/www/blanche-zfc/public"
     #Enter the ltd 
-    ServerName www.white.local
-    ServerAlias www.white.local
+    ServerName www.blanche-zfc.local
+    ServerAlias www.blanche-zfc.local
     #File directory
-    ErrorLog "logs/www.white.local-error.log"
-    CustomLog "logs/www.white.local-access.log" common
+    ErrorLog "/var/log/apache2/www.blanche-zfc.local-error.log"
+    CustomLog "/var/log/apache2/www.blanche-zfc.local-access.log" common
     #Options
-    <Directory "/var/www/white/public">
+    <Directory "/var/www/blanche-zfc/public">
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
