@@ -21,7 +21,7 @@ $settings = array(
      * instead of the default one provided. Default is ZfcUser\Entity\User.
      * The entity class should implement ZfcUser\Entity\UserInterface
      */
-    //'user_entity_class' => 'ZfcUser\Entity\User',
+    'user_entity_class' => 'Application\Entity\User',
 
     /**
      * Enable registration
@@ -60,7 +60,7 @@ $settings = array(
      *
      * Accepted values: boolean true or false
      */
-    //'enable_display_name' => true,
+    'enable_display_name' => true,
 
     /**
      * Modes for authentication identity match
