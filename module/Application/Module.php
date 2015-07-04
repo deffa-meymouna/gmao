@@ -26,14 +26,12 @@ class Module {
 			$translator->setLocale ( 'fr_FR' );
 		}
 		//Ajout des fichiers de traduction
-		//@FIXME Comprendre pourquoi on a le répertoire fr
+		$locale = substr($translator->getLocale(),0,2);
 		$translator->addTranslationFile(
-				'phpArray',
-				__DIR__ . '/../../vendor/zendframework/zend-i18n-resources/languages/fr/Zend_Validate.php',
-				'default'
+			'phpArray',
+			__DIR__ . "/../../vendor/zendframework/zend-i18n-resources/languages/$locale/Zend_Validate.php"
 		);
 		AbstractValidator::setDefaultTranslator($translator);
-		
 		//Menu de navigation
 		// Add ACL information to the Navigation view helper
 		$authorize = $e->getApplication ()->getServiceManager ()->get('BjyAuthorizeServiceAuthorize');
