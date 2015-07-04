@@ -9,6 +9,7 @@ return array(
         'ZfcUser',
         'ZfcUserDoctrineORM',
         'BjyAuthorize',
+        'ZendDeveloperTools',
         'Application',
     ),
 
