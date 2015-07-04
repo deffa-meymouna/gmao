@@ -136,26 +136,27 @@ return array(
                 'homePage' => [],
                 'lockPage' => [],
                 'exemples' => [],
-                'exemple1' => [],
             ],
         ],
         //Je place les droits de l'application blanche ici
-        //Les règles d'accès sont les suivantes
+        //Les règles d'accès sont les suivantes :
         'rule_providers' => array(
             \BjyAuthorize\Provider\Rule\Config::class => [
                 'allow' => [
-                    ['guest',['homePage','exemples','exemple1'],'view'],
+                    ['guest',['homePage','exemples'],'view'],
                 ],
             ],
         ),
-        //Désactivation de droits selon le controller
+        //Activation de droits selon le controller
         'guards' => [
             \BjyAuthorize\Guard\Controller::class => [
-                //['controller' => 'zfcuser', 'roles' => []],
+                //Gardes pour zfcuser
+                ['controller' => 'zfcuser', 'roles' => []],
+                //Gardes pour le contrôleur Index
                 [
                     'controller' => ['Application\Controller\Index'], 
                     'roles' => ['guest'] , 
-                    'action' => ['contact','exemple1','exemple2','index','sitemap']                   
+                    'action' => ['contact','exemple1','exemple2','index','sitemap','suivre']                   
                 ],
                 
                 //['controller' => ['Application\Controller\AdminController'], 'roles' => ['admin']],

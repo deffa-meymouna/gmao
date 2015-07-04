@@ -50,7 +50,7 @@ return array (
 						'priority' => 0.9,
 						'changefreq' => 'daily',
 						'action' => 'exemple1',
-					    'resource' => 'exemple1',
+					    'resource' => 'exemples',
 			            'privilege' => 'view',
 					),
 					array (
@@ -61,7 +61,7 @@ return array (
 						'priority' => 0.7,
 						'changefreq' => 'weekly',
 						'action' => 'exemple2',
-					    'resource' => 'exemple2',
+					    'resource' => 'exemples',
 			            'privilege' => 'view',
 					),
 					array (
@@ -72,7 +72,7 @@ return array (
 						'priority' => 0.7,
 						'changefreq' => 'daily',
 						'action' => 'suivre',
-					    'resource' => 'suivre',
+					    'resource' => 'exemples',
 			            'privilege' => 'view',
 					),
 					array (
@@ -83,7 +83,7 @@ return array (
 						'priority' => 0.3,
 						'changefreq' => 'monthly',
 						'action' => 'contact',
-					    'resource' => 'contact',
+					    'resource' => 'exemples',
 			            'privilege' => 'view',
 					)
 				)
