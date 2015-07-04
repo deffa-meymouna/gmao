@@ -17,7 +17,7 @@
  *		'changefreq' => '' //For Sitemap, valid values are always hourly daily weekly monthly yearly never
  *		'lastmod' => '' //For Sitemap, valid values are W3C Date or YYYY-MM-DD
  *		'priority' => '1.0' //The value should be a decimal between 0.0 and 1.0
- *		'resource' => 'Application\Controller\Index', //resource declared into csnauthorization.global.php
+ *		'resource' => '', //resource declared into @FIXME
  *		'privilege' => 'index' //privilege ie action
 */
 return array (
@@ -30,8 +30,8 @@ return array (
 				'route' => 'home',
 				'priority' => 1,
 				'changefreq' => 'weekly',
-				'resource' => 'Application\Controller\Index',
-				'privilege' => 'index'
+				'resource' => 'homePage',
+			    'privilege' => 'view'
 			),
 			array (
 				'icon' => 'road',
@@ -39,6 +39,8 @@ return array (
 				'route' => 'application',
 				'priority' => 0.8,
 				'changefreq' => 'weekly',
+			    'resource' => 'exemples',
+			    'privilege' => 'view',
 				'pages' => array (
 					array (
 						'icon' => 'eye',
@@ -47,7 +49,9 @@ return array (
 						'route' => 'application',
 						'priority' => 0.9,
 						'changefreq' => 'daily',
-						'action' => 'exemple1'
+						'action' => 'exemple1',
+					    'resource' => 'exemple1',
+			            'privilege' => 'view',
 					),
 					array (
 						'icon' => 'globe',
@@ -56,7 +60,9 @@ return array (
 						'route' => 'application',
 						'priority' => 0.7,
 						'changefreq' => 'weekly',
-						'action' => 'exemple2'
+						'action' => 'exemple2',
+					    'resource' => 'exemple2',
+			            'privilege' => 'view',
 					),
 					array (
 						'icon' => 'code',
@@ -65,7 +71,9 @@ return array (
 						'route' => 'application',
 						'priority' => 0.7,
 						'changefreq' => 'daily',
-						'action' => 'suivre'
+						'action' => 'suivre',
+					    'resource' => 'suivre',
+			            'privilege' => 'view',
 					),
 					array (
 						'icon' => 'phone',
@@ -74,7 +82,9 @@ return array (
 						'route' => 'application',
 						'priority' => 0.3,
 						'changefreq' => 'monthly',
-						'action' => 'contact'
+						'action' => 'contact',
+					    'resource' => 'contact',
+			            'privilege' => 'view',
 					)
 				)
 			),

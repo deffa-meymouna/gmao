@@ -11,24 +11,37 @@ namespace Application;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Validator\AbstractValidator;
+use Zend\View\Helper\Navigation;
 
 class Module {
 	public function onBootstrap(MvcEvent $e) {
 		$eventManager = $e->getApplication ()->getEventManager ();
 		$moduleRouteListener = new ModuleRouteListener ();
 		$moduleRouteListener->attach ( $eventManager );
+		//Initialisation de la traduction
 		$translator = $e->getApplication ()->getServiceManager ()->get ( 'translator' );
 		if (isset ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] )) {
 			$translator->setLocale ( \Locale::acceptFromHttp ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] ) )->setFallbackLocale ( 'fr_FR' );
 		} else {
 			$translator->setLocale ( 'fr_FR' );
 		}
+		//Ajout des fichiers de traduction
+		//@FIXME Comprendre pourquoi on a le répertoire fr
 		$translator->addTranslationFile(
 				'phpArray',
-				__DIR__ . '/../../vendor/zendframework/zendframework/resources/languages/fr/Zend_Validate.php',
+				__DIR__ . '/../../vendor/zendframework/zend-i18n-resources/languages/fr/Zend_Validate.php',
 				'default'
 		);
 		AbstractValidator::setDefaultTranslator($translator);
+		
+		//Menu de navigation
+		// Add ACL information to the Navigation view helper
+		$authorize = $e->getApplication ()->getServiceManager ()->get('BjyAuthorizeServiceAuthorize');
+		$acl = $authorize->getAcl();
+		$role = $authorize->getIdentity();
+		Navigation::setDefaultAcl($acl);
+		Navigation::setDefaultRole($role);
+		
 	}
 	public function getConfig() {
 		return include __DIR__ . '/config/module.config.php';

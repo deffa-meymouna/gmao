@@ -29,7 +29,7 @@ return array(
                     'route'    => '/main[/:action]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Application\Controller\Index',
+                        'controller'    => 'Index',
                         'action'        => 'index',
                     ),
                 ),
@@ -122,13 +122,31 @@ return array(
     'bjyauthorize' => array(
         // Using the authentication identity provider, which basically reads the roles from the auth service's identity
         'identity_provider' => 'BjyAuthorize\Provider\Identity\AuthenticationIdentityProvider',
-    
+        //Les roles viennent d'une base de données (à voir)
         'role_providers'        => array(
             // using an object repository (entity repository) to load all roles into our ACL
             'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => array(
                 'object_manager'    => 'doctrine.entitymanager.orm_default',
-                'role_entity_class' => 'Application\Role',
+                'role_entity_class' => 'Application\Entity\Role',
             ),
+        ),
+        //Les ressources viennent de ce fichier
+        'resource_providers' => [
+            \BjyAuthorize\Provider\Resource\Config::class => [
+                'homePage' => [],
+                'lockPage' => [],
+                'exemples' => [],
+                'exemple1' => [],
+            ],
+        ],
+        //Je place les droits de l'application blanche ici
+        //Les règles d'accès sont les suivantes
+        'rule_providers' => array(
+            \BjyAuthorize\Provider\Rule\Config::class => [
+                'allow' => [
+                    ['guest',['homePage','exemples','exemple1'],'view'],
+                ],
+            ],
         ),
     ),
 );

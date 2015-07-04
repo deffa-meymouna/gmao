@@ -3,8 +3,9 @@
   "description" : "Application Blanche avec la gestion des utilisateurs via Zfc-User",
   "version" : "1.0.1",
   "require" : {
-    "php" : ">=5.4",
-    "zendframework/zendframework" : "2.3.*",
+    "php" : ">=5.5",
+    "zendframework/zendframework" : "2.5.*",
+    "zendframework/zend-developer-tools" : "dev-master",
     "zf-commons/zfc-user": "1.*",
     "zf-commons/zfc-user-doctrine-orm": "1.*",
     "doctrine/doctrine-orm-module" : "@stable",
