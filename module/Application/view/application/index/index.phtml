@@ -53,11 +53,11 @@
     			<i class="fa fa-minus-circle"></i>&nbsp;<?php echo $this->translate('Page sécurisée') ?></a>
     		<?php if ($identified): ?>
     		<a class="btn btn-success btn-lg" href="<?php echo $this->url('zfcuser',array('action' => 'logout'));?>">
-    			<i class="fa fa-sign-out"></i>&nbsp;<?php echo $this->translate('Déconnexion') ?>
+    			<i class="fa fa-sign-out"></i>&nbsp;<?php echo $this->translate('Sign Out') ?>
     		</a>
     		<?php else:?>
     		<a class="btn btn-success btn-lg" href="<?php echo $this->url('zfcuser',array('action' => 'login'));?>">
-    			<i class="fa fa-sign-in"></i>&nbsp;<?php echo $this->translate('Connexion') ?>
+    			<i class="fa fa-sign-in"></i>&nbsp;<?php echo $this->translate('Sign In') ?>
     		</a>
     		<?php endif;?>
     	</span>

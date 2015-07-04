@@ -9,6 +9,8 @@
 
 	//Est-on connecté ?
 	$user = $this->zfcUserIdentity();
+	$gravatar = ($user)?$this->gravatar($this->zfcUserIdentity()->getEmail()):null;
+	
 ?>
 <html lang="fr">
 	<head>
@@ -56,27 +58,31 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						    <?php if (empty($gravatar)):?>
 							<i class="fa fa-user"></i>
-							<?php echo $this->escapehtml($user->getUsername())?>
+							<?php else:?>
+							<?php echo $gravatar->setImgSize(16); ?>
+							<?php echo $this->escapehtml($this->zfcUserDisplayName())?>
+							<?php endif;?>
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
 							<li>
-								<a href="#@FIXME URL D'EDITION DU PROFIL">
+								<a href="<?php echo $this->url('zfcuser');?>">
 									<i class="fa fa-pencil"></i>&nbsp;<?php echo $this->translate('Edit Profile');?>
 								</a>
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a href="<?php echo $this->url('zfcuser',array('action' => 'logout'));?>">
-									<i class="fa fa-sign-out"></i>&nbsp;<?php echo $this->translate('Log Out');?>
+								<a href="<?php echo $this->url('zfcuser/logout');?>">
+									<i class="fa fa-sign-out"></i>&nbsp;<?php echo $this->translate('Sign Out');?>
 								</a>
 							</li>
 						</ul>
 					</ul>
 					<?php else: ?>
-						<a href="<?php echo $this->url('zfcuser',array('action' => 'login'));?>" class="pull-right navbar-btn btn btn-success">
-							<i class="fa fa-sign-in"></i>&nbsp;<?php echo $this->translate('Log In');?>
+						<a href="<?php echo $this->url('zfcuser/login');?>" class="pull-right navbar-btn btn btn-success">
+							<i class="fa fa-sign-in"></i>&nbsp;<?php echo $this->translate('Sign In');?>
 						</a>
 					<?php endif;?>
 				</div><!--/.nav-collapse -->

@@ -75,8 +75,12 @@ return array(
 							'type'     => 'gettext',
 							'base_dir' => __DIR__ . '/../language',
 							'pattern'  => '%s.mo',
-							'text_domain' => "utilisateur",
 					),
+			        array(
+			             'type'     => 'gettext',
+			             'base_dir' => __DIR__ . '/../../vendor/zf-commons/zfc-user/src/ZfcUser/language',
+			             'pattern'  => '%s.mo',
+			        ),
 			),
 	),
 );
