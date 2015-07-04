@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * An example entity that represents a role.
  *
  * @ORM\Entity
- * @ORM\Table(name="user_role")
+ * @ORM\Table(name="te_role_rol")
  *
  * @author Tom Oram <tom@scl.co.uk>
  */
@@ -24,20 +24,21 @@ class Role implements HierarchicalRoleInterface
     /**
      * @var int
      * @ORM\Id
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="rol_id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     * @ORM\Column(name="rol_libelle", type="string", length=255, unique=true, nullable=false)
      */
     protected $roleId;
 
     /**
      * @var Role
      * @ORM\ManyToOne(targetEntity="Application\Entity\Role")
+     * @ORM\JoinColumn(name="rol_parent", referencedColumnName="rol_id")
      */
     protected $parent;
 

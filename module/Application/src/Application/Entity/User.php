@@ -17,7 +17,7 @@ use ZfcUser\Entity\UserInterface;
  * An example of how to implement a role aware user entity.
  *
  * @ORM\Entity
- * @ORM\Table(name="user")
+ * @ORM\Table(name="te_user_usr")
  *
  * @author Tom Oram <tom@scl.co.uk>
  */
@@ -26,32 +26,32 @@ class User implements UserInterface, ProviderInterface
     /**
      * @var int
      * @ORM\Id
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\Column(name="usr_id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     * @ORM\Column(name="usr_username", type="string", length=255, unique=true, nullable=true)
      */
     protected $username;
 
     /**
      * @var string
-     * @ORM\Column(type="string", unique=true,  length=255)
+     * @ORM\Column(name="usr_email", type="string", unique=true,  length=255)
      */
     protected $email;
 
     /**
      * @var string
-     * @ORM\Column(name="display_name", type="string", length=50, nullable=true)
+     * @ORM\Column(name="usr_display_name", type="string", length=50, nullable=true)
      */
     protected $displayName;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(name="usr_password", type="string", length=128)
      */
     protected $password;
 
@@ -63,9 +63,9 @@ class User implements UserInterface, ProviderInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      * @ORM\ManyToMany(targetEntity="Application\Entity\Role")
-     * @ORM\JoinTable(name="user_role_linker",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     * @ORM\JoinTable(name="tj_user_role_linker_url",
+     *      joinColumns={@ORM\JoinColumn(name="usr_id", referencedColumnName="usr_id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="rol_id", referencedColumnName="rol_id")}
      * )
      */
     protected $roles;
