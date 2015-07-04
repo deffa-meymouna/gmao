@@ -148,5 +148,20 @@ return array(
                 ],
             ],
         ),
+        //Désactivation de droits selon le controller
+        'guards' => [
+            \BjyAuthorize\Guard\Controller::class => [
+                //['controller' => 'zfcuser', 'roles' => []],
+                [
+                    'controller' => ['Application\Controller\Index'], 
+                    'roles' => ['guest'] , 
+                    'action' => ['contact','exemple1','exemple2','index','sitemap']                   
+                ],
+                
+                //['controller' => ['Application\Controller\AdminController'], 'roles' => ['admin']],
+                //['controller' => ['Module\Controller\Menu2Controller'], 'roles' => ['admin','affiliate']],
+                //['controller' => ['Module\Controller\Menu3Controller'], 'roles' => ['admin','affiliate','guest']],
+            ],
+        ],
     ),
 );
