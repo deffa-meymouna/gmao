@@ -143,6 +143,7 @@ return array(
                 //Gardes pour zftool
                 ['controller' => 'ZFTool\Controller\Classmap', 'roles' => []],
                 ['controller' => 'ZFTool\Controller\Config', 'roles' => []],
+                ['controller' => 'ZFTool\Controller\Create', 'roles' => []],
                 ['controller' => 'ZFTool\Controller\Diagnostics', 'roles' => []],
                 ['controller' => 'ZFTool\Controller\Info', 'roles' => []],
                 ['controller' => 'ZFTool\Controller\Install', 'roles' => []],
