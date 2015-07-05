@@ -9,7 +9,7 @@ telle Zend Skeleton mais intégrant plusieurs fonctionnalités complémentaires 
   * La gestion des rôles depuis l'interface administrateur (A faire)
   * La gestion des rôles de chaque utilisateur (A faire)
   * La gestion des ressources et des rôles nécessaires depuis les fichiers de configuration (Fait)
-  * Un contrôleur Index avec quelques actions de démonstration (A faire)
+  * Un contrôleur Index avec quelques actions de démonstration (Fait)
   * Le paramétrage Mantis vers les bugs recensés et les demandes d'évolutions en cours (A valider)
 
 Installation
