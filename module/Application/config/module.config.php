@@ -140,6 +140,13 @@ return array(
         //Activation de droits selon le controller
         'guards' => [
             \BjyAuthorize\Guard\Controller::class => [
+                //Gardes pour zftool
+                ['controller' => 'ZFTool\Controller\Classmap', 'roles' => []],
+                ['controller' => 'ZFTool\Controller\Config', 'roles' => []],
+                ['controller' => 'ZFTool\Controller\Diagnostics', 'roles' => []],
+                ['controller' => 'ZFTool\Controller\Info', 'roles' => []],
+                ['controller' => 'ZFTool\Controller\Install', 'roles' => []],
+                ['controller' => 'ZFTool\Controller\Module', 'roles' => []],
                 //Gardes pour zfcuser
                 ['controller' => 'zfcuser', 'roles' => []],
                 //Gardes pour zfcadmin
