@@ -11,6 +11,7 @@ return array(
         'ZfcUserDoctrineORM',
         'BjyAuthorize',
         'ZendDeveloperTools',
+        'TwbBundle',
         'Application',
     ),
 
