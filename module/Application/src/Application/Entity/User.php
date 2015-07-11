@@ -12,6 +12,7 @@ use BjyAuthorize\Provider\Role\ProviderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZfcUser\Entity\UserInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * An example of how to implement a role aware user entity.
@@ -20,6 +21,7 @@ use ZfcUser\Entity\UserInterface;
  * @ORM\Table(name="te_user_usr")
  *
  * @author Tom Oram <tom@scl.co.uk>
+ * @author Alexandre Tranchant <alexandre.tranchant@gmail.com>
  */
 class User implements UserInterface, ProviderInterface
 {
@@ -230,5 +232,32 @@ class User implements UserInterface, ProviderInterface
     public function addRole($role)
     {
         $this->roles[] = $role;
+    }
+    /**
+     * Add a role to the user.
+     *
+     * @param Role $role
+     *
+     * @return void
+     */
+    public function addRoles(Collection $roles)
+    {
+        foreach($roles as $role){
+            $this->roles->add($role);
+        }
+    
+    }
+    /**
+     * Remove a collection of roles to the user
+     * 
+     * @param Collection $roles
+     * 
+     * @return void
+     */
+    public function removeRoles(Collection $roles) 
+    {
+        foreach($roles as $role){
+            $this->roles->removeElement($role);
+        }
     }
 }
