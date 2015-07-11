@@ -39,7 +39,7 @@ return array (
 				'route' => 'application',
 				'priority' => 0.8,
 				'changefreq' => 'weekly',
-			    'resource' => 'exemples',
+			    'resource' => 'examples',
 			    'privilege' => 'view',
 				'pages' => array (
 					array (
@@ -50,7 +50,7 @@ return array (
 						'priority' => 0.9,
 						'changefreq' => 'daily',
 						'action' => 'exemple1',
-					    'resource' => 'exemples',
+					    'resource' => 'examples',
 			            'privilege' => 'view',
 					),
 					array (
@@ -61,7 +61,7 @@ return array (
 						'priority' => 0.7,
 						'changefreq' => 'weekly',
 						'action' => 'exemple2',
-					    'resource' => 'exemples',
+					    'resource' => 'examples',
 			            'privilege' => 'view',
 					),
 					array (
@@ -72,7 +72,7 @@ return array (
 						'priority' => 0.7,
 						'changefreq' => 'daily',
 						'action' => 'suivre',
-					    'resource' => 'exemples',
+					    'resource' => 'examples',
 			            'privilege' => 'view',
 					),
 					array (
@@ -83,11 +83,45 @@ return array (
 						'priority' => 0.3,
 						'changefreq' => 'monthly',
 						'action' => 'contact',
-					    'resource' => 'exemples',
+					    'resource' => 'examples',
 			            'privilege' => 'view',
 					)
 				)
 			),
+		    array (
+		        'icon' => 'wrench',
+		        'label' => 'Administration',
+		        'route' => 'zfcadmin',
+		        'priority' => 1,
+		        'changefreq' => 'monthly',
+		        'resource' => 'administration',
+		        'privilege' => 'list',
+		        'pages' => array (
+		            array (
+		                'icon' => 'users',
+		                'label' => 'Utilisateurs',
+		                'title' => 'Gestion des utilisateurs',
+		                'route' => 'zfcadmin/user',
+		                'priority' => 0.9,
+		                'changefreq' => 'monthly',
+		                'action' => 'list',
+		                'resource' => 'userAdmin',
+		                'privilege' => 'list',
+		            ),
+		            array (
+		                'icon' => 'shield',
+		                'label' => 'Roles',
+		                'title' => 'Gestion des rôles',
+		                'route' => 'zfcadmin/role',
+		                'priority' => 0.9,
+		                'changefreq' => 'monthly',
+		                'action' => 'list',
+		                'resource' => 'roleAdmin',
+		                'privilege' => 'list',
+		            ),
+		            
+		        ),
+		    ),
 			/*array(
 				'icon' => 'user',
 				'label' => 'Utilisateurs',
