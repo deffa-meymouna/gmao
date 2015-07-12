@@ -1,0 +1,103 @@
+<?php
+	//Préparation du menu
+	$partialMenu = array('navigation/topnav.phtml', 'default');
+	$this->navigation('navigation')->menu()->setPartial($partialMenu);
+	$partialBreadcrumbs = array('navigation/breadcrumbs.phtml', 'default');
+	$this->navigation('navigation')->breadcrumbs()->setPartial($partialBreadcrumbs);
+	//Doctype
+	echo $this->doctype();
+
+	//Est-on connecté ?
+	$user = $this->zfcUserIdentity();
+	$gravatar = ($user)?$this->gravatar($this->zfcUserIdentity()->getEmail()):null;
+	
+?>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<?php
+			// Le titre
+			echo $this->headTitle($this->translate('Administration'))->setSeparator(' - ')->setAutoEscape(false);
+			// Les meta
+			echo "\n".$this->headMeta()
+			->appendName('viewport', 'width=device-width, initial-scale=1.0')
+			->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+			->setIndent("\t\t");
+			//Les styles
+			echo "\n".$this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+						->prependStylesheet($this->basePath() . '/css/style.css')
+						->prependStylesheet($this->basePath() . '/css/font-awesome.min.css?v=4.3.0')
+						->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css?v=3.3.5')
+						->prependStylesheet($this->basePath() . '/css/bootstrap.min.css?v=3.3.5')
+						->setIndent("\t\t");
+			//Les scripts
+			echo "\n".$this->headScript()
+			->prependFile($this->basePath() . '/js/initialisation.js')
+			->prependFile($this->basePath() . '/js/bootstrap.min.js?v=3.3.5')
+			->prependFile($this->basePath() . '/js/jquery.min.js?v=1.13.3')
+			->prependFile($this->basePath() . '/js/respond.min.js?v=1.4.2', 'text/javascript', array('conditional' => 'lt IE 9',))
+			->prependFile($this->basePath() . '/js/html5shiv.min.js?v=3.7.2',   'text/javascript', array('conditional' => 'lt IE 9',))
+			->prependFile($this->basePath() . '/js/html5shiv-printshiv.min.js?v=3.7.2',   'text/javascript', array('conditional' => 'lt IE 9',))
+			->setIndent("\t\t");
+			//Les liens
+			echo "\n".$this->navigation()->links()->setIndent("\t\t")."\n" ;?>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="<?php echo $this->url('home') ?>"><span class=""><i class="fa fa-file-o"></i></span>&nbsp;<?php echo $this->translate('Administration') ?></a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<?php echo $this->navigation('navigation')->menu()->render(); ?>
+					<?php if ($user): ?>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						    <?php if (empty($gravatar)):?>
+							<i class="fa fa-user"></i>
+							<?php else:?>
+							<?php echo $gravatar->setImgSize(16); ?>
+							<?php echo $this->escapehtml($this->zfcUserDisplayName())?>
+							<?php endif;?>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a href="<?php echo $this->url('zfcuser');?>">
+									<i class="fa fa-pencil"></i>&nbsp;<?php echo $this->translate('Edit Profile');?>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="<?php echo $this->url('zfcuser/logout');?>">
+									<i class="fa fa-sign-out"></i>&nbsp;<?php echo $this->translate('Sign Out');?>
+								</a>
+							</li>
+						</ul>
+					</ul>
+					<?php else: ?>
+						<a href="<?php echo $this->url('zfcuser/login');?>" class="pull-right navbar-btn btn btn-success">
+							<i class="fa fa-sign-in"></i>&nbsp;<?php echo $this->translate('Sign In');?>
+						</a>
+					<?php endif;?>
+				</div><!--/.nav-collapse -->
+
+			</div>
+		</nav>
+		<div class="container">
+	   		<?php echo $this->navigation()->breadcrumbs(); ?>
+			<?php echo $this->content; ?>
+			<hr>
+			<footer>
+				<p><?php echo sprintf($this->translate("&copy; 2005 - %s par %s"),date('Y'),'<i class="fa fa-link"></i>&nbsp;<a href="http://www.at-it.fr" title="AT-IT">Alexandre Tranchant</a>'); ?>. <?php echo $this->translate('All rights reserved.') ?></p>
+			</footer>
+		</div> <!-- /container -->
+		<?php echo $this->inlineScript() ?>
+	</body>
+</html>
