@@ -53,14 +53,37 @@ class UserController extends AbstractActionController
      */
     public function indexAction()
     {
+        //Initialisation de variables
+        $dqlParams = array();
+        $params = array();
+        
         //Gestion des paramètres
         $itemsPerPage = $this->params()->fromRoute('itemsPerPage');
         $page         = $this->params()->fromRoute('page');
-        $sort         = $this->params()->fromRoute('sort');        
+        $sort         = $this->params()->fromRoute('sort');
+        $searchText   = $this->params()->fromQuery('search','');   
 
-        //Requête DQL
-        $dql = 'SELECT e FROM ' . User::class . ' e ORDER BY '.  $this->_getOrderBy($sort);
+        //Construction de la requête DQL
+        $dql = 'SELECT e FROM ' . User::class . ' e ';
+        if (!empty($searchText)){
+            $dql .= ' WHERE ';
+            if ((int)($searchText)){
+                $dqlParams[] = ' e.id like :id ';
+                $params['id'] = "%$searchText%";
+            }
+            $dqlParams[]= ' e.username like :username ';
+            $dqlParams[]= ' e.displayName like :displayname ';
+            $dqlParams[]= ' e.email like :email ';
+            $params['username']    = "%$searchText%";
+            $params['displayname'] = "%$searchText%";
+            $params['email']       = "%$searchText%";
+            $dql .= implode(' OR ', $dqlParams);
+        }
+        $dql.= ' ORDER BY '.  $this->_getOrderBy($sort);
         $query = $this->_getEntityManager()->createQuery($dql,false);
+        if (!empty($searchText)){
+            $query->setParameters($params);
+        }
 
         //Pagination
         $d2_paginator = new DoctrinePaginator($query);
@@ -73,9 +96,16 @@ class UserController extends AbstractActionController
         //Boutons du nombre d'items par page
         $ioSelect = new ItemsPerPage();
         $ioSelect->setValue($itemsPerPage);
+        
+        //@todo : Formulaire de recherche à instancier ici
+        $searchForm = new \Zend\Form\Form();
+        //@todo : Formulaire de recherche à initialiser ici
+                
 
         //Lancement de la vue
         return new ViewModel(array(
+            'searchForm'      => $searchForm,
+            'searchText'      => $searchText,
             'ioSelect'        => $ioSelect,
             'paginator'       => $zend_paginator,
             'page'            => $zend_paginator->getCurrentPageNumber(),
@@ -90,7 +120,7 @@ class UserController extends AbstractActionController
      * Retourne le tri pour la requête DQL
      * 
      * @FIXME Cette méthode ne respecte pas la séparation DQL / Controller
-     * @param unknown $sort
+     * @param string $sort
      * @return string
      */
     private function _getOrderBy($sort){

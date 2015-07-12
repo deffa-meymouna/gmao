@@ -1,15 +1,18 @@
+<?php $routeParams = $this->routeParams; ?>
 <?php if ($this->pageCount): ?>
      <div>
          <ul class="pagination pagination-sm">
              <!-- Previous page link -->
              <?php if (isset($this->previous)): ?>
+             	 <?php $routeParams['page']=$this->first; ?>
                  <li>
-                     <a href="<?php echo $this->url($this->route,['page' => $this->first, 'itemsPerPage' => $this->itemsPerPage , 'sort' => $this->sort]); ?>">
+                     <a href="<?php echo $this->url($this->route,$routeParams); ?>">
                          <i class="fa fa-fw fa-angle-double-left"></i>
                      </a>
                  </li>
+                 <?php $routeParams['page']=$this->previous; ?>
                  <li>
-                     <a href="<?php echo $this->url($this->route,['page' => $this->previous, 'itemsPerPage' => $this->itemsPerPage , 'sort' => $this->sort]); ?>">
+                     <a href="<?php echo $this->url($this->route,$routeParams); ?>">
                          <i class="fa fa-fw fa-angle-left"></i>
                      </a>
                  </li>
@@ -28,9 +31,10 @@
 
              <!-- Numbered page links -->
              <?php foreach ($this->pagesInRange as $page): ?>
+                 <?php $routeParams['page'] = $page; ?>
                  <?php if ($page != $this->current): ?>
                      <li>
-                         <a href="<?php echo $this->url($this->route,['page' => $page, 'itemsPerPage' => $this->itemsPerPage , 'sort' => $this->sort]); ?>">
+                         <a href="<?php echo $this->url($this->route,$routeParams); ?>">
                              <?php echo $page; ?>
                          </a>
                      </li>
@@ -43,13 +47,15 @@
 
              <!-- Next page link -->
              <?php if (isset($this->next)): ?>
+             	 <?php $routeParams['page']=$this->next; ?>
                  <li>
-                     <a href="<?php echo $this->url($this->route,['page' => $this->next, 'itemsPerPage' => $this->itemsPerPage , 'sort' => $this->sort]); ?>">
+                     <a href="<?php echo $this->url($this->route,$routeParams); ?>">
                          <i class="fa fa-fw fa-angle-right"></i>
                      </a>
                  </li>
+                 <?php $routeParams['page']=$this->last; ?>
                  <li>
-                     <a href="<?php echo $this->url($this->route,['page' => $this->last, 'itemsPerPage' => $this->itemsPerPage , 'sort' => $this->sort]); ?>">
+                     <a href="<?php echo $this->url($this->route,$routeParams); ?>">
                          <i class="fa fa-fw fa-angle-double-right"></i>
                      </a>
                  </li>

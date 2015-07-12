@@ -24,18 +24,19 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
-              'may_terminate' => true,
+                'may_terminate' => true,
                 'child_routes' => array(
                     'user' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route' => '/user[/page:page][/itemsPerPage:itemsPerPage][/sortBy:sort]',
+                            'route' => '/user[/page:page][/itemsPerPage:itemsPerPage][/sortBy:sort][?search=:search]',
                             'defaults' => array(
                                 'controller'   => 'Administration\Controller\User',
                                 'action'       => 'index',
                                 'page'         => 1,                                
                                 'itemsPerPage' => 10,
                                 'sort'         => 'IdAsc',
+                                'search'       => '',
                             ),
                             'constraints' => array(
                                 'page'         => '\d+',

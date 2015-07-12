@@ -5,6 +5,7 @@
     $page = $this->page;
     $itemsPerPage = $this->itemsPerPage;
     $sort = $this->sort;
+    $searchText = $this->searchText;
     
     //Paginator
     $paginator = $this->paginationControl($this->paginator,
@@ -12,24 +13,31 @@
         'partial/paginator.phtml',
         [
             'route'        => 'zfcadmin/user',
-            'itemsPerPage' => $itemsPerPage,
-            'sort'         => $this->sort,
+            'routeParams'  => [
+                'itemsPerPage' => $itemsPerPage,
+                'sort'         => $sort,
+                'search'   => $searchText
+            ],
         ]);
     
     //Fonction pour la liste déroulante
     $jsMultiplicateur = $this->escapejs($page * $itemsPerPage);
     $jsSort = $this->escapejs($sort);
     $jsUrl  = $this->escapejs($this->url('zfcadmin/user'));
+    $jsSearchText = $this->escapejs($searchText);
+    $jsVarSearchText = empty($searchText)?'':"var searchText = '$jsSearchText';";
+    $jsSearchUrl = empty($searchText)?'':" + '?search=$jsSearchText'";
     $this->headscript()->appendScript("function changement(){
     	var items = \$('#selectItemsPerPage').val();
     	var page  = Math.ceil($jsMultiplicateur / items);
     	var sort  = '$jsSort';
     	var route = '$jsUrl'; 	
-    	$(location).attr('href',route + '/page' + page + '/itemsPerPage' + items + '/sortBy'+ sort);	
+        $jsVarSearchText
+    	$(location).attr('href',route + '/page' + page + '/itemsPerPage' + items + '/sortBy'+ sort $jsSearchUrl);	
     }");
    
 ?>
-<h1 class="">
+<h1>
     <?php echo $this->escapeHtml($this->translate('Listing des utilisateurs'));?>
 </h1>
 <div class="row">
@@ -38,7 +46,7 @@
     </div>
     <div class="col-sm-4">
         <div class="text-right pagination">
-            <?php echo $this->formElement($this->ioSelect);?>
+            <?php echo $this->form($this->searchForm,TwbBundleForm::LAYOUT_INLINE)?>
         </div>
     </div>
 </div>
@@ -46,19 +54,19 @@
     
 </div>
 <?php if (count($this->paginator)): ?>
-<table class="table table-bordered table-hover table-responsive">
+<table class="table table-bordered table-hover table-responsive table-striped">
     <thead>
         <tr>
             <th id="identifiants">
                 <?php echo $this->escapeHtml($this->translate('Identifiant'));?>
                 <span class="btn-group pull-right">
                     <a class="btn btn-xs <?php echo ('IdAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
-                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'IdAsc']);?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'IdAsc','search' => $searchText]);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by id ascending'))?>">
                         <i class="fa fa-fw fa-sort-numeric-asc"></i>
                     </a>
                     <a class="btn btn-xs <?php echo ('IdDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
-                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'IdDesc']);?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'IdDesc','search' => $searchText]);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by id descending'))?>">
                         <i class="fa fa-fw fa-sort-numeric-desc"></i>
                     </a>
@@ -68,12 +76,12 @@
                 <?php echo $this->escapeHtml($this->translate('Username'));?>
                 <span class="btn-group pull-right">
                     <a class="btn btn-xs <?php echo ('UsernameAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
-                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'UsernameAsc']);?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'UsernameAsc','search' => $searchText]);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by username ascending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-asc"></i>
                     </a>
                     <a class="btn btn-xs <?php echo ('UsernameDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
-                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'UsernameDesc']);?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'UsernameDesc','search' => $searchText]);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by username descending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-desc"></i>
                     </a>
@@ -83,12 +91,12 @@
                 <?php echo $this->escapeHtml($this->translate('Email'));?>
                 <span class="btn-group pull-right">
                     <a class="btn btn-xs <?php echo ('EmailAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
-                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'EmailAsc']);?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'EmailAsc','search' => $searchText]);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by email ascending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-asc"></i>
                     </a>
                     <a class="btn btn-xs <?php echo ('EmailDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
-                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'EmailDesc']);?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'EmailDesc','search' => $searchText]);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by email descending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-desc"></i>
                     </a>
@@ -98,12 +106,12 @@
                 <?php echo $this->escapeHtml($this->translate('Display Name'));?>
                 <span class="btn-group pull-right">
                     <a class="btn btn-xs <?php echo ('DisplayNameAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
-                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'DisplayNameAsc']);?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'DisplayNameAsc','search' => $searchText]);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by display name ascending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-asc"></i>
                     </a>
                     <a class="btn btn-xs <?php echo ('DisplayNameDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
-                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'DisplayNameDesc']);?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'DisplayNameDesc','search' => $searchText]);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by display name descending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-desc"></i>
                     </a>
@@ -140,10 +148,25 @@
             </td>
         </tr>
         <?php endforeach;?>
-    </tbody>
+    </tbody>    
+    <caption>
+        <?php if (empty($searchText)):?>
+            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s utilisateur enregistré', '%s utilisateurs enregistrés', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
+        <?php else:?>
+            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s utilisateur correspond à votre recherche', '%s utilisateurs correspondent à votre recherche', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
+        <?php endif;?>
+    </caption>
+        
 </table>
-<div>
-    <?php echo $paginator; ?>
+<div class="row">
+    <div class="col-sm-8">    
+        <?php echo $paginator; ?>
+    </div>
+    <div class="col-sm-4">
+        <div class="text-right pagination">
+            <?php echo $this->formElement($this->ioSelect);?>
+        </div>
+    </div>
 </div>
 <?php else: //Aucun utilisateur?>
 <div class="alert alert-info">Aucun utilisateur</div>
