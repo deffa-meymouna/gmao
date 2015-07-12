@@ -63,7 +63,7 @@
                                     'partial/paginator.phtml', 
                                     array(
                                         'route' => 'zfcadmin/user',
-                                        'itemsPerPage' => $this->paginator->getItemCountPerPage(),
+                                        'itemsPerPage' => $itemsPerPage,
                                         'sort'       => $this->sort,
                                     )); ?>
 <?php else: //Aucun utilisateur?>
