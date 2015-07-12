@@ -14,6 +14,7 @@ use Application\Entity\User;
 use Zend\Paginator\Adapter\Iterator;
 use Zend\Paginator\Paginator as ZendPaginator;
 use Administration\Form\Element\ItemsPerPage;
+use Administration\Form\Search;
 
 /**
  * 
@@ -97,10 +98,10 @@ class UserController extends AbstractActionController
         $ioSelect = new ItemsPerPage();
         $ioSelect->setValue($itemsPerPage);
         
-        //@todo : Formulaire de recherche à instancier ici
-        $searchForm = new \Zend\Form\Form();
-        //@todo : Formulaire de recherche à initialiser ici
-                
+        //Formulaire de recherche
+        $searchForm = new Search();
+        //Formulaire de recherche initialisé
+        $searchForm->setData(['search' => $searchText]);
 
         //Lancement de la vue
         return new ViewModel(array(
