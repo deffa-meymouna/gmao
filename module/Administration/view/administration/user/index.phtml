@@ -1,8 +1,50 @@
 <?php
+    use TwbBundle\Form\View\Helper\TwbBundleForm;
+    
+    //Simplification
     $page = $this->page;
     $itemsPerPage = $this->itemsPerPage;
+    $sort = $this->sort;
+    
+    //Paginator
+    $paginator = $this->paginationControl($this->paginator,
+        'sliding',
+        'partial/paginator.phtml',
+        [
+            'route'        => 'zfcadmin/user',
+            'itemsPerPage' => $itemsPerPage,
+            'sort'         => $this->sort,
+        ]);
+    
+    //Fonction pour la liste déroulante
+    $jsMultiplicateur = $this->escapejs($page * $itemsPerPage);
+    $jsSort = $this->escapejs($sort);
+    $jsUrl  = $this->escapejs($this->url('zfcadmin/user'));
+    $this->headscript()->appendScript("function changement(){
+    	var items = \$('#selectItemsPerPage').val();
+    	var page  = Math.ceil($jsMultiplicateur / items);
+    	var sort  = '$jsSort';
+    	var route = '$jsUrl'; 	
+    	$(location).attr('href',route + '/page' + page + '/itemsPerPage' + items + '/sortBy'+ sort);	
+    }");
+   
 ?>
-<h1><?php echo $this->escapeHtml($this->translate('Listing des utilisateurs'));?></h1>
+<h1 class="">
+    <?php echo $this->escapeHtml($this->translate('Listing des utilisateurs'));?>
+</h1>
+<div class="row">
+    <div class="col-sm-8">
+        <?php echo $paginator; ?>
+    </div>
+    <div class="col-sm-4">
+        <div class="text-right pagination">
+            <?php echo $this->formElement($this->ioSelect);?>
+        </div>
+    </div>
+</div>
+<div class="text-left">
+    
+</div>
 <?php if (count($this->paginator)): ?>
 <table class="table table-bordered table-hover table-responsive">
     <thead>
@@ -100,15 +142,8 @@
         <?php endforeach;?>
     </tbody>
 </table>
-<div class="text-center">
-    <?php echo $this->paginationControl($this->paginator,
-                                    'sliding',
-                                    'partial/paginator.phtml', 
-                                    array(
-                                        'route' => 'zfcadmin/user',
-                                        'itemsPerPage' => $itemsPerPage,
-                                        'sort'       => $this->sort,
-                                    )); ?>
+<div>
+    <?php echo $paginator; ?>
 </div>
 <?php else: //Aucun utilisateur?>
 <div class="alert alert-info">Aucun utilisateur</div>

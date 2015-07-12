@@ -13,6 +13,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 use Application\Entity\User;
 use Zend\Paginator\Adapter\Iterator;
 use Zend\Paginator\Paginator as ZendPaginator;
+use Administration\Form\Element\ItemsPerPage;
 
 /**
  * 
@@ -68,9 +69,14 @@ class UserController extends AbstractActionController
         $zend_paginator = new ZendPaginator($adapter);
         $zend_paginator->setItemCountPerPage($itemsPerPage);
         $zend_paginator->setCurrentPageNumber($page);
+        
+        //Boutons du nombre d'items par page
+        $ioSelect = new ItemsPerPage();
+        $ioSelect->setValue($itemsPerPage);
 
         //Lancement de la vue
         return new ViewModel(array(
+            'ioSelect'        => $ioSelect,
             'paginator'       => $zend_paginator,
             'page'            => $zend_paginator->getCurrentPageNumber(),
             'itemsPerPage'    => $zend_paginator->getItemCountPerPage(),
