@@ -27,12 +27,20 @@ return array(
               'may_terminate' => true,
                 'child_routes' => array(
                     'user' => array(
-                        'type' => 'Literal',
+                        'type' => 'segment',
                         'options' => array(
-                            'route' => '/user',
+                            'route' => '/user[/page:page][/itemsPerPage:itemsPerPage][/sortBy:sort]',
                             'defaults' => array(
-                                'controller' => 'Administration\Controller\User',
-                                'action'     => 'index',
+                                'controller'   => 'Administration\Controller\User',
+                                'action'       => 'index',
+                                'page'         => 1,                                
+                                'itemsPerPage' => 10,
+                                'sort'         => 'IdAsc',
+                            ),
+                            'constraints' => array(
+                                'page'         => '\d+',
+                                'itemsPerPage' => '\d+',
+                                'sort'         => '(IdAsc|IdDesc|UsernameAsc|UsernameDesc|EmailAsc|EmailDesc|DisplayNameAsc|DisplayNameDesc)', // only login, logout or info are allowed
                             ),
                         ),
                     ),
