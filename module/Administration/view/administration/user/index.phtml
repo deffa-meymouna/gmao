@@ -10,12 +10,12 @@
             <th id="identifiants">
                 <?php echo $this->escapeHtml($this->translate('Identifiant'));?>
                 <span class="btn-group pull-right">
-                    <a class="btn btn-default btn-xs <?php echo ('IdAsc' == $this->sort)?'active btn-primary':''; ?>" 
+                    <a class="btn btn-xs <?php echo ('IdAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'IdAsc']);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by id ascending'))?>">
                         <i class="fa fa-fw fa-sort-numeric-asc"></i>
                     </a>
-                    <a class="btn btn-default btn-xs <?php echo ('IdDesc' == $this->sort)?'active btn-primary':''; ?>" 
+                    <a class="btn btn-xs <?php echo ('IdDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'IdDesc']);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by id descending'))?>">
                         <i class="fa fa-fw fa-sort-numeric-desc"></i>
@@ -25,12 +25,12 @@
             <th id="names">
                 <?php echo $this->escapeHtml($this->translate('Username'));?>
                 <span class="btn-group pull-right">
-                    <a class="btn btn-default btn-xs <?php echo ('UsernameAsc' == $this->sort)?'active btn-primary':''; ?>" 
+                    <a class="btn btn-xs <?php echo ('UsernameAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'UsernameAsc']);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by username ascending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-asc"></i>
                     </a>
-                    <a class="btn btn-default btn-xs <?php echo ('UsernameDesc' == $this->sort)?'active btn-primary':''; ?>" 
+                    <a class="btn btn-xs <?php echo ('UsernameDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'UsernameDesc']);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by username descending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-desc"></i>
@@ -40,12 +40,12 @@
             <th id="emails">
                 <?php echo $this->escapeHtml($this->translate('Email'));?>
                 <span class="btn-group pull-right">
-                    <a class="btn btn-default btn-xs <?php echo ('EmailAsc' == $this->sort)?'active btn-primary':''; ?>" 
+                    <a class="btn btn-xs <?php echo ('EmailAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'EmailAsc']);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by email ascending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-asc"></i>
                     </a>
-                    <a class="btn btn-default btn-xs <?php echo ('EmailDesc' == $this->sort)?'active btn-primary':''; ?>" 
+                    <a class="btn btn-xs <?php echo ('EmailDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'EmailDesc']);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by email descending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-desc"></i>
@@ -55,12 +55,12 @@
             <th id="display_names">
                 <?php echo $this->escapeHtml($this->translate('Display Name'));?>
                 <span class="btn-group pull-right">
-                    <a class="btn btn-default btn-xs <?php echo ('DisplayNameAsc' == $this->sort)?'active btn-primary':''; ?>" 
+                    <a class="btn btn-xs <?php echo ('DisplayNameAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'DisplayNameAsc']);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by display name ascending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-asc"></i>
                     </a>
-                    <a class="btn btn-default btn-xs <?php echo ('DisplayNameDesc' == $this->sort)?'active btn-primary':''; ?>" 
+                    <a class="btn btn-xs <?php echo ('DisplayNameDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'DisplayNameDesc']);?>" 
                        title="<?php echo $this->escapehtmlattr($this->translate('Sort users by display name descending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-desc"></i>
@@ -100,7 +100,8 @@
         <?php endforeach;?>
     </tbody>
 </table>
-<?php echo $this->paginationControl($this->paginator,
+<div class="text-center">
+    <?php echo $this->paginationControl($this->paginator,
                                     'sliding',
                                     'partial/paginator.phtml', 
                                     array(
@@ -108,6 +109,7 @@
                                         'itemsPerPage' => $itemsPerPage,
                                         'sort'       => $this->sort,
                                     )); ?>
+</div>
 <?php else: //Aucun utilisateur?>
 <div class="alert alert-info">Aucun utilisateur</div>
 <?php endif;?>
