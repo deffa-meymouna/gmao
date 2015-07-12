@@ -10,7 +10,6 @@ namespace Administration\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
-use Application\Paginator\DoctrinePaginatorAdapter;
 use Application\Entity\User;
 use Zend\Paginator\Adapter\Iterator;
 use Zend\Paginator\Paginator as ZendPaginator;
@@ -56,7 +55,7 @@ class UserController extends AbstractActionController
         //Gestion des paramètres
         $itemsPerPage = $this->params()->fromRoute('itemsPerPage');
         $page         = $this->params()->fromRoute('page');
-        $sort         = $this->params()->fromRoute('sort');
+        $sort         = $this->params()->fromRoute('sort');        
 
         //Requête DQL
         $dql = 'SELECT e FROM ' . User::class . ' e ORDER BY '.  $this->_getOrderBy($sort);
@@ -84,11 +83,24 @@ class UserController extends AbstractActionController
     /**
      * Retourne le tri pour la requête DQL
      * 
+     * @FIXME Cette méthode ne respecte pas la séparation DQL / Controller
      * @param unknown $sort
      * @return string
      */
     private function _getOrderBy($sort){
         switch($sort){
+            case 'DisplayNameAsc':
+                return 'e.displayName ASC';
+            case 'DisplayNameDesc':
+                return 'e.displayName DESC';
+            case 'EmailAsc':
+                return 'e.email ASC';
+            case 'EmailDesc':
+                return 'e.email DESC';
+            case 'UsernameAsc':
+                return 'e.username ASC';
+            case 'UsernameDesc':
+                return 'e.username DESC';
             case 'IdDesc':
                 return 'e.id DESC';
             default:
