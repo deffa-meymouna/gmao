@@ -10,3 +10,6 @@ div.container a.brand {
 p.text-justify{
 	text-align:justify;
 }
+img.gravatar{
+	vertical-align: sub;
+}

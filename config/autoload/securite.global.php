@@ -33,7 +33,8 @@ return [
                     //[users], [resources], [privileges]
                     [['guest','user','admin'],['homePage','examples'],'view'],
                     ['admin','administration','list'],
-                    ['admin',['userAdmin','roleAdmin'],['add','view','list','edit','delete']],
+                    ['admin','userAdmin',['add','view','list','edit','delete','ban','activating']],
+                    ['admin','roleAdmin',['add','view','list','edit','delete']],
                     
                 ],
             ],

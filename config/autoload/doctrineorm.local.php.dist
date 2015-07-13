@@ -4,6 +4,9 @@ return array(
         'configuration' => array(
             'orm_default' => array(
                 'sql_logger' => 'ZF2DoctrineSQLLogger',
+                'types' => array(
+                    'utcdatetime' => 'ApplicationDBALTypesUTCDateTimeType',
+                ),
             ),
         ),
         'connection' => array(

@@ -41,7 +41,7 @@ class User implements UserInterface, ProviderInterface
 
     /**
      * @var string
-     * @ORM\Column(name="usr_email", type="string", unique=true,  length=255)
+     * @ORM\Column(name="usr_email", type="string", unique=true,  length=255, nullable=false)
      */
     protected $email;
 
@@ -53,10 +53,51 @@ class User implements UserInterface, ProviderInterface
 
     /**
      * @var string
-     * @ORM\Column(name="usr_password", type="string", length=128)
+     * @ORM\Column(name="usr_password", type="string", length=128, nullable=false)
      */
     protected $password;
+    
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="usr_inscription", type="UTCDateTime", nullable=false)
+     */
+    protected $inscription;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="usr_activation", type="UTCDateTime")
+     */
+    protected $activation;
+    
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="usr_bannissement", type="UTCDateTime")
+     */
+    protected $bannissement;
+    
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="usr_lastvisite", type="UTCDateTime")
+     */
+    protected $lastVisite;
+    
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="usr_modification", type="UTCDateTime")
+     */
+    protected $modification;
+    /**
+     * @var string
+     * @ORM\Column(name="usr_timezone", type="string", length=80, nullable=false)
+     */
+    protected $timezone;
+    /**
+     * @var string
+     * @ORM\Column(name="usr_locale", type="string", length=80, nullable=false)
+     */
+    protected $locale;
+    
+    
     /**
      * @var int
      */
@@ -71,6 +112,11 @@ class User implements UserInterface, ProviderInterface
      * )
      */
     protected $roles;
+    
+    /**
+     * @var bool
+     */
+    private $localizedInscription = false;
 
     /**
      * Initialies the roles variable.
@@ -213,6 +259,122 @@ class User implements UserInterface, ProviderInterface
     }
 
     /**
+     * @return DateTime the $inscription
+     */
+    public function getInscription()
+    {
+        /*if (!$this->localizedInscription) {
+            $this->inscription->setTimeZone(new \DateTimeZone($this->timezone));
+        }*/
+        return $this->inscription;
+    }
+
+	/**
+     * @param DateTime $inscription
+     */
+    public function setInscription($inscription)
+    {
+        $this->inscription = $inscription;
+    }
+
+	/**
+     * @return DateTime the $activation
+     */
+    public function getActivation()
+    {
+        return $this->activation;
+    }
+
+	/**
+     * @param DateTime $activation
+     */
+    public function setActivation($activation)
+    {
+        $this->activation = $activation;
+    }
+
+	/**
+     * @return DateTime the $bannissement
+     */
+    public function getBannissement()
+    {
+        return $this->bannissement;
+    }
+
+	/**
+     * @param DateTime $bannissement
+     */
+    public function setBannissement($bannissement)
+    {
+        $this->bannissement = $bannissement;
+    }
+
+	/**
+     * @return DateTime the $lastvisite
+     */
+    public function getLastVisite()
+    {
+        return $this->lastVisite;
+    }
+
+	/**
+     * @param DateTime $lastvisite
+     */
+    public function setLastVisite($lastVisite)
+    {
+        $this->lastVisite = $lastVisite;
+    }
+
+	/**
+     * @return DateTime the $modification
+     */
+    public function getModification()
+    {
+        return $this->modification;
+    }
+
+	/**
+     * @param DateTime $modification
+     * @return void
+     */
+    public function setModification($modification)
+    {
+        $this->modification = $modification;
+    }
+
+	/**
+     * @return string the $timezone
+     */
+    public function getTimezone()
+    {
+        return $this->timezone;
+    }
+
+	/**
+     * @param string $timezone
+     */
+    public function setTimezone($timezone)
+    {
+        $this->timezone = $timezone;
+    }
+
+	/**
+     * @return string the $locale
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+	/**
+     * @param string $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+	/**
      * Get role.
      *
      * @return array
@@ -259,5 +421,29 @@ class User implements UserInterface, ProviderInterface
         foreach($roles as $role){
             $this->roles->removeElement($role);
         }
+    }
+    /**
+     * Indique si l'utilisateur est actif
+     * 
+     * @return boolean true si actif
+     */
+    public function isActive(){
+        return null != $this->activation;
+    }
+    /**
+     * Indique si l'utilisateur est banni
+     *
+     * @return boolean true si banni
+     */
+    public function isBanned(){
+        return null != $this->bannissement;
+    }
+    /**
+     * @todo Fonction à modifier et à appeler avant toute sauvegarde
+     */
+    public function setUpdated()
+    {
+        // WILL be saved in the database
+        $this->updated = new \DateTime("now");
     }
 }

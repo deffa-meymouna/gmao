@@ -7,6 +7,21 @@
     $sort = $this->sort;
     $searchText = $this->searchText;
     
+    //Gravatars Settings
+    $settings = array(
+        'img_size'    => 16,
+        'default_img' => \Zend\View\Helper\Gravatar::DEFAULT_IDENTICON,
+        'rating'      => \Zend\View\Helper\Gravatar::RATING_G,
+        'secure'      => null,
+    );
+    $attr = ['class'=>'gravatar'];
+    
+    //dateFormat
+    $zfcUser = $this->zfcUserIdentity();
+    if ($zfcUser){
+        $this->plugin('dateFormat')->setTimeZone($zfcUser->getTimeZone())->setLocale($zfcUser->getLocale());
+    }
+    
     //Paginator
     $paginator = $this->paginationControl($this->paginator,
         'sliding',
@@ -54,6 +69,7 @@
     
 </div>
 <?php if (count($this->paginator)): ?>
+<div class="table-responsive">
 <table class="table table-bordered table-hover table-responsive table-striped">
     <thead>
         <tr>
@@ -117,16 +133,51 @@
                     </a>
                 </span>
             </th>
+            <th id="inscriptions">
+                <?php echo $this->escapeHtml($this->translate('Inscription'));?>
+                <span class="btn-group pull-right">
+                    <a class="btn btn-xs <?php echo ('InscriptionAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'InscriptionAsc','search' => $searchText]);?>" 
+                       title="<?php echo $this->escapehtmlattr($this->translate('Sort users by inscription date ascending'))?>">
+                        <i class="fa fa-fw fa-sort-alpha-asc"></i>
+                    </a>
+                    <a class="btn btn-xs <?php echo ('InscriptionDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'InscriptionDesc','search' => $searchText]);?>" 
+                       title="<?php echo $this->escapehtmlattr($this->translate('Sort users by inscription date descending'))?>">
+                        <i class="fa fa-fw fa-sort-alpha-desc"></i>
+                    </a>
+                </span>
+            </th>
+            <th id="lastsvisite">
+                <?php echo $this->escapeHtml($this->translate('Dernière visite'));?>
+                <span class="btn-group pull-right">
+                    <a class="btn btn-xs <?php echo ('LastVisiteAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'LastVisiteAsc','search' => $searchText]);?>" 
+                       title="<?php echo $this->escapehtmlattr($this->translate('Sort users by last visite date ascending'))?>">
+                        <i class="fa fa-fw fa-sort-amount-asc"></i>
+                    </a>
+                    <a class="btn btn-xs <?php echo ('LastVisiteDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'LastVisiteDesc','search' => $searchText]);?>" 
+                       title="<?php echo $this->escapehtmlattr($this->translate('Sort users by last visite date descending'))?>">
+                        <i class="fa fa-fw fa-sort-amount-desc"></i>
+                    </a>
+                </span>
+            </th>
             <th id="actions"></th>
         </tr>        
     </thead>
     <tbody>
         <?php foreach ($this->paginator as $user):?>
-        <tr>
+        <tr class="<?php echo ($user->isBanned())?'danger':(($user->isActive())?'':'warning');?> ">
             <td headers="identifiants"><?php echo $this->escapeHtml($user->getId());?></td>
             <td headers="names"><?php echo $this->escapeHtml($user->getUsername());?></td>
-            <td headers="emails"><?php echo $this->escapeHtml($user->getEmail());?></td>
-            <td headers="display_names"><?php echo $this->escapeHtml($user->getDisplayName());?></td>
+            <td headers="emails">
+                <?php echo $this->gravatar($user->getEmail(),$settings,$attr);?>
+                <?php echo $this->escapeHtml($user->getEmail());?>
+            </td>
+            <td headers="display_names"><?php echo $this->escapeHtml($user->getDisplayName());?></td>            
+            <td headers="inscriptions"><?php echo $this->dateFormat($user->getInscription(),IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM);?></td>
+            <td headers="lastsvisit"><?php echo $this->dateFormat($user->getLastVisite(),IntlDateFormatter::MEDIUM,IntlDateFormatter::MEDIUM);?></td>
             <td headers="actions">
                 <span class="btn-group">
                 <?php if ($this->viewIsAllowed):?>
@@ -137,6 +188,16 @@
                 <?php if ($this->editIsAllowed):?>
                     <a class="btn btn-default btn-xs" href="#" title=<?php echo $this->escapehtmlattr('Edit');?>>
                         <i class="fa fa-fw fa-pencil"></i>
+                    </a>
+                <?php endif;?>
+                <?php if ($this->activatingIsAllowed):?>
+                    <a class="btn btn-default btn-xs <?php echo ($user->isActive())?'disabled':'';?>" href="#" title=<?php echo $this->escapehtmlattr('Ban');?>>
+                        <i class="fa fa-fw fa-check"></i>
+                    </a>
+                <?php endif;?>
+                <?php if ($this->banIsAllowed):?>
+                    <a class="btn btn-default btn-xs" href="#" title=<?php echo $this->escapehtmlattr('Ban');?>>
+                        <i class="fa fa-fw fa-ban"></i>
                     </a>
                 <?php endif;?>
                 <?php if ($this->deleteIsAllowed):?>
@@ -158,6 +219,7 @@
     </caption>
         
 </table>
+</div>
 <div class="row">
     <div class="col-sm-8">    
         <?php echo $paginator; ?>

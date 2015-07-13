@@ -115,6 +115,8 @@ class UserController extends AbstractActionController
             'viewIsAllowed'   => $this->isAllowed('userAdmin', 'view'),
             'editIsAllowed'   => $this->isAllowed('userAdmin', 'edit'),
             'deleteIsAllowed' => $this->isAllowed('userAdmin', 'delete'),
+            'banIsAllowed'    => $this->isAllowed('userAdmin', 'ban'),
+            'activatingIsAllowed' => $this->isAllowed('userAdmin', 'activating'),
         ));
     }
     /**
@@ -126,6 +128,14 @@ class UserController extends AbstractActionController
      */
     private function _getOrderBy($sort){
         switch($sort){
+            case 'InscriptionAsc':
+                return 'e.inscription ASC';
+            case 'InscriptionDesc':
+                return 'e.inscription DESC';
+            case 'LastVisiteAsc':
+                return 'e.lastVisite ASC';
+            case 'LastVisiteDesc':
+                return 'e.lastVisite DESC';
             case 'DisplayNameAsc':
                 return 'e.displayName ASC';
             case 'DisplayNameDesc':

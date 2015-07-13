@@ -41,7 +41,7 @@ return array(
                             'constraints' => array(
                                 'page'         => '\d+',
                                 'itemsPerPage' => '\d+',
-                                'sort'         => '(IdAsc|IdDesc|UsernameAsc|UsernameDesc|EmailAsc|EmailDesc|DisplayNameAsc|DisplayNameDesc)', // only login, logout or info are allowed
+                                'sort'         => '(IdAsc|IdDesc|UsernameAsc|UsernameDesc|EmailAsc|EmailDesc|DisplayNameAsc|DisplayNameDesc|InscriptionAsc|InscriptionDesc|LastVisiteAsc|LastVisiteDesc)', // only login, logout or info are allowed
                             ),
                         ),
                     ),
