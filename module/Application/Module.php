@@ -18,19 +18,21 @@ class Module {
 		$eventManager = $e->getApplication ()->getEventManager ();
 		$moduleRouteListener = new ModuleRouteListener ();
 		$moduleRouteListener->attach ( $eventManager );
+		//Détermination de la locale
+		if (isset ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] )) {
+		    $locale = \Locale::acceptFromHttp ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] );
+		} else {
+		    $locale = \Locale::getDefault();
+		}
 		//Initialisation de la traduction
 		$translator = $e->getApplication ()->getServiceManager ()->get ( 'translator' );
-		if (isset ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] )) {
-			$translator->setLocale ( \Locale::acceptFromHttp ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] ) )->setFallbackLocale ( 'fr_FR' );
-		} else {
-			$translator->setLocale ( 'fr_FR' );
-		}
+		$translator->setLocale ( $locale );
 		//Ajout des fichiers de traduction
-		$locale = substr($translator->getLocale(),0,2);
-		$translator->addTranslationFile(
-			'phpArray',
-			__DIR__ . "/../../vendor/zendframework/zend-i18n-resources/languages/$locale/Zend_Validate.php"
-		);
+		$sm_locale = substr($translator->getLocale(),0,2);
+		$translationFile = __DIR__ . "/../../vendor/zendframework/zend-i18n-resources/languages/$sm_locale/Zend_Validate.php";
+		if (file_exists($translationFile)){
+		  $translator->addTranslationFile('phpArray',$translationFile);
+		}
 		AbstractValidator::setDefaultTranslator($translator);
 		//Menu de navigation
 		// Add ACL information to the Navigation view helper
