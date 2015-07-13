@@ -10,7 +10,7 @@
 	//Est-on connecté ?
 	$user = $this->zfcUserIdentity();
 	$gravatar = ($user)?$this->gravatar($this->zfcUserIdentity()->getEmail()):null;
-	
+
 ?>
 <html lang="fr">
 	<head>
@@ -44,14 +44,14 @@
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo $this->url('home') ?>"><span class=""><i class="fa fa-file-o"></i></span>&nbsp;<?php echo $this->translate('Administration') ?></a>
+					<a class="navbar-brand" href="<?php echo $this->url('home') ?>"><span class=""><i class="fa fa-fw fa-tachometer"></i></span>&nbsp;<?php echo $this->translate('Administration') ?></a>
 				</div>
 				<div class="collapse navbar-collapse">
 					<?php echo $this->navigation('navigation')->menu()->render(); ?>
@@ -87,10 +87,9 @@
 						</a>
 					<?php endif;?>
 				</div><!--/.nav-collapse -->
-
 			</div>
 		</nav>
-		<div class="container">
+		<div class="container-fluid">
 	   		<?php echo $this->navigation()->breadcrumbs(); ?>
 			<?php echo $this->content; ?>
 			<hr>
