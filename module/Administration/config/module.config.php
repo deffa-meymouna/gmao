@@ -36,35 +36,24 @@ return array(
                     'user' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route' => '/user[/page:page][/itemsPerPage:itemsPerPage][/sortBy:sort][?search=:search]',
+                            'route' => '/user[/action-:action][/user:user][/confirmation:confirmation][/page:page][/itemsPerPage:itemsPerPage][/sortBy:sort][?search=:search]',
                             'defaults' => array(
                                 'controller'   => 'Administration\Controller\User',
-                                'action'       => 'index',
                                 'page'         => 1,                                
                                 'itemsPerPage' => 10,
                                 'sort'         => 'IdAsc',
                                 'search'       => '',
-                            ),
-                            'constraints' => array(
-                                'page'         => '\d+',
-                                'itemsPerPage' => '\d+',
-                                'sort'         => '(IdAsc|IdDesc|UsernameAsc|UsernameDesc|EmailAsc|EmailDesc|DisplayNameAsc|DisplayNameDesc|InscriptionAsc|InscriptionDesc|LastVisiteAsc|LastVisiteDesc)', // only login, logout or info are allowed
-                            ),
-                        ),
-                    ),
-                    'user-action' => array(
-                        'type' => 'segment',
-                        'options' => array(
-                            'route' => '/user/:action[/user:user][/confirmation:confirmation]',
-                            'defaults' => array(
-                                'controller'   => 'Administration\Controller\User',
-                                'confirmation' => '0',
-                                'user'         => '0',
+                                'action'       => 'list',
+                                'user'         => 0,                                
+                                'confirmation' => 0,
                             ),
                             'constraints' => array(
                                 'user'         => '[0-9]+',
-                                'action'       => '[a-zA-Z][a-zA-Z0-9_-]+',
+                                'action'       => '[a-zA-Z][a-zA-Z_-]+',
                                 'confirmation' => '[0-2]',
+                                'page'         => '[0-9]+',
+                                'itemsPerPage' => '[0-9]+',
+                                'sort'         => '(IdAsc|IdDesc|UsernameAsc|UsernameDesc|EmailAsc|EmailDesc|DisplayNameAsc|DisplayNameDesc|InscriptionAsc|InscriptionDesc|LastVisiteAsc|LastVisiteDesc)', // only login, logout or info are allowed
                             ),
                         ),
                     ),

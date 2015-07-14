@@ -1,0 +1,86 @@
+<div class="page-header">
+	<h1>
+	   <i class="fa fa-fw fa-eye"></i>
+		<?php echo sprintf($this->escapehtml($this->translate('Informations détaillées de %s')),
+			              '<strong>'.$this->escapehtml($this->user->getEmail()).'</strong>');
+	    ?>
+	</h1>
+</div>
+<?php
+	$flash = $this->flashmessenger();
+	echo $flash->render('error',   array('alert', 'alert-dismissable', 'alert-danger'));
+	echo $flash->render('warning', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('info',    array('alert', 'alert-dismissable', 'alert-info'));
+	echo $flash->render('default', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('success', array('alert', 'alert-dismissable', 'alert-success'));
+?>
+<div class="row text-justify">
+	<div class="col-sm-6 col-lg-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+				    <i class="fa fa-fw fa-eye"></i>
+					<?php echo $this->translate('Informations générales sur l’utilisateur');?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Username');?></dt>
+					<dd><?php echo $this->escapehtml($this->user->getUsername());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Display Name');?></dt>
+					<dd><?php echo $this->escapehtml($this->user->getDisplayName());?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Email');?></dt>
+					<dd><?php echo $this->escapehtml($this->user->getEmail());?></dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 col-lg-4">
+	   <div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+				    <i class="fa fa-fw fa-calendar"></i>
+					<?php echo $this->translate('Calendrier');?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Inscription');?></dt>
+					<dd><?php echo $this->dateFormat($this->user->getInscription(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Date d’activation');?></dt>					
+					<dd>
+					   <?php if (empty($this->user->getActivation())):?>
+					   <span class="label label-warning"><?php echo $this->escapeHtml('Compte non activé')?></span>
+					   <?php else:?>
+					   <?php echo $this->dateFormat($this->user->getActivation(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?>
+					   <?php endif;?>
+					</dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Dernière activité');?></dt>
+					<dd><?php echo $this->dateFormat($this->user->getLastVisite(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Dernière modification');?></dt>
+					<dd><?php echo $this->dateFormat($this->user->getModification(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Date du bannissement');?></dt>					
+					<dd>
+					   <?php if (empty($this->user->getBannissement())):?>
+					   <span class="label label-default"><?php echo $this->escapeHtml('Compte non banni')?></span>
+					   <?php else:?>
+					   <?php echo $this->dateFormat($this->user->getBanissement(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?>
+					   <?php endif;?>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>

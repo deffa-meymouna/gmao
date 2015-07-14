@@ -9,12 +9,10 @@ namespace Administration\Controller;
  */
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 use Application\Entity\User;
-use Zend\Paginator\Adapter\Iterator;
-use Zend\Paginator\Paginator as ZendPaginator;
 use Administration\Form\Element\ItemsPerPage;
 use Administration\Form\Search;
+use Zend\Http\Response;
 
 /**
  * 
@@ -23,22 +21,20 @@ use Administration\Form\Search;
  */
 class UserController extends AbstractActionController
 {
+    const NO_RESPONSE = 0;
+    const CANCEL      = 1;
+    const CONFIRM     = 2;
     /**
      *
      * @var \Doctrine\ORM\EntityManager
      */
     protected $em;
     /**
-     *
-     * @return \Doctrine\ORM\EntityManager
+     * 
+     * @var Application\Service\Users
      */
-    protected function _getEntityManager()
-    {
-        if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        }
-        return $this->em;
-    }
+    protected $usersService;
+
     /**
      * 
      * @return \Doctrine\ORM\EntityRepository
@@ -47,19 +43,62 @@ class UserController extends AbstractActionController
         return $this->_getEntityManager()->getRepository(User::class);
     }
     /**
-     * Active un utilisateur
+     * Consulter un utilisateur
      * 
-     * @return \Zend\View\Model\ViewModel
+     * @return \Zend\Http\Response|\Zend\View\Model\ViewModel
      */
-    public function activeAction(){
-        return new ViewModel();
+    public function viewAction(){
+        $user = $this->_getUser();
+        if ($user instanceof Response){
+            //Redirection
+            return $user;
+        }
+        return new ViewModel(array(
+            'user'    => $user,
+        ));
     }
     /**
-     * Listing des utilisateurs
+     * Activer un utilisateur
+     * 
+     * @return \Zend\Http\Response|\Zend\View\Model\ViewModel
+     */
+    public function activeAction(){
+        $user = $this->_getUser();
+		if ($user instanceof Response){
+			//Redirection
+			return $user;
+		}
+		if ($user->isActive()){
+		    $message = "L’utilisateur %s était déjà actif. Aucune action n’a été entreprise !";
+			$message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
+			$this->flashMessenger()->addWarningMessage($message);
+		    return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
+		}
+		$confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
+		if($confirmation == self::CONFIRM){
+			$this->_getUsersService()->activeUser($user);
+			$this->_getUsersService()->saveUser($user);
+			$message = "L’utilisateur %s a été activé avec succès.";
+			$message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
+			$this->flashMessenger()->addSuccessMessage($message);
+			return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
+		}elseif($confirmation == self::CANCEL){
+			$message = sprintf($this->_getTranslatorHelper()->translate("Annulation demandée ! L’utilisateur %s n'a pas été activé."),$user->getEmail());
+			$this->flashMessenger()->addInfoMessage($message);
+			return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
+		}
+		return new ViewModel(array(
+			'user'    => $user,
+		    'confirm' => self::CONFIRM,
+		    'cancel'  => self::CANCEL,
+		));
+    }
+    /**
+     * Lister les utilisateurs
      * 
      * @see \Zend\Mvc\Controller\AbstractActionController::indexAction()
      */
-    public function indexAction()
+    public function listAction()
     {
         //Initialisation de variables
         $dqlParams = array();
@@ -70,34 +109,9 @@ class UserController extends AbstractActionController
         $page         = $this->params()->fromRoute('page');
         $sort         = $this->params()->fromRoute('sort');
         $searchText   = $this->params()->fromQuery('search','');   
-
-        //Construction de la requête DQL
-        $dql = 'SELECT e FROM ' . User::class . ' e ';
-        if (!empty($searchText)){
-            $dql .= ' WHERE ';
-            if ((int)($searchText)){
-                $dqlParams[] = ' e.id like :id ';
-                $params['id'] = "%$searchText%";
-            }
-            $dqlParams[]= ' e.username like :username ';
-            $dqlParams[]= ' e.displayName like :displayname ';
-            $dqlParams[]= ' e.email like :email ';
-            $params['username']    = "%$searchText%";
-            $params['displayname'] = "%$searchText%";
-            $params['email']       = "%$searchText%";
-            $dql .= implode(' OR ', $dqlParams);
-        }
-        $dql.= ' ORDER BY '.  $this->_getOrderBy($sort);
-        $query = $this->_getEntityManager()->createQuery($dql,false);
-        if (!empty($searchText)){
-            $query->setParameters($params);
-        }
-
+        
         //Pagination
-        $d2_paginator = new DoctrinePaginator($query);
-        $d2_paginator_iter = $d2_paginator->getIterator(); // returns \ArrayIterator object
-        $adapter = new Iterator($d2_paginator_iter);
-        $zend_paginator = new ZendPaginator($adapter);
+        $zend_paginator = $this->_getUsersService()->searchUsers($searchText,$sort);
         $zend_paginator->setItemCountPerPage($itemsPerPage);
         $zend_paginator->setCurrentPageNumber($page);
         
@@ -126,41 +140,51 @@ class UserController extends AbstractActionController
             'activatingIsAllowed' => $this->isAllowed('userAdmin', 'activating'),
         ));
     }
+    
     /**
-     * Retourne le tri pour la requête DQL
      * 
-     * @FIXME Cette méthode ne respecte pas la séparation DQL / Controller
-     * @param string $sort
-     * @return string
      */
-    private function _getOrderBy($sort){
-        switch($sort){
-            case 'InscriptionAsc':
-                return 'e.inscription ASC';
-            case 'InscriptionDesc':
-                return 'e.inscription DESC';
-            case 'LastVisiteAsc':
-                return 'e.lastVisite ASC';
-            case 'LastVisiteDesc':
-                return 'e.lastVisite DESC';
-            case 'DisplayNameAsc':
-                return 'e.displayName ASC';
-            case 'DisplayNameDesc':
-                return 'e.displayName DESC';
-            case 'EmailAsc':
-                return 'e.email ASC';
-            case 'EmailDesc':
-                return 'e.email DESC';
-            case 'UsernameAsc':
-                return 'e.username ASC';
-            case 'UsernameDesc':
-                return 'e.username DESC';
-            case 'IdDesc':
-                return 'e.id DESC';
-            default:
-                return 'e.id ASC';
+    protected function _getUser(){
+        $id = (int) $this->params()->fromRoute('user', 0);
+        if ($id == 0) {
+            $this->flashMessenger()->addErrorMessage($this->_getTranslatorHelper()->translate('Identifiant de l\'utilisateur invalide'));
+            return $this->redirect()->toRoute('zfcadmin/user');
+        }        
+        $unUser = $this->_getUsersService()->findUserById($id);
+        if (empty($unUser)){
+            $this->flashMessenger()->addWarningMessage($this->_getTranslatorHelper()->translate('L\'utilisateur sélectionnée n\'a pas été trouvé ou n\'existe plus'));
+            return $this->redirect()->toRoute('zfcadmin/user');
         }
-        
+        return $unUser;
+    }
+    /**
+     * 
+     */
+    
+    /**
+     * get translatorHelper
+     *
+     * @return  Zend\Mvc\I18n\Translator
+     */
+    protected function _getTranslatorHelper()
+    {
+        if (null === $this->translatorHelper) {
+            $this->translatorHelper = $this->getServiceLocator()->get('MvcTranslator');
+        }
+        return $this->translatorHelper;
+    }
+    
+    /**
+     * get usersService
+     *
+     * @return Application\Service\Users
+     */
+    protected function _getUsersService()
+    {
+        if (null === $this->usersService) {
+            $this->usersService = $this->getServiceLocator()->get('UsersService');
+        }
+        return $this->usersService;
     }
 }
 
