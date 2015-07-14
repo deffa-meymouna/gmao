@@ -65,8 +65,16 @@
         </div>
     </div>
 </div>
-<div class="text-left">
+<div class="flashmessenger">
+<?php
     
+	$flash = $this->flashmessenger();
+	echo $flash->render('error',   array('alert', 'alert-dismissable', 'alert-danger'));
+	echo $flash->render('warning', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('info',    array('alert', 'alert-dismissable', 'alert-info'));
+	echo $flash->render('default', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('success', array('alert', 'alert-dismissable', 'alert-success'));
+?>
 </div>
 <?php if (count($this->paginator)): ?>
 <div class="table-responsive">
