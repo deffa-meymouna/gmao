@@ -5,33 +5,41 @@ use Doctrine\DBAL\Types\DateTimeType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 /**
- * 
- * 
+ * Based on :
+ *  
  * @see http://doctrine-orm.readthedocs.org/en/latest/cookbook/working-with-datetime.html
- *
+ * 
+ * But with some bugs fixed :
+ * 
+ * @see https://github.com/braincrafted/doctrine-bundle/blob/master/DBAL/Type/UTCDateTimeType.php
+ * 
  */
 class UTCDateTimeType extends DateTimeType
 {
+    /** @var \DateTimeZone */
     static private $utc = null;
-
+    /**
+     * {@inheritDoc}
+     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if ($value === null) {
             return null;
         }
-
-
-        return $value->format($platform->getDateTimeFormatString(),
-            (self::$utc) ? self::$utc : (self::$utc = new \DateTimeZone('UTC'))
-        );
+        if (!$value instanceof \DateTime) {
+            return null;
+        }
+        $value->setTimezone((self::$utc) ? self::$utc : (self::$utc = new \DateTimeZone('UTC')));
+        return $value->format($platform->getDateTimeFormatString());
     }
-
+    /**
+     * {@inheritDoc}
+     */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         if ($value === null) {
             return null;
         }
-
         $val = \DateTime::createFromFormat(
             $platform->getDateTimeFormatString(),
             $value,
