@@ -23,6 +23,7 @@ class UsersService implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-        return new Users($entityManager);
+        $authorize     = $serviceLocator->get('BjyAuthorize\Service\Authorize');
+        return new Users($entityManager,$authorize);
     }
 }

@@ -21,8 +21,8 @@ return [
                 'lockPage'       => [],
                 'examples'       => [],
                 'administration' => [],
-                'userAdmin'      => [],
-                'roleAdmin'      => [],
+                'user'           => [],
+                'role'           => [],
             ],
         ],
         //Je place les droits de l'application blanche ici
@@ -32,9 +32,15 @@ return [
                 'allow' => [
                     //[users], [resources], [privileges]
                     [['guest','user','admin'],['homePage','examples'],'view'],
+                    [['guest','user','admin'],'user','search'],
+                    //En dehors de l'admin, on n'a pas le droit d'activer,
+                    //sauf si on s'activait soi-même
+                    //Mais on ne peut pas être identifié pour s'activer
+                    //C'est pour cela que Guest à le droit d'activer
+                    ['guest','user','activating'],                    
                     ['admin','administration','list'],
-                    ['admin','userAdmin',['add','view','list','edit','delete','ban','activating']],
-                    ['admin','roleAdmin',['add','view','list','edit','delete']],
+                    ['admin','user',['add','view','list','edit','delete','ban','activating','unban']],
+                    ['admin','role',['add','view','list','edit','delete']],
                     
                 ],
             ],

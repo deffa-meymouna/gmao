@@ -104,8 +104,7 @@ return array (
 		                'route' => 'zfcadmin/user',
 		                'priority' => 0.9,
 		                'changefreq' => 'monthly',
-		                'action' => 'list',
-		                'resource' => 'userAdmin',
+		                'resource' => 'user',
 		                'privilege' => 'list',
 		            ),
 		            array (
@@ -116,7 +115,7 @@ return array (
 		                'priority' => 0.9,
 		                'changefreq' => 'monthly',
 		                'action' => 'list',
-		                'resource' => 'roleAdmin',
+		                'resource' => 'role',
 		                'privilege' => 'list',
 		            ),
 		            

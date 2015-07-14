@@ -13,6 +13,8 @@ use Application\Entity\User;
 use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 use Zend\Paginator\Adapter\Iterator;
 use Zend\Paginator\Paginator as ZendPaginator;
+use BjyAuthorize\Service\Authorize;
+use BjyAuthorize\Exception\UnAuthorizedException;
 
 class Users
 {
@@ -35,24 +37,71 @@ class Users
 	 */
 	private $entityManager;
 	/**
-	 * Constructeur
-	 *
-	 * @param EntityManager $entityManager
+	 * @var Authorize
 	 */
-	public function __construct(EntityManagerInterface $entityManager){
+	private $authorize;
+    /**
+	 * Constructeur
+     *
+	 * @param EntityManagerInterface $entityManager
+	 * @param Authorize $authorize
+	 */
+	public function __construct(EntityManagerInterface $entityManager, Authorize $authorize){
 		$this->entityManager = $entityManager;
+		$this->authorize = $authorize;
 	}
+	/**
+	 * Active un utilisateur
+	 * 
+	 * @param User $user
+	 * @throws UnAuthorizedException
+	 */
 	public function activeUser(User $user){
+	    if (!$this->authorize->isAllowed('user','activating')){
+	        //En dehors de l'admin, on n'a pas le droit d'activer, 
+	        //sauf si on s'activait soi-même
+	        //Mais on ne peut pas être identifié pour s'activer
+	        //C'est pour cela que Guest à le droit d'activer
+	        throw new UnAuthorizedException();
+	    }
 	    $user->setActivation(new \DateTime("now"));
-	    $user->setUpdated();	    
+	    $this->_saveUser($user);	    
+	}
+	/**
+	 * Banni un utilisateur
+	 * @param User $user
+     * @throws UnAuthorizedException
+	 */
+	public function banUser(User $user){
+	    if (!$this->authorize->isAllowed('user','ban')){	     
+	        throw new UnAuthorizedException();
+	    }
+	    $user->setBannissement(new \DateTime("now"));
+	    $this->_saveUser($user);  
+	}
+	/**
+	 * «Débannir» un utilisateur
+	 * @param User $user
+	 * @throws UnAuthorizedException
+	 */
+	public function unbanUser(User $user){
+		if (!$this->authorize->isAllowed('user','unban')){	     
+	        throw new UnAuthorizedException();
+	    }
+	    $user->setBannissement(null);
+	    $this->_saveUser($user);	    
 	}
 	/**
 	 * 
 	 * @param string $searchText
 	 * @param string $sort
+	 * @throws UnAuthorizedException
 	 * @return Zend\Paginator\Paginator
 	 */
     public function searchUsers($searchText,$sort = self::ID_ASC){
+        if (!$this->authorize->isAllowed('user','search')){
+            throw new UnAuthorizedException();
+        }
         //Construction de la requête DQL
         $dql = 'SELECT e FROM ' . User::class . ' e ';
         if (!empty($searchText)){
@@ -81,31 +130,6 @@ class Users
         
     }
         
-    /**
-     * Service de création d'une Entité Machine à partir d'un formulaire valide
-     * et préalablement filtré de type ReferencerIPForm
-     * @todo to implement
-     * @param MachineForm $form
-     * @return Machine
-     */
-    /*public function referencerUnNouvelUtilisateur(ReferencementIpForm $form){
-    	$nouvelleMachine = new MachineTable();
-    	$nouvelleMachine->setDescription($form->get('mac_description')->getValue());
-    	$nouvelleMachine->setLibelle($form->get('mac_libelle')->getValue());
-    	$nouvelleMachine->setInterface($form->get('mac_interface')->getValue());
-    	$nouvelleMachine->setType($form->get('mac_type')->getValue());
-    	return $nouvelleMachine;
-    }*/
-	/**
-	 * Enregistre une Machine
-	 *
-	 * @param User $unUser
-	 */
-	public function saveUser(User $unUser){
-	    $unUser->setUpdated();
-		$this->entityManager->persist($unUser);
-		$this->entityManager->flush();
-	}
 	/**
 	 * Recherche un Utilisateur selon son Id
 	 *
@@ -118,15 +142,35 @@ class Users
 
 	/**
 	 * Supprime un utilisateur
-	 * @FIXME To implement
+	 * 
 	 * @param User $unUser
+	 * @throws UnAuthorizedException
 	 * @return void
 	 */
-	public function deleteUser(User $unUser){
+	public function deleteUser(User $unUser,$flush = true){
+	    if (!$this->authorize->isAllowed('user','delete')){
+	        throw new UnAuthorizedException();
+	    }
 		$this->entityManager->remove($unUser);
-		$this->entityManager->flush();
+		if ($flush){
+		  $this->entityManager->flush();
+		}
 	}
 
+	/**
+	 * Enregistre un User
+	 * Cette fonction est volontairement protégée, car je ne veux pas qu'un malin
+	 * chope un $user et le sauvegarde. Il pourrait alors le bannir.
+	 *
+	 * @param User $unUser
+	 */
+	protected function _saveUser(User $unUser,$flush = true){
+	    $unUser->setUpdated();
+		$this->entityManager->persist($unUser);
+		if ($flush){
+		    $this->entityManager->flush();
+		}
+	}
 	/**
 	 *
 	 * @return \Doctrine\ORM\EntityManager

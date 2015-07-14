@@ -4,6 +4,12 @@
 		<?php echo sprintf($this->escapehtml($this->translate('Informations détaillées de %s')),
 			              '<strong>'.$this->escapehtml($this->user->getEmail()).'</strong>');
 	    ?>
+	    <?php if ($this->user->isBanned()):?>
+	       <span class="pull-right label label-danger"><?php echo $this->escapeHtml('Compte banni')?></span>
+	    <?php endif;?>
+	    <?php if (!$this->user->isActive()):?>
+	       <span class="pull-right label label-warning"><?php echo $this->escapeHtml('Compte non activé')?></span>
+	    <?php endif;?>
 	</h1>
 </div>
 <?php
@@ -55,10 +61,10 @@
 				<dl class="dl-horizontal">
 					<dt><?php echo $this->translate('Date d’activation');?></dt>					
 					<dd>
-					   <?php if (empty($this->user->getActivation())):?>
-					   <span class="label label-warning"><?php echo $this->escapeHtml('Compte non activé')?></span>
-					   <?php else:?>
+					   <?php if ($this->user->isActive()):?>
 					   <?php echo $this->dateFormat($this->user->getActivation(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?>
+					   <?php else:?>
+					   <span class="label label-warning"><?php echo $this->escapeHtml('Compte non activé')?></span>
 					   <?php endif;?>
 					</dd>
 				</dl>
@@ -73,13 +79,44 @@
 				<dl class="dl-horizontal">
 					<dt><?php echo $this->translate('Date du bannissement');?></dt>					
 					<dd>
-					   <?php if (empty($this->user->getBannissement())):?>
-					   <span class="label label-default"><?php echo $this->escapeHtml('Compte non banni')?></span>
+					   <?php if ($this->user->isBanned()):?>
+					   <?php echo $this->dateFormat($this->user->getBannissement(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?>
 					   <?php else:?>
-					   <?php echo $this->dateFormat($this->user->getBanissement(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?>
+					   <span class="label label-default"><?php echo $this->escapeHtml('Compte non banni')?></span>
 					   <?php endif;?>
 					</dd>
 				</dl>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 col-lg-4">
+	   <div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+				    <i class="fa fa-fw fa-wrench"></i>
+					<?php echo $this->translate('Outils d’administration');?>
+				</h2>
+			</div>
+			<div class="panel-body">
+			    <?php if ($this->user->isBanned()):?>
+    				<a class="btn btn-lg btn-default" 
+    				    href="<?php echo $this->url('zfcadmin/user',['action'=>'unban','user'=>$this->user->getId()]);?>">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-camera fa-user-1x"></i>
+                            <i class="fa fa-ban fa-stack-2x text-success"></i>
+                        </span> 
+                        <?php echo $this->translate('Lever le bannissement')?>
+                    </a>
+                <?php else:?>
+                    <a class="btn btn-lg btn-default" 
+    				    href="<?php echo $this->url('zfcadmin/user',['action'=>'ban','user'=>$this->user->getId()]);?>">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-camera fa-user-1x"></i>
+                            <i class="fa fa-ban fa-stack-2x text-danger"></i>
+                        </span> 
+                        <?php echo $this->translate('Bannir l’utilisateur');?>
+                    </a>
+                <?php endif?>
 			</div>
 		</div>
 	</div>
