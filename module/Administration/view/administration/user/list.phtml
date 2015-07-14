@@ -192,7 +192,7 @@
                 <span class="btn-group">
                 <?php if ($this->viewIsAllowed):?>
                     <a class="btn btn-default btn-xs" 
-                        href="<?php echo $this->url('zfcadmin/user',['action'=>'active','user'=>$user->getId()]);?>" 
+                        href="<?php echo $this->url('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);?>" 
                        title="<?php echo $this->escapehtmlattr('View');?>">
                         <i class="fa fa-fw fa-eye"></i>
                     </a>
