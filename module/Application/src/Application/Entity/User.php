@@ -199,6 +199,11 @@ class User implements UserInterface, ProviderInterface
      */
     public function getDisplayName()
     {
+        if (empty($this->displayName)){
+            if (empty($this->getUsername())){
+                return substr($this->getEmail(), 0, strpos($this->getEmail(), '@'));
+            }
+        }
         return $this->displayName;
     }
 
@@ -444,6 +449,6 @@ class User implements UserInterface, ProviderInterface
     public function setUpdated()
     {
         // WILL be saved in the database
-        $this->updated = new \DateTime("now");
+        $this->modification = new \DateTime("now");
     }
 }
