@@ -45,6 +45,19 @@ return array(
                             ),
                         ),
                     ),
+                    'user-action' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/user/:action/:user',
+                            'defaults' => array(
+                                'controller'   => 'Administration\Controller\User',
+                            ),
+                            'constraints' => array(
+                                'user'         => '[0-9]+',
+                                'action'       => '[a-zA-Z][a-zA-Z0-9_-]+',
+                            ),
+                        ),
+                    ),
                     'role' => array(
                         'type' => 'Literal',
                         'options' => array(

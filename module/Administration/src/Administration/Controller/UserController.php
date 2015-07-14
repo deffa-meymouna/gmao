@@ -47,9 +47,16 @@ class UserController extends AbstractActionController
         return $this->_getEntityManager()->getRepository(User::class);
     }
     /**
+     * Active un utilisateur
+     * 
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function activeAction(){
+        return new ViewModel();
+    }
+    /**
      * Listing des utilisateurs
      * 
-     * @todo to implement
      * @see \Zend\Mvc\Controller\AbstractActionController::indexAction()
      */
     public function indexAction()

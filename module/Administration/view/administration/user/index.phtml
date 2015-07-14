@@ -168,7 +168,7 @@
     </thead>
     <tbody>
         <?php foreach ($this->paginator as $user):?>
-        <tr class="<?php echo ($user->isBanned())?'danger':(($user->isActive())?'':'warning');?> ">
+        <tr>
             <td headers="identifiants"><?php echo $this->escapeHtml($user->getId());?></td>
             <td headers="names"><?php echo $this->escapeHtml($user->getUsername());?></td>
             <td headers="emails">
@@ -191,7 +191,9 @@
                     </a>
                 <?php endif;?>
                 <?php if ($this->activatingIsAllowed):?>
-                    <a class="btn btn-default btn-xs <?php echo ($user->isActive())?'disabled':'';?>" href="#" title=<?php echo $this->escapehtmlattr('Ban');?>>
+                    <a class="btn btn-default btn-xs <?php echo ($user->isActive())?'disabled':'';?>" 
+                        href="<?php echo $this->url('zfcadmin/user-action',['action'=>'active','user'=>$user->getId()]);?>" 
+                       title=<?php echo $this->escapehtmlattr('Active');?>>
                         <i class="fa fa-fw fa-check"></i>
                     </a>
                 <?php endif;?>
@@ -206,6 +208,11 @@
                     </a>
                 <?php endif;?>
                 </span>
+                <?php if ($user->isBanned()):?>
+                    <span class="label label-danger"><?php echo $this->escapehtml($this->translate('Banned'))?></span>
+                <?php elseif (!$user->isActive()):?>
+                    <span class="label label-warning"><?php echo $this->escapehtml($this->translate('Inactive'))?></span>
+                <?php endif;?>
             </td>
         </tr>
         <?php endforeach;?>
