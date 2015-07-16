@@ -1,0 +1,45 @@
+<?php $cpt = 0;?>
+<div class="page-header">
+	<h1><i class="fa fa-fw fa-delete"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Supprimer un utilisateur'))?></h1>
+</div>
+<div class="row text-justify">
+	<div class="col-sm-offset-2 col-sm-8">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+					<i class="fa fa-interrogation"></i>&nbsp;
+					<?php echo $this->escapehtml($this->translate('Demande de confirmation'));?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<p><strong><?php echo $this->escapehtml($this->translate('Êtes-vous sûr de vouloir supprimer l’utilisateur suivant ?'));?></strong></p>
+				<ul class="">
+					<li><?php echo $this->translate('Email')?>&nbsp;: <?php echo $this->escapehtml($this->user->getEmail());?></li>
+					<li><?php echo $this->translate('Username')?>&nbsp;: 
+					   <?php if (empty($this->user->getUsername())): ?>
+					       <small><?php echo $this->escapehtml($this->translate('Non renseigné'));?></small>
+					   <?php else: ?>
+					       <?php echo $this->escapehtml($this->user->getUsername());?>
+					   <?php endif;?>
+					</li>
+					<li><?php echo $this->translate('Display Name')?>&nbsp;:
+					   <?php if (empty($this->user->getDisplayName())): ?>
+					       <small><?php echo $this->escapehtml($this->translate('Non renseigné'));?></small>
+					   <?php else: ?>
+					       <?php echo $this->escapehtml($this->user->getDisplayName());?>
+					   <?php endif;?>
+				</ul>
+			</div>
+			<div class="panel-footer text-right">
+				<div class="btn-group">
+					<a href="<?php echo $this->url('zfcadmin/user',array('action'=>'delete','user'=>$this->user->getId(), 'confirmation'=>$this->confirm));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Supprimer l’utilisateur'))?>"
+					  class="btn btn-primary tooltip-link"><i class="fa fa-check fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Supprimer'))?></a>
+				<a href="<?php echo $this->url('zfcadmin/user',array('action'=>'delete','user'=>$this->user->getId(), 'confirmation'=>$this->cancel));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Ne pas supprimer l’utilisateur'))?>"
+					  class="btn btn-default tooltip-link"><i class="fa fa-undo fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Annuler'))?></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

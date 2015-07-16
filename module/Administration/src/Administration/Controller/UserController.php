@@ -93,6 +93,35 @@ class UserController extends AbstractActionController
 		));
     }
     /**
+     * Supprimer un utilisateur
+     * 
+     * @return \Zend\Http\Response|\Zend\View\Model\ViewModel
+     */
+    public function deleteAction(){
+        $user = $this->_getUser();
+		if ($user instanceof Response){
+			//Redirection
+			return $user;
+		}
+		$confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
+		if($confirmation == self::CONFIRM){
+			$this->_getUsersService()->deleteUser($user);
+			$message = "L’utilisateur %s a été supprimé avec succès.";
+			$message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
+			$this->flashMessenger()->addSuccessMessage($message);
+			return $this->redirect()->toRoute('zfcadmin/user',['action'=>'list']);
+		}elseif($confirmation == self::CANCEL){
+			$message = sprintf($this->_getTranslatorHelper()->translate("Annulation demandée ! L’utilisateur %s n’a pas été supprimé."),$user->getEmail());
+			$this->flashMessenger()->addInfoMessage($message);
+			return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
+		}
+		return new ViewModel(array(
+			'user'    => $user,
+		    'confirm' => self::CONFIRM,
+		    'cancel'  => self::CANCEL,
+		));
+    }
+    /**
      * Bannir un utilisateur
      *
      * @return \Zend\Http\Response|\Zend\View\Model\ViewModel

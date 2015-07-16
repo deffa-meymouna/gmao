@@ -228,7 +228,9 @@
                 <?php endif;?>
                 
                 <?php if ($this->deleteIsAllowed):?>
-                    <a class="btn btn-default btn-xs" href="#" title=<?php echo $this->escapehtmlattr('Delete');?>>
+                    <a class="btn btn-default btn-xs" 
+                        href="<?php echo $this->url('zfcadmin/user',['action'=>'delete','user'=>$user->getId()]);?>" 
+                       title=<?php echo $this->escapehtmlattr('Delete');?>>
                         <i class="fa fa-fw fa-trash-o"></i>
                     </a>
                 <?php endif;?>
