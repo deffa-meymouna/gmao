@@ -77,7 +77,6 @@ class UserController extends AbstractActionController
 		$confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
 		if($confirmation == self::CONFIRM){
 			$this->_getUsersService()->activeUser($user);
-			$this->_getUsersService()->saveUser($user);
 			$message = "L’utilisateur %s a été activé avec succès.";
 			$message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
 			$this->flashMessenger()->addSuccessMessage($message);
@@ -113,7 +112,6 @@ class UserController extends AbstractActionController
         $confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
         if($confirmation == self::CONFIRM){
             $this->_getUsersService()->banUser($user);
-            $this->_getUsersService()->saveUser($user);
             $message = "L’utilisateur %s a été banni avec succès.";
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
             $this->flashMessenger()->addSuccessMessage($message);
@@ -149,7 +147,6 @@ class UserController extends AbstractActionController
         $confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
         if($confirmation == self::CONFIRM){
             $this->_getUsersService()->unbanUser($user);
-            $this->_getUsersService()->saveUser($user);
             $message = "Le bannissement de l’utilisateur %s a été levé avec succès.";
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
             $this->flashMessenger()->addSuccessMessage($message);
