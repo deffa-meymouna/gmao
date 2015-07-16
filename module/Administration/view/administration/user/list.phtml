@@ -209,11 +209,24 @@
                         <i class="fa fa-fw fa-check"></i>
                     </a>
                 <?php endif;?>
-                <?php if ($this->banIsAllowed):?>
-                    <a class="btn btn-default btn-xs" href="#" title=<?php echo $this->escapehtmlattr('Ban');?>>
-                        <i class="fa fa-fw fa-ban"></i>
-                    </a>
+                <?php if ($user->isBanned()):?>
+                    <?php if ($this->unbanIsAllowed):?>
+                        <a class="btn btn-default btn-xs" 
+                            href="<?php echo $this->url('zfcadmin/user',['action'=>'unban','user'=>$user->getId()]);?>"
+                           title=<?php echo $this->escapehtmlattr('Unban');?>>
+                           <i class="fa fa-ban text-success"></i>
+                        </a>
+                    <?php endif;?>
+                <?php else:?>
+                    <?php if ($this->banIsAllowed):?>
+                        <a class="btn btn-default btn-xs" 
+                            href="<?php echo $this->url('zfcadmin/user',['action'=>'ban','user'=>$user->getId()]);?>"
+                           title=<?php echo $this->escapehtmlattr('Ban');?>>
+                            <i class="fa fa-ban text-danger"></i>
+                         </a>
+                    <?php endif;?>
                 <?php endif;?>
+                
                 <?php if ($this->deleteIsAllowed):?>
                     <a class="btn btn-default btn-xs" href="#" title=<?php echo $this->escapehtmlattr('Delete');?>>
                         <i class="fa fa-fw fa-trash-o"></i>
