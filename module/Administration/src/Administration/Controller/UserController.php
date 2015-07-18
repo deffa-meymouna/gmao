@@ -284,6 +284,7 @@ class UserController extends AbstractActionController
     
     /**
      * 
+     * @return User|Ambigous <\Zend\Http\Response, \Zend\Stdlib\ResponseInterface>
      */
     protected function _getUser(){
         $id = (int) $this->params()->fromRoute('user', 0);

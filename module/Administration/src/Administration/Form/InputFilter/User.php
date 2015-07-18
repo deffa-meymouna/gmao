@@ -17,7 +17,7 @@ class User extends InputFilter
     {
         // @todo gérer les doublons
         $this->add(array(
-            'name' => 'displayname',
+            'name' => 'displayName',
             'required' => true,
             'filters' => array(
                 array(

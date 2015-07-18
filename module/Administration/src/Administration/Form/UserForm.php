@@ -44,7 +44,7 @@ class UserForm extends Form
             )
         ));
         $this->add(array(
-            'name' => 'displayname',
+            'name' => 'displayName',
             'type' => 'Text',
             'options' => array(
                 'label' => 'Display Name',

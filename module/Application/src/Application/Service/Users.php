@@ -145,10 +145,10 @@ class Users extends EntityRepository implements UserInterface
                 $params['id'] = "%$searchText%";
             }
             $dqlParams[]= ' e.username like :username ';
-            $dqlParams[]= ' e.displayName like :displayname ';
+            $dqlParams[]= ' e.displayName like :displayName ';
             $dqlParams[]= ' e.email like :email ';
             $params['username']    = "%$searchText%";
-            $params['displayname'] = "%$searchText%";
+            $params['displayName'] = "%$searchText%";
             $params['email']       = "%$searchText%";
             $dql .= implode(' OR ', $dqlParams);
         }

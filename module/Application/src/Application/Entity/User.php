@@ -136,7 +136,7 @@ class User implements UserInterface, ProviderInterface
         $this->id = $data['id'];
         $this->email = $data['email'];
         $this->username = $data['username'];
-        $this->displayname = $data['displayname'];
+        $this->displayName = $data['displayName'];
         //@FIXME gérer le changement de mot de passe ?
     }    
 
