@@ -14,9 +14,12 @@ class ItemsPerPage extends Select
     /**
      * Constructeur
      */
-    function __construct()
+    function __construct($name = null, $options = array())
     {
-        parent::__construct('itemsPerPage');
+        if (empty($name)){
+            $name = 'selectItemsPerPage';
+        }
+        parent::__construct($name,$options);
         
         //Création du bouton qui suivera
         $button = new Button('submit');
@@ -30,23 +33,35 @@ class ItemsPerPage extends Select
         ]);
         $button->setLabel('');
         //Attribut lié à la vue
-        //@FIXME ce paramètre class devrait peut-être se trouver ailleurs
         $this->setAttributes([
             'class' => 'input-sm',
             'id' => 'selectItemsPerPage'
         ]);
         //Listing des options
-        //@todo Il faudrait aller les chercher dans les fichiers de configuration
         $this->setOptions([
-            'value_options' => [
-                '10' => ' 10 items',
-                '50' => ' 50 items',
-                '100' => '100 items'
-            ],
             //Le bouton est placé après
             'add-on-append' => $button,
             //Texte, compatible avec Twb-bundle
             'add-on-prepend' => 'Items per page',
         ]);
     }
+    /**
+     * 
+     * @param string integers comma separeted
+     * @return \Administration\Form\Element\ItemsPerPage
+     */
+    public function setItemsPerPage($options)
+    {
+        foreach (explode(',', $options) as $option){
+            $integer = (int)$option;
+            if ($integer > 0){
+                $valueOptions[$option]=sprintf('%i items',$option);
+            }
+        }
+        $this->setValueOptions($valueOptions);
+        return $this;
+    }
+
+
+    
 }

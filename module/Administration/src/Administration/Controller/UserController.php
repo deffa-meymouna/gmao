@@ -256,7 +256,7 @@ class UserController extends AbstractActionController
         $zend_paginator->setCurrentPageNumber($page);
         
         //Boutons du nombre d'items par page
-        $ioSelect = new ItemsPerPage();
+        $ioSelect = $this->serviceLocator->get('items_per_page_form');
         $ioSelect->setValue($itemsPerPage);
         
         //Formulaire de recherche
