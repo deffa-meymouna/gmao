@@ -56,6 +56,9 @@ class UserController extends AbstractActionController
         }
         return new ViewModel(array(
             'user'    => $user,
+            'editIsAllowed' => $this->isAllowed('user', 'edit'),
+            'banIsAllowed' => $this->isAllowed('user', 'ban'),
+            'unbanIsAllowed' => $this->isAllowed('user', 'unban'),
         ));
     }
     /**
