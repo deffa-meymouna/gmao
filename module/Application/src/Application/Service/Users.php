@@ -19,9 +19,9 @@ use Zend\Db\Sql\Ddl\Column\Date;
 use Administration\Form\InputFilter\User as UserFilter;
 use Zend\InputFilter\InputFilterInterface;
 use ZfcUser\Mapper\UserInterface;
-use Doctrine\ORM\EntityRepository;
+use ZfcUserDoctrineORM\Mapper\User as UserMapper;
 
-class Users extends EntityRepository implements UserInterface
+class Users extends UserMapper implements UserInterface
 {
     
     const INSCRIPTION_ASC  = 'InscriptionAsc';
@@ -275,34 +275,6 @@ class Users extends EntityRepository implements UserInterface
 	
 	    return $this->inputFilter;
 	}
-	
-	/* (non-PHPdoc)
-	 * @see \ZfcUser\Mapper\UserInterface::findByEmail()
-	 */
-	public function findByEmail($email)
-	{
-	    return $this->findBy(
-	        ['email'=>$email]
-	    );
-	}
-	
-	/* (non-PHPdoc)
-	 * @see \ZfcUser\Mapper\UserInterface::findById()
-	 */
-	public function findById($id)
-	{
-	    return $this->entityManager->find($id);
-	}
-	
-	/* (non-PHPdoc)
-	 * @see \ZfcUser\Mapper\UserInterface::findByUsername()
-	 */
-	public function findByUsername($username)
-	{
-	    return $this->entityManager->findBy(
-	        ['username'=>$username]
-	    );
-	    	}
 	
 	/* (non-PHPdoc)
 	 * @see \ZfcUser\Mapper\UserInterface::insert()
