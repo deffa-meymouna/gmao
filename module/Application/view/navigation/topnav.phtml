@@ -14,7 +14,7 @@
         <li <?php if($class) echo 'class="'.$this->escapehtmlattr($class).'"';?>>
             <a class="nav-header" href="<?php echo $page->getHref() ?>" <?php if ($page->getTitle()) echo 'title="'.$this->escapehtmlattr($page->getTitle()).'"'; ?>>
 	           	<?php if ($page->get('icon')):?>
-	            <i class="fa fa-<?php echo $page->get('icon');?>"></i>
+	            <i class="fa fa-fw fa-<?php echo $page->get('icon');?>"></i>
 	            <?php endif;?>
 	            <?php echo $this->translate($page->getLabel()) ?>
             </a>
@@ -23,7 +23,7 @@
         <li class="dropdown <?php if ($page->isActive(true)) echo ' active';?>">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	           	<?php if ($page->get('icon')):?>
-	            <i class="fa fa-<?php echo $page->get('icon');?>"></i>
+	            <i class="fa fa-fw fa-<?php echo $page->get('icon');?>"></i>
 	            <?php endif;?>
             <span><?php echo $this->translate($page->getLabel()) ?>&nbsp;<b class="caret"></b></span>
             </a>
@@ -35,7 +35,7 @@
                 <li>
                     <a href="<?php echo $child->getHref() ?>" <?php if ($child->getTitle()) echo 'title="'.$this->translate($child->getTitle()).'"'; ?>>
                     	<?php if ($child->get('icon')):?>
-                        <i class="fa fa-<?php echo $child->get('icon');?>"></i>
+                        <i class="fa fa-fw fa-<?php echo $child->get('icon');?>"></i>
                         <?php endif;?>
                         <?php echo $this->translate($child->getLabel()) ?>
                     </a>
