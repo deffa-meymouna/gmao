@@ -125,7 +125,31 @@ class User implements UserInterface, ProviderInterface
     {
         $this->roles = new ArrayCollection();
     }
+    
+    /**
+     * Populate from an array.
+     *
+     * @param array $data
+     */
+    public function exchangeArray ($data = array())
+    {
+        $this->id = $data['id'];
+        $this->email = $data['email'];
+        $this->username = $data['username'];
+        $this->displayname = $data['displayname'];
+        //@FIXME gérer le changement de mot de passe ?
+    }    
 
+    /**
+     * Convert the object to an array.
+     *
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+    
     /**
      * Get id.
      *

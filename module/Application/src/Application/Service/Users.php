@@ -15,8 +15,13 @@ use Zend\Paginator\Adapter\Iterator;
 use Zend\Paginator\Paginator as ZendPaginator;
 use BjyAuthorize\Service\Authorize;
 use BjyAuthorize\Exception\UnAuthorizedException;
+use Zend\Db\Sql\Ddl\Column\Date;
+use Administration\Form\InputFilter\User as UserFilter;
+use Zend\InputFilter\InputFilterInterface;
+use ZfcUser\Mapper\UserInterface;
+use Doctrine\ORM\EntityRepository;
 
-class Users
+class Users extends EntityRepository implements UserInterface
 {
     
     const INSCRIPTION_ASC  = 'InscriptionAsc';
@@ -40,7 +45,13 @@ class Users
 	 * @var Authorize
 	 */
 	private $authorize;
-    /**
+	/**
+	 * 
+	 * @var UserFilter
+	 */
+	private $inputFilter;
+
+	/**
 	 * Constructeur
      *
 	 * @param EntityManagerInterface $entityManager
@@ -78,6 +89,29 @@ class Users
 	    }
 	    $user->setBannissement(new \DateTime("now"));
 	    $this->_saveUser($user);  
+	}
+	/**
+	 * Éditer un utilisateur
+	 * @param User $user
+	 * @throws UnAuthorizedException
+	 */
+	public function editUser(User $user){
+	    if (!$this->authorize->isAllowed('user','edit')){
+	        throw new UnAuthorizedException();
+	    }	    
+	    $this->_saveUser($user);
+	}
+	/**
+	 * Créer un utilisateur
+	 * @param User $user
+	 * @throws UnAuthorizedException
+	 */
+	public function createUser(User $user){
+	    if (!$this->authorize->isAllowed('user','create')){
+	        throw new UnAuthorizedException();
+	    }
+	    $user->setInscription(new Date('now'));
+	    $this->_saveUser($user);
 	}
 	/**
 	 * «Débannir» un utilisateur
@@ -177,10 +211,10 @@ class Users
 	 */
 	protected function _getEntityManager()
 	{
-	    if (null === $this->em) {
-	        $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+	    if (null === $this->entityManager) {
+	        $this->entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
 	    }
-	    return $this->em;
+	    return $this->entityManager;
 	}
 	
 	/**
@@ -218,4 +252,72 @@ class Users
 	            return 'e.id ASC';
 	    }
 	}
+	
+	/**
+	 *
+	 * @param InputFilterInterface $inputFilter
+	 * @throws \Exception
+	 */
+	public function setInputFilter(InputFilterInterface $inputFilter)
+	{
+	    throw new \Exception("Not used");
+	}
+	/**
+	 * 
+	 * @return \Administration\Form\InputFilter\User
+	 */
+	public function getInputFilter()
+	{
+	    if (!$this->inputFilter) {
+	        $inputFilter = new UserFilter($this);
+	        $this->inputFilter = $inputFilter;
+	    }
+	
+	    return $this->inputFilter;
+	}
+	
+	/* (non-PHPdoc)
+	 * @see \ZfcUser\Mapper\UserInterface::findByEmail()
+	 */
+	public function findByEmail($email)
+	{
+	    return $this->findBy(
+	        ['email'=>$email]
+	    );
+	}
+	
+	/* (non-PHPdoc)
+	 * @see \ZfcUser\Mapper\UserInterface::findById()
+	 */
+	public function findById($id)
+	{
+	    return $this->entityManager->find($id);
+	}
+	
+	/* (non-PHPdoc)
+	 * @see \ZfcUser\Mapper\UserInterface::findByUsername()
+	 */
+	public function findByUsername($username)
+	{
+	    return $this->entityManager->findBy(
+	        ['username'=>$username]
+	    );
+	    	}
+	
+	/* (non-PHPdoc)
+	 * @see \ZfcUser\Mapper\UserInterface::insert()
+	 */
+	public function insert($user)
+	{
+	   return $this->createUser($user);
+	}
+	
+	/* (non-PHPdoc)
+	 * @see \ZfcUser\Mapper\UserInterface::update()
+	 */
+	public function update($user)
+	{
+	    return $this->editUser($user);
+	}
+	
 }

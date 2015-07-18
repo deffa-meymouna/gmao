@@ -13,6 +13,7 @@ use Application\Entity\User;
 use Administration\Form\Element\ItemsPerPage;
 use Administration\Form\Search;
 use Zend\Http\Response;
+use Administration\Form\UserForm;
 
 /**
  * 
@@ -91,6 +92,44 @@ class UserController extends AbstractActionController
 		    'confirm' => self::CONFIRM,
 		    'cancel'  => self::CANCEL,
 		));
+    }
+    /**
+     * Editer un utilisateur
+     *
+     * @return \Zend\Http\Response|\Zend\View\Model\ViewModel
+     */
+    public function editAction(){
+        $user = $this->_getUser();
+        if ($user instanceof Response){
+            //Redirection
+            return $user;
+        }
+        //Création du formulaire
+        $form  = new UserForm();
+        $form->bind($user);
+        $form->get('submit')->setAttribute('value', 'Edit');
+        
+        //Traitement de la requête
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setInputFilter($this->_getUsersService()->getInputFilter());
+            $form->setData($request->getPost());
+        
+            if ($form->isValid()) {
+                //Il faudrait passer par le service utilisateur
+                $this->_getUsersService()->editUser($user);
+                $message = "L’utilisateur %s a été modifié avec succès.";
+                $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
+                $this->flashMessenger()->addSuccessMessage($message);
+                // Redirect to edited user in view mode
+                return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
+            }
+        }
+        
+        return new ViewModel(array(
+            'id' => $user->getId(),
+            'form' => $form,
+        ));
     }
     /**
      * Supprimer un utilisateur

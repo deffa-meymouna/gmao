@@ -18,12 +18,12 @@ class UsersService implements FactoryInterface
 	/**
 	 * (non-PHPdoc)
 	 * @see \Zend\ServiceManager\FactoryInterface::createService()
-	 * @return Application\Entity\User
+	 * @return Application\Service\Users
 	 */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-        $authorize     = $serviceLocator->get('BjyAuthorize\Service\Authorize');
-        return new Users($entityManager,$authorize);
+        $authorize     = $serviceLocator->get('BjyAuthorize\Service\Authorize');        
+        return new Users($entityManager, $authorize);
     }
 }

@@ -198,7 +198,9 @@
                     </a>
                 <?php endif;?>
                 <?php if ($this->editIsAllowed):?>
-                    <a class="btn btn-default btn-xs" href="#" title=<?php echo $this->escapehtmlattr('Edit');?>>
+                    <a class="btn btn-default btn-xs" 
+                        href="<?php echo $this->url('zfcadmin/user',['action'=>'edit','user'=>$user->getId()]);?>"
+                       title=<?php echo $this->escapehtmlattr('Edit');?>>
                         <i class="fa fa-fw fa-pencil"></i>
                     </a>
                 <?php endif;?>
