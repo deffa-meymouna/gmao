@@ -17,7 +17,7 @@
  *		'changefreq' => '' //For Sitemap, valid values are always hourly daily weekly monthly yearly never
  *		'lastmod' => '' //For Sitemap, valid values are W3C Date or YYYY-MM-DD
  *		'priority' => '1.0' //The value should be a decimal between 0.0 and 1.0
- *		'resource' => '', //resource declared into @FIXME
+ *		'resource' => '', //resource declared into security.global.php
  *		'privilege' => 'index' //privilege ie action
 */
 return array (
