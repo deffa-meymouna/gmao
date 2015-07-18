@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZfcUser\Entity\UserInterface;
 use Doctrine\Common\Collections\Collection;
+use ZfcUserDoctrineORM\Entity\User as DoctrineUser;
 
 /**
  * An example of how to implement a role aware user entity.
@@ -23,7 +24,7 @@ use Doctrine\Common\Collections\Collection;
  * @author Tom Oram <tom@scl.co.uk>
  * @author Alexandre Tranchant <alexandre.tranchant@gmail.com>
  */
-class User implements UserInterface, ProviderInterface
+class User extends DoctrineUser implements UserInterface, ProviderInterface
 {
     /**
      * @var int
@@ -468,7 +469,7 @@ class User implements UserInterface, ProviderInterface
         return null != $this->bannissement;
     }
     /**
-     * @todo Fonction à modifier et à appeler avant toute sauvegarde
+     * Met à jour la date de dernière modification
      */
     public function setUpdated()
     {
