@@ -16,8 +16,6 @@ use Zend\Paginator\Paginator as ZendPaginator;
 use BjyAuthorize\Service\Authorize;
 use BjyAuthorize\Exception\UnAuthorizedException;
 use Zend\Db\Sql\Ddl\Column\Date;
-use Administration\Form\InputFilter\User as UserFilter;
-use Zend\InputFilter\InputFilterInterface;
 use ZfcUser\Mapper\UserInterface;
 use ZfcUserDoctrineORM\Mapper\User as UserMapper;
 
@@ -251,29 +249,6 @@ class Users extends UserMapper implements UserInterface
 	        default:
 	            return 'e.id ASC';
 	    }
-	}
-	
-	/**
-	 *
-	 * @param InputFilterInterface $inputFilter
-	 * @throws \Exception
-	 */
-	public function setInputFilter(InputFilterInterface $inputFilter)
-	{
-	    throw new \Exception("Not used");
-	}
-	/**
-	 * 
-	 * @return \Administration\Form\InputFilter\User
-	 */
-	public function getInputFilter()
-	{
-	    if (!$this->inputFilter) {
-	        $inputFilter = new UserFilter($this);
-	        $this->inputFilter = $inputFilter;
-	    }
-	
-	    return $this->inputFilter;
 	}
 	
 	/* (non-PHPdoc)

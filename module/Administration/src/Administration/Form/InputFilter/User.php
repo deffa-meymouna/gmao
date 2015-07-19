@@ -13,8 +13,8 @@ class User extends InputFilter
 
     /**
      */
-    function __construct($userRepository)
-    {
+    function __construct(/*$userRepository*/)
+    {        
         // @todo gérer les doublons
         $this->add(array(
             'name' => 'displayName',

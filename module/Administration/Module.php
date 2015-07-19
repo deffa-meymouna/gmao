@@ -8,6 +8,7 @@ namespace Administration;
 
 use Administration\Form\Element\ItemsPerPage;
 use Administration\Options\ModuleOptions;
+use Administration\Form\InputFilter\User;
 class Module
 {
 
@@ -34,6 +35,8 @@ class Module
     {
         return array(
             'invokables' => array(
+                'Administration\Form\UserForm' => 'Administration\Form\UserForm',
+                'Administration\Form\InputFilter\User' => 'Administration\Form\InputFilter\User',
             ),
             'factories' => array(
                 'items_per_page' => function ($sm)
@@ -59,7 +62,19 @@ class Module
                     $elementOptions['value_options']=$valueOptions;
                     $element = new ItemsPerPage(null,$elementOptions);
                     return $element;
+                },                
+                'user_input_filter' => function ($sm){
+                    //$userMapper = $sm->get('user_mapper');
+                    $inputFilter = new User();      
+                    return $inputFilter;
                 },
+                'user_form' => function ($sm){
+                    $userForm = $sm->get('Administration\Form\UserForm');
+                    $inputFilter = $sm->get('user_input_filter');
+                    $userForm->setInputFilter($inputFilter);
+                    return $userForm;
+                },
+                
             )
         );
     }

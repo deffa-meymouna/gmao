@@ -114,7 +114,6 @@ class UserController extends AbstractActionController
         //Traitement de la requête
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $form->setInputFilter($this->_getUsersService()->getInputFilter());
             $form->setData($request->getPost());
         
             if ($form->isValid()) {
@@ -332,7 +331,7 @@ class UserController extends AbstractActionController
      * @return \Administration\Form\UserForm
      */
     protected function _getForm(){
-        return new UserForm();
+        return $this->getServiceLocator()->get('UserForm');
     }
     /**
      * @return integer
