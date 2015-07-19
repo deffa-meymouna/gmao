@@ -98,14 +98,14 @@ return array(
             ),
             'orm_default' => array (
                 'drivers' => array (
-                    'Application\Entity' => 'zfcuser_entity',
+                    'Administration\Entity' => 'zfcuser_entity',
                 )
             )
         )
     ),
     'zfcuser' => array(
         // telling ZfcUser to use our own class
-        'user_entity_class'       => 'Application\Entity\User',
+        'user_entity_class'       => 'Administration\Entity\User',
         // telling ZfcUserDoctrineORM to skip the entities it defines
         'enable_default_entities' => false,
     ),

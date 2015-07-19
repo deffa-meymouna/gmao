@@ -9,7 +9,7 @@ namespace Administration\Controller;
  */
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Application\Entity\User;
+use Administration\Entity\User;
 use Administration\Form\Search;
 use Zend\Http\Response;
 

@@ -9,7 +9,7 @@
  */
 namespace Administration\Service;
 use Doctrine\ORM\EntityManagerInterface;
-use Application\Entity\User;
+use Administration\Entity\User;
 use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 use Zend\Paginator\Adapter\Iterator;
 use Zend\Paginator\Paginator as ZendPaginator;
@@ -168,10 +168,10 @@ class Users extends UserMapper implements UserInterface
 	 * Recherche un Utilisateur selon son Id
 	 *
 	 * @param integer $id
-	 * @return Application\Entity\User
+	 * @return Administration\Entity\User
 	 */
 	public function findUserById($id){
-		return $this->entityManager->getRepository('Application\Entity\User')->find($id);
+		return $this->entityManager->getRepository('Administration\Entity\User')->find($id);
 	}
 
 	/**

@@ -6,7 +6,7 @@
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
  
-namespace Application\Entity;
+namespace Administration\Entity;
 
 use BjyAuthorize\Provider\Role\ProviderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -106,7 +106,7 @@ class User extends DoctrineUser implements UserInterface, ProviderInterface
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     * @ORM\ManyToMany(targetEntity="Application\Entity\Role")
+     * @ORM\ManyToMany(targetEntity="Administration\Entity\Role")
      * @ORM\JoinTable(name="tj_user_role_linker_url",
      *      joinColumns={@ORM\JoinColumn(name="usr_id", referencedColumnName="usr_id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="rol_id", referencedColumnName="rol_id")}
