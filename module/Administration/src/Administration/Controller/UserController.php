@@ -116,7 +116,7 @@ class UserController extends AbstractActionController
             return $user;
         }
         //Création du formulaire
-        $form  = $this->_getForm();
+        $form  = $this->_getForm($user->getId());
         $form->bind($user);
         $form->get('submit')->setAttribute('value', 'Edit');
         
@@ -124,7 +124,6 @@ class UserController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
-        
             if ($form->isValid()) {
                 //Il faudrait passer par le service utilisateur
                 $this->_getUsersService()->editUser($user);
@@ -336,9 +335,13 @@ class UserController extends AbstractActionController
      * 
      * @return \Administration\Form\UserForm
      */
-    protected function _getForm(){
+    protected function _getForm($exceptId){
         if (null === $this->userForm) {
             $this->userForm = $this->getServiceLocator()->get('UserForm');
+            $userFilter = $this->userForm->getInputFilter();
+            if ($userFilter instanceof \Administration\Form\InputFilter\User){
+                $userFilter->setExceptId($exceptId);
+            }
         }
         return $this->userForm;
     }
