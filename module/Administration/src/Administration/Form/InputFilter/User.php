@@ -2,7 +2,7 @@
 namespace Administration\Form\InputFilter;
 
 use Zend\InputFilter\InputFilter;
-use Application\Service\Users;
+use Administration\Service\Users;
 
 /**
  *
@@ -63,7 +63,6 @@ class User extends InputFilter
                 array(
                     'name' => 'EmailAddress'
                 ),
-                //@FIXME Parametrer correctement NoRecordExists
                 array(
                     'name' => \ZfcUser\Validator\NoRecordExists::class,
                     'options' => array(
@@ -94,14 +93,13 @@ class User extends InputFilter
                         'max' => 100
                     )
                 ),
-                //@FIXME Parametrer correctement NoRecordExists
-                /*array(
+                array(
                     'name' => \ZfcUser\Validator\NoRecordExists::class,
                     'options' => array(
                         'key' => 'username',
                         'mapper' => $userRepository,
                     )
-                ),*/
+                ),
             ),
         ));
     }

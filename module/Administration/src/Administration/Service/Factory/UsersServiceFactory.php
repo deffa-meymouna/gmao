@@ -7,18 +7,18 @@
  * @license https://github.com/Alexandre-T/gmao/blob/master/LICENSE MIT
  * @author Alexandre Tranchant <Alexandre.Tranchant@gmail.com>
  */
-namespace Application\Service\Factory;
+namespace Administration\Service\Factory;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Application\Service\Users;
+use Administration\Service\Users;
 
 class UsersServiceFactory implements FactoryInterface
 {
 	/**
 	 * (non-PHPdoc)
 	 * @see \Zend\ServiceManager\FactoryInterface::createService()
-	 * @return Application\Service\Users
+	 * @return Administration\Service\Users
 	 */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

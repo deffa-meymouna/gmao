@@ -7,7 +7,7 @@
  * @license https://github.com/Alexandre-T/zfc-blanche/blob/master/LICENSE MIT
  * @author Alexandre Tranchant <Alexandre.Tranchant@gmail.com>
  */
-namespace Application\Service;
+namespace Administration\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Application\Entity\User;
 use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;

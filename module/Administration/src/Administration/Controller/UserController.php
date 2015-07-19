@@ -40,7 +40,7 @@ class UserController extends AbstractActionController
     protected $userForm;
     /**
      * 
-     * @var Application\Service\Users
+     * @var Administration\Service\Users
      */
     protected $usersService;
 
@@ -323,7 +323,7 @@ class UserController extends AbstractActionController
     /**
      * get usersService
      *
-     * @return Application\Service\Users
+     * @return Administration\Service\Users
      */
     protected function _getUsersService()
     {
