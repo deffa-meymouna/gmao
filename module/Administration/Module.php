@@ -41,7 +41,11 @@ class Module
                     $config = $sm->get('Config');                    
                     return new ModuleOptions(isset($config['administration']) ? $config['administration'] : '5,7,8');
                 },
-                
+                'items_per_page_default' => function ($sm)
+                {                    
+                    $config = $sm->get('Config');                    
+                    return new ModuleOptions(isset($config['administration']) ? $config['administration'] : 5);
+                },
                 'items_per_page_form' => function ($sm)
                 {
                     $translator = $sm->get('translator');

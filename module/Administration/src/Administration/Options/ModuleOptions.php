@@ -4,6 +4,7 @@ namespace Administration\Options;
 
 use Zend\Stdlib\AbstractOptions;
 use Administration\Options\Exception\ModuleOptionsException;
+use Zend\Db\Sql\Ddl\Column\Integer;
 
 class ModuleOptions extends AbstractOptions implements ItemsPerPageOptionsInterface{
     /**
@@ -12,9 +13,17 @@ class ModuleOptions extends AbstractOptions implements ItemsPerPageOptionsInterf
      */
     const DEFAULT_VALUES = [10,25,50,100];
     /**
+     * 
+     */
+    const DEFAULT_VALUE = 10;
+    /**
      * @var array of integer
      */
     protected $itemsPerPage = self::DEFAULT_VALUES;
+    /**
+     * @var Integer
+     */
+    protected $itemsPerPageDefault = self::DEFAULT_VALUE;
     /**
      * set items that can be displayed per page
      * 
@@ -50,5 +59,27 @@ class ModuleOptions extends AbstractOptions implements ItemsPerPageOptionsInterf
     {
         return $this->itemsPerPage;
     }
+	/* (non-PHPdoc)
+     * @see \Administration\Options\ItemsPerPageOptionsInterface::getItemsPerPageByDefault()
+     */
+    public function getItemsPerPageDefault()
+    {
+        return $this->itemsPerPageDefault;        
+    }
+
+	/* (non-PHPdoc)
+     * @see \Administration\Options\ItemsPerPageOptionsInterface::setItemsPerPageByDefault()
+     */
+    public function setItemsPerPageDefault($quantity)
+    {
+        $result = (int)$quantity;
+        if ($result < 1){
+            throw new ModuleOptionsException(sprintf('setItemsPerPageDefault : %s is not a positive integer',$quantity));
+        }
+        $this->itemsPerPageDefault = $result; 
+        return $this;
+    }
+
+    
 
 }

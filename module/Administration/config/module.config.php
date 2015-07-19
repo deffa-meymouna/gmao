@@ -39,8 +39,9 @@ return array(
                             'route' => '/user[/action-:action][/user:user][/confirmation:confirmation][/page:page][/itemsPerPage:itemsPerPage][/sortBy:sort][?search=:search]',
                             'defaults' => array(
                                 'controller'   => 'Administration\Controller\User',
-                                'page'         => 1,                                
-                                'itemsPerPage' => 10,
+                                'page'         => 1,
+                                //It's now an option defined in ModuleOptions via administration.global.php                              
+                                //'itemsPerPage' => 10,
                                 'sort'         => 'IdAsc',
                                 'search'       => '',
                                 'action'       => 'list',

@@ -107,7 +107,7 @@ class UserController extends AbstractActionController
             return $user;
         }
         //Création du formulaire
-        $form  = new UserForm();
+        $form  = $this->_getForm();
         $form->bind($user);
         $form->get('submit')->setAttribute('value', 'Edit');
         
@@ -244,7 +244,7 @@ class UserController extends AbstractActionController
         $params = array();
         
         //Gestion des paramètres
-        $itemsPerPage = $this->params()->fromRoute('itemsPerPage');
+        $itemsPerPage = $this->params()->fromRoute('itemsPerPage',$this->_getItemsPerPageByDefault());
         $page         = $this->params()->fromRoute('page');
         $sort         = $this->params()->fromRoute('sort');
         $searchText   = $this->params()->fromQuery('search','');   
@@ -326,6 +326,19 @@ class UserController extends AbstractActionController
             $this->usersService = $this->getServiceLocator()->get('UsersService');
         }
         return $this->usersService;
+    }
+    /**
+     * 
+     * @return \Administration\Form\UserForm
+     */
+    protected function _getForm(){
+        return new UserForm();
+    }
+    /**
+     * @return integer
+     */
+    protected function _getItemsPerPageByDefault(){
+        return $this->serviceLocator->get('items_per_page_default')->getItemsPerPageDefault();
     }
 }
 
