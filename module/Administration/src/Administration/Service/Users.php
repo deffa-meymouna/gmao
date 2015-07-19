@@ -102,18 +102,6 @@ class Users extends UserMapper implements UserInterface
 	    $this->_saveUser($user);
 	}
 	/**
-	 * Créer un utilisateur
-	 * @param User $user
-	 * @throws UnAuthorizedException
-	 */
-	public function createUser(User $user){
-	    if (!$this->authorize->isAllowed('user','create')){
-	        throw new UnAuthorizedException();
-	    }
-	    $user->setInscription(new Date('now'));
-	    $this->_saveUser($user);
-	}
-	/**
 	 * «Débannir» un utilisateur
 	 * @param User $user
 	 * @throws UnAuthorizedException
@@ -251,14 +239,6 @@ class Users extends UserMapper implements UserInterface
 	        default:
 	            return 'e.id ASC';
 	    }
-	}
-	
-	/* (non-PHPdoc)
-	 * @see \ZfcUser\Mapper\UserInterface::insert()
-	 */
-	public function insert($user)
-	{
-	   return $this->createUser($user);
 	}
 	
 	/* (non-PHPdoc)

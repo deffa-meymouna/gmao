@@ -39,7 +39,7 @@ return [
                     //C'est pour cela que Guest à le droit d'activer
                     ['guest','user','activating'],                    
                     ['admin','administration','list'],
-                    ['admin','user',['activating','add','ban','create','edit','delete','list','unban','view']],
+                    ['admin','user',['activating','add','ban','edit','delete','list','unban','view']],
                     ['admin','role',['add','create','delete','edit','list','view']],
                     
                 ],
