@@ -18,6 +18,7 @@ use BjyAuthorize\Exception\UnAuthorizedException;
 use Zend\Db\Sql\Ddl\Column\Date;
 use ZfcUser\Mapper\UserInterface;
 use ZfcUserDoctrineORM\Mapper\User as UserMapper;
+use ZfcUserDoctrineORM\Options\ModuleOptions;
 
 class Users extends UserMapper implements UserInterface
 {
@@ -55,9 +56,10 @@ class Users extends UserMapper implements UserInterface
 	 * @param EntityManagerInterface $entityManager
 	 * @param Authorize $authorize
 	 */
-	public function __construct(EntityManagerInterface $entityManager, Authorize $authorize){
+	public function __construct(EntityManagerInterface $entityManager, Authorize $authorize, ModuleOptions $options){
 		$this->entityManager = $entityManager;
 		$this->authorize = $authorize;
+		parent::__construct($entityManager, $options);
 	}
 	/**
 	 * Active un utilisateur

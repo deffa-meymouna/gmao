@@ -2,6 +2,7 @@
 namespace Administration\Form\InputFilter;
 
 use Zend\InputFilter\InputFilter;
+use Application\Service\Users;
 
 /**
  *
@@ -13,7 +14,7 @@ class User extends InputFilter
 
     /**
      */
-    function __construct(/*$userRepository*/)
+    function __construct(Users $userRepository)
     {        
         // @todo gérer les doublons
         $this->add(array(
@@ -63,13 +64,13 @@ class User extends InputFilter
                     'name' => 'EmailAddress'
                 ),
                 //@FIXME Parametrer correctement NoRecordExists
-                /*array(
+                array(
                     'name' => \ZfcUser\Validator\NoRecordExists::class,
                     'options' => array(
                         'key' => 'email',
                         'mapper' => $userRepository,
                     ),
-                )*/
+                )
             )
         ));
         

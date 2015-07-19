@@ -36,7 +36,7 @@ class Module
         return array(
             'invokables' => array(
                 'Administration\Form\UserForm' => 'Administration\Form\UserForm',
-                'Administration\Form\InputFilter\User' => 'Administration\Form\InputFilter\User',
+                'Administration\Form\InputFilter\User' => 'Administration\Form\InputFilter\User',                
             ),
             'factories' => array(
                 'items_per_page' => function ($sm)
@@ -64,8 +64,8 @@ class Module
                     return $element;
                 },                
                 'user_input_filter' => function ($sm){
-                    //$userMapper = $sm->get('user_mapper');
-                    $inputFilter = new User();      
+                    $userMapper = $sm->get('UsersService');
+                    $inputFilter = new User($userMapper);      
                     return $inputFilter;
                 },
                 'user_form' => function ($sm){

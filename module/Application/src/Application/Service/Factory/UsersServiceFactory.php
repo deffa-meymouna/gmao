@@ -13,7 +13,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Application\Service\Users;
 
-class UsersService implements FactoryInterface
+class UsersServiceFactory implements FactoryInterface
 {
 	/**
 	 * (non-PHPdoc)
@@ -23,7 +23,8 @@ class UsersService implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-        $authorize     = $serviceLocator->get('BjyAuthorize\Service\Authorize');        
-        return new Users($entityManager, $authorize);
+        $authorize     = $serviceLocator->get('BjyAuthorize\Service\Authorize');
+        $moduleOptions = $serviceLocator->get('zfcuser_module_options');
+        return new Users($entityManager, $authorize, $moduleOptions);
     }
 }

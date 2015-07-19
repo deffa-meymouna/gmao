@@ -12,7 +12,6 @@ use Zend\View\Model\ViewModel;
 use Application\Entity\User;
 use Administration\Form\Search;
 use Zend\Http\Response;
-use Administration\Form\UserForm;
 
 /**
  * 
@@ -29,6 +28,16 @@ class UserController extends AbstractActionController
      * @var \Doctrine\ORM\EntityManager
      */
     protected $em;
+    /**
+     * 
+     * @var integer 
+     */
+    protected $itemsPerPageDefault;
+    /**
+     * 
+     * @var \Administration\Form\UserForm
+     */
+    protected $userForm;
     /**
      * 
      * @var Application\Service\Users
@@ -297,9 +306,6 @@ class UserController extends AbstractActionController
         }
         return $unUser;
     }
-    /**
-     * 
-     */
     
     /**
      * get translatorHelper
@@ -331,13 +337,19 @@ class UserController extends AbstractActionController
      * @return \Administration\Form\UserForm
      */
     protected function _getForm(){
-        return $this->getServiceLocator()->get('UserForm');
+        if (null === $this->userForm) {
+            $this->userForm = $this->getServiceLocator()->get('UserForm');
+        }
+        return $this->userForm;
     }
     /**
      * @return integer
      */
     protected function _getItemsPerPageByDefault(){
-        return $this->serviceLocator->get('items_per_page_default')->getItemsPerPageDefault();
+        if (null === $this->itemsPerPageDefault){
+            $this->itemsPerPageDefault = $this->serviceLocator->get('items_per_page_default')->getItemsPerPageDefault();
+        }
+        return $this->itemsPerPageDefault;
     }
 }
 
