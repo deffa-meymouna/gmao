@@ -59,13 +59,28 @@ return array(
                         ),
                     ),
                     'role' => array(
-                        'type' => 'Literal',
+                        'type' => 'segment',
                         'options' => array(
-                            'route' => '/role',
+                            'route' => '/role[/action-:action][/role:role][/confirmation:confirmation][/page:page][/itemsPerPage:itemsPerPage][/sortBy:sort][?search=:search]',
                             'defaults' => array(
                                 'controller' => 'Administration\Controller\Role',
-                                'action'     => 'index',
+                                'action'     => 'list',
+                                'sort'         => 'IdAsc',
+                                'search'       => '',
+                                'action'       => 'list',
+                                'user'         => 0,                                
+                                'confirmation' => 0,
+                                'page'         =>1
                             ),
+                            'constraints' => array(
+                                'role'         => '[0-9]+',
+                                'action'       => '[a-zA-Z][a-zA-Z_-]+',
+                                'confirmation' => '[0-2]',
+                                'page'         => '[0-9]+',
+                                'itemsPerPage' => '[0-9]+',
+                                'sort'         => '(IdAsc|IdDesc|RoleIdAsc|RoleIdDesc|InscriptionAsc|InscriptionDesc)', // only login, logout or info are allowed
+                            ),
+                            
                         ),
                     ),
                     

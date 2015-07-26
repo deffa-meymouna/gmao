@@ -1,0 +1,82 @@
+<div class="page-header">
+	<h1>
+	   <i class="fa fa-fw fa-eye"></i>
+		<?php echo sprintf($this->escapehtml($this->translate('Informations détaillées du rôle « %s »')),
+			              '<strong>'.$this->escapehtml($this->role->getRoleId()).'</strong>');
+	    ?>
+	</h1>
+</div>
+<?php
+	$flash = $this->flashmessenger();
+	echo $flash->render('error',   array('alert', 'alert-dismissable', 'alert-danger'));
+	echo $flash->render('warning', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('info',    array('alert', 'alert-dismissable', 'alert-info'));
+	echo $flash->render('default', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('success', array('alert', 'alert-dismissable', 'alert-success'));
+?>
+<div class="row text-justify">
+	<div class="col-sm-6 col-lg-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+				    <i class="fa fa-fw fa-eye"></i>
+					<?php echo $this->translate('Informations générales sur le rôle');?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Libellé');?></dt>
+					<dd><?php echo $this->escapehtml($this->role->getRoleId());?></dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 col-lg-4">
+	   <div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+				    <i class="fa fa-fw fa-calendar"></i>
+					<?php echo $this->translate('Calendrier');?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Date de création');?></dt>
+					<dd><?php echo $this->dateFormat($this->role->getInscription(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?></dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt><?php echo $this->translate('Dernière modification');?></dt>
+					<dd><?php echo $this->dateFormat($this->role->getModification(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?></dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 col-lg-4">
+	   <div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+				    <i class="fa fa-fw fa-wrench"></i>
+					<?php echo $this->translate('Outils d’administration');?>
+				</h2>
+			</div>
+			<div class="panel-body">
+                <?php if ($this->editIsAllowed):?>
+                    <a class="btn btn-lg btn-default"
+                        href="<?php echo $this->url('zfcadmin/role',['action'=>'edit','role'=>$this->role->getId()]);?>"
+                       title="<?php echo $this->escapehtmlattr($this->translate('Éditer le rôle'));?>">
+                       <i class="fa fa-lg fa-stack fa-pencil"></i>
+                       <?php echo $this->escapehtml($this->translate('Éditer le rôle'));?>
+                    </a>
+                <?php endif;?>
+                <?php if ($this->deleteIsAllowed):?>
+                    <a class="btn btn-lg btn-default"
+                        href="<?php echo $this->url('zfcadmin/role',['action'=>'delete','role'=>$this->role->getId()]);?>"
+                       title="<?php echo $this->escapehtmlattr($this->translate('Supprimer le rôle'));?>">
+                       <i class="fa fa-lg fa-stack fa-pencil"></i>
+                       <?php echo $this->escapehtml($this->translate('Supprimer le rôle'));?>
+                    </a>
+                <?php endif;?>
+			</div>
+		</div>
+	</div>
+</div>

@@ -74,7 +74,8 @@ class Module
                     $userForm->setInputFilter($inputFilter);
                     return $userForm;
                 },
-                'UsersService' => 'Administration\Service\Factory\UsersServiceFactory',                
+                'UsersService' => 'Administration\Service\Factory\UsersServiceFactory',
+                'RolesService' => 'Administration\Service\Factory\RolesServiceFactory',
             )
         );
     }

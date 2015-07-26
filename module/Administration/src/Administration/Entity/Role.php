@@ -36,6 +36,18 @@ class Role implements HierarchicalRoleInterface
     protected $roleId;
 
     /**
+     * @var \DateTime
+     * @ORM\Column(name="rol_inscription", type="UTCDateTime", nullable=false)
+     */
+    protected $inscription;
+    
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="rol_modification", type="UTCDateTime")
+     */
+    protected $modification;
+    
+    /**
      * @var Role
      * @ORM\ManyToOne(targetEntity="Administration\Entity\Role")
      * @ORM\JoinColumn(name="rol_parent", referencedColumnName="rol_id")
@@ -43,6 +55,38 @@ class Role implements HierarchicalRoleInterface
     protected $parent;
 
     /**
+     * @return the $inscription
+     */
+    public function getInscription()
+    {
+        return $this->inscription;
+    }
+
+	/**
+     * @return the $modification
+     */
+    public function getModification()
+    {
+        return $this->modification;
+    }
+
+	/**
+     * @param DateTime $inscription
+     */
+    public function setInscription($inscription)
+    {
+        $this->inscription = $inscription;
+    }
+
+	/**
+     * @param DateTime $modification
+     */
+    public function setModification($modification)
+    {
+        $this->modification = $modification;
+    }
+
+	/**
      * Get the id.
      *
      * @return int

@@ -1,0 +1,174 @@
+<?php
+    use TwbBundle\Form\View\Helper\TwbBundleForm;
+    
+    //Simplification
+    $page = $this->page;
+    $itemsPerPage = $this->itemsPerPage;
+    $sort = $this->sort;
+    $searchText = $this->searchText;
+    
+    //Gravatars Settings
+    $settings = array(
+        'img_size'    => 16,
+        'default_img' => \Zend\View\Helper\Gravatar::DEFAULT_IDENTICON,
+        'rating'      => \Zend\View\Helper\Gravatar::RATING_G,
+        'secure'      => null,
+    );
+    $attr = ['class'=>'gravatar'];
+    
+    //dateFormat
+    $zfcUser = $this->zfcUserIdentity();
+    if ($zfcUser){
+        $this->plugin('dateFormat')->setTimeZone($zfcUser->getTimeZone())->setLocale($zfcUser->getLocale());
+    }
+    
+    //Paginator
+    $paginator = $this->paginationControl($this->paginator,
+        'sliding',
+        'partial/paginator.phtml',
+        [
+            'route'        => 'zfcadmin/role',
+            'routeParams'  => [
+                'itemsPerPage' => $itemsPerPage,
+                'sort'         => $sort,
+                'search'   => $searchText
+            ],
+        ]);
+    
+    //Fonction pour la liste déroulante
+    $jsMultiplicateur = $this->escapejs($page * $itemsPerPage);
+    $jsSort = $this->escapejs($sort);
+    $jsUrl  = $this->escapejs($this->url('zfcadmin/role'));
+    $jsSearchText = $this->escapejs($searchText);
+    $jsVarSearchText = empty($searchText)?'':"var searchText = '$jsSearchText';";
+    $jsSearchUrl = empty($searchText)?'':" + '?search=$jsSearchText'";
+    $this->headscript()->appendScript("function changement(){
+    	var items = \$('#selectItemsPerPage').val();
+    	var page  = Math.ceil($jsMultiplicateur / items);
+    	var sort  = '$jsSort';
+    	var route = '$jsUrl'; 	
+        $jsVarSearchText
+    	$(location).attr('href',route + '/page' + page + '/itemsPerPage' + items + '/sortBy'+ sort $jsSearchUrl);	
+    }");
+   
+?>
+<div class="page-header">
+    <h1>
+        <i class="fa fa-fw fa-shield"></i> <?php echo $this->escapeHtml($this->translate('Listing des rôles'));?>
+    </h1>
+</div>
+<div class="row">
+    <div class="col-sm-8">
+        <?php echo $paginator; ?>
+    </div>
+    <div class="col-sm-4">
+        <div class="pull-right pagination">
+            <?php echo $this->form($this->searchForm,TwbBundleForm::LAYOUT_INLINE)?>
+        </div>
+    </div>
+</div>
+<div class="flashmessenger">
+<?php
+    
+	$flash = $this->flashmessenger();
+	echo $flash->render('error',   array('alert', 'alert-dismissable', 'alert-danger'));
+	echo $flash->render('warning', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('info',    array('alert', 'alert-dismissable', 'alert-info'));
+	echo $flash->render('default', array('alert', 'alert-dismissable', 'alert-warning'));
+	echo $flash->render('success', array('alert', 'alert-dismissable', 'alert-success'));
+?>
+</div>
+<?php if (count($this->paginator)): ?>
+<div class="table-responsive">
+<table class="table table-bordered table-hover table-responsive table-striped">
+    <thead>
+        <tr>
+            <th id="identifiants">
+                <?php echo $this->escapeHtml($this->translate('Identifiant'));?>
+                <span class="btn-group pull-right">
+                    <a class="btn btn-xs <?php echo ('IdAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
+                        href="<?php echo $this->url('zfcadmin/role',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'IdAsc','search' => $searchText]);?>" 
+                       title="<?php echo $this->escapehtmlattr($this->translate('Sort roles by id ascending'))?>">
+                        <i class="fa fa-fw fa-sort-numeric-asc"></i>
+                    </a>
+                    <a class="btn btn-xs <?php echo ('IdDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
+                        href="<?php echo $this->url('zfcadmin/role',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'IdDesc','search' => $searchText]);?>" 
+                       title="<?php echo $this->escapehtmlattr($this->translate('Sort roles by id descending'))?>">
+                        <i class="fa fa-fw fa-sort-numeric-desc"></i>
+                    </a>
+                </span>
+            </th>
+            <th id="roleIds">
+                <?php echo $this->escapeHtml($this->translate('Libellé'));?>
+                <span class="btn-group pull-right">
+                    <a class="btn btn-xs <?php echo ('RoleIdAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
+                        href="<?php echo $this->url('zfcadmin/role',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'RoleIdAsc','search' => $searchText]);?>" 
+                       title="<?php echo $this->escapehtmlattr($this->translate('Sort roles by libelle ascending'))?>">
+                        <i class="fa fa-fw fa-sort-alpha-asc"></i>
+                    </a>
+                    <a class="btn btn-xs <?php echo ('RoleIdDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
+                        href="<?php echo $this->url('zfcadmin/role',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'RoleIdDesc','search' => $searchText]);?>" 
+                       title="<?php echo $this->escapehtmlattr($this->translate('Sort roles by libelle descending'))?>">
+                        <i class="fa fa-fw fa-sort-alpha-desc"></i>
+                    </a>
+                </span>
+            </th>
+            <th id="actions"></th>
+        </tr>        
+    </thead>
+    <tbody>
+        <?php foreach ($this->paginator as $role):?>
+        <tr>
+            <td headers="identifiants"><?php echo $this->escapeHtml($role->getId());?></td>
+            <td headers="roleIds"><?php echo $this->escapeHtml($role->getRoleId());?></td>
+            <td headers="actions">
+                <span class="btn-group">
+                <?php if ($this->viewIsAllowed):?>
+                    <a class="btn btn-default btn-xs" 
+                        href="<?php echo $this->url('zfcadmin/role',['action'=>'view','role'=>$role->getId()]);?>" 
+                       title="<?php echo $this->escapehtmlattr('View');?>">
+                        <i class="fa fa-fw fa-eye"></i>
+                    </a>
+                <?php endif;?>
+                <?php if ($this->editIsAllowed):?>
+                    <a class="btn btn-default btn-xs" 
+                        href="<?php echo $this->url('zfcadmin/role',['action'=>'edit','role'=>$role->getId()]);?>"
+                       title=<?php echo $this->escapehtmlattr('Edit');?>>
+                        <i class="fa fa-fw fa-pencil"></i>
+                    </a>
+                <?php endif;?>
+                <?php if ($this->deleteIsAllowed):?>
+                    <a class="btn btn-default btn-xs" 
+                        href="<?php echo $this->url('zfcadmin/role',['action'=>'delete','role'=>$role->getId()]);?>" 
+                       title=<?php echo $this->escapehtmlattr('Delete');?>>
+                        <i class="fa fa-fw fa-trash-o"></i>
+                    </a>
+                <?php endif;?>
+                </span>
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>    
+    <caption>
+        <?php if (empty($searchText)):?>
+            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s utilisateur enregistré', '%s utilisateurs enregistrés', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
+        <?php else:?>
+            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s utilisateur correspond à votre recherche', '%s utilisateurs correspondent à votre recherche', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
+        <?php endif;?>
+    </caption>
+        
+</table>
+</div>
+<div class="row">
+    <div class="col-sm-8">    
+        <?php echo $paginator; ?>
+    </div>
+    <div class="col-sm-4">
+        <div class="text-right pagination">
+            <?php echo $this->formElement($this->ioSelect);?>
+        </div>
+    </div>
+</div>
+<?php else: //Aucun utilisateur?>
+<div class="alert alert-info">Aucun utilisateur</div>
+<?php endif;?>
