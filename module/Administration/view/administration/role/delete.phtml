@@ -1,0 +1,32 @@
+<?php $cpt = 0;?>
+<div class="page-header">
+	<h1><i class="fa fa-fw fa-delete"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Supprimer un rôle'))?></h1>
+</div>
+<div class="row text-justify">
+	<div class="col-sm-offset-2 col-sm-8">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h2 class="panel-title">
+					<i class="fa fa-interrogation"></i>&nbsp;
+					<?php echo $this->escapehtml($this->translate('Demande de confirmation'));?>
+				</h2>
+			</div>
+			<div class="panel-body">
+				<p><strong><?php echo $this->escapehtml($this->translate('Êtes-vous sûr de vouloir supprimer le role suivant ?'));?></strong></p>
+				<ul class="">
+					<li><?php echo $this->translate('Libellé')?>&nbsp;: <?php echo $this->escapehtml($this->role->getRoleId());?></li>
+				</ul>
+			</div>
+			<div class="panel-footer text-right">
+				<div class="btn-group">
+					<a href="<?php echo $this->url('zfcadmin/role',array('action'=>'delete','role'=>$this->role->getId(), 'confirmation'=>$this->confirm));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Supprimer l’utilisateur'))?>"
+					  class="btn btn-primary tooltip-link"><i class="fa fa-check fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Supprimer'))?></a>
+				<a href="<?php echo $this->url('zfcadmin/role',array('action'=>'delete','role'=>$this->role->getId(), 'confirmation'=>$this->cancel));?>"
+					  title="<?php echo $this->escapehtmlattr($this->translate('Ne pas supprimer l’utilisateur'))?>"
+					  class="btn btn-default tooltip-link"><i class="fa fa-undo fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Annuler'))?></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

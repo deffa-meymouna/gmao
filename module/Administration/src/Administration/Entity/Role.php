@@ -151,4 +151,25 @@ class Role implements HierarchicalRoleInterface
     {
         $this->parent = $parent;
     }
+    /**
+     * Populate from an array.
+     *
+     * @param array $data
+     */
+    public function exchangeArray ($data = array())
+    {
+        $this->id = $data['id'];
+        $this->parent = $data['parent'];
+        $this->displayName = $data['displayName'];
+    }
+    
+    /**
+     * Convert the object to an array.
+     *
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
 }

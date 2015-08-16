@@ -79,7 +79,4 @@ class ModuleOptions extends AbstractOptions implements ItemsPerPageOptionsInterf
         $this->itemsPerPageDefault = $result; 
         return $this;
     }
-
-    
-
 }

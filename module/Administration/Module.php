@@ -9,6 +9,7 @@ namespace Administration;
 use Administration\Form\Element\ItemsPerPage;
 use Administration\Options\ModuleOptions;
 use Administration\Form\InputFilter\User;
+use Administration\Form\InputFilter\Role;
 class Module
 {
 
@@ -36,6 +37,7 @@ class Module
         return array(
             'invokables' => array(
                 'Administration\Form\UserForm' => 'Administration\Form\UserForm',
+                'Administration\Form\RoleForm' => 'Administration\Form\RoleForm',
                 'Administration\Form\InputFilter\User' => 'Administration\Form\InputFilter\User',                
             ),
             'factories' => array(
@@ -62,7 +64,18 @@ class Module
                     $elementOptions['value_options']=$valueOptions;
                     $element = new ItemsPerPage(null,$elementOptions);
                     return $element;
-                },                
+                },
+                'role_input_filter' => function ($sm){
+                    $roleMapper = $sm->get('RolesService');
+                    $inputFilter = new Role($roleMapper);      
+                    return $inputFilter;
+                },
+                'role_form' => function ($sm){
+                    $roleForm = $sm->get('Administration\Form\RoleForm');
+                    $inputFilter = $sm->get('role_input_filter');
+                    $roleForm->setInputFilter($inputFilter);
+                    return $roleForm;
+                },
                 'user_input_filter' => function ($sm){
                     $userMapper = $sm->get('UsersService');
                     $inputFilter = new User($userMapper);      
