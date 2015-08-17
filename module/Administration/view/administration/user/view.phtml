@@ -77,7 +77,7 @@
 					<dd><?php echo $this->dateFormat($this->user->getModification(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?></dd>
 				</dl>
 				<dl class="dl-horizontal">
-					<dt><?php echo $this->translate('Date du bannissement');?></dt>					
+					<dt><?php echo $this->translate('Ban date');?></dt>					
 					<dd>
 					   <?php if ($this->user->isBanned()):?>
 					   <?php echo $this->dateFormat($this->user->getBannissement(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?>
