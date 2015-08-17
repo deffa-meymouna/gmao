@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Application blanche\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-17 16:29+0100\n"
-"PO-Revision-Date: 2015-08-17 16:29+0100\n"
+"POT-Creation-Date: 2015-08-17 16:36+0100\n"
+"PO-Revision-Date: 2015-08-17 16:36+0100\n"
 "Last-Translator: Alexandre Tranchant <Alexandre.Tranchant@gmail.com>\n"
 "Language-Team:  <alexandre.tranchant@gmail.com>\n"
 "Language: en_US\n"
@@ -60,6 +60,10 @@ msgstr ""
 
 #: ../src/Administration/Controller/UserController.php:303
 msgid "The selected user was not find or does not exist anymore."
+msgstr ""
+
+#: ../src/Administration/Form/Element/ItemsPerPage.php:45
+msgid "Items per page"
 msgstr ""
 
 #: ../src/Administration/Form/Search.php:27

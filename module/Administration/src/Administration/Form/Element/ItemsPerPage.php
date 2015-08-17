@@ -42,7 +42,7 @@ class ItemsPerPage extends Select
             //Le bouton est placé après
             'add-on-append' => $button,
             //Texte, compatible avec Twb-bundle
-            'add-on-prepend' => 'Items per page',
+            'add-on-prepend' => _('Items per page'),
         ]);
     }
     /**
