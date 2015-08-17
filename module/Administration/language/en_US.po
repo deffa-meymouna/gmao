@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Application blanche\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-17 14:07+0100\n"
-"PO-Revision-Date: 2015-08-17 14:10+0100\n"
+"POT-Creation-Date: 2015-08-17 14:33+0100\n"
+"PO-Revision-Date: 2015-08-17 14:33+0100\n"
 "Last-Translator: Alexandre Tranchant <Alexandre.Tranchant@gmail.com>\n"
 "Language-Team:  <alexandre.tranchant@gmail.com>\n"
 "Language: en_US\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../src/Administration/Controller/RoleController.php:116
 #, php-format
-msgid "Cancellation! The role %s was not deleted."
+msgid "Cancellation ! The role %s was not deleted."
 msgstr ""
 
 #: ../src/Administration/Controller/RoleController.php:180
@@ -36,21 +36,21 @@ msgstr ""
 
 #: ../src/Administration/Controller/UserController.php:97
 #, php-format
-msgid "Cancellation! This user %s has not been activated."
+msgid "Cancellation ! This user %s has not been activated."
 msgstr ""
 
 #: ../src/Administration/Controller/UserController.php:162
 #, php-format
-msgid "Cancellation! This user %s was not deleted."
+msgid "Cancellation ! This user %s was not deleted."
 msgstr ""
 
 #: ../src/Administration/Controller/UserController.php:197
 #, php-format
-msgid "Cancellation! This user %s was not banned."
+msgid "Cancellation ! This user %s was not banned."
 msgstr ""
 
 #: ../src/Administration/Controller/UserController.php:232
-msgid "Cancellation! This user remains banned."
+msgid "Cancellation ! This user remains banned."
 msgstr ""
 
 #: ../src/Administration/Controller/UserController.php:298
@@ -391,7 +391,7 @@ msgid "Last activity"
 msgstr ""
 
 #: ../view/administration/user/view.phtml:80
-msgid "Date du bannissement"
+msgid "Ban date"
 msgstr ""
 
 #: ../view/administration/user/view.phtml:125
