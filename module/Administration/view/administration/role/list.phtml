@@ -99,16 +99,16 @@
                 </span>
             </th>
             <th id="roleIds">
-                <?php echo $this->escapeHtml($this->translate('Libellé'));?>
+                <?php echo $this->escapeHtml($this->translate('Title'));?>
                 <span class="btn-group pull-right">
                     <a class="btn btn-xs <?php echo ('RoleIdAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/role',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'RoleIdAsc','search' => $searchText]);?>" 
-                       title="<?php echo $this->escapehtmlattr($this->translate('Sort roles by libelle ascending'))?>">
+                       title="<?php echo $this->escapehtmlattr($this->translate('Sort roles by title ascending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-asc"></i>
                     </a>
                     <a class="btn btn-xs <?php echo ('RoleIdDesc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/role',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'RoleIdDesc','search' => $searchText]);?>" 
-                       title="<?php echo $this->escapehtmlattr($this->translate('Sort roles by libelle descending'))?>">
+                       title="<?php echo $this->escapehtmlattr($this->translate('Sort roles by title descending'))?>">
                         <i class="fa fa-fw fa-sort-alpha-desc"></i>
                     </a>
                 </span>
@@ -151,9 +151,9 @@
     </tbody>    
     <caption>
         <?php if (empty($searchText)):?>
-            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s utilisateur enregistré', '%s utilisateurs enregistrés', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
+            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s role registered', '%s roles registered', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
         <?php else:?>
-            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s utilisateur correspond à votre recherche', '%s utilisateurs correspondent à votre recherche', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
+            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s role is matching your request', '%s roles are matching your request', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
         <?php endif;?>
     </caption>
         
@@ -169,6 +169,6 @@
         </div>
     </div>
 </div>
-<?php else: //Aucun utilisateur?>
-<div class="alert alert-info">Aucun utilisateur</div>
+<?php else: //Aucun rôle (en théorie l'application explose avant ;) )?>
+<div class="alert alert-info"> <?php echo $this->escapehtml($this->translate('No role registered'));?></div>
 <?php endif;?>

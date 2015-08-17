@@ -5,7 +5,7 @@
 		    <i class="fa fa-user fa-stack-1x"></i>
 			<i class="fa fa-ban fa-stack-2x text-success"></i>
 		</span>
-        <?php echo $this->escapehtml($this->translate('Lever le bannissement d’un utilisateur'))?>
+        <?php echo $this->escapehtml($this->translate('Unban an user'))?>
     </h1>
 </div>
 <div class="row text-justify">
@@ -14,25 +14,25 @@
 			<div class="panel-heading">
 				<h2 class="panel-title">
 					<i class="fa fa-interrogation"></i>&nbsp;
-					<?php echo $this->escapehtml($this->translate('Demande de confirmation'));?>
+					<?php echo $this->escapehtml($this->translate('Confirmation'));?>
 				</h2>
 			</div>
 			<div class="panel-body">
 				<p>
-					<strong><?php echo $this->escapehtml($this->translate('Êtes-vous sûr de vouloir lever le bannissement de l’utilisateur suivant ?'));?></strong>
+					<strong><?php echo $this->escapehtml($this->translate('Are you sure to want to unban the following user ?'));?></strong>
 				</p>
 				<ul class="">
 					<li><?php echo $this->translate('Email')?>&nbsp;: <?php echo $this->escapehtml($this->user->getEmail());?></li>
 					<li><?php echo $this->translate('Username')?>&nbsp;: 
 					   <?php if (empty($this->user->getUsername())): ?>
-					       <small><?php echo $this->escapehtml($this->translate('Non renseigné'));?></small>
+					       <small><?php echo $this->escapehtml($this->translate('No information'));?></small>
 					   <?php else: ?>
 					       <?php echo $this->escapehtml($this->user->getUsername());?>
 					   <?php endif;?>
 					</li>
 					<li><?php echo $this->translate('Display Name')?>&nbsp;:
 					   <?php if (empty($this->user->getDisplayName())): ?>
-					       <small><?php echo $this->escapehtml($this->translate('Non renseigné'));?></small>
+					       <small><?php echo $this->escapehtml($this->translate('No information'));?></small>
 					   <?php else: ?>
 					       <?php echo $this->escapehtml($this->user->getDisplayName());?>
 					   <?php endif;?>
@@ -44,12 +44,12 @@
 				<div class="btn-group">
 					<a
 						href="<?php echo $this->url('zfcadmin/user',array('action'=>'unban','user'=>$this->user->getId(), 'confirmation'=>$this->confirm));?>"
-						title="<?php echo $this->escapehtmlattr($this->translate('Lever le bannissement de l’utilisateur'))?>"
-						class="btn btn-primary tooltip-link"><i class="fa fa-check fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Lever le bannissement'))?></a>
+						title="<?php echo $this->escapehtmlattr($this->translate('Unban this user'))?>"
+						class="btn btn-primary tooltip-link"><i class="fa fa-check fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Unban'))?></a>
 					<a
 						href="<?php echo $this->url('zfcadmin/user',array('action'=>'unban','user'=>$this->user->getId(), 'confirmation'=>$this->cancel));?>"
-						title="<?php echo $this->escapehtmlattr($this->translate('Ne pas lever le bannissement de l’utilisateur'))?>"
-						class="btn btn-default tooltip-link"><i class="fa fa-undo fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Annuler'))?></a>
+						title="<?php echo $this->escapehtmlattr($this->translate('Do not unban this user'))?>"
+						class="btn btn-default tooltip-link"><i class="fa fa-undo fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Cancel'))?></a>
 				</div>
 			</div>
 		</div>

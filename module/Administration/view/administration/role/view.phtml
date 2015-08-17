@@ -1,7 +1,7 @@
 <div class="page-header">
 	<h1>
 	   <i class="fa fa-fw fa-eye"></i>
-		<?php echo sprintf($this->escapehtml($this->translate('Informations détaillées du rôle « %s »')),
+		<?php echo sprintf($this->escapehtml($this->translate('Detailed informations of the role « %s »')),
 			              '<strong>'.$this->escapehtml($this->role->getRoleId()).'</strong>');
 	    ?>
 	</h1>
@@ -20,12 +20,12 @@
 			<div class="panel-heading">
 				<h2 class="panel-title">
 				    <i class="fa fa-fw fa-eye"></i>
-					<?php echo $this->translate('Informations générales sur le rôle');?>
+					<?php echo $this->translate('General informations of the role');?>
 				</h2>
 			</div>
 			<div class="panel-body">
 				<dl class="dl-horizontal">
-					<dt><?php echo $this->translate('Libellé');?></dt>
+					<dt><?php echo $this->translate('Title');?></dt>
 					<dd><?php echo $this->escapehtml($this->role->getRoleId());?></dd>
 				</dl>
 			</div>
@@ -36,16 +36,16 @@
 			<div class="panel-heading">
 				<h2 class="panel-title">
 				    <i class="fa fa-fw fa-calendar"></i>
-					<?php echo $this->translate('Calendrier');?>
+					<?php echo $this->translate('Calendar');?>
 				</h2>
 			</div>
 			<div class="panel-body">
 				<dl class="dl-horizontal">
-					<dt><?php echo $this->translate('Date de création');?></dt>
+					<dt><?php echo $this->translate('Creation date');?></dt>
 					<dd><?php echo $this->dateFormat($this->role->getInscription(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?></dd>
 				</dl>
 				<dl class="dl-horizontal">
-					<dt><?php echo $this->translate('Dernière modification');?></dt>
+					<dt><?php echo $this->translate('Last update');?></dt>
 					<dd><?php echo $this->dateFormat($this->role->getModification(),IntlDateFormatter::SHORT,IntlDateFormatter::SHORT);?></dd>
 				</dl>
 			</div>
@@ -56,24 +56,24 @@
 			<div class="panel-heading">
 				<h2 class="panel-title">
 				    <i class="fa fa-fw fa-wrench"></i>
-					<?php echo $this->translate('Outils d’administration');?>
+					<?php echo $this->translate('Administration tools');?>
 				</h2>
 			</div>
 			<div class="panel-body">
                 <?php if ($this->editIsAllowed):?>
                     <a class="btn btn-lg btn-default"
                         href="<?php echo $this->url('zfcadmin/role',['action'=>'edit','role'=>$this->role->getId()]);?>"
-                       title="<?php echo $this->escapehtmlattr($this->translate('Éditer le rôle'));?>">
+                       title="<?php echo $this->escapehtmlattr($this->translate('Edit the role'));?>">
                        <i class="fa fa-lg fa-stack fa-pencil"></i>
-                       <?php echo $this->escapehtml($this->translate('Éditer le rôle'));?>
+                       <?php echo $this->escapehtml($this->translate('Edit the role'));?>
                     </a>
                 <?php endif;?>
                 <?php if ($this->deleteIsAllowed):?>
                     <a class="btn btn-lg btn-default"
                         href="<?php echo $this->url('zfcadmin/role',['action'=>'delete','role'=>$this->role->getId()]);?>"
-                       title="<?php echo $this->escapehtmlattr($this->translate('Supprimer le rôle'));?>">
+                       title="<?php echo $this->escapehtmlattr($this->translate('Delete the role'));?>">
                        <i class="fa fa-lg fa-stack fa-pencil"></i>
-                       <?php echo $this->escapehtml($this->translate('Supprimer le rôle'));?>
+                       <?php echo $this->escapehtml($this->translate('Delete the role'));?>
                     </a>
                 <?php endif;?>
 			</div>

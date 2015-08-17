@@ -54,7 +54,7 @@
 ?>
 <div class="page-header">
     <h1>
-        <?php echo $this->escapeHtml($this->translate('Listing des utilisateurs'));?>
+        <?php echo $this->escapeHtml($this->translate('Listing of the users'));?>
     </h1>
 </div>
 <div class="row">
@@ -144,7 +144,7 @@
                 </span>
             </th>
             <th id="inscriptions">
-                <?php echo $this->escapeHtml($this->translate('Inscription'));?>
+                <?php echo $this->escapeHtml($this->translate('Registration date'));?>
                 <span class="btn-group pull-right">
                     <a class="btn btn-xs <?php echo ('InscriptionAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'InscriptionAsc','search' => $searchText]);?>" 
@@ -159,7 +159,7 @@
                 </span>
             </th>
             <th id="lastsvisite">
-                <?php echo $this->escapeHtml($this->translate('Dernière visite'));?>
+                <?php echo $this->escapeHtml($this->translate('Last visit'));?>
                 <span class="btn-group pull-right">
                     <a class="btn btn-xs <?php echo ('LastVisiteAsc' == $this->sort)?'active btn-primary':'btn-default'; ?>" 
                         href="<?php echo $this->url('zfcadmin/user',['page' => $page, 'itemsPerPage' => $itemsPerPage,'sort' => 'LastVisiteAsc','search' => $searchText]);?>" 
@@ -248,9 +248,9 @@
     </tbody>    
     <caption>
         <?php if (empty($searchText)):?>
-            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s utilisateur enregistré', '%s utilisateurs enregistrés', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
+            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s user registered', '%s users registered', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
         <?php else:?>
-            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s utilisateur correspond à votre recherche', '%s utilisateurs correspondent à votre recherche', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
+            <?php echo $this->escapehtml(sprintf($this->translatePlural('%s user is matching your request', '%s users are matching your request', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
         <?php endif;?>
     </caption>
         
@@ -266,6 +266,6 @@
         </div>
     </div>
 </div>
-<?php else: //Aucun utilisateur?>
-<div class="alert alert-info">Aucun utilisateur</div>
+<?php else: //Aucun utilisateur, en théorie l'application explose avant ;)?>
+<div class="alert alert-info"> <?php echo $this->escapehtml($this->translate('No user registered'));?></div>
 <?php endif;?>

@@ -1,6 +1,6 @@
 <?php $cpt = 0;?>
 <div class="page-header">
-	<h1><i class="fa fa-fw fa-check"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Activer un utilisateur'))?></h1>
+	<h1><i class="fa fa-fw fa-check"></i>&nbsp;<?php echo $this->escapehtml($this->translate('User’s activation'))?></h1>
 </div>
 <div class="row text-justify">
 	<div class="col-sm-offset-2 col-sm-8">
@@ -8,23 +8,23 @@
 			<div class="panel-heading">
 				<h2 class="panel-title">
 					<i class="fa fa-interrogation"></i>&nbsp;
-					<?php echo $this->escapehtml($this->translate('Demande de confirmation'));?>
+					<?php echo $this->escapehtml($this->translate('Confirmation'));?>
 				</h2>
 			</div>
 			<div class="panel-body">
-				<p><strong><?php echo $this->escapehtml($this->translate('Êtes-vous sûr de vouloir activer l’utilisateur suivant ?'));?></strong></p>
+				<p><strong><?php echo $this->escapehtml($this->translate('Are you sure to want to activate the followwing user ?'));?></strong></p>
 				<ul class="">
 					<li><?php echo $this->translate('Email')?>&nbsp;: <?php echo $this->escapehtml($this->user->getEmail());?></li>
 					<li><?php echo $this->translate('Username')?>&nbsp;: 
 					   <?php if (empty($this->user->getUsername())): ?>
-					       <small><?php echo $this->escapehtml($this->translate('Non renseigné'));?></small>
+					       <small><?php echo $this->escapehtml($this->translate('No information'));?></small>
 					   <?php else: ?>
 					       <?php echo $this->escapehtml($this->user->getUsername());?>
 					   <?php endif;?>
 					</li>
 					<li><?php echo $this->translate('Display Name')?>&nbsp;:
 					   <?php if (empty($this->user->getDisplayName())): ?>
-					       <small><?php echo $this->escapehtml($this->translate('Non renseigné'));?></small>
+					       <small><?php echo $this->escapehtml($this->translate('No information'));?></small>
 					   <?php else: ?>
 					       <?php echo $this->escapehtml($this->user->getDisplayName());?>
 					   <?php endif;?>
@@ -33,11 +33,11 @@
 			<div class="panel-footer text-right">
 				<div class="btn-group">
 					<a href="<?php echo $this->url('zfcadmin/user',array('action'=>'active','user'=>$this->user->getId(), 'confirmation'=>$this->confirm));?>"
-					  title="<?php echo $this->escapehtmlattr($this->translate('Activer l’utilisateur'))?>"
-					  class="btn btn-primary tooltip-link"><i class="fa fa-check fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Activer'))?></a>
+					  title="<?php echo $this->escapehtmlattr($this->translate('Activate the user'))?>"
+					  class="btn btn-primary tooltip-link"><i class="fa fa-check fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Activate'))?></a>
 				<a href="<?php echo $this->url('zfcadmin/user',array('action'=>'active','user'=>$this->user->getId(), 'confirmation'=>$this->cancel));?>"
-					  title="<?php echo $this->escapehtmlattr($this->translate('Ne pas activer l’utilisateur'))?>"
-					  class="btn btn-default tooltip-link"><i class="fa fa-undo fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Annuler'))?></a>
+					  title="<?php echo $this->escapehtmlattr($this->translate('Do not activate the user'))?>"
+					  class="btn btn-default tooltip-link"><i class="fa fa-undo fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Cancel'))?></a>
 				</div>
 			</div>
 		</div>

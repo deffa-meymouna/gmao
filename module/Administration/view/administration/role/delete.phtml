@@ -1,6 +1,6 @@
 <?php $cpt = 0;?>
 <div class="page-header">
-	<h1><i class="fa fa-fw fa-delete"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Supprimer un rôle'))?></h1>
+	<h1><i class="fa fa-fw fa-delete"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Delete a role'))?></h1>
 </div>
 <div class="row text-justify">
 	<div class="col-sm-offset-2 col-sm-8">
@@ -8,11 +8,11 @@
 			<div class="panel-heading">
 				<h2 class="panel-title">
 					<i class="fa fa-interrogation"></i>&nbsp;
-					<?php echo $this->escapehtml($this->translate('Demande de confirmation'));?>
+					<?php echo $this->escapehtml($this->translate('Confirmation'));?>
 				</h2>
 			</div>
 			<div class="panel-body">
-				<p><strong><?php echo $this->escapehtml($this->translate('Êtes-vous sûr de vouloir supprimer le role suivant ?'));?></strong></p>
+				<p><strong><?php echo $this->escapehtml($this->translate('Are you sure to want to delete the following role?'));?></strong></p>
 				<ul class="">
 					<li><?php echo $this->translate('Libellé')?>&nbsp;: <?php echo $this->escapehtml($this->role->getRoleId());?></li>
 				</ul>
@@ -20,11 +20,11 @@
 			<div class="panel-footer text-right">
 				<div class="btn-group">
 					<a href="<?php echo $this->url('zfcadmin/role',array('action'=>'delete','role'=>$this->role->getId(), 'confirmation'=>$this->confirm));?>"
-					  title="<?php echo $this->escapehtmlattr($this->translate('Supprimer l’utilisateur'))?>"
-					  class="btn btn-primary tooltip-link"><i class="fa fa-check fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Supprimer'))?></a>
+					  title="<?php echo $this->escapehtmlattr($this->translate('Delete this role'))?>"
+					  class="btn btn-primary tooltip-link"><i class="fa fa-check fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Delete'))?></a>
 				<a href="<?php echo $this->url('zfcadmin/role',array('action'=>'delete','role'=>$this->role->getId(), 'confirmation'=>$this->cancel));?>"
-					  title="<?php echo $this->escapehtmlattr($this->translate('Ne pas supprimer l’utilisateur'))?>"
-					  class="btn btn-default tooltip-link"><i class="fa fa-undo fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Annuler'))?></a>
+					  title="<?php echo $this->escapehtmlattr($this->translate('Do not delete this role'))?>"
+					  class="btn btn-default tooltip-link"><i class="fa fa-undo fa-fw"></i>&nbsp;<?php echo $this->escapehtml($this->translate('Cancel'))?></a>
 				</div>
 			</div>
 		</div>
