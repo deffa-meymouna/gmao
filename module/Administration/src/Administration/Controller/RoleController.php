@@ -81,7 +81,7 @@ class RoleController extends AbstractActionController
             if ($form->isValid()) {
                 //Il faudrait passer par le service utilisateur
                 $this->_getRolesService()->editRole($role);
-                $message = "Le rôle %s a été modifié avec succès.";
+                $message = "Role %s was updated succesfully.";
                 $message = sprintf($this->_getTranslatorHelper()->translate($message),$role->getRoleId());
                 $this->flashMessenger()->addSuccessMessage($message);
                 // Redirect to edited role in view mode
@@ -108,12 +108,12 @@ class RoleController extends AbstractActionController
         $confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
         if($confirmation == self::CONFIRM){
             $this->_getRolesService()->deleteRole($role);
-            $message = "Le rôle %s a été supprimé avec succès.";
+            $message = "Role %s was updated succesfully.";
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$role->getRoleId());
             $this->flashMessenger()->addSuccessMessage($message);
             return $this->redirect()->toRoute('zfcadmin/role',['action'=>'list']);
         }elseif($confirmation == self::CANCEL){
-            $message = sprintf($this->_getTranslatorHelper()->translate("Annulation demandée ! Le rôle %s n’a pas été supprimé."),$role->getRoleId());
+            $message = sprintf($this->_getTranslatorHelper()->translate("Cancellation ! The role %s was not deleted."),$role->getRoleId());
             $this->flashMessenger()->addInfoMessage($message);
             return $this->redirect()->toRoute('zfcadmin/role',['action'=>'view','role'=>$role->getId()]);
         }
@@ -177,12 +177,12 @@ class RoleController extends AbstractActionController
     protected function _getRole(){
         $id = (int) $this->params()->fromRoute('role', 0);
         if ($id == 0) {
-            $this->flashMessenger()->addErrorMessage($this->_getTranslatorHelper()->translate('Identifiant de rôle invalide'));
+            $this->flashMessenger()->addErrorMessage($this->_getTranslatorHelper()->translate('Invalid role id'));
             return $this->redirect()->toRoute('zfcadmin/role');
         }
         $unRole = $this->_getRolesService()->findRoleById($id);
         if (empty($unRole)){
-            $this->flashMessenger()->addWarningMessage($this->_getTranslatorHelper()->translate('Le rôle sélectionné n\'a pas été trouvé ou n\'existe plus'));
+            $this->flashMessenger()->addWarningMessage($this->_getTranslatorHelper()->translate('The selected role was not find or does not exist anymore.'));
             return $this->redirect()->toRoute('zfcadmin/role');
         }
         return $unRole;

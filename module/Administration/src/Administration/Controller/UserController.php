@@ -81,7 +81,7 @@ class UserController extends AbstractActionController
 			return $user;
 		}
 		if ($user->isActive()){
-		    $message = "L’utilisateur %s était déjà actif. Aucune action n’a été entreprise !";
+		    $message = "This user %s was already activated. No action done !";
 			$message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
 			$this->flashMessenger()->addWarningMessage($message);
 		    return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
@@ -89,12 +89,12 @@ class UserController extends AbstractActionController
 		$confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
 		if($confirmation == self::CONFIRM){
 			$this->_getUsersService()->activeUser($user);
-			$message = "L’utilisateur %s a été activé avec succès.";
+			$message = "This user %s was succesfully activated.";
 			$message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
 			$this->flashMessenger()->addSuccessMessage($message);
 			return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
 		}elseif($confirmation == self::CANCEL){
-			$message = sprintf($this->_getTranslatorHelper()->translate("Annulation demandée ! L’utilisateur %s n’a pas été activé."),$user->getEmail());
+			$message = sprintf($this->_getTranslatorHelper()->translate("Cancellation ! This user %s has not been activated."),$user->getEmail());
 			$this->flashMessenger()->addInfoMessage($message);
 			return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
 		}
@@ -127,7 +127,7 @@ class UserController extends AbstractActionController
             if ($form->isValid()) {
                 //Il faudrait passer par le service utilisateur
                 $this->_getUsersService()->editUser($user);
-                $message = "L’utilisateur %s a été modifié avec succès.";
+                $message = "This user %s was successfully updated.";
                 $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
                 $this->flashMessenger()->addSuccessMessage($message);
                 // Redirect to edited user in view mode
@@ -154,12 +154,12 @@ class UserController extends AbstractActionController
 		$confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
 		if($confirmation == self::CONFIRM){
 			$this->_getUsersService()->deleteUser($user);
-			$message = "L’utilisateur %s a été supprimé avec succès.";
+			$message = "The user %s was successfully deleted.";
 			$message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
 			$this->flashMessenger()->addSuccessMessage($message);
 			return $this->redirect()->toRoute('zfcadmin/user',['action'=>'list']);
 		}elseif($confirmation == self::CANCEL){
-			$message = sprintf($this->_getTranslatorHelper()->translate("Annulation demandée ! L’utilisateur %s n’a pas été supprimé."),$user->getEmail());
+			$message = sprintf($this->_getTranslatorHelper()->translate("Cancellation ! This user %s was not deleted."),$user->getEmail());
 			$this->flashMessenger()->addInfoMessage($message);
 			return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
 		}
@@ -181,7 +181,7 @@ class UserController extends AbstractActionController
             return $user;
         }
         if ($user->isBanned()){
-            $message = "L’utilisateur %s était déjà banni. Aucune action n’a été entreprise !";
+            $message = "This user %s was already banned. No action done !";
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
             $this->flashMessenger()->addWarningMessage($message);
             return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
@@ -189,12 +189,12 @@ class UserController extends AbstractActionController
         $confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
         if($confirmation == self::CONFIRM){
             $this->_getUsersService()->banUser($user);
-            $message = "L’utilisateur %s a été banni avec succès.";
+            $message = "This user %s was successfully banned.";
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
             $this->flashMessenger()->addSuccessMessage($message);
             return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
         }elseif($confirmation == self::CANCEL){
-            $message = sprintf($this->_getTranslatorHelper()->translate("Annulation demandée ! L’utilisateur %s n’a pas été banni."),$user->getEmail());
+            $message = sprintf($this->_getTranslatorHelper()->translate("Cancellation ! This user %s was not banned."),$user->getEmail());
             $this->flashMessenger()->addInfoMessage($message);
             return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
         }
@@ -216,7 +216,7 @@ class UserController extends AbstractActionController
             return $user;
         }
         if (!$user->isBanned()){
-            $message = "L’utilisateur %s n'était pas banni. Aucune action n’a été entreprise !";
+            $message = "This user %s was not banned. No action done !";
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
             $this->flashMessenger()->addWarningMessage($message);
             return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
@@ -224,12 +224,12 @@ class UserController extends AbstractActionController
         $confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
         if($confirmation == self::CONFIRM){
             $this->_getUsersService()->unbanUser($user);
-            $message = "Le bannissement de l’utilisateur %s a été levé avec succès.";
+            $message = "This user %s is no more banned.";
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
             $this->flashMessenger()->addSuccessMessage($message);
             return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
         }elseif($confirmation == self::CANCEL){
-            $message = sprintf($this->_getTranslatorHelper()->translate("Annulation demandée ! L’utilisateur %s est toujours banni."),$user->getEmail());
+            $message = sprintf($this->_getTranslatorHelper()->translate("Cancellation ! This user remains banned."),$user->getEmail());
             $this->flashMessenger()->addInfoMessage($message);
             return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
         }
@@ -295,12 +295,12 @@ class UserController extends AbstractActionController
     protected function _getUser(){
         $id = (int) $this->params()->fromRoute('user', 0);
         if ($id == 0) {
-            $this->flashMessenger()->addErrorMessage($this->_getTranslatorHelper()->translate('Identifiant de l\'utilisateur invalide'));
+            $this->flashMessenger()->addErrorMessage($this->_getTranslatorHelper()->translate('Invalid user Id'));
             return $this->redirect()->toRoute('zfcadmin/user');
         }        
         $unUser = $this->_getUsersService()->findUserById($id);
         if (empty($unUser)){
-            $this->flashMessenger()->addWarningMessage($this->_getTranslatorHelper()->translate('L\'utilisateur sélectionnée n\'a pas été trouvé ou n\'existe plus'));
+            $this->flashMessenger()->addWarningMessage($this->_getTranslatorHelper()->translate('The selected user was not find or does not exist anymore.'));
             return $this->redirect()->toRoute('zfcadmin/user');
         }
         return $unUser;
