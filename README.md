@@ -5,12 +5,17 @@ Cette branche a pour objectif de donner naissance à une application blanche
 telle Zend Skeleton mais intégrant plusieurs fonctionnalités complémentaires :
   * La connexion via ZfcUser (Fait)
   * La gestion de son profil utilisateur depuis l'interface utilisateur ZfcUSer (A faire)
-  * La gestion des utilisateurs depuis l'interface administrateur ZfcUSer (A faire)
-  * La gestion des rôles depuis l'interface administrateur (A faire)
+  * La gestion des utilisateurs depuis l'interface administrateur ZfcUSer (Fait)
+  * La gestion des rôles depuis l'interface administrateur (En cours)
   * La gestion des rôles de chaque utilisateur (A faire)
   * La gestion des ressources et des rôles nécessaires depuis les fichiers de configuration (Fait)
+  * La gestion des ressources et des rôles nécessaires depuis la base de données (A faire)
+  * La mise en cache des ressources et des rôles nécessaires pour accélérer les traitements (A faire)
   * Un contrôleur Index avec quelques actions de démonstration (Fait)
   * Le paramétrage Mantis vers les bugs recensés et les demandes d'évolutions en cours (A valider)
+  * Un plan de tests complet (en cours)
+  * La gestion des bannissements (à faire)
+  * La mise en place de travis (À tester et à mettre en oeuvre)
 
 Installation
 ----
@@ -32,3 +37,10 @@ config/autoload :
     2. Remplissez les informations de configuration à Mantis
     3. Sauvegardez le fichier sous local.php
         
+Informations
+----
+La branche de développement est : blanche-zfc
+
+Je recherche de l'aide pour :
+ * La mise en place de travis
+ * Les traductions (je dois tout repasser en anglais et créer les fichiers de traduction française)
