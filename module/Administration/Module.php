@@ -10,7 +10,11 @@ use Administration\Form\Element\ItemsPerPage;
 use Administration\Options\ModuleOptions;
 use Administration\Form\InputFilter\User;
 use Administration\Form\InputFilter\Role;
-class Module
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\EventManager\EventInterface;
+use Zend\Mvc\I18n\Translator;
+
+class Module implements BootstrapListenerInterface
 {
 
     public function getConfig()
@@ -90,6 +94,13 @@ class Module
                 'UsersService' => 'Administration\Service\Factory\UsersServiceFactory',
                 'RolesService' => 'Administration\Service\Factory\RolesServiceFactory',
             )
-        );
+        );        
+            
+    }
+    
+    public function onBootstrap(EventInterface $e)
+    {
+        $translator = $e->getApplication()->getServiceManager()->get('translator');
+        $translator->addTranslationFilePattern('gettext',__DIR__ . '/language/','%s.mo');
     }
 }
