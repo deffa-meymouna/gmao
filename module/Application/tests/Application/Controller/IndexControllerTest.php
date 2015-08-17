@@ -5,6 +5,9 @@ namespace Application\Controller;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class IndexControllerTest extends AbstractHttpControllerTestCase {
+    //@FIXME refaire les tests en se basant sur cela :
+    //@link http://stackoverflow.com/questions/14354456/simple-zf2-unit-tests-for-a-controller-using-zfcuser
+    
 	//Trace error activated
 	protected $traceError = true;
 	/**
@@ -49,10 +52,10 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertActionName('index');
 		$this->assertMatchedRouteName ( 'application' );
 	}
-	public function testServiceActionCanBeAccessed() {
-
+	public function testServiceActionCanNotBeAccessed() {
+	    
 		$this->dispatch ( '/main/service' );
-		$this->assertResponseStatusCode ( 200 );
+		$this->assertResponseStatusCode ( 403 );
 
 		$this->assertModuleName ( 'Application' );
 		$this->assertControllerName ( 'Application\Controller\Index' );
@@ -116,8 +119,21 @@ class IndexControllerTest extends AbstractHttpControllerTestCase {
 		$this->assertMatchedRouteName ( 'application' );
 	}
 	public function testLockActionCanNotBeAccessed() {
-
-		$this->dispatch ( '/main/lock' );
+	    
+		// Creating mock
+	    /*$mockBjy = $this->getMock("BjyAuthorize\Service\Authorize", array("isAllowed"), array($this->getApplicationConfig(), $this->getApplication()->getServiceManager()));
+	    
+	    // Bypass auth, force true
+	    $mockBjy->expects($this->any())
+	       ->method('isAllowed')
+	       ->will($this->returnValue(true));
+	    
+	    // Overriding BjyAuthorize\Service\Authorize service
+	    $this->getApplication()
+	       ->getServiceManager()
+	       ->setAllowOverride(true)
+	       ->setService('BjyAuthorize\Service\Authorize', $mockBjy);*/
+	    
 		$this->assertResponseStatusCode ( 403 );
 
 		$this->assertModuleName ( 'Application' );

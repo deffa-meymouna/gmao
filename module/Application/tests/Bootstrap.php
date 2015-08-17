@@ -1,6 +1,6 @@
 <?php
 
-namespace AlbumTest;
+namespace ApplicationTest;
 
 use Zend\Loader\AutoloaderFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;
@@ -35,10 +35,8 @@ class Bootstrap {
 				),
 				'modules' => array (
 						'Application',
-						'Album',
 						'DoctrineModule',
-						'DoctrineORMModule',
-						'CsnUser' 
+						'DoctrineORMModule'
 				) 
 		);
 		
@@ -56,8 +54,8 @@ class Bootstrap {
 	}
 	protected static function initAutoloader() {
 		$vendorPath = static::findParentPath ( 'vendor' );
-		
-		$zf2Path = getenv ( 'ZF2_PATH' );
+
+		/*$zf2Path = getenv ( 'ZF2_PATH' );
 		if (! $zf2Path) {
 			if (defined ( 'ZF2_PATH' )) {
 				$zf2Path = ZF2_PATH;
@@ -70,13 +68,13 @@ class Bootstrap {
 		
 		if (! $zf2Path) {
 			throw new RuntimeException ( 'Unable to load ZF2. Run `php composer.phar install` or' . ' define a ZF2_PATH environment variable.' );
-		}
+		}*/
 		
 		if (file_exists ( $vendorPath . '/autoload.php' )) {
 			include $vendorPath . '/autoload.php';
 		}
 		
-		include $zf2Path . '/Zend/Loader/AutoloaderFactory.php';
+		//include $zf2Path . '/Zend/Loader/AutoloaderFactory.php';
 		AutoloaderFactory::factory ( array (
 				'Zend\Loader\StandardAutoloader' => array (
 						'autoregister_zf' => true,

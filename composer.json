@@ -14,7 +14,8 @@
     "bjyoungblood/bjy-authorize" : "1.4.*",
     "neilime/zf2-twb-bundle" : "2.*@stable",
     "bjyoungblood/bjy-authorize" : "1.4.*",
-    "tburschka/zf2-doctrine-sql-logger" : "dev-master"
+    "tburschka/zf2-doctrine-sql-logger" : "dev-master",
+    "phpunit/phpunit" : "4.7.*"
   },
   "repositories" : [ {
     "type" : "vcs",
