@@ -24,10 +24,10 @@ class Search extends Form
             'name' => 'search',
             'attributes' => array(
                 'type' => 'text',
-                'placeholder' => 'Enter search...'
+                'placeholder' => _('Enter search...')
             ),
             'options' => array(
-                'label' => 'Search'
+                'label' => _('Search')
             )
         ));
         //J'aimerai bien ne pas mettre de name à mon submit !
