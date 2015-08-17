@@ -19,17 +19,17 @@ class UserForm extends Form
     public function __construct($name = null, $options = array())
     {
         // we want to ignore the name and options passed
-        parent::__construct('album');
+        parent::__construct('userForm');
         
         $this->add(array(
             'name' => 'id',
-            'type' => 'Hidden'
+            'type' => 'hidden'
         ));
         $this->add(array(
             'name' => 'username',
-            'type' => 'Text',
+            'type' => 'text',
             'options' => array(
-                'label' => 'Username',
+                'label' => _('Username'),
                 'column-size' => 'sm-10',
                 'label_attributes' => array('class' => 'col-sm-2')
             )
@@ -38,7 +38,7 @@ class UserForm extends Form
             'name' => 'email',
             'type' => 'email',
             'options' => array(
-                'label' => 'Email',
+                'label' => _('Email'),
                 'column-size' => 'sm-10',
                 'label_attributes' => array('class' => 'col-sm-2')
             )
@@ -47,16 +47,16 @@ class UserForm extends Form
             'name' => 'displayName',
             'type' => 'Text',
             'options' => array(
-                'label' => 'Display Name',
+                'label' => _('Display Name'),
                 'column-size' => 'sm-10',
                 'label_attributes' => array('class' => 'col-sm-2')
             )
         ));        
         $this->add(array(
             'name' => 'submit',
-            'type' => 'Submit',
+            'type' => 'submit',
             'attributes' => array(
-                'value' => 'Save',
+                'value' => _('Save'),
                 'id' => 'submitbutton'
             ),
             'options' => array(
@@ -65,5 +65,3 @@ class UserForm extends Form
         ));
     }
 }
-
-?>

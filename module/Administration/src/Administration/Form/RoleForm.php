@@ -23,13 +23,13 @@ class RoleForm extends Form
         
         $this->add(array(
             'name' => 'id',
-            'type' => 'Hidden'
+            'type' => 'hidden'
         ));
         $this->add(array(
             'name' => 'roleId',
-            'type' => 'Text',
+            'type' => 'text',
             'options' => array(
-                'label' => 'Username',
+                'label' => _('Username'),
                 'column-size' => 'sm-10',
                 'label_attributes' => array('class' => 'col-sm-2')
             )
@@ -38,7 +38,7 @@ class RoleForm extends Form
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(
-                'value' => 'Save',
+                'value' => _('Save'),
                 'id' => 'submitbutton'
             ),
             'options' => array(
@@ -47,5 +47,3 @@ class RoleForm extends Form
         ));
     }
 }
-
-?>

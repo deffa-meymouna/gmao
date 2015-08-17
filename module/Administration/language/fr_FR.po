@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Application blanche\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-17 16:36+0100\n"
-"PO-Revision-Date: 2015-08-17 16:37+0100\n"
+"POT-Creation-Date: 2015-08-17 19:09+0100\n"
+"PO-Revision-Date: 2015-08-17 19:09+0100\n"
 "Last-Translator: Alexandre Tranchant <Alexandre.Tranchant@gmail.com>\n"
 "Language-Team:  <alexandre.tranchant@gmail.com>\n"
 "Language: fr_FR\n"
@@ -67,6 +67,22 @@ msgstr "L’utilisateur sélectionné n’a pas été trouvé ou n’existe plus
 msgid "Items per page"
 msgstr "Éléments par page"
 
+#: ../src/Administration/Form/RoleForm.php:32
+#: ../src/Administration/Form/UserForm.php:32
+#: ../view/administration/user/active.phtml:18
+#: ../view/administration/user/ban.phtml:26
+#: ../view/administration/user/delete.phtml:18
+#: ../view/administration/user/list.phtml:102
+#: ../view/administration/user/unban.phtml:26
+#: ../view/administration/user/view.phtml:34
+msgid "Username"
+msgstr "Nom d’utilisateur"
+
+#: ../src/Administration/Form/RoleForm.php:41
+#: ../src/Administration/Form/UserForm.php:59
+msgid "Save"
+msgstr "Enregistrer"
+
 #: ../src/Administration/Form/Search.php:27
 msgid "Enter search..."
 msgstr "Entrez vos critères de recherche"
@@ -74,6 +90,26 @@ msgstr "Entrez vos critères de recherche"
 #: ../src/Administration/Form/Search.php:30
 msgid "Search"
 msgstr "Chercher"
+
+#: ../src/Administration/Form/UserForm.php:41
+#: ../view/administration/user/active.phtml:17
+#: ../view/administration/user/ban.phtml:25
+#: ../view/administration/user/delete.phtml:17
+#: ../view/administration/user/list.phtml:117
+#: ../view/administration/user/unban.phtml:25
+#: ../view/administration/user/view.phtml:42
+msgid "Email"
+msgstr "Email"
+
+#: ../src/Administration/Form/UserForm.php:50
+#: ../view/administration/user/active.phtml:25
+#: ../view/administration/user/ban.phtml:33
+#: ../view/administration/user/delete.phtml:25
+#: ../view/administration/user/list.phtml:132
+#: ../view/administration/user/unban.phtml:33
+#: ../view/administration/user/view.phtml:38
+msgid "Display Name"
+msgstr "Nom affiché"
 
 #: ../view/administration/role/delete.phtml:3
 msgid "Delete a role"
@@ -195,24 +231,6 @@ msgstr "Activation de l’utilisateur"
 msgid "Are you sure to want to activate the followwing user ?"
 msgstr "Êtes-vous sûr de vouloir activer le rôle suivant"
 
-#: ../view/administration/user/active.phtml:17
-#: ../view/administration/user/ban.phtml:25
-#: ../view/administration/user/delete.phtml:17
-#: ../view/administration/user/list.phtml:117
-#: ../view/administration/user/unban.phtml:25
-#: ../view/administration/user/view.phtml:42
-msgid "Email"
-msgstr "Email"
-
-#: ../view/administration/user/active.phtml:18
-#: ../view/administration/user/ban.phtml:26
-#: ../view/administration/user/delete.phtml:18
-#: ../view/administration/user/list.phtml:102
-#: ../view/administration/user/unban.phtml:26
-#: ../view/administration/user/view.phtml:34
-msgid "Username"
-msgstr "Nom d’utilisateur"
-
 #: ../view/administration/user/active.phtml:20
 #: ../view/administration/user/active.phtml:27
 #: ../view/administration/user/ban.phtml:28
@@ -223,15 +241,6 @@ msgstr "Nom d’utilisateur"
 #: ../view/administration/user/unban.phtml:35
 msgid "No information"
 msgstr "Non renseigné"
-
-#: ../view/administration/user/active.phtml:25
-#: ../view/administration/user/ban.phtml:33
-#: ../view/administration/user/delete.phtml:25
-#: ../view/administration/user/list.phtml:132
-#: ../view/administration/user/unban.phtml:33
-#: ../view/administration/user/view.phtml:38
-msgid "Display Name"
-msgstr "Nom affiché"
 
 #: ../view/administration/user/active.phtml:36
 msgid "Activate the user"
