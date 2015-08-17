@@ -1,0 +1,633 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Application blanche\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-17 14:33+0100\n"
+"PO-Revision-Date: 2015-08-17 14:33+0100\n"
+"Last-Translator: Alexandre Tranchant <Alexandre.Tranchant@gmail.com>\n"
+"Language-Team:  <alexandre.tranchant@gmail.com>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate;label\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../Module.php:61
+#, php-format
+msgid "%d items"
+msgstr "%d éléments"
+
+#: ../src/Administration/Controller/RoleController.php:116
+#, php-format
+msgid "Cancellation ! The role %s was not deleted."
+msgstr "Annulation demandée ! Le rôle %s n’a pas été effacé."
+
+#: ../src/Administration/Controller/RoleController.php:180
+msgid "Invalid role id"
+msgstr "Identifiant de rôle invalide"
+
+#: ../src/Administration/Controller/RoleController.php:185
+msgid "The selected role was not find or does not exist anymore."
+msgstr "Le rôle sélectionné n’a pas été trouvé ou n’existe plus."
+
+#: ../src/Administration/Controller/UserController.php:97
+#, php-format
+msgid "Cancellation ! This user %s has not been activated."
+msgstr "Annulation ! L’utilisateur %s n’a pas été activé."
+
+#: ../src/Administration/Controller/UserController.php:162
+#, php-format
+msgid "Cancellation ! This user %s was not deleted."
+msgstr "Annulation demandée ! L’utilisateur %s n’a pas été effacé."
+
+#: ../src/Administration/Controller/UserController.php:197
+#, php-format
+msgid "Cancellation ! This user %s was not banned."
+msgstr "Annulation demandée ! L’utilisateur %s n’a pas été banni."
+
+#: ../src/Administration/Controller/UserController.php:232
+msgid "Cancellation ! This user remains banned."
+msgstr "Annulation demandée ! L’utilisateur est toujours banni."
+
+#: ../src/Administration/Controller/UserController.php:298
+msgid "Invalid user Id"
+msgstr "Identifiant de l’utilisateur invalide"
+
+#: ../src/Administration/Controller/UserController.php:303
+msgid "The selected user was not find or does not exist anymore."
+msgstr "L’utilisateur sélectionné n’a pas été trouvé ou n’existe plus."
+
+#: ../view/administration/role/delete.phtml:3
+msgid "Delete a role"
+msgstr "Effacer un rôle"
+
+#: ../view/administration/role/delete.phtml:11
+#: ../view/administration/user/active.phtml:11
+#: ../view/administration/user/ban.phtml:17
+#: ../view/administration/user/delete.phtml:11
+#: ../view/administration/user/unban.phtml:17
+msgid "Confirmation"
+msgstr "Demande de confirmation"
+
+#: ../view/administration/role/delete.phtml:15
+msgid "Are you sure to want to delete the following role?"
+msgstr "Êtes-vous sûr de vouloir effacer le rôle suivant ?"
+
+#: ../view/administration/role/delete.phtml:17
+#: ../view/administration/role/list.phtml:102
+#: ../view/administration/role/view.phtml:28
+msgid "Title"
+msgstr "Libellé"
+
+#: ../view/administration/role/delete.phtml:23
+msgid "Delete this role"
+msgstr "Effacer ce rôle"
+
+#: ../view/administration/role/delete.phtml:24
+#: ../view/administration/user/delete.phtml:37
+msgid "Delete"
+msgstr "Effacer"
+
+#: ../view/administration/role/delete.phtml:26
+msgid "Do not delete this role"
+msgstr "Ne pas effacer ce rôle"
+
+#: ../view/administration/role/delete.phtml:27
+#: ../view/administration/user/active.phtml:40
+#: ../view/administration/user/delete.phtml:40
+#: ../view/administration/user/unban.phtml:52
+msgid "Cancel"
+msgstr "Annuler"
+
+#: ../view/administration/role/edit.phtml:3
+msgid "Edit a role"
+msgstr "Éditer un rôle"
+
+#: ../view/administration/role/list.phtml:57
+msgid "Roles’s listing"
+msgstr "Liste des rôles"
+
+#: ../view/administration/role/list.phtml:87
+#: ../view/administration/user/list.phtml:87
+msgid "Identifiant"
+msgstr "Identifiant"
+
+#: ../view/administration/role/list.phtml:91
+msgid "Sort roles by id ascending"
+msgstr "Trier les rôles par identifiant et dans l’ordre croissant"
+
+#: ../view/administration/role/list.phtml:96
+msgid "Sort roles by id descending"
+msgstr "Trier les rôles par identifiant et dans l’ordre décroissant"
+
+#: ../view/administration/role/list.phtml:106
+msgid "Sort roles by title ascending"
+msgstr "Trier les rôles par libellé et dans l’ordre croissant"
+
+#: ../view/administration/role/list.phtml:111
+msgid "Sort roles by title descending"
+msgstr "Trier les rôles par libellé et dans l’ordre décroissant"
+
+#: ../view/administration/role/list.phtml:173
+msgid "No role registered"
+msgstr "Aucun rôle enregistré"
+
+#: ../view/administration/role/view.phtml:4
+#, php-format
+msgid "Detailed informations of the role « %s »"
+msgstr "Informations détaillées sur le rôle « %s »"
+
+#: ../view/administration/role/view.phtml:23
+msgid "General informations of the role"
+msgstr "Informations générales sur le rôle"
+
+#: ../view/administration/role/view.phtml:39
+msgid "Calendar"
+msgstr "Calendrier"
+
+#: ../view/administration/role/view.phtml:44
+msgid "Creation date"
+msgstr "Date d’inscription"
+
+#: ../view/administration/role/view.phtml:48
+#: ../view/administration/user/view.phtml:76
+msgid "Last update"
+msgstr "Dernière modification"
+
+#: ../view/administration/role/view.phtml:59
+#: ../view/administration/user/view.phtml:97
+msgid "Administration tools"
+msgstr "Outils d’administration"
+
+#: ../view/administration/role/view.phtml:66
+#: ../view/administration/role/view.phtml:68
+msgid "Edit the role"
+msgstr "Éditer un rôle"
+
+#: ../view/administration/role/view.phtml:74
+#: ../view/administration/role/view.phtml:76
+msgid "Delete the role"
+msgstr "Effacer le rôle"
+
+#: ../view/administration/user/active.phtml:3
+msgid "User’s activation"
+msgstr "Activation de l’utilisateur"
+
+#: ../view/administration/user/active.phtml:15
+msgid "Are you sure to want to activate the followwing user ?"
+msgstr "Êtes-vous sûr de vouloir activer le rôle suivant"
+
+#: ../view/administration/user/active.phtml:17
+#: ../view/administration/user/ban.phtml:25
+#: ../view/administration/user/delete.phtml:17
+#: ../view/administration/user/list.phtml:117
+#: ../view/administration/user/unban.phtml:25
+#: ../view/administration/user/view.phtml:42
+msgid "Email"
+msgstr "Email"
+
+#: ../view/administration/user/active.phtml:18
+#: ../view/administration/user/ban.phtml:26
+#: ../view/administration/user/delete.phtml:18
+#: ../view/administration/user/list.phtml:102
+#: ../view/administration/user/unban.phtml:26
+#: ../view/administration/user/view.phtml:34
+msgid "Username"
+msgstr "Nom d’utilisateur"
+
+#: ../view/administration/user/active.phtml:20
+#: ../view/administration/user/active.phtml:27
+#: ../view/administration/user/ban.phtml:28
+#: ../view/administration/user/ban.phtml:35
+#: ../view/administration/user/delete.phtml:20
+#: ../view/administration/user/delete.phtml:27
+#: ../view/administration/user/unban.phtml:28
+#: ../view/administration/user/unban.phtml:35
+msgid "No information"
+msgstr "Non renseigné"
+
+#: ../view/administration/user/active.phtml:25
+#: ../view/administration/user/ban.phtml:33
+#: ../view/administration/user/delete.phtml:25
+#: ../view/administration/user/list.phtml:132
+#: ../view/administration/user/unban.phtml:33
+#: ../view/administration/user/view.phtml:38
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#: ../view/administration/user/active.phtml:36
+msgid "Activate the user"
+msgstr "Activer l’utilisateur"
+
+#: ../view/administration/user/active.phtml:37
+msgid "Activate"
+msgstr "Activer"
+
+#: ../view/administration/user/active.phtml:39
+msgid "Do not activate the user"
+msgstr "Ne pas activer l’utilisateur"
+
+#: ../view/administration/user/ban.phtml:8
+msgid "Ban a user"
+msgstr "Bannir un utilisateur"
+
+#: ../view/administration/user/ban.phtml:22
+msgid "Are you sure to want to ban the following user ?"
+msgstr "Êtes vous sûr de vouloir bannir l’utilisateur suivant ?"
+
+#: ../view/administration/user/ban.phtml:45
+#: ../view/administration/user/view.phtml:113
+msgid "Ban this user"
+msgstr "Bannir cet utilisateur"
+
+#: ../view/administration/user/ban.phtml:46
+#: ../view/administration/user/ban.phtml:50
+#: ../view/administration/user/view.phtml:119
+msgid "Ban"
+msgstr "Bannir"
+
+#: ../view/administration/user/ban.phtml:49
+msgid "Do not ban this user"
+msgstr "Ne pas bannir cet utilisateur"
+
+#: ../view/administration/user/delete.phtml:3
+msgid "Delete an user"
+msgstr "Effacer un utilisateur"
+
+#: ../view/administration/user/delete.phtml:15
+msgid "Are you sure to want to delete the following user ?"
+msgstr "Êtes-vous sûr de vouloir bannir l’utilisateur suivant"
+
+#: ../view/administration/user/delete.phtml:36
+msgid "Delete this user"
+msgstr "Supprimer cet utilisateur"
+
+#: ../view/administration/user/delete.phtml:39
+msgid "Do not delete this user"
+msgstr "Ne pas effacer cet utilisateur"
+
+#: ../view/administration/user/edit.phtml:3
+msgid "Edit an user"
+msgstr "Éditer un utilisateur"
+
+#: ../view/administration/user/list.phtml:57
+msgid "Listing of the users"
+msgstr "Liste des utilisateurs"
+
+#: ../view/administration/user/list.phtml:91
+msgid "Sort users by id ascending"
+msgstr "Trier les utilisateurs par identifiant et de façon croissante"
+
+#: ../view/administration/user/list.phtml:96
+msgid "Sort users by id descending"
+msgstr "Trier les utilisateurs par identifiant et de façon décroissante"
+
+#: ../view/administration/user/list.phtml:106
+msgid "Sort users by username ascending"
+msgstr "Trier les utilisateurs par nom d’utilisateur et de façon croissante"
+
+#: ../view/administration/user/list.phtml:111
+msgid "Sort users by username descending"
+msgstr "Trier les utilisateurs par nom d’utilisateur et de façon décroissante"
+
+#: ../view/administration/user/list.phtml:121
+msgid "Sort users by email ascending"
+msgstr "Trier les utilisateurs par email et de façon croissante"
+
+#: ../view/administration/user/list.phtml:126
+msgid "Sort users by email descending"
+msgstr "Trier les utilisateurs par email et de façon décroissante"
+
+#: ../view/administration/user/list.phtml:136
+msgid "Sort users by display name ascending"
+msgstr "Trier les utilisateurs par nom affiché et de façon croissante"
+
+#: ../view/administration/user/list.phtml:141
+msgid "Sort users by display name descending"
+msgstr "Trier les utilisateurs par nom affiché et de façon décroissante"
+
+#: ../view/administration/user/list.phtml:147
+#: ../view/administration/user/view.phtml:58
+msgid "Registration date"
+msgstr "Date d’inscription"
+
+#: ../view/administration/user/list.phtml:151
+msgid "Sort users by inscription date ascending"
+msgstr "Trier les utilisateurs par date d’inscription croissante"
+
+#: ../view/administration/user/list.phtml:156
+msgid "Sort users by inscription date descending"
+msgstr "Trier les utilisateurs par date d’inscription décroissante"
+
+#: ../view/administration/user/list.phtml:162
+msgid "Last visit"
+msgstr "Dernière visite"
+
+#: ../view/administration/user/list.phtml:166
+msgid "Sort users by last visite date ascending"
+msgstr "Trier les utilisateurs par date croissante de dernière visite"
+
+#: ../view/administration/user/list.phtml:171
+msgid "Sort users by last visite date descending"
+msgstr "Trier les utilisateurs par date décroissante de dernière visite"
+
+#: ../view/administration/user/list.phtml:241
+msgid "Banned"
+msgstr "Banni"
+
+#: ../view/administration/user/list.phtml:243
+msgid "Inactive"
+msgstr "Inactif"
+
+#: ../view/administration/user/list.phtml:270
+msgid "No user registered"
+msgstr "Aucun utilisateur inscrit"
+
+#: ../view/administration/user/unban.phtml:8
+msgid "Unban an user"
+msgstr "Lever le bannissement d’un utilisateur"
+
+#: ../view/administration/user/unban.phtml:22
+msgid "Are you sure to want to unban the following user ?"
+msgstr ""
+"Êtes-vous sûr de vouloir lever le bannissement de l’utilisateur suivant ?"
+
+#: ../view/administration/user/unban.phtml:47
+#: ../view/administration/user/view.phtml:104
+msgid "Unban this user"
+msgstr "Lever le bannissement d’un utilisateur"
+
+#: ../view/administration/user/unban.phtml:48
+#: ../view/administration/user/view.phtml:109
+msgid "Unban"
+msgstr "Lever le bannissement"
+
+#: ../view/administration/user/unban.phtml:51
+msgid "Do not unban this user"
+msgstr "Ne pas lever le bannissement de cet utilisateur"
+
+#: ../view/administration/user/view.phtml:4
+#, php-format
+msgid "Informations détaillées de %s"
+msgstr "Informations détaillées de %s"
+
+#: ../view/administration/user/view.phtml:29
+msgid "General information about this user"
+msgstr "Informations générales sur cet utilisateur"
+
+#: ../view/administration/user/view.phtml:53
+msgid "Calendrier"
+msgstr "Calendrier"
+
+#: ../view/administration/user/view.phtml:62
+msgid "Activation date"
+msgstr "Date d’activation"
+
+#: ../view/administration/user/view.phtml:72
+msgid "Last activity"
+msgstr "Dernière activité"
+
+#: ../view/administration/user/view.phtml:80
+msgid "Ban date"
+msgstr "Date du bannissement"
+
+#: ../view/administration/user/view.phtml:125
+msgid "Edit this user"
+msgstr "Éditer cet utilisateur"
+
+#: ../view/administration/user/view.phtml:127
+msgid "Edit"
+msgstr "Éditer"
+
+#: ../view/layout/admin.phtml:20 ../view/layout/admin.phtml:54
+msgid "Administration"
+msgstr "Administration"
+
+#: ../view/layout/admin.phtml:73
+msgid "Edit Profile"
+msgstr "Modifier le profil"
+
+#: ../view/layout/admin.phtml:79
+msgid "Sign Out"
+msgstr "Se déconnecter"
+
+#: ../view/layout/admin.phtml:86
+msgid "Sign In"
+msgstr "S’inscrire"
+
+#: ../view/layout/admin.phtml:97
+#, php-format
+msgid "&copy; 2005 - %s par %s"
+msgstr "&copy; 2005 - %s par %s"
+
+#: ../view/layout/admin.phtml:97
+msgid "All rights reserved."
+msgstr "Tous droits réservés."
+
+#~ msgid "Date du bannissement"
+#~ msgstr "Date du bannissement"
+
+#~ msgid "%sL'Application blanche%s %sest un noyau%s"
+#~ msgstr "%sL'Application blanche%s %sest un noyau%s"
+
+#~ msgid "Gestion des utilisateurs"
+#~ msgstr "Users managment"
+
+#~ msgid "Gestion des rôles"
+#~ msgstr "Role managment"
+
+#~ msgid "Connexion via ZfcUser"
+#~ msgstr "Connexion via ZfcUser"
+
+#~ msgid "Menu de navigation sécurisé"
+#~ msgstr "Menu de navigation sécurisé"
+
+#~ msgid "A 404 error occurred"
+#~ msgstr "Une erreur 404 est survenue"
+
+#~ msgid "The requested controller was unable to dispatch the request."
+#~ msgstr "Le contrôleur demandé n'a pas pu dispatcher la requête."
+
+#~ msgid ""
+#~ "The requested controller could not be mapped to an existing controller "
+#~ "class."
+#~ msgstr ""
+#~ "Le contrôleur demandé ne correspond pas à une classe existante de "
+#~ "contrôleur."
+
+#~ msgid "The requested controller was not dispatchable."
+#~ msgstr "Le contrôleur demandé n'est pas dispatchable."
+
+#~ msgid "The requested URL could not be matched by routing."
+#~ msgstr "L'URL demandée n'a pas pu trouver de route correspondante."
+
+#~ msgid "We cannot determine at this time why a 404 was generated."
+#~ msgstr ""
+#~ "Nous ne pouvons pas déterminer pour le moment pourquoi une 404 a été "
+#~ "générée."
+
+#~ msgid "Controller"
+#~ msgstr "Contrôleur"
+
+#~ msgid "resolves to %s"
+#~ msgstr "résout en %s"
+
+#~ msgid "Additional information"
+#~ msgstr "Informations complémentaires"
+
+#~ msgid "File"
+#~ msgstr "Fichier"
+
+#~ msgid "Message"
+#~ msgstr "Message"
+
+#~ msgid "Stack trace"
+#~ msgstr "Pile d'exécution"
+
+#~ msgid "Previous exceptions"
+#~ msgstr "Exceptions précédentes"
+
+#~ msgid "No Exception available"
+#~ msgstr "Aucune exception disponible"
+
+#~ msgid "An error occurred"
+#~ msgstr "Une erreur est survenue"
+
+#~ msgid "Home"
+#~ msgstr "Accueil"
+
+#~ msgid ""
+#~ "Hello %s Your authentication credentials are not declared into this "
+#~ "application"
+#~ msgstr ""
+#~ "Bonjour %s Vos accréditations ne sont pas déclarées dans cette application"
+
+#~ msgid ""
+#~ "Your authentication credentials are not declared into this application"
+#~ msgstr "Vos accréditations ne sont pas déclarées dans cette application"
+
+#~ msgid "Your username is disabled. Please contact an administrator."
+#~ msgstr "Votre compte a été désactivé. Veuillez contacter un administrateur."
+
+#~ msgid "Your authentication credentials are not valid"
+#~ msgstr "Vos identifiants de connexion ne sont pas valides"
+
+#~ msgid "Something went wrong during login! Please, try again later."
+#~ msgstr ""
+#~ "Une erreur est survenue durant la connexion. Veuillez réessayer plus tard."
+
+#~ msgid "My albums"
+#~ msgstr "Mes albums"
+
+#, fuzzy
+#~ msgid "Portail de développement"
+#~ msgstr "Suivre le développement"
+
+#, fuzzy
+#~ msgid "Aide &amp; Support"
+#~ msgstr "Aide &amp; support"
+
+#~ msgid "GMAO"
+#~ msgstr "GMAO"
+
+#~ msgid "Log In"
+#~ msgstr "Connexion"
+
+#~ msgid "Welcome"
+#~ msgstr "Bienvenue"
+
+#~ msgid "Congratulations! You have successfully logged in."
+#~ msgstr "Félicitations vous êtes correctement authentifié"
+
+#~ msgid "Guest"
+#~ msgstr "Invité"
+
+#~ msgid "Please login to use this application."
+#~ msgstr "Veuillez vous identifier pour utiliser cette application."
+
+#, fuzzy
+#~ msgid "Update Profile"
+#~ msgstr "Modifier le profil"
+
+#~ msgid "Your First/Last Name"
+#~ msgstr "Vos prénom et nom de famille"
+
+#~ msgid "Your Language"
+#~ msgstr "Votre langue"
+
+#~ msgid "Welcome to %sZend Framework 2%s"
+#~ msgstr "Bienvenue dans le %sZend Framework 2%s"
+
+#~ msgid ""
+#~ "Congratulations! You have successfully installed the %sZF2 Skeleton "
+#~ "Application%s. You are currently running Zend Framework version %s. This "
+#~ "skeleton can serve as a simple starting point for you to begin building "
+#~ "your application on ZF2."
+#~ msgstr ""
+#~ "Félicitations ! Vous avez installé avec succès le %sZF2 Skeleton "
+#~ "Application%s. Vous utilisez actuellement Zend Framework version %s. "
+#~ "Cette structure peut vous servir comme un point de départ simple pour "
+#~ "démarrer la construction de votre application avec ZF2."
+
+#~ msgid "Fork Zend Framework 2 on GitHub"
+#~ msgstr "Faites un Fork de Zend Framework 2 sur GitHub"
+
+#~ msgid ""
+#~ "Zend Framework 2 is under active development. If you are interested in "
+#~ "following the development of ZF2, there is a special ZF2 portal on the "
+#~ "official Zend Framework website which provides links to the ZF2 %swiki%s, "
+#~ "%sdev blog%s, %sissue tracker%s, and much more. This is a great resource "
+#~ "for staying up to date with the latest developments!"
+#~ msgstr ""
+#~ "Zend Framework 2 est en cours de développement. Si vous êtes intéressé "
+#~ "pour suivre l'évolution de ZF2, il existe un portail dédié à ZF2 sur le "
+#~ "site officiel Zend Framework qui propose des liens vers le %swiki%s ZF2, "
+#~ "%sdev blog%s, %ssuivi des problèmes%s, et bien plus encore. Il s'agit "
+#~ "d'une excellente ressource pour rester à jour sur les dernières "
+#~ "évolutions !"
+
+#~ msgid "ZF2 Development Portal"
+#~ msgstr "Portail sur le développement de ZF2"
+
+#~ msgid "Discover Modules"
+#~ msgstr "Découvrez les modules"
+
+#~ msgid ""
+#~ "The community is working on developing a community site to serve as a "
+#~ "repository and gallery for ZF2 modules. The project is available %son "
+#~ "GitHub%s. The site is currently live and currently contains a list of "
+#~ "some of the modules already available for ZF2."
+#~ msgstr ""
+#~ "La communauté travaille sur le développement d'un site communautaire avec "
+#~ "l'objectif de servir de dépôt et de galerie  pour les modules ZF2. Le "
+#~ "projet est disponible %ssur GitHub%s. Le site est déjà en ligne, et "
+#~ "contient une liste non exhaustive des modules déjà disponibles pour ZF2."
+
+#~ msgid "Explore ZF2 Modules"
+#~ msgstr "Explorer les modules ZF2"
+
+#~ msgid ""
+#~ "If you need any help or support while developing with ZF2, you may reach "
+#~ "us via IRC: %s#zftalk on Freenode%s. We'd love to hear any questions or "
+#~ "feedback you may have regarding the beta releases. Alternatively, you may "
+#~ "subscribe and post questions to the %smailing lists%s."
+#~ msgstr ""
+#~ "Si vous avez besoin d'aide ou de support en développant avec ZF2, vous "
+#~ "pouvez nous joindre sur IRC : %s#zftalk sur Freenode%s. Nous aimerions "
+#~ "avoir vos questions ou vos commentaires que vous pourriez avoir au sujet "
+#~ "des versions bêta. Sinon, vous pouvez vous abonner, et poser des "
+#~ "questions sur la %sliste de diffusion%s."
+
+#~ msgid "Ping us on IRC"
+#~ msgstr "Rejoignez-nous sur IRC"
+
+#~ msgid "Skeleton Application"
+#~ msgstr "Skeleton Application"
+
+#~ msgid "Exception"
+#~ msgstr "Exception"
