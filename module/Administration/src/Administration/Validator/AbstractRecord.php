@@ -46,7 +46,8 @@ abstract class AbstractRecord extends ZfcUserAbstractRecord
      */
     protected function query($value)
     {
-        $result = parent::query($value);
+        //Initialisation
+        $result = false;
         
         //Comportement normal ssi exceptId n'est pas défini
         if(empty($this->exceptId)){
@@ -61,9 +62,13 @@ abstract class AbstractRecord extends ZfcUserAbstractRecord
             case 'username':
                 $result = $this->getMapper()->findByUsername($value);
                 break;
+            
+            case 'roleId':
+                $result = $this->getMapper()->findByRoleId($value);
+                break;
     
             default:
-                throw new \Exception('Invalid key used in ZfcUser validator');
+                throw new \Exception(sprintf('Invalid key %s used in Administration validator',$this->getKey()));
                 break;
         }
         
