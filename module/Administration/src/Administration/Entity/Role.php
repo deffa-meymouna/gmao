@@ -221,7 +221,7 @@ class Role implements HierarchicalRoleInterface
     {
         $this->id = $data['id'];
         $this->parent = $data['parent'];
-        $this->displayName = $data['displayName'];
+        $this->roleId = $data['roleId'];
     }
     
     /**
@@ -232,5 +232,13 @@ class Role implements HierarchicalRoleInterface
     public function getArrayCopy()
     {
         return get_object_vars($this);
+    }
+    /**
+     * Met à jour la date de dernière modification
+     */
+    public function setUpdated()
+    {
+        // WILL be saved in the database
+        $this->modification = new \DateTime("now");
     }
 }
