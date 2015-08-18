@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Application blanche\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-18 11:28+0100\n"
-"PO-Revision-Date: 2015-08-18 11:32+0100\n"
+"PO-Revision-Date: 2015-08-18 11:48+0100\n"
 "Last-Translator: Alexandre Tranchant <Alexandre.Tranchant@gmail.com>\n"
 "Language-Team:  <alexandre.tranchant@gmail.com>\n"
 "Language: fr_FR\n"
@@ -494,7 +494,7 @@ msgstr "Se déconnecter"
 
 #: ../view/layout/admin.phtml:86
 msgid "Sign In"
-msgstr "S’inscrire"
+msgstr "Se connecter"
 
 #: ../view/layout/admin.phtml:97
 #, php-format
