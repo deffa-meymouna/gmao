@@ -145,6 +145,12 @@
                     </a>
                 <?php endif;?>
                 </span>
+                <?php if ($role->isDefault()):?>
+                    <span class="label label-default"><?php echo $this->escapehtml($this->translate('Default role'))?></span>
+                <?php endif;?>
+                <?php if ($role->isAuthenticate()):?>
+                    <span class="label label-default"><?php echo $this->escapehtml($this->translate('Authenticate role'))?></span>
+                <?php endif;?>
             </td>
         </tr>
         <?php endforeach;?>
@@ -154,7 +160,7 @@
             <?php echo $this->escapehtml(sprintf($this->translatePlural('%s role registered', '%s roles registered', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
         <?php else:?>
             <?php echo $this->escapehtml(sprintf($this->translatePlural('%s role is matching your request', '%s roles are matching your request', $this->paginator->getTotalItemCount()),$this->paginator->getTotalItemCount()));?>
-        <?php endif;?>
+        <?php endif;?>        
     </caption>
         
 </table>

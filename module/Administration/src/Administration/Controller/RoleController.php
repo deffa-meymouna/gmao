@@ -6,6 +6,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Administration\Entity\Role;
 use Administration\Form\Search;
+use Zend\Http\Response;
 
 class RoleController extends AbstractActionController
 {
@@ -81,7 +82,7 @@ class RoleController extends AbstractActionController
             if ($form->isValid()) {
                 //Il faudrait passer par le service utilisateur
                 $this->_getRolesService()->editRole($role);
-                $message = "Role %s was updated succesfully.";
+                $message = _("Role %s was updated succesfully.");
                 $message = sprintf($this->_getTranslatorHelper()->translate($message),$role->getRoleId());
                 $this->flashMessenger()->addSuccessMessage($message);
                 // Redirect to edited role in view mode
@@ -108,7 +109,7 @@ class RoleController extends AbstractActionController
         $confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
         if($confirmation == self::CONFIRM){
             $this->_getRolesService()->deleteRole($role);
-            $message = "Role %s was updated succesfully.";
+            $message = _("Role %s was updated succesfully.");
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$role->getRoleId());
             $this->flashMessenger()->addSuccessMessage($message);
             return $this->redirect()->toRoute('zfcadmin/role',['action'=>'list']);

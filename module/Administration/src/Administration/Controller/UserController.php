@@ -81,7 +81,7 @@ class UserController extends AbstractActionController
 			return $user;
 		}
 		if ($user->isActive()){
-		    $message = "This user %s was already activated. No action done !";
+		    $message = _("This user %s was already activated. No action done !");
 			$message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
 			$this->flashMessenger()->addWarningMessage($message);
 		    return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
@@ -89,7 +89,7 @@ class UserController extends AbstractActionController
 		$confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
 		if($confirmation == self::CONFIRM){
 			$this->_getUsersService()->activeUser($user);
-			$message = "This user %s was succesfully activated.";
+			$message = _("This user %s was succesfully activated.");
 			$message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
 			$this->flashMessenger()->addSuccessMessage($message);
 			return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
@@ -127,7 +127,7 @@ class UserController extends AbstractActionController
             if ($form->isValid()) {
                 //Il faudrait passer par le service utilisateur
                 $this->_getUsersService()->editUser($user);
-                $message = "This user %s was successfully updated.";
+                $message = _("This user %s was successfully updated.");
                 $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
                 $this->flashMessenger()->addSuccessMessage($message);
                 // Redirect to edited user in view mode
@@ -154,7 +154,7 @@ class UserController extends AbstractActionController
 		$confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
 		if($confirmation == self::CONFIRM){
 			$this->_getUsersService()->deleteUser($user);
-			$message = "The user %s was successfully deleted.";
+			$message = _("The user %s was successfully deleted.");
 			$message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
 			$this->flashMessenger()->addSuccessMessage($message);
 			return $this->redirect()->toRoute('zfcadmin/user',['action'=>'list']);
@@ -181,7 +181,7 @@ class UserController extends AbstractActionController
             return $user;
         }
         if ($user->isBanned()){
-            $message = "This user %s was already banned. No action done !";
+            $message = _("This user %s was already banned. No action done !");
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
             $this->flashMessenger()->addWarningMessage($message);
             return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
@@ -189,7 +189,7 @@ class UserController extends AbstractActionController
         $confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
         if($confirmation == self::CONFIRM){
             $this->_getUsersService()->banUser($user);
-            $message = "This user %s was successfully banned.";
+            $message = _("This user %s was successfully banned.");
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
             $this->flashMessenger()->addSuccessMessage($message);
             return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
@@ -216,7 +216,7 @@ class UserController extends AbstractActionController
             return $user;
         }
         if (!$user->isBanned()){
-            $message = "This user %s was not banned. No action done !";
+            $message = _("This user %s was not banned. No action done !");
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
             $this->flashMessenger()->addWarningMessage($message);
             return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);
@@ -224,7 +224,7 @@ class UserController extends AbstractActionController
         $confirmation = $this->params()->fromRoute('confirmation', self::NO_RESPONSE);
         if($confirmation == self::CONFIRM){
             $this->_getUsersService()->unbanUser($user);
-            $message = "This user %s is no more banned.";
+            $message = _("This user %s is no more banned.");
             $message = sprintf($this->_getTranslatorHelper()->translate($message),$user->getEmail());
             $this->flashMessenger()->addSuccessMessage($message);
             return $this->redirect()->toRoute('zfcadmin/user',['action'=>'view','user'=>$user->getId()]);

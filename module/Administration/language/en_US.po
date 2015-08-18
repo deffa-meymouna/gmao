@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Application blanche\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-17 19:09+0100\n"
-"PO-Revision-Date: 2015-08-17 19:09+0100\n"
+"POT-Creation-Date: 2015-08-18 11:28+0100\n"
+"PO-Revision-Date: 2015-08-18 11:28+0100\n"
 "Last-Translator: Alexandre Tranchant <Alexandre.Tranchant@gmail.com>\n"
 "Language-Team:  <alexandre.tranchant@gmail.com>\n"
 "Language: en_US\n"
@@ -22,17 +22,33 @@ msgstr ""
 msgid "%d items"
 msgstr ""
 
-#: ../src/Administration/Controller/RoleController.php:116
+#: ../src/Administration/Controller/RoleController.php:85
+#: ../src/Administration/Controller/RoleController.php:112
+#, php-format
+msgid "Role %s was updated succesfully."
+msgstr ""
+
+#: ../src/Administration/Controller/RoleController.php:117
 #, php-format
 msgid "Cancellation ! The role %s was not deleted."
 msgstr ""
 
-#: ../src/Administration/Controller/RoleController.php:180
+#: ../src/Administration/Controller/RoleController.php:181
 msgid "Invalid role id"
 msgstr ""
 
-#: ../src/Administration/Controller/RoleController.php:185
+#: ../src/Administration/Controller/RoleController.php:186
 msgid "The selected role was not find or does not exist anymore."
+msgstr ""
+
+#: ../src/Administration/Controller/UserController.php:84
+#, php-format
+msgid "This user %s was already activated. No action done !"
+msgstr ""
+
+#: ../src/Administration/Controller/UserController.php:92
+#, php-format
+msgid "This user %s was succesfully activated."
 msgstr ""
 
 #: ../src/Administration/Controller/UserController.php:97
@@ -40,14 +56,44 @@ msgstr ""
 msgid "Cancellation ! This user %s has not been activated."
 msgstr ""
 
+#: ../src/Administration/Controller/UserController.php:130
+#, php-format
+msgid "This user %s was successfully updated."
+msgstr ""
+
+#: ../src/Administration/Controller/UserController.php:157
+#, php-format
+msgid "The user %s was successfully deleted."
+msgstr ""
+
 #: ../src/Administration/Controller/UserController.php:162
 #, php-format
 msgid "Cancellation ! This user %s was not deleted."
 msgstr ""
 
+#: ../src/Administration/Controller/UserController.php:184
+#, php-format
+msgid "This user %s was already banned. No action done !"
+msgstr ""
+
+#: ../src/Administration/Controller/UserController.php:192
+#, php-format
+msgid "This user %s was successfully banned."
+msgstr ""
+
 #: ../src/Administration/Controller/UserController.php:197
 #, php-format
 msgid "Cancellation ! This user %s was not banned."
+msgstr ""
+
+#: ../src/Administration/Controller/UserController.php:219
+#, php-format
+msgid "This user %s was not banned. No action done !"
+msgstr ""
+
+#: ../src/Administration/Controller/UserController.php:227
+#, php-format
+msgid "This user %s is no more banned."
 msgstr ""
 
 #: ../src/Administration/Controller/UserController.php:232
@@ -181,7 +227,15 @@ msgstr ""
 msgid "Sort roles by title descending"
 msgstr ""
 
-#: ../view/administration/role/list.phtml:173
+#: ../view/administration/role/list.phtml:149
+msgid "Default role"
+msgstr ""
+
+#: ../view/administration/role/list.phtml:152
+msgid "Authenticate role"
+msgstr ""
+
+#: ../view/administration/role/list.phtml:179
 msgid "No role registered"
 msgstr ""
 

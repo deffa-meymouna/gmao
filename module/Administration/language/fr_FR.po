@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Application blanche\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-17 19:09+0100\n"
-"PO-Revision-Date: 2015-08-17 19:09+0100\n"
+"POT-Creation-Date: 2015-08-18 11:28+0100\n"
+"PO-Revision-Date: 2015-08-18 11:32+0100\n"
 "Last-Translator: Alexandre Tranchant <Alexandre.Tranchant@gmail.com>\n"
 "Language-Team:  <alexandre.tranchant@gmail.com>\n"
 "Language: fr_FR\n"
@@ -23,33 +23,79 @@ msgstr ""
 msgid "%d items"
 msgstr "%d éléments"
 
-#: ../src/Administration/Controller/RoleController.php:116
+#: ../src/Administration/Controller/RoleController.php:85
+#: ../src/Administration/Controller/RoleController.php:112
+#, php-format
+msgid "Role %s was updated succesfully."
+msgstr "Le rôle %s a été mis à jour avec succès."
+
+#: ../src/Administration/Controller/RoleController.php:117
 #, php-format
 msgid "Cancellation ! The role %s was not deleted."
 msgstr "Annulation demandée ! Le rôle %s n’a pas été effacé."
 
-#: ../src/Administration/Controller/RoleController.php:180
+#: ../src/Administration/Controller/RoleController.php:181
 msgid "Invalid role id"
 msgstr "Identifiant de rôle invalide"
 
-#: ../src/Administration/Controller/RoleController.php:185
+#: ../src/Administration/Controller/RoleController.php:186
 msgid "The selected role was not find or does not exist anymore."
 msgstr "Le rôle sélectionné n’a pas été trouvé ou n’existe plus."
+
+#: ../src/Administration/Controller/UserController.php:84
+#, php-format
+msgid "This user %s was already activated. No action done !"
+msgstr "Cet utilisateur %s était déjà actif. Aucune action entreprise !"
+
+#: ../src/Administration/Controller/UserController.php:92
+#, php-format
+msgid "This user %s was succesfully activated."
+msgstr "L’utilisateur %s a été activé avec succès."
 
 #: ../src/Administration/Controller/UserController.php:97
 #, php-format
 msgid "Cancellation ! This user %s has not been activated."
 msgstr "Annulation ! L’utilisateur %s n’a pas été activé."
 
+#: ../src/Administration/Controller/UserController.php:130
+#, php-format
+msgid "This user %s was successfully updated."
+msgstr "L’utilisateur %s a été mis à jour avec succès."
+
+#: ../src/Administration/Controller/UserController.php:157
+#, php-format
+msgid "The user %s was successfully deleted."
+msgstr "L’utilisateur %s a été effacé avec succès."
+
 #: ../src/Administration/Controller/UserController.php:162
 #, php-format
 msgid "Cancellation ! This user %s was not deleted."
 msgstr "Annulation demandée ! L’utilisateur %s n’a pas été effacé."
 
+#: ../src/Administration/Controller/UserController.php:184
+#, php-format
+msgid "This user %s was already banned. No action done !"
+msgstr "Cet utilisateur %s était déjà banni. Aucune action entreprise !"
+
+#: ../src/Administration/Controller/UserController.php:192
+#, php-format
+msgid "This user %s was successfully banned."
+msgstr "L’utilisateur %s a été banni avec succès."
+
 #: ../src/Administration/Controller/UserController.php:197
 #, php-format
 msgid "Cancellation ! This user %s was not banned."
 msgstr "Annulation demandée ! L’utilisateur %s n’a pas été banni."
+
+#: ../src/Administration/Controller/UserController.php:219
+#, php-format
+msgid "This user %s was not banned. No action done !"
+msgstr "L’utilisateur %s n’était pas banni. Aucune action entreprise !"
+
+#: ../src/Administration/Controller/UserController.php:227
+#, php-format
+msgid "This user %s is no more banned."
+msgstr "L’utilisateur %s n’est plus banni."
 
 #: ../src/Administration/Controller/UserController.php:232
 msgid "Cancellation ! This user remains banned."
@@ -182,7 +228,15 @@ msgstr "Trier les rôles par libellé et dans l’ordre croissant"
 msgid "Sort roles by title descending"
 msgstr "Trier les rôles par libellé et dans l’ordre décroissant"
 
-#: ../view/administration/role/list.phtml:173
+#: ../view/administration/role/list.phtml:149
+msgid "Default role"
+msgstr "Rôle par défaut"
+
+#: ../view/administration/role/list.phtml:152
+msgid "Authenticate role"
+msgstr "Rôle authentifié"
+
+#: ../view/administration/role/list.phtml:179
 msgid "No role registered"
 msgstr "Aucun rôle enregistré"
 

@@ -36,6 +36,18 @@ class Role implements HierarchicalRoleInterface
     protected $roleId;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="rol_default", type="boolean", nullable=false)
+     */
+    protected $default = false;
+    
+    /**
+     * @var boolean
+     * @ORM\Column(name="rol_authenticate", type="boolean", nullable=false)
+     */
+    protected $authenticate = false;
+    
+    /**
      * @var \DateTime
      * @ORM\Column(name="rol_inscription", type="UTCDateTime", nullable=false)
      */
@@ -95,8 +107,8 @@ class Role implements HierarchicalRoleInterface
     {
         return $this->id;
     }
-
-    /**
+    
+	/**
      * Set the id.
      *
      * @param int $id
@@ -109,6 +121,55 @@ class Role implements HierarchicalRoleInterface
     }
 
     /**
+     * @return the $default
+     */
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * @return the $default
+     */
+    public function isDefault()
+    {
+        return $this->default;
+    }
+    
+    /**
+     * @param boolean $default
+     */
+    public function setDefault($default)
+    {
+        $this->default = !empty($default);
+    }
+
+    
+	/**
+     * @return the $authenticate
+     */
+    public function getAuthenticate()
+    {
+        return $this->authenticate;
+    }
+    
+    /**
+     * @return the $authenticate
+     */
+    public function isAuthenticate()
+    {
+        return $this->authenticate;
+    }
+
+	/**
+     * @param boolean $authenticate
+     */
+    public function setAuthenticate($authenticate)
+    {
+        $this->authenticate = !empty($authenticate);
+    }
+
+	/**
      * Get the role id.
      *
      * @return string
