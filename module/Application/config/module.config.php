@@ -57,7 +57,9 @@ return array(
             'Zend\Log\LoggerAbstractServiceFactory',
         ),
         'factories' => array(
-            'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'roleService' => \Administration\Service\Factory\RolesServiceFactory::class,
+            'translator'  => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'BjyAuthenticationIdentityProvider' => BjyAuthorize\Provider\Identity\AuthenticationIdentityProvider::class,
         ),
     ),
     'controllers' => array(

@@ -15,9 +15,11 @@ use Zend\View\Helper\Navigation;
 
 class Module {
 	public function onBootstrap(MvcEvent $e) {
-		$eventManager = $e->getApplication ()->getEventManager ();
+		
+	    $eventManager = $e->getApplication ()->getEventManager ();
 		$moduleRouteListener = new ModuleRouteListener ();
 		$moduleRouteListener->attach ( $eventManager );
+		
 		//Détermination de la locale
 		if (isset ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] )) {
 		    $locale = \Locale::acceptFromHttp ( $_SERVER ['HTTP_ACCEPT_LANGUAGE'] );
@@ -34,11 +36,18 @@ class Module {
 		  $translator->addTranslationFile('phpArray',$translationFile);
 		}
 		AbstractValidator::setDefaultTranslator($translator);
-		//Menu de navigation
+		
+		//Définition du rôle par défaut
+		$provider =  $e->getApplication ()->getServiceManager ()->get('BjyAuthorize\Provider\Identity\AuthenticationIdentityProvider');
+		$roleService = $e->getApplication ()->getServiceManager ()->get('roleService');
+		$provider->setDefaultRole($roleService->getRoleByDefault());
+		$provider->setAuthenticatedRole($roleService->getAuthenticatedRole());
+		
 		// Add ACL information to the Navigation view helper
 		$authorize = $e->getApplication ()->getServiceManager ()->get('BjyAuthorizeServiceAuthorize');
-		$acl = $authorize->getAcl();
 		$role = $authorize->getIdentity();
+		$acl = $authorize->getAcl();
+		
 		Navigation::setDefaultAcl($acl);
 		Navigation::setDefaultRole($role);
 		

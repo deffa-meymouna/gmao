@@ -15,7 +15,6 @@ use Zend\Paginator\Adapter\Iterator;
 use Zend\Paginator\Paginator as ZendPaginator;
 use BjyAuthorize\Service\Authorize;
 use BjyAuthorize\Exception\UnAuthorizedException;
-use Zend\Db\Sql\Ddl\Column\Date;
 use ZfcUser\Mapper\UserInterface;
 use ZfcUserDoctrineORM\Mapper\User as UserMapper;
 use ZfcUserDoctrineORM\Options\ModuleOptions;
@@ -100,6 +99,24 @@ class Roles extends UserMapper implements UserInterface
         return new ZendPaginator($adapter);
         
     }
+    /**
+     * Recherche le Role par défaut quand on est identifié
+     *
+     * @param integer $id
+     * @return Administration\Entity\Role
+     */
+    public function getAuthenticatedRole(){
+        return $this->entityManager->getRepository('Administration\Entity\Role')->findOneByAuthenticate(1);
+    }
+    /**
+     * Recherche le Role par défaut 
+     *
+     * @param integer $id
+     * @return Administration\Entity\Role
+     */
+    public function getRoleByDefault(){
+        return $this->entityManager->getRepository('Administration\Entity\Role')->findOneByDefault(1);
+    }
         
 	/**
 	 * Recherche un Role selon son Id
@@ -109,6 +126,16 @@ class Roles extends UserMapper implements UserInterface
 	 */
 	public function findRoleById($id){
 		return $this->entityManager->getRepository('Administration\Entity\Role')->find($id);
+	}
+	
+	/**
+	 * Recherche un Role selon son titre
+	 *
+	 * @param integer $id
+	 * @return Administration\Entity\Role
+	 */
+	public function findByRoleId($id){
+	    return $this->entityManager->getRepository('Administration\Entity\Role')->findByRoleId($id);
 	}
 
 	/**
