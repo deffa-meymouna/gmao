@@ -18,7 +18,7 @@ class RolesServiceFactory implements FactoryInterface
 	/**
 	 * (non-PHPdoc)
 	 * @see \Zend\ServiceManager\FactoryInterface::createService()
-	 * @return Administration\Service\Users
+	 * @return Administration\Service\Roles
 	 */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
